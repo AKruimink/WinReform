@@ -79,7 +79,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
         public void EventHandler_AddEventHandler_EmptyEventName_ThrowsArgumentNullException()
         {
             //Arrange
-            var handler = new EventHandler<string>((sender, e) => { });
+            var handler = new EventHandler((sender, e) => { });
             var emptyName = string.Empty;
 
             //Act
@@ -105,7 +105,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
         public void EventHandler_AddEventHandler_WhitespaceEventName_ThrowsArgumentNullException()
         {
             //Arrange
-            var handler = new EventHandler<string>((sender, e) => { });
+            var handler = new EventHandler((sender, e) => { });
             var whitespaceName = "   ";
 
             //Act
@@ -185,7 +185,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
         public void EventHandler_RemoveEventHandler_EmptyEventName_ThrowsArgumentNullException()
         {
             //Arrange
-            var handler = new EventHandler<string>((sender, e) => { });
+            var handler = new EventHandler((sender, e) => { });
             var emptyName = string.Empty;
 
             //Act
@@ -211,7 +211,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
         public void EventHandler_RemoveEventHandler_WhitespaceEventName_ThrowsArgumentNullException()
         {
             //Arrange
-            var handler = new EventHandler<string>((sender, e) => { });
+            var handler = new EventHandler((sender, e) => { });
             var whitespaceName = "   ";
 
             //Act
@@ -312,7 +312,6 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
 
             //Arrange
             Event -= HandleEvent;
-
         }
 
         [Fact]
