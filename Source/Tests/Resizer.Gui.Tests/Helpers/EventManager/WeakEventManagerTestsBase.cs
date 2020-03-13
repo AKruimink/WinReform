@@ -12,7 +12,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
 
         public readonly IWeakEventManager<string> WeakEventManagerType = new WeakEventManager<string>();
 
-        public event EventHandler TestEvent
+        public event EventHandler InvalidEvent
         {
             add => WeakEventManager.AddEventHandler(value);
             remove => WeakEventManager.RemoveEventHandler(value);
