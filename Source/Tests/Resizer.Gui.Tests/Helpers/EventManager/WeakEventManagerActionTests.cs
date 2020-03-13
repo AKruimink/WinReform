@@ -15,7 +15,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
             remove => WeakEventManager.RemoveEventHandler(value);
         }
 
-        public event Action<string> ActionEventType
+        public event Action<string> ActionEventString
         {
             add => WeakEventManagerType.AddEventHandler(value);
             remove => WeakEventManagerType.RemoveEventHandler(value);
@@ -46,7 +46,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
             //Act
 
             //Assert
-            Assert.Throws<ArgumentNullException>(() => WeakEventManagerType.AddEventHandler(nullAction, nameof(ActionEventType)));
+            Assert.Throws<ArgumentNullException>(() => WeakEventManagerType.AddEventHandler(nullAction, nameof(ActionEventString)));
         }
 
         [Fact]
@@ -152,7 +152,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
             //Act
 
             //Assert
-            Assert.Throws<ArgumentNullException>(() => WeakEventManagerType.RemoveEventHandler(nullAction, nameof(ActionEventType)));
+            Assert.Throws<ArgumentNullException>(() => WeakEventManagerType.RemoveEventHandler(nullAction, nameof(ActionEventString)));
         }
 
         [Fact]
@@ -233,7 +233,6 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
             Assert.Throws<ArgumentNullException>(() => WeakEventManagerType.RemoveEventHandler(action, whitespaceName));
         }
 
-
         #endregion
 
         #region HandleEvent Tests
@@ -247,7 +246,10 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
 
             void HandleAction()
             {
+                //Act
                 eventFired = true;
+
+                //Arrange
                 ActionEvent -= HandleAction;
             }
 
@@ -263,23 +265,26 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
         {
             //Arrange
             var eventFired = false;
-            string? eventMessage = null;
-            ActionEventType += HandleAction;
+            ActionEventString += HandleAction;
 
             void HandleAction(string message)
             {
+                //Assert
+                Assert.NotNull(message);
+                Assert.NotEmpty(message);
+
+                //Act
                 eventFired = true;
-                eventMessage = message;
-                ActionEventType -= HandleAction;
+                
+                //Arrange
+                ActionEventString -= HandleAction;
             }
 
             //Act
-            WeakEventManagerType.HandleEvent("Test", nameof(ActionEventType));
+            WeakEventManagerType.HandleEvent("Test", nameof(ActionEventString));
 
             //Assert
             Assert.True(eventFired);
-            Assert.NotNull(eventMessage);
-            Assert.NotEmpty(eventMessage);
         }
 
         [Fact]
@@ -292,7 +297,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
             void HandleAction() => eventFired = true;
 
             //Act
-            WeakEventManager.HandleEvent(nameof(TestEvent));
+            WeakEventManager.HandleEvent(nameof(InvalidEvent));
 
             //Assert
             Assert.False(eventFired);
@@ -307,18 +312,18 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
         {
             //Arrange
             var eventFired = false;
-            ActionEventType += HandleAction;
+            ActionEventString += HandleAction;
 
             void HandleAction(string message) => eventFired = true;
 
             //Act
-            WeakEventManagerType.HandleEvent("Test", nameof(TestEvent));
+            WeakEventManagerType.HandleEvent("Test", nameof(InvalidEvent));
 
             //Assert
             Assert.False(eventFired);
 
             //Arrange
-            ActionEventType -= HandleAction;
+            ActionEventString -= HandleAction;
         }
 
         [Fact]
@@ -343,8 +348,8 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
         {
             //Arrange
             var eventFired = false;
-            ActionEventType += HandleAction;
-            ActionEventType -= HandleAction;
+            ActionEventString += HandleAction;
+            ActionEventString -= HandleAction;
 
             void HandleAction(string message) => eventFired = true;
 
@@ -381,7 +386,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
             //Arrange
             var eventFired = false;
             var unassignedWeakEventManager = new WeakEventManager<string>();
-            ActionEventType += HandleAction;
+            ActionEventString += HandleAction;
 
             void HandleAction(string message) => eventFired = true;
 
@@ -392,7 +397,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
             Assert.False(eventFired);
 
             //Arrange
-            ActionEventType -= HandleAction;
+            ActionEventString -= HandleAction;
         }
 
         [Fact]
@@ -419,18 +424,18 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
         {
             //Arrange
             var eventFired = false;
-            ActionEventType += HandleAction;
+            ActionEventString += HandleAction;
 
             void HandleAction(string message) => eventFired = true;
 
             //Act
 
             //Assert
-            Assert.Throws<InvalidHandleEventException>(() => WeakEventManagerType.HandleEvent(this, "Test", nameof(ActionEventType)));
+            Assert.Throws<InvalidHandleEventException>(() => WeakEventManagerType.HandleEvent(this, "Test", nameof(ActionEventString)));
             Assert.False(eventFired);
 
             //Arrange
-            ActionEventType -= HandleAction;
+            ActionEventString -= HandleAction;
         }
 
         #endregion
