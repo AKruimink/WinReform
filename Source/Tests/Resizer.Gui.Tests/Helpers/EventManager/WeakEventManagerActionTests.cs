@@ -275,7 +275,7 @@ namespace Resizer.Gui.Tests.Helpers.EventManager
 
                 //Act
                 eventFired = true;
-                
+
                 //Arrange
                 ActionEventString -= HandleAction;
             }
