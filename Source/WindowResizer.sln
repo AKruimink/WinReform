@@ -8,11 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resizer.Gui", "Resizer.Gui\Resizer.Gui.csproj", "{5106CAC9-A541-43BD-B29F-7D021E3E6B29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resizer.Gui", "Resizer.Gui\Resizer.Gui.csproj", "{5106CAC9-A541-43BD-B29F-7D021E3E6B29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{37F54EC3-0CBE-4687-BD92-0E58354A067D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resizer.Gui.Tests", "Tests\Resizer.Gui.Tests\Resizer.Gui.Tests.csproj", "{A74E245B-D45A-4C36-8342-D8CAF8E9FCB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resizer.Gui.Tests", "Tests\Resizer.Gui.Tests\Resizer.Gui.Tests.csproj", "{A74E245B-D45A-4C36-8342-D8CAF8E9FCB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
