@@ -38,7 +38,7 @@ namespace Resizer.Gui.Helpers.Messenger
         {
             if(@delegate == null)
             {
-                throw new ArgumentException(nameof(@delegate));
+                throw new ArgumentNullException(nameof(@delegate));
             }
 
             if(keepReferenceAlive)
@@ -89,7 +89,7 @@ namespace Resizer.Gui.Helpers.Messenger
 
             if (@delegate == null)
             {
-                return !_methodInfo.IsStatic && _weakReference.IsAlive;
+                return !_methodInfo.IsStatic && !_weakReference.IsAlive;
             }
 
             return _weakReference.Target == @delegate.Target && Equals(_methodInfo, @delegate.GetMethodInfo());
@@ -99,7 +99,7 @@ namespace Resizer.Gui.Helpers.Messenger
         /// Try to get the <see cref="Delegate"/> from the <see cref="WeakReference"/>
         /// </summary>
         /// <returns>Returns the created <see cref="Delegate"/> if no <see cref="Delegate"/> could be create it returns <see cref="null"/></returns>
-        public Delegate? TryGetDelegate()
+        private Delegate? TryGetDelegate()
         {
             if(_methodInfo?.IsStatic ?? false)
             {
