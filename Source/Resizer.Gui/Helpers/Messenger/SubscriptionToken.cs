@@ -3,7 +3,7 @@
 namespace Resizer.Gui.Helpers.Messenger
 {
     /// <summary>
-    /// Defines subsription token used to identify and manage a <see cref="PubSubEvent"/> subscription
+    /// Defines subsription token used to identify and manage a <see cref="EventSubscription"/>
     /// </summary>
     public class SubscriptionToken : IEquatable<SubscriptionToken>
     {
