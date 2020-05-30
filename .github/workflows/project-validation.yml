@@ -26,13 +26,17 @@ jobs:
         working-directory: 'Source'
         run: dotnet restore
         
+      # Build the application
+      - name: 'Build application'
+        working-directory: 'Source'
+        run: dotnet build --configuration Release --no-restore
+        
       # Run the project unit tests
       - name: 'Run unit tests'
         working-directory: 'Source'
         run: dotnet test --no-build
         
-      # Build the application only when triggered by a pull request
-      - if: ${{ github.event_name == 'pull_request' }}
-        name: 'Build application'
-        working-directory: 'Source'
-        run: dotnet build --configuration Release --no-restore
+      # Optional for deployment ?
+      #- if: ${{ github.event_name == 'pull_request' && github.ref == 'refs/heads/master'}}
+      #  name: 'Deploy application'
+        
