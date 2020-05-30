@@ -6,7 +6,7 @@ on:
 
 # Defines environment variables
 env:
-  NETCORE_VERSION: '3.1.x'
+  NETCORE_VERSION: '3.1.200'
 
 jobs:
   build:
