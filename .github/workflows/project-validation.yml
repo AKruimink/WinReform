@@ -1,4 +1,4 @@
-name: "Test and Build"
+name: 'Test and Build'
 
 on:
   push:
@@ -6,30 +6,30 @@ on:
 
 # Defines environment variables
 env:
-  NETCORE_VERSION: "3.1.x"
+  NETCORE_VERSION: '3.1.x'
 
 jobs:
   build:
-    name: "Test and Build"
+    name: 'Test and Build'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         
       #Setup the environment 
-      - name: "Setup .NET Core SDK ${{ env.NETCORE_VERSION }}"
+      - name: 'Setup .NET Core SDK ${{ env.NETCORE_VERSION }}'
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.NETCORE_VERSION }}
           
       # Restore all nuget packages to prevent issues during build
-      - name: "Restore nuget packages"
+      - name: 'Restore nuget packages'
         run: dotnet restore
         
       # Run the project unit tests
-      - name: "Run unit tests"
+      - name: 'Run unit tests'
         run: dotnet test --no-build
         
       # Build the application only when triggered by a pull request
-      - if: github.event_name == "pull_request"
-        name: "Build application"
+      - if: ${{ github.event_name == pull_request }}
+        name: 'Build application'
         run: dotnet build --configuration Release --no-restore
