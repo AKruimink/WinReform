@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test application
-      - uses: actions/checkout@v2
-      - with: 
+        uses: actions/checkout@v2
+        with: 
           dotnet-version: '3.1.x'
       - run: dotnet test
   build:
@@ -19,7 +19,7 @@ jobs:
     if: github.event_name == 'pull_request'
     steps:
       - name: Build Application
-      - uses: actions/checkout@v2
-      - with: 
+        uses: actions/checkout@v2
+        with: 
           dotnet-version: '3.1.x'
       - run: dotnet build --configuration Release
