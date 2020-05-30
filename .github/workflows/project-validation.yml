@@ -11,7 +11,7 @@ jobs:
       - name: Test application
         uses: actions/checkout@v2
         with: 
-          dotnet-version: '3.1.x'
+           dotnet-version: 3.1.x
       - run: dotnet test
   build:
     runs-on: ubuntu-latest
@@ -21,5 +21,5 @@ jobs:
       - name: Build Application
         uses: actions/checkout@v2
         with: 
-          dotnet-version: '3.1.x'
+           dotnet-version: 3.1.x
       - run: dotnet build --configuration Release
