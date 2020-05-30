@@ -14,9 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
-      # Set the working directory
-      - working-directory: 'Source'
         
       #Setup the environment 
       - name: 'Setup .NET Core SDK ${{ env.NETCORE_VERSION }}'
@@ -26,13 +23,16 @@ jobs:
                   
       # Restore all nuget packages to prevent issues during build
       - name: 'Restore nuget packages'
+        working-directory: 'Source'
         run: dotnet restore
         
       # Run the project unit tests
       - name: 'Run unit tests'
+        working-directory: 'Source'
         run: dotnet test --no-build
         
       # Build the application only when triggered by a pull request
       - if: ${{ github.event_name == 'pull_request' }}
         name: 'Build application'
+        working-directory: 'Source'
         run: dotnet build --configuration Release --no-restore
