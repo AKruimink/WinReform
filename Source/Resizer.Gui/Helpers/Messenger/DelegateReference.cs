@@ -54,7 +54,7 @@ namespace Resizer.Gui.Helpers.Messenger
         }
 
         ///<inheritdoc/>
-        public Delegate? GetDelegate
+        public Delegate? Delegate
         {
             get
             {

@@ -71,7 +71,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
             GC.Collect();
 
             // Assert
-            Assert.NotNull(delegateReference.GetDelegate);
+            Assert.NotNull(delegateReference.Delegate);
         }
 
         [Fact]
@@ -89,7 +89,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
             GC.Collect();
 
             // Assert
-            Assert.NotNull(delegateReference.GetDelegate);
+            Assert.NotNull(delegateReference.Delegate);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
             // Act
 
             // Assert
-            Assert.NotNull(delegateReference.GetDelegate);
+            Assert.NotNull(delegateReference.Delegate);
         }
 
 
@@ -118,7 +118,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
             var delegateReference = new DelegateReference(action, false);
 
             // Act
-            ((Action<string>)delegateReference.GetDelegate!)("payload");
+            ((Action<string>)delegateReference.Delegate!)("payload");
 
             // Assert
             Assert.Equal("payload", @delegate._actionArgs);
@@ -140,7 +140,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
             GC.Collect();
 
             // Assert
-            Assert.Null(delegateReference.GetDelegate);
+            Assert.Null(delegateReference.Delegate);
         }
 
         #endregion

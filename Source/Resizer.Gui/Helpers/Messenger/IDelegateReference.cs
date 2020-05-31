@@ -8,8 +8,8 @@ namespace Resizer.Gui.Helpers.Messenger
     public interface IDelegateReference
     {
         /// <summary>
-        /// Gets the referenced <see cref="Delegate"/> object, Returns <see cref="null"/> if non exist
+        /// Gets the referenced <see cref="System.Delegate"/> object, Returns <see cref="null"/> if non exist
         /// </summary>
-        Delegate? GetDelegate { get; }
+        Delegate? Delegate { get; }
     }
 }

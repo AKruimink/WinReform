@@ -27,7 +27,7 @@ namespace Resizer.Gui.Helpers.Messenger
                 throw new ArgumentNullException(nameof(actionReference));
             }
 
-            if(!(actionReference.GetDelegate is Action))
+            if(!(actionReference.Delegate is Action))
             {
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid Delegate Reference Type Exception", typeof(Action).FullName, nameof(actionReference)));
             }
@@ -40,7 +40,7 @@ namespace Resizer.Gui.Helpers.Messenger
         /// </summary>
         public Action? GetAction
         {
-            get => (Action?)_actionReference.GetDelegate;
+            get => (Action?)_actionReference.Delegate;
         }
 
         ///<inheritdoc/>
@@ -103,7 +103,7 @@ namespace Resizer.Gui.Helpers.Messenger
                 throw new ArgumentNullException(nameof(actionReference));
             }
 
-            if (!(actionReference.GetDelegate is Action<TPayload>))
+            if (!(actionReference.Delegate is Action<TPayload>))
             {
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid Delegate Reference Type Exception", typeof(Action<TPayload>).FullName, nameof(actionReference)));
             }
@@ -113,7 +113,7 @@ namespace Resizer.Gui.Helpers.Messenger
                 throw new ArgumentNullException(nameof(filterReference));
             }
 
-            if (!(filterReference.GetDelegate is Predicate<TPayload>))
+            if (!(filterReference.Delegate is Predicate<TPayload>))
             {
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid Delegate Reference Type Exception", typeof(Predicate<TPayload>).FullName, nameof(filterReference)));
             }
@@ -127,7 +127,7 @@ namespace Resizer.Gui.Helpers.Messenger
         /// </summary>
         public Action<TPayload>? GetAction
         {
-            get => (Action<TPayload>?)_actionReference.GetDelegate;
+            get => (Action<TPayload>?)_actionReference.Delegate;
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Resizer.Gui.Helpers.Messenger
         /// </summary>
         public Predicate<TPayload>? GetFilter
         {
-            get => (Predicate<TPayload>?)_filterReference.GetDelegate;
+            get => (Predicate<TPayload>?)_filterReference.Delegate;
         }
 
         ///<inheritdoc/>
@@ -148,13 +148,15 @@ namespace Resizer.Gui.Helpers.Messenger
                 return arguments =>
                 {
                     var argument = default(TPayload);
-                    if(arguments != null && arguments.Length > 0 && arguments[0] != null)
+                    if (arguments != null && arguments.Length > 0 && arguments[0] != null)
                     {
                         argument = (TPayload)arguments[0];
                     }
-                    if(filter(argument))
+                    //TODO argument's possible null reference is suppressed, null should be allowed to be passed, but was unable to figure nullable out for it at this time.
+                    // or we should just throw during a null argument, when no argument's are passed the non generic type should probably just be used
+                    if (filter(argument!))
                     {
-                        InvokeAction(action, argument);
+                        InvokeAction(action, argument!);
                     }
                 };
             }
