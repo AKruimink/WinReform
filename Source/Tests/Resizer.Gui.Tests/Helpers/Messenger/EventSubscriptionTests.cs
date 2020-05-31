@@ -13,7 +13,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
 
         private class MockDelegateReference : IDelegateReference
         {
-            public Delegate? GetDelegate { get; set; }
+            public Delegate? Delegate { get; set; }
 
             public MockDelegateReference()
             {
@@ -22,7 +22,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
 
             public MockDelegateReference(Delegate @delegate)
             {
-                GetDelegate = @delegate;
+                Delegate = @delegate;
             }
         }
 
@@ -48,7 +48,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
         public void ConstructGeneric_NullActionReference_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockFilterReference = new MockDelegateReference() { GetDelegate = (Predicate<object>)(arg => { return true; }) };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)(arg => { return true; }) };
 
             // Act
 
@@ -63,7 +63,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
         public void ConstructGeneric_NullFilterReference_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { GetDelegate = (Action<object>)delegate { } };
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { } };
 
             // Act
 
@@ -78,7 +78,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
         public void ConstructNonGeneric_NullAction_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { GetDelegate = null };
+            var mockActionReference = new MockDelegateReference() { Delegate = null };
 
             // Act
 
@@ -93,8 +93,8 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
         public void ConstructGeneric_NullAction_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { GetDelegate = null };
-            var mockFilterReference = new MockDelegateReference() { GetDelegate = (Predicate<object>)(arg => { return true; }) };
+            var mockActionReference = new MockDelegateReference() { Delegate = null };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)(arg => { return true; }) };
 
             // Act
 
@@ -109,8 +109,8 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
         public void ConstructGeneric_NullFilter_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { GetDelegate = (Action<object>)delegate { }};
-            var mockFilterReference = new MockDelegateReference() { GetDelegate = null };
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { }};
+            var mockFilterReference = new MockDelegateReference() { Delegate = null };
 
             // Act
 
@@ -125,7 +125,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
         public void ConstructNonGeneric_DifferentTargetTypeActionReference_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { GetDelegate = (Action<int>)delegate { } };
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<int>)delegate { } };
 
             // Act
 
@@ -140,8 +140,8 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
         public void ConstructGeneric_DifferentTargetTypeActionReference_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { GetDelegate = (Action<int>)delegate { } };
-            var mockFilterReference = new MockDelegateReference() { GetDelegate = (Predicate<object>)(arg => { return true; }) };
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<int>)delegate { } };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)(arg => { return true; }) };
 
             // Act
 
@@ -156,8 +156,8 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
         public void ConstructGeneric_DifferentTargetTypeFilterReference_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { GetDelegate = (Action<object>)delegate { } };
-            var mockFilterReference = new MockDelegateReference() { GetDelegate = (Predicate<int>)(arg => { return true; }) };
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { } };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<int>)(arg => { return true; }) };
 
             // Act
 
@@ -166,6 +166,286 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
             {
                 var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
             });
+        }
+
+        #endregion
+
+        #region SubscriptionToken Tests
+
+        [Fact]
+        public void SubscriptionTokenNonGeneric_Intialize_ShouldInitialize()
+        {
+            // Prepare
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { } };
+            var eventSubscription = new EventSubscription(mockActionReference);
+            var subscriptionToken = new SubscriptionToken();
+
+            // Act
+            eventSubscription.SubscriptionToken = subscriptionToken;
+
+            // Assert
+            Assert.Same(mockActionReference.Delegate, eventSubscription.GetAction);
+            Assert.Same(subscriptionToken, eventSubscription.SubscriptionToken);
+        }
+
+        [Fact]
+        public void SubscriptionTokenGeneric_Intialize_ShouldInitialize()
+        {
+            // Prepare
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { } };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)(arg => { return true; }) };
+            var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+            var subscriptionToken = new SubscriptionToken();
+
+            // Act
+            eventSubscription.SubscriptionToken = subscriptionToken;
+
+            // Assert
+            Assert.Same(mockActionReference.Delegate, eventSubscription.GetAction);
+            Assert.Same(mockFilterReference.Delegate, eventSubscription.GetFilter);
+            Assert.Same(subscriptionToken, eventSubscription.SubscriptionToken);
+        }
+
+        #endregion
+
+        #region GetAction Tests
+
+        [Fact]
+        public void GetActionNonGeneric_NullAction_ShouldReturnNull()
+        {
+            // Prepare
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { } };
+            var eventSubscription = new EventSubscription(mockActionReference);
+            Action<object[]>? publishAction;
+
+            // Act
+            publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Assert
+            Assert.NotNull(publishAction);
+
+            // Act
+            mockActionReference.Delegate = null;
+            publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Assert
+            Assert.Null(publishAction);
+        }
+
+        [Fact]
+        public void GetActionGeneric_NullAction_ShouldReturnNull()
+        {
+            // Prepare
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { } };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)(arg => { return true; }) };
+            var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+            Action<object[]>? publishAction;
+
+            // Act
+            publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Assert
+            Assert.NotNull(publishAction);
+
+            // Act
+            mockActionReference.Delegate = null;
+            publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Assert
+            Assert.Null(publishAction);
+        }
+
+        #endregion
+
+        #region GetExecutionStrategy Tests
+
+        [Fact]
+        public void GetExecutionStrategyGeneric_PassArgument_ShouldPassArgumentToDelegates()
+        {
+            // Prepare
+            string? passedArgumentToAction = null;
+            string? passedArgumentToFilter = null;
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<string>)(obj => passedArgumentToAction = obj) };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<string>)(obj => { passedArgumentToFilter = obj; return true; }) };
+            var eventSubscription = new EventSubscription<string>(mockActionReference, mockFilterReference);
+            var publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Act
+            publishAction?.Invoke(new[] { "TestString" });
+
+            // Assert
+            Assert.Equal("TestString", passedArgumentToAction);
+            Assert.Equal("TestString", passedArgumentToFilter);
+        }
+
+        [Fact]
+        public void GetExecutionStrategyNonGeneric_NullAction_ShouldReturnNull()
+        {
+            // Prepare
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate {  } };
+            var eventSubscription = new EventSubscription(mockActionReference);
+            Action<object[]>? publishAction;
+
+            // Act
+            publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Assert
+            Assert.NotNull(publishAction);
+
+            // Act
+            mockActionReference.Delegate = null;
+            publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Assert
+            Assert.Null(publishAction);
+        }
+
+        [Fact]
+        public void GetExecutionStrategyGeneric_NullAction_ShouldReturnNull()
+        {
+            // Prepare
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<int>)delegate { } };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<int>)delegate { return false; } };
+            var eventSubscription = new EventSubscription<int>(mockActionReference, mockFilterReference);
+            Action<object[]>? publishAction;
+
+            // Act
+            publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Assert
+            Assert.NotNull(publishAction);
+
+            // Act
+            mockActionReference.Delegate = null;
+            publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Assert
+            Assert.Null(publishAction);
+        }
+
+        [Fact]
+        public void GetExecutionStrategyGeneric_NullFilter_ShouldReturnNull()
+        {
+            // Prepare
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<int>)delegate { } };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<int>)delegate { return false; } };
+            var eventSubscription = new EventSubscription<int>(mockActionReference, mockFilterReference);
+            Action<object[]>? publishAction;
+
+            // Act
+            publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Assert
+            Assert.NotNull(publishAction);
+
+            // Act
+            mockFilterReference.Delegate = null;
+            publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Assert
+            Assert.Null(publishAction);
+        }
+
+        [Fact]
+        public void GetExecutionStrategyGeneric_FilterReturnsFalse_ShouldNotExecute()
+        {
+            // Prepare
+            var actionExecuted = false;
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<int>)delegate { actionExecuted = true; } };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<int>)delegate { return false; } };
+            var eventSubscription = new EventSubscription<int>(mockActionReference, mockFilterReference);
+            var publishAction = eventSubscription.GetExecutionStrategy();
+
+            // Act
+            publishAction?.Invoke(new object[] { null! });
+
+            // Assert
+            Assert.False(actionExecuted);
+        }
+
+        #endregion
+
+        #region InvokeAction Tests
+
+        [Fact]
+        public void InvokeActionNonGeneric_ValidAction_ShouldExecuteAction()
+        {
+            // Prepare
+            var actionExecuted = false;
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { actionExecuted = true; } };
+            var eventSubscription = new EventSubscription(mockActionReference);
+
+            // Act
+            eventSubscription.InvokeAction((Action)mockActionReference.Delegate);
+
+            // Assert
+            Assert.True(actionExecuted);
+        }
+
+        [Fact]
+        public void InvokeActionGeneric_ValidAction_ShouldExecuteAction()
+        {
+            // Prepare
+            var actionExecuted = false;
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { actionExecuted = true; } };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)delegate { return false; } };
+            var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+
+            // Act
+            eventSubscription.InvokeAction((Action<object>)mockActionReference.Delegate, "testString");
+
+            // Assert
+            Assert.True(actionExecuted);
+        }
+
+        [Fact]
+        public void InvokeActionNonGeneric_NullAction_ShouldThrowArgumentNullException()
+        {
+            // Prepare
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { } };
+            var eventSubscription = new EventSubscription(mockActionReference);
+
+            // Act
+            
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                eventSubscription.InvokeAction(null!);
+            });
+        }
+
+        [Fact]
+        public void InvokeActionGeneric_NullAction_ShouldThrowArgumentNullException()
+        {
+            // Prepare
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate {  } };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)delegate { return true; } };
+            var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+
+            // Act
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                eventSubscription.InvokeAction(null!, "testString");
+            });
+        }
+
+        [Fact]
+        public void InvokeActionGeneric_PassArgument_ShouldPassArgument()
+        {
+            // Prepare
+            string? passedArgument = null;
+            var mockActionReference = new MockDelegateReference() { Delegate = (Action<string>)(obj => passedArgument = obj) };
+            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<string>)delegate { return true; } };
+            var eventSubscription = new EventSubscription<string>(mockActionReference, mockFilterReference);
+
+            // Act
+            eventSubscription.InvokeAction((Action<string>)mockActionReference.Delegate, "someString");
+
+            // Assert
+            Assert.Equal("someString", passedArgument);
         }
 
         #endregion
