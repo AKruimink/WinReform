@@ -94,7 +94,7 @@ namespace Resizer.Gui.Helpers.Messenger
         /// <summary>
         /// Create a new <see cref="EventSubscription"/> that represents a subscription to an event that get executed on the publisher thread
         /// </summary>
-        /// <param name="actionReference"><see cref="DelegateReference"/> of the <see cref="Action"/> to execute when the subscribed event is published</param>
+        /// <param name="actionReference"><see cref="DelegateReference"/> of the <see cref="Action{T}"/> to execute when the subscribed event is published</param>
         /// <param name="filterReference"><see cref="DelegateReference"/> of a <see cref="Predicate{T}"/> with criteria that need to match for the subscriber callback to invoke</param>
         public EventSubscription(IDelegateReference actionReference, IDelegateReference filterReference)
         {
