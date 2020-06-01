@@ -5,6 +5,9 @@ using Xunit;
 
 namespace Resizer.Gui.Tests.Helpers.Messenger
 {
+    /// <summary>
+    /// Tests for the <see cref="BackgroundEventSubscription"/>
+    /// </summary>
     public class BackgroundEventSubscriptionTests
     {
         #region Test Fixtures
