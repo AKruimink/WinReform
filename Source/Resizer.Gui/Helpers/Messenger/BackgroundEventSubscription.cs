@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace Resizer.Gui.Helpers.Messenger

@@ -152,8 +152,8 @@ namespace Resizer.Gui.Helpers.Messenger
                     {
                         argument = (TPayload)arguments[0];
                     }
-                    //TODO argument's possible null reference is suppressed, null should be allowed to be passed, but was unable to figure nullable out for it at this time.
-                    // or we should just throw during a null argument, when no argument's are passed the non generic type should probably just be used
+                    //TODO argument possible null reference is suppressed, null should be allowed to be passed, but was unable to figure nullable out for it at this time.
+                    // or we should just throw during a null argument, when no arguments are passed the non generic type should probably just be used
                     if (filter(argument!))
                     {
                         InvokeAction(action, argument!);
