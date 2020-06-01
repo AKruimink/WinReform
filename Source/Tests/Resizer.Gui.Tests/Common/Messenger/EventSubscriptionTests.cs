@@ -1,8 +1,8 @@
 ﻿using System;
-using Resizer.Gui.Helpers.Messenger;
+using Resizer.Gui.Common.Messenger;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Helpers.Messenger
+namespace Resizer.Gui.Tests.Common.Messenger
 {
     /// <summary>
     /// Tests for the <see cref="EventSubscription"/>

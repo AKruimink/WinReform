@@ -1,8 +1,8 @@
 ﻿using System;
-using Resizer.Gui.Helpers.Command;
+using Resizer.Gui.Common.Command;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Helpers.Command
+namespace Resizer.Gui.Tests.Common.Command
 {
     /// <summary>
     /// Tests for the <see cref="DelegateCommand"/>

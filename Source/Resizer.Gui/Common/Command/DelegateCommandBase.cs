@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Windows.Input;
 
-namespace Resizer.Gui.Helpers.Command
+namespace Resizer.Gui.Common.Command
 {
     /// <summary>
     /// Defines a base command 

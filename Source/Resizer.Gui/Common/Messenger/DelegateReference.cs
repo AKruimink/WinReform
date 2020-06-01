@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Resizer.Gui.Helpers.Messenger
+namespace Resizer.Gui.Common.Messenger
 {
     /// <summary>
     /// Defines a class that holds a references to a delegate

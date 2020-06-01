@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Resizer.Gui.Helpers.ViewModel
+namespace Resizer.Gui.Common.ViewModel
 {
     /// <summary>
     /// Base viewmodel that implements <see cref="INotifyPropertyChanged"/> to simplify viewmodels

@@ -1,7 +1,7 @@
-﻿using Resizer.Gui.Helpers.ViewModel;
+﻿using Resizer.Gui.Common.ViewModel;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Helpers.ViewModel
+namespace Resizer.Gui.Tests.Common.ViewModel
 {
     /// <summary>
     /// Tests for the <see cref="ViewModelBase"/>
