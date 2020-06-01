@@ -37,7 +37,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
             // Prepare
             var completedEvent = new ManualResetEvent(false);
             SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
-            SynchronizationContext? calledSyncContext = null;
+            SynchronizationContext? calledSyncContext = null; // TODO: calledSyncContext is always set to null, SynchronizationContext can be confusing
 
             var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
             var eventSubscription = new BackgroundEventSubscription(mockActionReference);
@@ -57,7 +57,7 @@ namespace Resizer.Gui.Tests.Helpers.Messenger
             // Prepare
             var completedEvent = new ManualResetEvent(false);
             SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
-            SynchronizationContext? calledSyncContext = null;
+            SynchronizationContext? calledSyncContext = null; // TODO: calledSyncContext is always set to null, SynchronizationContext can be confusing
 
             var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
             var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)delegate { return true; } };
