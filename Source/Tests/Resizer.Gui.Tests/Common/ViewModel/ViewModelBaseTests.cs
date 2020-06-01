@@ -1,4 +1,5 @@
 ﻿using Resizer.Gui.Common.ViewModel;
+using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.ViewModel
@@ -8,22 +9,6 @@ namespace Resizer.Gui.Tests.Common.ViewModel
     /// </summary>
     public class ViewModelBaseTests
     {
-        private class MockViewModel : ViewModelBase
-        {
-            private int _mockProperty;
-
-            public int MockProperty
-            {
-                get => _mockProperty;
-                set => SetProperty(ref _mockProperty, value);
-            }
-
-            internal void InvokeOnPropertyChanged()
-            {
-                RaisePropertyChanged(nameof(MockProperty));
-            }
-        }
-
         #region SetProperty Tests
 
         [Fact]
@@ -31,16 +16,16 @@ namespace Resizer.Gui.Tests.Common.ViewModel
         {
             // Prepare
             int value = 10;
-            var mockViewModel = new MockViewModel();
+            var mockViewModel = new ViewModelMock();
 
             // Assert
-            Assert.Equal(0, mockViewModel.MockProperty);
+            Assert.Equal(0, mockViewModel.IntProperty);
 
             // Act
-            mockViewModel.MockProperty = value;
+            mockViewModel.IntProperty = value;
 
             // Assert
-            Assert.Equal(value, mockViewModel.MockProperty);
+            Assert.Equal(value, mockViewModel.IntProperty);
         }
 
         [Fact]
@@ -49,23 +34,23 @@ namespace Resizer.Gui.Tests.Common.ViewModel
             // Prepare
             var oldValue = 10;
             var newValue = 10;
-            var mockViewModel = new MockViewModel {MockProperty = oldValue};
+            var mockViewModel = new ViewModelMock { IntProperty = oldValue};
             var invoked = false;
             mockViewModel.PropertyChanged += (o, e) =>
             {
                 // Act
-                if (e.PropertyName.Equals(nameof(mockViewModel.MockProperty)))
+                if (e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
                 {
                     invoked = true;
                 }
             };
 
             // Act
-            mockViewModel.MockProperty = newValue;
+            mockViewModel.IntProperty = newValue;
 
             // Assert
             Assert.False(invoked);
-            Assert.Equal(oldValue, mockViewModel.MockProperty);
+            Assert.Equal(oldValue, mockViewModel.IntProperty);
         }
 
         [Fact]
@@ -73,19 +58,19 @@ namespace Resizer.Gui.Tests.Common.ViewModel
         {
             // Prepare
             var value = 10;
-            var mockViewModel = new MockViewModel();
+            var mockViewModel = new ViewModelMock();
             var invoked = false;
             mockViewModel.PropertyChanged += (o, e) =>
             {
                 // Act
-                if (e.PropertyName.Equals(nameof(mockViewModel.MockProperty)))
+                if (e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
                 {
                     invoked = true;
                 }
             };
 
             // Act
-            mockViewModel.MockProperty = value;
+            mockViewModel.IntProperty = value;
 
             // Assert
             Assert.True(invoked);
@@ -100,11 +85,11 @@ namespace Resizer.Gui.Tests.Common.ViewModel
         {
             // Prepare
             var invoked = false;
-            var mockViewModel = new MockViewModel();
+            var mockViewModel = new ViewModelMock();
             mockViewModel.PropertyChanged += (o, e) =>
             {
                 // Act
-                if (e.PropertyName.Equals(nameof(mockViewModel.MockProperty)))
+                if (e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
                 {
                     invoked = true;
                 }

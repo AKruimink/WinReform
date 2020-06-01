@@ -1,5 +1,6 @@
 ﻿using System;
 using Resizer.Gui.Common.Command;
+using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.Command
@@ -9,31 +10,6 @@ namespace Resizer.Gui.Tests.Common.Command
     /// </summary>
     public class DelegateCommandTests
     {
-        private class DelegateHandler
-        {
-            public bool CanExecuteReturnValue { get; set; } = true;
-
-            public object? CanExecuteParameter { get; set; }
-
-            public object? ExecuteParameter { get; set; }
-
-            public bool CanExecute(object parameter)
-            {
-                CanExecuteParameter = parameter;
-                return CanExecuteReturnValue;
-            }
-
-            public void Execute(object parameter)
-            {
-                ExecuteParameter = parameter;
-            }
-        }
-
-        private class TestClass
-        {
-
-        }
-
         #region Constructor Tests
 
         [Fact]
@@ -166,7 +142,7 @@ namespace Resizer.Gui.Tests.Common.Command
         public void Execute_PassObject_ShouldPassObject()
         {
             // Prepare
-            var handler = new DelegateHandler();
+            var handler = new DelegateHandlerMock();
             var command = new DelegateCommand<object>(handler.Execute);
             var parameter = new object();
 
@@ -182,8 +158,8 @@ namespace Resizer.Gui.Tests.Common.Command
         {
             // Prepare
             var executeCalled = false;
-            var testClass = new TestClass();
-            var command = new DelegateCommand<TestClass>(delegate (TestClass parameter)
+            var testClass = new EmptyClassMock();
+            var command = new DelegateCommand<EmptyClassMock>(delegate (EmptyClassMock parameter)
             {
                 // Act
                 executeCalled = true;
@@ -223,7 +199,7 @@ namespace Resizer.Gui.Tests.Common.Command
         public void CanExecute_PassObject_ShouldPassObject()
         {
             // Prepare
-            var handler = new DelegateHandler();
+            var handler = new DelegateHandlerMock();
             var command = new DelegateCommand<object>(handler.Execute, handler.CanExecute);
             var parameter = new object();
             handler.CanExecuteReturnValue = true;
@@ -240,7 +216,7 @@ namespace Resizer.Gui.Tests.Common.Command
         public void CanExecute_Unassigned_ShouldReturnTrue()
         {
             // Prepare
-            var handler = new DelegateHandler();
+            var handler = new DelegateHandlerMock();
             var command = new DelegateCommand<object>(handler.Execute);
 
             // Act
@@ -254,7 +230,7 @@ namespace Resizer.Gui.Tests.Common.Command
         public void CanExecute_RaiseCanExecuteChanged_ShouldReturnTrue()
         {
             // Prepare
-            var handler = new DelegateHandler();
+            var handler = new DelegateHandlerMock();
             var command = new DelegateCommand<object>(handler.Execute);
             var canExecuteChangedRaised = false;
 
@@ -288,8 +264,8 @@ namespace Resizer.Gui.Tests.Common.Command
         {
             // Prepare
             var executeCalled = false;
-            var testClass = new TestClass();
-            var command = new DelegateCommand<TestClass>((p) => { }, delegate (TestClass parameter)
+            var testClass = new EmptyClassMock();
+            var command = new DelegateCommand<EmptyClassMock>((p) => { }, delegate (EmptyClassMock parameter)
             {
                 // Assert
                 Assert.Same(testClass, parameter);

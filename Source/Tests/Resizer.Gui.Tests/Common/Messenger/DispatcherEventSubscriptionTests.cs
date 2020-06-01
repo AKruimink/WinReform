@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Resizer.Gui.Common.Messenger;
+using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.Messenger
@@ -10,43 +11,6 @@ namespace Resizer.Gui.Tests.Common.Messenger
     /// </summary>
     public class DispatcherEventSubscriptionTests
     {
-        #region Test Fixtures
-
-        private class MockDelegateReference : IDelegateReference
-        {
-            public Delegate? Delegate { get; set; }
-
-            public MockDelegateReference()
-            {
-            }
-
-            public MockDelegateReference(Delegate @delegate)
-            {
-                Delegate = @delegate;
-            }
-        }
-
-        private class MockSynchronizationContext : SynchronizationContext
-        {
-            public bool InvokeCalled { get; private set; } = false;
-
-            public object? InvokeArgs { get; private set; }
-
-            public SynchronizationContext? SynchronizationContext { get; private set; }
-
-
-            public override void Post(SendOrPostCallback d, object? state)
-            {
-                base.Post(d, state);
-
-                InvokeCalled = true;
-                InvokeArgs = d;
-                SynchronizationContext = Current;
-            }
-        }
-
-        #endregion
-
         #region InvokeAction Tests
 
         [Fact]
@@ -54,12 +18,12 @@ namespace Resizer.Gui.Tests.Common.Messenger
         {
             // Prepare
             var completedEvent = new ManualResetEvent(false);
-            var mockSynchronizationContext = new MockSynchronizationContext();
-            SynchronizationContext.SetSynchronizationContext(mockSynchronizationContext);
+            var synchronizationContextMock = new SynchronizationContextMock();
+            SynchronizationContext.SetSynchronizationContext(synchronizationContextMock);
             SynchronizationContext? calledSyncContext = null; // TODO: calledSyncContext is always set to null, SynchronizationContext can be confusing
 
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
-            var eventSubscription = new DispatcherEventSubscription(mockActionReference, mockSynchronizationContext);
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
+            var eventSubscription = new DispatcherEventSubscription(mockActionReference, synchronizationContextMock);
             var publishAction = eventSubscription.GetExecutionStrategy();
 
             // Act
@@ -69,7 +33,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
             // Assert
             
             Assert.NotEqual(SynchronizationContext.Current, calledSyncContext);
-            //Assert.Equal(mockSynchronizationContext.SynchronizationContext, calledSyncContext);
+            //Assert.Equal(SynchronizationContextMock.SynchronizationContext, calledSyncContext);
         }
 
         [Fact]
@@ -77,13 +41,13 @@ namespace Resizer.Gui.Tests.Common.Messenger
         {
             // Prepare
             var completedEvent = new ManualResetEvent(false);
-            var mockSynchronizationContext = new MockSynchronizationContext();
-            SynchronizationContext.SetSynchronizationContext(mockSynchronizationContext);
+            var SynchronizationContextMock = new SynchronizationContextMock();
+            SynchronizationContext.SetSynchronizationContext(SynchronizationContextMock);
             SynchronizationContext? calledSyncContext = null; // TODO: calledSyncContext is always set to null, SynchronizationContext can be confusing
 
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)delegate { return true; } };
-            var eventSubscription = new DispatcherEventSubscription<object> (mockActionReference, mockFilterReference, mockSynchronizationContext);
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)delegate { return true; } };
+            var eventSubscription = new DispatcherEventSubscription<object> (mockActionReference, mockFilterReference, SynchronizationContextMock);
             var publishAction = eventSubscription.GetExecutionStrategy();
 
             // Act
@@ -92,7 +56,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
 
             // Assert
             Assert.NotEqual(SynchronizationContext.Current, calledSyncContext);
-            //Assert.Equal(mockSynchronizationContext.SynchronizationContext, calledSyncContext);
+            //Assert.Equal(SynchronizationContextMock.SynchronizationContext, calledSyncContext);
         }
 
         #endregion

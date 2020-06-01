@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Resizer.Gui.Common.Messenger;
+using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.Messenger
@@ -10,36 +11,6 @@ namespace Resizer.Gui.Tests.Common.Messenger
     /// </summary>
     public class DelegateReferenceTests
     {
-        #region Test Fixtures
-
-        private class DelegateHandler
-        {
-            public string? _actionArgs;
-
-            public void DoEvent(string value)
-            {
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
-                var myValue = value;
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
-            }
-
-            public void SomeAction(string args)
-            {
-                _actionArgs = args;
-            }
-
-            public static void StaticMethod()
-            {
-#pragma warning disable CS0219 // Variable is assigned but its value is never used
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
-                var someValue = 0;
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
-#pragma warning restore CS0219 // Variable is assigned but its value is never used
-            }
-        }
-
-        #endregion
-
         #region Constructor Tests
 
         [Fact]
@@ -60,13 +31,11 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public async Task Construct_KeepReferenceAliveTrue_ShouldPreventGarbageCollection()
         {
             // Prepare
-            var @delegate = new DelegateHandler();
-            var delegateReference = new DelegateReference((Action<string>)@delegate.DoEvent, true);
+            var @delegate = new DelegateHandlerMock();
+            var delegateReference = new DelegateReference((Action)@delegate.EventMethod, true);
 
             // Act
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-            @delegate = null;
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+            @delegate = null!;
             await Task.Delay(100);
             GC.Collect();
 
@@ -78,13 +47,11 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public async Task Construct_KeepReferenceAliveFalse_ShouldGetGarbageCollected()
         {
             // Prepare
-            var @delegate = new DelegateHandler();
-            var delegateReference = new DelegateReference((Action<string>)@delegate.DoEvent, true);
+            var @delegate = new DelegateHandlerMock();
+            var delegateReference = new DelegateReference((Action)@delegate.EventMethod, true);
 
             // Act
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-            @delegate = null;
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+            @delegate = null!;
             await Task.Delay(100);
             GC.Collect();
 
@@ -96,7 +63,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void Construct_WeakReferenceStaticDelegate_ShouldSet()
         {
             // Prepare
-            var delegateReference = new DelegateReference((Action)DelegateHandler.StaticMethod, false);
+            var delegateReference = new DelegateReference((Action)DelegateHandlerMock.StaticMethod, false);
 
             // Act
 
@@ -113,29 +80,27 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void GetDelegate_ActionDelegate_ShouldReturnAction()
         {
             // Prepare
-            var @delegate = new DelegateHandler();
-            var action = new Action<string>(@delegate.SomeAction);
+            var @delegate = new DelegateHandlerMock();
+            var action = new Action<string>(@delegate.ActionMethod);
             var delegateReference = new DelegateReference(action, false);
 
             // Act
             ((Action<string>)delegateReference.Delegate!)("payload");
 
             // Assert
-            Assert.Equal("payload", @delegate._actionArgs);
+            Assert.Equal("payload", @delegate.MethodParameter);
         }
 
         [Fact]
         public async Task GetDelegate_DelegateNotAlive_ShouldReturnNull()
         {
             // Prepare
-            var @delegate = new DelegateHandler();
+            var @delegate = new DelegateHandlerMock();
             var weakReference = new WeakReference(@delegate);
-            var delegateReference = new DelegateReference((Action<string>)@delegate.DoEvent, false);
+            var delegateReference = new DelegateReference((Action)@delegate.EventMethod, false);
 
             // Act
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-            @delegate = null;
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+            @delegate = null!;
             await Task.Delay(100);
             GC.Collect();
 
@@ -151,36 +116,36 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void DelegateEquals_EqualDelegate_ShouldReturnTrue()
         {
             // Prepare
-            var @delegate = new DelegateHandler();
-            var action = new Action<string>(@delegate.SomeAction);
+            var @delegate = new DelegateHandlerMock();
+            var action = new Action<string>(@delegate.ActionMethod);
             var delegateReference = new DelegateReference(action, false);
 
             // Act
 
             // Assert
-            Assert.True(delegateReference.DelegateEquals(new Action<string>(@delegate.SomeAction)));
+            Assert.True(delegateReference.DelegateEquals(new Action<string>(@delegate.ActionMethod)));
         }
 
         [Fact]
         public void DelegateEquals_DoesntEqualDelegate_ShouldReturnFalse()
         {
             // Prepare
-            var @delegate = new DelegateHandler();
-            var delegateReference = new DelegateReference(new Action<string>(@delegate.SomeAction), false);
+            var @delegate = new DelegateHandlerMock();
+            var delegateReference = new DelegateReference(new Action<string>(@delegate.ActionMethod), false);
 
             // Act
 
             // Assert
-            Assert.False(delegateReference.DelegateEquals(new Action<string>(@delegate.DoEvent)));
+            Assert.False(delegateReference.DelegateEquals(new Action(@delegate.EventMethod)));
         }
 
         [Fact]
         public void DelegateEquals_EqualsNullDelegate_ShouldReturnFalse()
         {
             // Prepare
-            var @delegate = new DelegateHandler();
+            var @delegate = new DelegateHandlerMock();
             var weakReference = new WeakReference(@delegate);
-            var delegateReference = new DelegateReference((Action<string>)@delegate.DoEvent, false);
+            var delegateReference = new DelegateReference((Action)@delegate.EventMethod, false);
 
             // Act
             GC.KeepAlive(weakReference);
@@ -194,9 +159,9 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public async Task DelegateEquals_EqualNullDelegateReferenceNotAlive_ShouldReturnTrue()
         {
             // Prepare
-            var @delegate = new DelegateHandler();
+            var @delegate = new DelegateHandlerMock();
             var weakReference = new WeakReference(@delegate);
-            var delegateReference = new DelegateReference((Action<string>)@delegate.DoEvent, false);
+            var delegateReference = new DelegateReference((Action)@delegate.EventMethod, false);
 
             // Act
             @delegate = null!;
@@ -213,12 +178,12 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void DelegateEquals_EqualStaticDelegate_ShouldReturnTrue()
         {
             // Prepare
-            var delegateReference = new DelegateReference((Action)DelegateHandler.StaticMethod, false);
+            var delegateReference = new DelegateReference((Action)DelegateHandlerMock.StaticMethod, false);
 
             // Act
 
             // Assert
-            Assert.True(delegateReference.DelegateEquals((Action)DelegateHandler.StaticMethod));
+            Assert.True(delegateReference.DelegateEquals((Action)DelegateHandlerMock.StaticMethod));
         }
 
         #endregion

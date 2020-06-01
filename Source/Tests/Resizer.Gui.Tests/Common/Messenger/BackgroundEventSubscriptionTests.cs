@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Resizer.Gui.Common.Messenger;
+using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.Messenger
@@ -10,25 +11,6 @@ namespace Resizer.Gui.Tests.Common.Messenger
     /// </summary>
     public class BackgroundEventSubscriptionTests
     {
-        #region Test Fixtures
-
-        private class MockDelegateReference : IDelegateReference
-        {
-            public Delegate? Delegate { get; set; }
-
-            public MockDelegateReference()
-            {
-
-            }
-
-            public MockDelegateReference(Delegate @delegate)
-            {
-                Delegate = @delegate;
-            }
-        }
-
-        #endregion
-
         #region InvokeAction Tests
 
         [Fact]
@@ -39,7 +21,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
             SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
             SynchronizationContext? calledSyncContext = null; // TODO: calledSyncContext is always set to null, SynchronizationContext can be confusing
 
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
             var eventSubscription = new BackgroundEventSubscription(mockActionReference);
             var publishAction = eventSubscription.GetExecutionStrategy();
 
@@ -59,8 +41,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
             SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
             SynchronizationContext? calledSyncContext = null; // TODO: calledSyncContext is always set to null, SynchronizationContext can be confusing
 
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)delegate { return true; } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)delegate { return true; } };
             var eventSubscription = new BackgroundEventSubscription<object>(mockActionReference, mockFilterReference);
             var publishAction = eventSubscription.GetExecutionStrategy();
 

@@ -16,6 +16,14 @@ namespace Resizer.Gui.Tests.Mocks
         /// <summary>
         /// Create a new mock of the <see cref="DelegateReference"/>
         /// </summary>
+        public DelegateReferenceMock()
+        {
+
+        }
+
+        /// <summary>
+        /// Create a new mock of the <see cref="DelegateReference"/>
+        /// </summary>
         /// <param name="delegate"><see cref="Delegate"/> to be referenced</param>
         public DelegateReferenceMock(Delegate @delegate)
         {

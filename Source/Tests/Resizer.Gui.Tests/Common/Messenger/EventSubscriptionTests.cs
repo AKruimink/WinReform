@@ -1,5 +1,6 @@
 ﻿using System;
 using Resizer.Gui.Common.Messenger;
+using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.Messenger
@@ -9,25 +10,6 @@ namespace Resizer.Gui.Tests.Common.Messenger
     /// </summary>
     public class EventSubscriptionTests
     {
-        #region Test Fixtures
-
-        private class MockDelegateReference : IDelegateReference
-        {
-            public Delegate? Delegate { get; set; }
-
-            public MockDelegateReference()
-            {
-
-            }
-
-            public MockDelegateReference(Delegate @delegate)
-            {
-                Delegate = @delegate;
-            }
-        }
-
-        #endregion
-
         #region Constructor Tests
 
         [Fact]
@@ -48,7 +30,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void ConstructGeneric_NullActionReference_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)(arg => { return true; }) };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)(arg => { return true; }) };
 
             // Act
 
@@ -63,7 +45,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void ConstructGeneric_NullFilterReference_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
 
             // Act
 
@@ -78,7 +60,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void ConstructNonGeneric_NullAction_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = null };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = null };
 
             // Act
 
@@ -93,8 +75,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void ConstructGeneric_NullAction_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = null };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)(arg => { return true; }) };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = null };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)(arg => { return true; }) };
 
             // Act
 
@@ -109,8 +91,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void ConstructGeneric_NullFilter_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { }};
-            var mockFilterReference = new MockDelegateReference() { Delegate = null };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { }};
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = null };
 
             // Act
 
@@ -125,7 +107,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void ConstructNonGeneric_DifferentTargetTypeActionReference_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<int>)delegate { } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<int>)delegate { } };
 
             // Act
 
@@ -140,8 +122,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void ConstructGeneric_DifferentTargetTypeActionReference_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<int>)delegate { } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)(arg => { return true; }) };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<int>)delegate { } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)(arg => { return true; }) };
 
             // Act
 
@@ -156,8 +138,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void ConstructGeneric_DifferentTargetTypeFilterReference_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<int>)(arg => { return true; }) };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<int>)(arg => { return true; }) };
 
             // Act
 
@@ -176,7 +158,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void SubscriptionTokenNonGeneric_Intialize_ShouldInitialize()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { } };
             var eventSubscription = new EventSubscription(mockActionReference);
             var subscriptionToken = new SubscriptionToken();
 
@@ -192,8 +174,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void SubscriptionTokenGeneric_Intialize_ShouldInitialize()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)(arg => { return true; }) };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)(arg => { return true; }) };
             var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
             var subscriptionToken = new SubscriptionToken();
 
@@ -214,7 +196,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void GetActionNonGeneric_NullAction_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { } };
             var eventSubscription = new EventSubscription(mockActionReference);
             Action<object[]>? publishAction;
 
@@ -236,8 +218,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void GetActionGeneric_NullAction_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)(arg => { return true; }) };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)(arg => { return true; }) };
             var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
             Action<object[]>? publishAction;
 
@@ -265,8 +247,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
             // Prepare
             string? passedArgumentToAction = null;
             string? passedArgumentToFilter = null;
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<string>)(obj => passedArgumentToAction = obj) };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<string>)(obj => { passedArgumentToFilter = obj; return true; }) };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<string>)(obj => passedArgumentToAction = obj) };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<string>)(obj => { passedArgumentToFilter = obj; return true; }) };
             var eventSubscription = new EventSubscription<string>(mockActionReference, mockFilterReference);
             var publishAction = eventSubscription.GetExecutionStrategy();
 
@@ -282,7 +264,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void GetExecutionStrategyNonGeneric_NullAction_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate {  } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate {  } };
             var eventSubscription = new EventSubscription(mockActionReference);
             Action<object[]>? publishAction;
 
@@ -304,8 +286,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void GetExecutionStrategyGeneric_NullAction_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<int>)delegate { } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<int>)delegate { return false; } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<int>)delegate { } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<int>)delegate { return false; } };
             var eventSubscription = new EventSubscription<int>(mockActionReference, mockFilterReference);
             Action<object[]>? publishAction;
 
@@ -327,8 +309,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void GetExecutionStrategyGeneric_NullFilter_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<int>)delegate { } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<int>)delegate { return false; } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<int>)delegate { } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<int>)delegate { return false; } };
             var eventSubscription = new EventSubscription<int>(mockActionReference, mockFilterReference);
             Action<object[]>? publishAction;
 
@@ -351,8 +333,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         {
             // Prepare
             var actionExecuted = false;
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<int>)delegate { actionExecuted = true; } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<int>)delegate { return false; } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<int>)delegate { actionExecuted = true; } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<int>)delegate { return false; } };
             var eventSubscription = new EventSubscription<int>(mockActionReference, mockFilterReference);
             var publishAction = eventSubscription.GetExecutionStrategy();
 
@@ -372,7 +354,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         {
             // Prepare
             var actionExecuted = false;
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { actionExecuted = true; } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { actionExecuted = true; } };
             var eventSubscription = new EventSubscription(mockActionReference);
 
             // Act
@@ -387,8 +369,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         {
             // Prepare
             var actionExecuted = false;
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate { actionExecuted = true; } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)delegate { return false; } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { actionExecuted = true; } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)delegate { return false; } };
             var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
 
             // Act
@@ -402,7 +384,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void InvokeActionNonGeneric_NullAction_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action)delegate { } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { } };
             var eventSubscription = new EventSubscription(mockActionReference);
 
             // Act
@@ -419,8 +401,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void InvokeActionGeneric_NullAction_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<object>)delegate {  } };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<object>)delegate { return true; } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate {  } };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)delegate { return true; } };
             var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
 
             // Act
@@ -437,8 +419,8 @@ namespace Resizer.Gui.Tests.Common.Messenger
         {
             // Prepare
             string? passedArgument = null;
-            var mockActionReference = new MockDelegateReference() { Delegate = (Action<string>)(obj => passedArgument = obj) };
-            var mockFilterReference = new MockDelegateReference() { Delegate = (Predicate<string>)delegate { return true; } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<string>)(obj => passedArgument = obj) };
+            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<string>)delegate { return true; } };
             var eventSubscription = new EventSubscription<string>(mockActionReference, mockFilterReference);
 
             // Act
