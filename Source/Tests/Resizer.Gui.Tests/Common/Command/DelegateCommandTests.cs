@@ -23,7 +23,7 @@ namespace Resizer.Gui.Tests.Common.Command
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var actual = new DelegateCommand(null, null);
+                var actual = new DelegateCommand(null!, null);
             });
         }
 
@@ -37,7 +37,7 @@ namespace Resizer.Gui.Tests.Common.Command
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var actual = new DelegateCommand(null);
+                var actual = new DelegateCommand(null!);
             });
         }
 
@@ -89,7 +89,7 @@ namespace Resizer.Gui.Tests.Common.Command
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var actual = new DelegateCommand<object>(null, null);
+                var actual = new DelegateCommand<object>(null!, null);
             });
         }
 
@@ -103,7 +103,7 @@ namespace Resizer.Gui.Tests.Common.Command
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var actual = new DelegateCommand<object>(null);
+                var actual = new DelegateCommand<object>(null!);
             });
         }
 
@@ -221,7 +221,7 @@ namespace Resizer.Gui.Tests.Common.Command
             var command = new DelegateCommand<object>(handler.Execute);
 
             // Act
-            var returnValue = command.CanExecute(null);
+            var returnValue = command.CanExecute(null!);
 
             // Assert
             Assert.True(returnValue);
