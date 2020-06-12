@@ -1,4 +1,5 @@
 ﻿using Resizer.Gui.Common.Messenger;
+using Resizer.Gui.Tests.Common.Messenger.Mocks;
 using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
@@ -141,6 +142,23 @@ namespace Resizer.Gui.Tests.Common.Messenger
 
             // Assert
             Assert.False(eventBase.Contains(token));
+        }
+
+        #endregion
+
+
+        #region Contains Tests
+
+        [Fact]
+        public void Contains_SearchByToken_ShouldFindSubscriber()
+        {
+            // Prepare
+            var eventbase = new EventBaseFixture();
+            var eventSubscription = new EventSubscriptionMock();
+            var token = eventbase.Subscribe(eventSubscription);
+
+            // Assert
+            Assert.True(eventbase.Contains(token));
         }
 
         #endregion

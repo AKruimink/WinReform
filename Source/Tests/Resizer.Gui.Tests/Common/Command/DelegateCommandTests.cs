@@ -1,5 +1,6 @@
 ﻿using System;
 using Resizer.Gui.Common.Command;
+using Resizer.Gui.Tests.Common.Command.Mocks;
 using Resizer.Gui.Tests.Mocks;
 using Xunit;
 

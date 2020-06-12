@@ -1,7 +1,7 @@
 ﻿using System;
 using Resizer.Gui.Common.Messenger;
 
-namespace Resizer.Gui.Tests.Mocks
+namespace Resizer.Gui.Tests.Common.Messenger.Mocks
 {
     public class EventSubscriptionMock : IEventSubscription
     {

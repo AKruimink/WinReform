@@ -1,4 +1,5 @@
 ﻿using Resizer.Gui.Common.ViewModel;
+using Resizer.Gui.Tests.Common.ViewModel.Mocks;
 using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
