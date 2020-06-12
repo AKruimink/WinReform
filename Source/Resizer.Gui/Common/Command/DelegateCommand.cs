@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows.Input;
 
-namespace Resizer.Gui.Helpers.Command
+namespace Resizer.Gui.Common.Command
 {
     /// <summary>
     /// An <see cref="ICommand"/> whose delegate doesnt take any parameters
@@ -32,7 +32,7 @@ namespace Resizer.Gui.Helpers.Command
         /// <param name="canExecuteMethod"></param>
         public DelegateCommand(Action executeMethod, Func<bool>? canExecuteMethod) : base()
         {
-            if(executeMethod == null || canExecuteMethod == null)
+            if (executeMethod == null || canExecuteMethod == null)
             {
                 throw new ArgumentNullException(nameof(executeMethod), "The Execute Method or Can Execute Method cannot be null ");
             }
@@ -57,7 +57,7 @@ namespace Resizer.Gui.Helpers.Command
         {
             return _canExecuteMethod();
         }
-        
+
         ///<inheritdoc/>
         protected override void Execute(object parameter)
         {
@@ -106,9 +106,9 @@ namespace Resizer.Gui.Helpers.Command
             }
 
             var typeInfo = typeof(T).GetTypeInfo();
-            if(typeInfo.IsValueType)
+            if (typeInfo.IsValueType)
             {
-                if(!typeInfo.IsGenericType || !typeof(Nullable<>).GetTypeInfo().IsAssignableFrom(typeInfo.GetGenericTypeDefinition().GetTypeInfo()))
+                if (!typeInfo.IsGenericType || !typeof(Nullable<>).GetTypeInfo().IsAssignableFrom(typeInfo.GetGenericTypeDefinition().GetTypeInfo()))
                 {
                     throw new InvalidCastException("Parameter type isnt a valid generic type");
                 }

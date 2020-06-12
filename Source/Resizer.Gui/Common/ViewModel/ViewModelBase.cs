@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Resizer.Gui.Helpers.ViewModel
+namespace Resizer.Gui.Common.ViewModel
 {
     /// <summary>
     /// Base viewmodel that implements <see cref="INotifyPropertyChanged"/> to simplify viewmodels
@@ -35,7 +35,7 @@ namespace Resizer.Gui.Helpers.ViewModel
         /// <returns>Returns <see langword="true"/> if the value was changed, otherwise <see langword="false"/></returns>
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string? propertyName = null)
         {
-            if(EqualityComparer<T>.Default.Equals(storage, value))
+            if (EqualityComparer<T>.Default.Equals(storage, value))
             {
                 return false;
             }
