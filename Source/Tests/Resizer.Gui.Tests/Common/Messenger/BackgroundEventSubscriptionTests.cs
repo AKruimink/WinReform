@@ -2,7 +2,6 @@
 using System.Threading;
 using Resizer.Gui.Common.Messenger;
 using Resizer.Gui.Tests.Common.Messenger.Mocks;
-using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.Messenger

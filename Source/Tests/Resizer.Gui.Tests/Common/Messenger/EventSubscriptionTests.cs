@@ -1,7 +1,6 @@
 ﻿using System;
 using Resizer.Gui.Common.Messenger;
 using Resizer.Gui.Tests.Common.Messenger.Mocks;
-using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.Messenger
@@ -92,7 +91,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void ConstructGeneric_NullFilter_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { }};
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
             var mockFilterReference = new DelegateReferenceMock() { Delegate = null };
 
             // Act
@@ -265,7 +264,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void GetExecutionStrategyNonGeneric_NullAction_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate {  } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { } };
             var eventSubscription = new EventSubscription(mockActionReference);
             Action<object[]>? publishAction;
 
@@ -389,7 +388,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
             var eventSubscription = new EventSubscription(mockActionReference);
 
             // Act
-            
+
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
@@ -402,7 +401,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void InvokeActionGeneric_NullAction_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate {  } };
+            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
             var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)delegate { return true; } };
             var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
 

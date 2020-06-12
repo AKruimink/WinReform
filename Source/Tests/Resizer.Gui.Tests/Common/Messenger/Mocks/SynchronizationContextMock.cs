@@ -16,7 +16,7 @@ namespace Resizer.Gui.Tests.Common.Messenger.Mocks
         /// Arguments passed to along during the invoke
         /// </summary>
         public object? InvokeArgs { get; set; }
-         
+
         /// <summary>
         /// <see cref="SynchronizationContext"/> that the invoke is being executed on
         /// </summary>

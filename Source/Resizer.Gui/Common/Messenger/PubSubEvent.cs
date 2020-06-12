@@ -61,7 +61,7 @@ namespace Resizer.Gui.Common.Messenger
                     subscription = new EventSubscription(actionReference);
                     break;
                 case ThreadOption.UIThread:
-                    if(SynchronizationContext == null)
+                    if (SynchronizationContext == null)
                     {
                         throw new ArgumentNullException(nameof(SynchronizationContext));
                     }
@@ -129,7 +129,7 @@ namespace Resizer.Gui.Common.Messenger
         {
             return Subscribe(action, ThreadOption.PublisherThread);
         }
-           
+
         /// <summary>
         /// Subscribe a delegate to an event that will be published on <see cref="ThreadOption.PublisherThread"/>
         /// </summary>
@@ -173,7 +173,7 @@ namespace Resizer.Gui.Common.Messenger
         public virtual SubscriptionToken Subscribe(Action<TPayLoad> action, ThreadOption threadOption, bool keepSubscriberReferenceAlive)
         {
             return Subscribe(action, threadOption, keepSubscriberReferenceAlive, null);
-            
+
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Resizer.Gui.Common.Messenger
         {
             var actionReference = new DelegateReference(action, keepSubscriberReferenceAlive);
             DelegateReference filterReference;
-            if(filter != null)
+            if (filter != null)
             {
                 filterReference = new DelegateReference(filter, keepSubscriberReferenceAlive);
             }
@@ -243,7 +243,7 @@ namespace Resizer.Gui.Common.Messenger
         /// <param name="arguments">The argument to pass to the subscribers</param>
         public virtual void Publish(TPayLoad argument)
         {
-            if(argument == null)
+            if (argument == null)
             {
                 throw new ArgumentNullException(nameof(argument), "Use the Non Generic PubSubEvent for events without arguments");
             }

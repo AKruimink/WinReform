@@ -22,7 +22,7 @@ namespace Resizer.Gui.Common.Messenger
         ///<inheritdoc/>
         public TEventType GetEvent<TEventType>() where TEventType : EventBase, new()
         {
-            lock(_events)
+            lock (_events)
             {
                 if (!_events.TryGetValue(typeof(TEventType), out var existingEvent))
                 {

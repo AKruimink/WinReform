@@ -1,6 +1,5 @@
 ﻿using Resizer.Gui.Common.ViewModel;
 using Resizer.Gui.Tests.Common.ViewModel.Mocks;
-using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.ViewModel
@@ -35,7 +34,7 @@ namespace Resizer.Gui.Tests.Common.ViewModel
             // Prepare
             var oldValue = 10;
             var newValue = 10;
-            var mockViewModel = new ViewModelMock { IntProperty = oldValue};
+            var mockViewModel = new ViewModelMock { IntProperty = oldValue };
             var invoked = false;
             mockViewModel.PropertyChanged += (o, e) =>
             {

@@ -36,12 +36,12 @@ namespace Resizer.Gui.Common.Messenger
         /// <param name="keepReferenceAlive">If <see langword="true"/> the reference wil be kept alive using a string reference, otherwise a <see cref="WeakReference"/> is used</param>
         public DelegateReference(Delegate @delegate, bool keepReferenceAlive)
         {
-            if(@delegate == null)
+            if (@delegate == null)
             {
                 throw new ArgumentNullException(nameof(@delegate));
             }
 
-            if(keepReferenceAlive)
+            if (keepReferenceAlive)
             {
                 _delegate = @delegate;
             }
@@ -58,7 +58,7 @@ namespace Resizer.Gui.Common.Messenger
         {
             get
             {
-                if(_delegate != null)
+                if (_delegate != null)
                 {
                     return _delegate;
                 }
@@ -76,7 +76,7 @@ namespace Resizer.Gui.Common.Messenger
         /// <returns>Returns <see langword="true"/> if equal, otherwise <see langword="false"/></returns>
         public bool DelegateEquals(Delegate @delegate)
         {
-            if(_delegate != null)
+            if (_delegate != null)
             {
                 return _delegate == @delegate;
             }
@@ -101,13 +101,13 @@ namespace Resizer.Gui.Common.Messenger
         /// <returns>Returns the created <see cref="Delegate"/> if no <see cref="Delegate"/> could be create it returns <see cref="null"/></returns>
         private Delegate? TryGetDelegate()
         {
-            if(_methodInfo?.IsStatic ?? false)
+            if (_methodInfo?.IsStatic ?? false)
             {
                 return _methodInfo.CreateDelegate(_delegateType!, null);
             }
 
             var target = _weakReference?.Target;
-            if(target != null)
+            if (target != null)
             {
                 return _methodInfo?.CreateDelegate(_delegateType!, target);
             }

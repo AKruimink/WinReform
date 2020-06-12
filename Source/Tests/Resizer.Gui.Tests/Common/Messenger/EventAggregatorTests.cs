@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Resizer.Gui.Common.Messenger;
+﻿using Resizer.Gui.Common.Messenger;
 using Resizer.Gui.Tests.Common.Messenger.Mocks;
 using Xunit;
 

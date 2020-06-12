@@ -27,7 +27,7 @@ namespace Resizer.Gui.Common.Messenger
         /// <returns>Returns <see langword="true"/> if the <see cref="SubscriptionToken"/> is equal, otherwise it returns <see langword="false"/></returns>
         public bool Equals(SubscriptionToken subscriptionToken)
         {
-            if(subscriptionToken == null)
+            if (subscriptionToken == null)
             {
                 throw new ArgumentNullException(nameof(subscriptionToken));
             }
@@ -42,12 +42,12 @@ namespace Resizer.Gui.Common.Messenger
         /// <returns>Returns <see langword="true"/> if the objects are equal, otherwise it returns <see langword="false"/></returns>
         public override bool Equals(object? @object)
         {
-            if(ReferenceEquals(this, @object))
+            if (ReferenceEquals(this, @object))
             {
                 return true;
             }
 
-            if(@object is SubscriptionToken token)
+            if (@object is SubscriptionToken token)
             {
                 return Equals(token);
             }

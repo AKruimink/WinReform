@@ -22,12 +22,12 @@ namespace Resizer.Gui.Common.Messenger
         /// <param name="actionReference"><see cref="DelegateReference"/> of the <see cref="Action"/> to execute when the subscribed event is published</param>
         public EventSubscription(IDelegateReference actionReference)
         {
-            if(actionReference == null)
+            if (actionReference == null)
             {
                 throw new ArgumentNullException(nameof(actionReference));
             }
 
-            if(!(actionReference.Delegate is Action))
+            if (!(actionReference.Delegate is Action))
             {
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid Delegate Reference Type Exception", typeof(Action).FullName, nameof(actionReference)));
             }
@@ -47,7 +47,7 @@ namespace Resizer.Gui.Common.Messenger
         public virtual Action<object[]>? GetExecutionStrategy()
         {
             var action = GetAction;
-            if(action != null)
+            if (action != null)
             {
                 return arguments =>
                 {
@@ -63,7 +63,7 @@ namespace Resizer.Gui.Common.Messenger
         /// <param name="action">The <see cref="Action"/> to invoke</param>
         public virtual void InvokeAction(Action action)
         {
-            if(action == null)
+            if (action == null)
             {
                 throw new ArgumentNullException(nameof(action));
             }

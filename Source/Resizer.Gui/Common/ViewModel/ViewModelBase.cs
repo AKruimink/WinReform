@@ -35,7 +35,7 @@ namespace Resizer.Gui.Common.ViewModel
         /// <returns>Returns <see langword="true"/> if the value was changed, otherwise <see langword="false"/></returns>
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string? propertyName = null)
         {
-            if(EqualityComparer<T>.Default.Equals(storage, value))
+            if (EqualityComparer<T>.Default.Equals(storage, value))
             {
                 return false;
             }

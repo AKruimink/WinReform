@@ -32,7 +32,7 @@ namespace Resizer.Gui.Common.Messenger
         /// <returns>Returns <see langword="true"/> if the subscription exists, otherwise returns <see langword="false"/></returns>
         public virtual bool Contains(SubscriptionToken token)
         {
-            lock(Subscriptions)
+            lock (Subscriptions)
             {
                 var subscription = Subscriptions.FirstOrDefault(evt => evt.SubscriptionToken == token);
                 return subscription != null;
@@ -63,14 +63,14 @@ namespace Resizer.Gui.Common.Messenger
         /// <returns>Returns <see cref="SubscriptionToken"/> that idenfies the subscription</returns>
         protected virtual SubscriptionToken InternalSubscribe(IEventSubscription eventSubscription)
         {
-            if(eventSubscription == null)
+            if (eventSubscription == null)
             {
                 throw new ArgumentNullException(nameof(eventSubscription));
             }
 
             eventSubscription.SubscriptionToken = new SubscriptionToken();
 
-            lock(Subscriptions)
+            lock (Subscriptions)
             {
                 Subscriptions.Add(eventSubscription);
             }
@@ -83,10 +83,10 @@ namespace Resizer.Gui.Common.Messenger
         /// <param name="token"><see cref="SubscriptionToken"/> identifying the subscription to remove</param>
         protected virtual void InternalUnsubscribe(SubscriptionToken token)
         {
-            lock(Subscriptions)
+            lock (Subscriptions)
             {
                 var subscription = Subscriptions.FirstOrDefault(evt => evt.SubscriptionToken == token);
-                if(subscription != null)
+                if (subscription != null)
                 {
                     Subscriptions.Remove(subscription);
                 }
@@ -100,7 +100,7 @@ namespace Resizer.Gui.Common.Messenger
         protected virtual void InternalPublish(params object[] arguments)
         {
             var executionStrategies = GetExecutionStratagies();
-            foreach(var executionStrategy in executionStrategies)
+            foreach (var executionStrategy in executionStrategies)
             {
                 executionStrategy(arguments);
             }
@@ -114,7 +114,7 @@ namespace Resizer.Gui.Common.Messenger
         {
             var returnList = new List<Action<object[]>>();
 
-            lock(Subscriptions)
+            lock (Subscriptions)
             {
                 for (var i = Subscriptions.Count - 1; i >= 0; i--)
                 {

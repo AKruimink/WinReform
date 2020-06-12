@@ -2,7 +2,6 @@
 using System.Threading;
 using Resizer.Gui.Common.Messenger;
 using Resizer.Gui.Tests.Common.Messenger.Mocks;
-using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.Messenger
@@ -32,7 +31,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
             completedEvent.WaitOne(5000);
 
             // Assert
-            
+
             Assert.NotEqual(SynchronizationContext.Current, calledSyncContext);
             //Assert.Equal(SynchronizationContextMock.SynchronizationContext, calledSyncContext);
         }
@@ -48,7 +47,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
 
             var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
             var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)delegate { return true; } };
-            var eventSubscription = new DispatcherEventSubscription<object> (mockActionReference, mockFilterReference, SynchronizationContextMock);
+            var eventSubscription = new DispatcherEventSubscription<object>(mockActionReference, mockFilterReference, SynchronizationContextMock);
             var publishAction = eventSubscription.GetExecutionStrategy();
 
             // Act
