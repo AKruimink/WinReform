@@ -1,6 +1,5 @@
 ﻿using Resizer.Gui.Common.Messenger;
 using Resizer.Gui.Tests.Common.Messenger.Mocks;
-using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Common.Messenger
@@ -10,35 +9,13 @@ namespace Resizer.Gui.Tests.Common.Messenger
     /// </summary>
     public class EventBaseTests
     {
-        #region Test Fixtures
-
-        private class EventBaseFixture : EventBase
-        {
-            public SubscriptionToken Subscribe(IEventSubscription subscription)
-            {
-                return base.InternalSubscribe(subscription);
-            }
-
-            public void Unsubscribe(SubscriptionToken token)
-            {
-                base.InternalUnsubscribe(token);
-            }
-
-            public void Publish(params object[] arguments)
-            {
-                base.InternalPublish(arguments);
-            }
-        }
-
-        #endregion
-
         #region InternalSubscribe Tests
 
         [Fact]
         public void InternalSubscribe_SubscribeEvent_ShouldSubscribeToEvent()
         {
             // Prepare
-            var eventBase = new EventBaseFixture();
+            var eventBase = new EventBaseMock();
             var eventSubscription = new EventSubscriptionMock();
 
             // Act
@@ -57,7 +34,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void InternalUnsubscribe_UnsubscribeEvent_ShouldUnubscribeFromEvent()
         {
             // Prepare
-            var eventBase = new EventBaseFixture();
+            var eventBase = new EventBaseMock();
             var eventSubscription = new EventSubscriptionMock();
             eventBase.Subscribe(eventSubscription);
 
@@ -81,7 +58,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         {
             // Prepare
             var eventPublished = false;
-            var eventBase = new EventBaseFixture();
+            var eventBase = new EventBaseMock();
             var eventSubscription = new EventSubscriptionMock
             {
                 PublishActionReturnValue = delegate { eventPublished = true; }
@@ -103,7 +80,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
             // Prepare
             var firstEventPublished = false;
             var secondEventPublished = false;
-            var eventBase = new EventBaseFixture();
+            var eventBase = new EventBaseMock();
             var firstEventSubscription = new EventSubscriptionMock
             {
                 PublishActionReturnValue = delegate { firstEventPublished = true; }
@@ -132,7 +109,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void InternalPublish_NullReference_ShouldPruneStratagies()
         {
             // Prepare
-            var eventBase = new EventBaseFixture();
+            var eventBase = new EventBaseMock();
             var eventSubscription = new EventSubscriptionMock();
             eventSubscription.PublishActionReturnValue = null;
             var token = eventBase.Subscribe(eventSubscription);
@@ -153,7 +130,7 @@ namespace Resizer.Gui.Tests.Common.Messenger
         public void Contains_SearchByToken_ShouldFindSubscriber()
         {
             // Prepare
-            var eventbase = new EventBaseFixture();
+            var eventbase = new EventBaseMock();
             var eventSubscription = new EventSubscriptionMock();
             var token = eventbase.Subscribe(eventSubscription);
 
