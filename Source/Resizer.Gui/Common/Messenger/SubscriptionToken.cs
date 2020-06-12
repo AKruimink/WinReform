@@ -3,7 +3,7 @@
 namespace Resizer.Gui.Common.Messenger
 {
     /// <summary>
-    /// Defines subsription token used to identify a <see cref="EventSubscription"/>
+    /// Defines subscription token used to identify a <see cref="EventSubscription"/>
     /// </summary>
     public class SubscriptionToken : IEquatable<SubscriptionToken>
     {
@@ -38,7 +38,7 @@ namespace Resizer.Gui.Common.Messenger
         /// <summary>
         /// Compair the current object to another object
         /// </summary>
-        /// <param name="object">The <see cref="Object"/> to compair with the current <see cref="Object"/></param>
+        /// <param name="object">The <see cref="object"/> to compair with the current <see cref="object"/></param>
         /// <returns>Returns <see langword="true"/> if the objects are equal, otherwise it returns <see langword="false"/></returns>
         public override bool Equals(object? @object)
         {

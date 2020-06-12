@@ -41,13 +41,13 @@ namespace Resizer.Gui.Tests.Common.Messenger
         {
             // Prepare
             var completedEvent = new ManualResetEvent(false);
-            var SynchronizationContextMock = new SynchronizationContextMock();
-            SynchronizationContext.SetSynchronizationContext(SynchronizationContextMock);
+            var synchronizationContextMock = new SynchronizationContextMock();
+            SynchronizationContext.SetSynchronizationContext(synchronizationContextMock);
             SynchronizationContext? calledSyncContext = null; // TODO: calledSyncContext is always set to null, SynchronizationContext can be confusing
 
             var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
             var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)delegate { return true; } };
-            var eventSubscription = new DispatcherEventSubscription<object>(mockActionReference, mockFilterReference, SynchronizationContextMock);
+            var eventSubscription = new DispatcherEventSubscription<object>(mockActionReference, mockFilterReference, synchronizationContextMock);
             var publishAction = eventSubscription.GetExecutionStrategy();
 
             // Act
