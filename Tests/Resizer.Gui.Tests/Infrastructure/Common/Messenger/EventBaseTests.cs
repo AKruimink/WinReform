@@ -1,5 +1,4 @@
-﻿using Resizer.Gui.Common.Messenger;
-using Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks;
+﻿using Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger

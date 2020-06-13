@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Resizer.Gui.Common.Messenger;
+﻿using Resizer.Gui.Infrastructure.Common.Messenger;
+using Resizer.Gui.Infrastructure.Common.Messenger.Strategies;
 using Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger
@@ -44,7 +45,8 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger
         public void SubscribeNonGeneric_DefaultThread_ShouldPublishOnSubscriberThread()
         {
             // Prepare
-            static void Action() { }
+            static void Action()
+            { }
             var pubsubEvent = new PubSubEventMock();
 
             // Act
@@ -59,7 +61,8 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger
         public void SubscribeGeneric_DefaultThread_ShouldPublishOnSubscriberThread()
         {
             // Prepare
-            static void Action(string args) { }
+            static void Action(string args)
+            { }
             var pubsubEvent = new PubSubEventMock<string>();
 
             // Act

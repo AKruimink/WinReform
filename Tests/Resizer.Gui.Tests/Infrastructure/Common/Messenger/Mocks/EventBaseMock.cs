@@ -1,4 +1,5 @@
-﻿using Resizer.Gui.Common.Messenger;
+﻿using Resizer.Gui.Infrastructure.Common.Messenger;
+using Resizer.Gui.Infrastructure.Common.Messenger.Strategies;
 
 namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks
 {

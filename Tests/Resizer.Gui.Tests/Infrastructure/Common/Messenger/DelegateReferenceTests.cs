@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Resizer.Gui.Common.Messenger;
+﻿using Resizer.Gui.Infrastructure.Common.Messenger;
 using Resizer.Gui.Tests.Mocks;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger

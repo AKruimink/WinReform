@@ -1,5 +1,4 @@
-﻿using Resizer.Gui.Common.ViewModel;
-using Resizer.Gui.Tests.Infrastructure.Common.ViewModel.Mocks;
+﻿using Resizer.Gui.Tests.Infrastructure.Common.ViewModel.Mocks;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel
@@ -39,7 +38,7 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel
             mockViewModel.PropertyChanged += (o, e) =>
             {
                 // Act
-                if (e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
+                if(e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
                 {
                     invoked = true;
                 }
@@ -63,7 +62,7 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel
             mockViewModel.PropertyChanged += (o, e) =>
             {
                 // Act
-                if (e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
+                if(e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
                 {
                     invoked = true;
                 }
@@ -89,7 +88,7 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel
             mockViewModel.PropertyChanged += (o, e) =>
             {
                 // Act
-                if (e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
+                if(e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
                 {
                     invoked = true;
                 }

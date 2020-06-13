@@ -30,7 +30,7 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks
         {
             Executed = true;
 
-            if (ActionToExecute != null)
+            if(ActionToExecute != null)
             {
                 ActionToExecute.Invoke();
             }
@@ -45,7 +45,7 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks
             PassedArgument = argument;
             Executed = true;
 
-            if (ActionToExecute != null)
+            if(ActionToExecute != null)
             {
                 ActionToExecute.Invoke();
             }

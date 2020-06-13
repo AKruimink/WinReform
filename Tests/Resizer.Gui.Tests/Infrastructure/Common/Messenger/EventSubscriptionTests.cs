@@ -1,6 +1,7 @@
-﻿using System;
-using Resizer.Gui.Common.Messenger;
+﻿using Resizer.Gui.Infrastructure.Common.Messenger;
+using Resizer.Gui.Infrastructure.Common.Messenger.Strategies;
 using Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks;
+using System;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger

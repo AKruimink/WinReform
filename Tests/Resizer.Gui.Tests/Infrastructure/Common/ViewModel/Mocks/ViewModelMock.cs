@@ -1,4 +1,4 @@
-﻿using Resizer.Gui.Common.ViewModel;
+﻿using Resizer.Gui.Infrastructure.Common.ViewModel;
 
 namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel.Mocks
 {
