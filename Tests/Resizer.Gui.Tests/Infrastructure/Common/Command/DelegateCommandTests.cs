@@ -1,10 +1,10 @@
 ﻿using System;
 using Resizer.Gui.Common.Command;
-using Resizer.Gui.Tests.Common.Command.Mocks;
+using Resizer.Gui.Tests.Infrastructure.Common.Command.Mocks;
 using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Common.Command
+namespace Resizer.Gui.Tests.Infrastructure.Common.Command
 {
     /// <summary>
     /// Tests for the <see cref="DelegateCommand"/>

@@ -1,4 +1,4 @@
-﻿namespace Resizer.Gui.Tests.Common.Command.Mocks
+﻿namespace Resizer.Gui.Tests.Infrastructure.Common.Command.Mocks
 {
     /// <summary>
     /// Defines a mock implementation of an empty class

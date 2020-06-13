@@ -1,8 +1,8 @@
 ﻿using Resizer.Gui.Common.ViewModel;
-using Resizer.Gui.Tests.Common.ViewModel.Mocks;
+using Resizer.Gui.Tests.Infrastructure.Common.ViewModel.Mocks;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Common.ViewModel
+namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel
 {
     /// <summary>
     /// Tests for the <see cref="ViewModelBase"/>

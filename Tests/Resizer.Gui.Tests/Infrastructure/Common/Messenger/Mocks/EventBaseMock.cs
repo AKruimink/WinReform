@@ -1,6 +1,6 @@
 ﻿using Resizer.Gui.Common.Messenger;
 
-namespace Resizer.Gui.Tests.Common.Messenger.Mocks
+namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks
 {
     /// <summary>
     /// Defines a mock implementation of <see cref="EventBase"/>

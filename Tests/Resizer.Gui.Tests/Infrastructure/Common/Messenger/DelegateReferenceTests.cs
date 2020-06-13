@@ -4,7 +4,7 @@ using Resizer.Gui.Common.Messenger;
 using Resizer.Gui.Tests.Mocks;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Common.Messenger
+namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger
 {
     /// <summary>
     /// Tests for the <see cref="DelegateReference"/>
