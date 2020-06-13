@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Resizer.Gui.Common.Messenger
+namespace Resizer.Gui.Infrastructure.Common.Messenger
 {
     /// <summary>
     /// Defines a class that gets the instance of a <see cref="PubSubEvent"/> event
@@ -26,8 +26,10 @@ namespace Resizer.Gui.Common.Messenger
             {
                 if (!_events.TryGetValue(typeof(TEventType), out var existingEvent))
                 {
-                    var newEvent = new TEventType();
-                    newEvent.SynchronizationContext = _synchronizationContext;
+                    var newEvent = new TEventType
+                    {
+                        SynchronizationContext = _synchronizationContext
+                    };
                     _events[typeof(TEventType)] = newEvent;
 
                     return newEvent;

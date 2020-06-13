@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Resizer.Gui.Common.Messenger
+namespace Resizer.Gui.Infrastructure.Common.Messenger
 {
     /// <summary>
     /// Represents a class that holds a reference to a delegate

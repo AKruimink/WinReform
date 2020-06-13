@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Resizer.Gui.Common.Messenger
+namespace Resizer.Gui.Infrastructure.Common.Messenger.Strategies
 {
     /// <summary>
     /// Represents a subscription to a event used by <see cref="EventBase"/>

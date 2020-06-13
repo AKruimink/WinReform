@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Windows.Input;
 
-namespace Resizer.Gui.Common.Command
+namespace Resizer.Gui.Infrastructure.Common.Command
 {
     /// <summary>
     /// Defines a base command 
@@ -12,7 +12,7 @@ namespace Resizer.Gui.Common.Command
         /// <summary>
         /// Location where the application code is being executed
         /// </summary>
-        private SynchronizationContext? _synchronizationContext;
+        private readonly SynchronizationContext? _synchronizationContext;
 
         /// <summary>
         /// Occures when the can execute state changes

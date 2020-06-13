@@ -1,4 +1,4 @@
-﻿namespace Resizer.Gui.Common.Messenger
+﻿namespace Resizer.Gui.Infrastructure.Common.Messenger
 {
     /// <summary>
     /// Represents a class that gets the instance of a <see cref="EventBase"/>

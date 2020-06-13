@@ -1,4 +1,4 @@
-﻿namespace Resizer.Gui.Common.Messenger
+﻿namespace Resizer.Gui.Infrastructure.Common.Messenger
 {
     /// <summary>
     /// Represents the thread on which a <see cref="PubSubEvent"/> subscriber will be called

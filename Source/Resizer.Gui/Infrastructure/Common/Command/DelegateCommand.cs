@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows.Input;
 
-namespace Resizer.Gui.Common.Command
+namespace Resizer.Gui.Infrastructure.Common.Command
 {
     /// <summary>
     /// An <see cref="ICommand"/> whose delegate doesnt take any parameters

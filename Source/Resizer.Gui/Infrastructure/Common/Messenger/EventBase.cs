@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Resizer.Gui.Infrastructure.Common.Messenger.Strategies;
 
-namespace Resizer.Gui.Common.Messenger
+namespace Resizer.Gui.Infrastructure.Common.Messenger
 {
     /// <summary>
     /// Defines base class that allows publication and subscriptioon to events

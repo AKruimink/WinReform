@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Resizer.Gui.Common.Messenger
+namespace Resizer.Gui.Infrastructure.Common.Messenger
 {
     /// <summary>
     /// Defines subscription token used to identify a <see cref="EventSubscription"/>
