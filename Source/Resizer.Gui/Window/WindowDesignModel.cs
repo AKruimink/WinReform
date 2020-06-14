@@ -1,7 +1,7 @@
 ﻿namespace Resizer.Gui.Window
 {
     /// <summary>
-    /// Defines a class that acts as a design time viewmodel for the main window
+    /// Defines a class that provides design time application information
     /// </summary>
     public class WindowDesignModel
     {
