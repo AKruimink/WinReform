@@ -8,8 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MainWindow\" />
+    <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="MahApps.Metro" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Infrastructure\Styles\ToggleButton.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
 
 </Project>
