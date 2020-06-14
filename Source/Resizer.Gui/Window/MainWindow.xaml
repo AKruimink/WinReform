@@ -70,7 +70,7 @@
                 <TextBlock Text="{Binding Version}"
                            VerticalAlignment="Center"
                            Margin="0 0 5 0"
-                           Opacity="0.7"/>
+                           Opacity="1"/>
             </Button>
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
@@ -82,6 +82,8 @@
 
     <!-- Content -->
     <mah:SplitView DisplayMode="Overlay"
+                   OverlayBrush="Black"
+                   Opacity="0.75"
                    IsPaneOpen="{Binding MenuIsOpen, Mode=TwoWay}"
                    PaneBackground="{DynamicResource MahApps.Brushes.Flyout.Background}">
         <mah:SplitView.Pane>
