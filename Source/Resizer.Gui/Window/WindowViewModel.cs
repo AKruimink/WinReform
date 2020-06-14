@@ -16,7 +16,7 @@ namespace Resizer.Gui.Window
         public string Version { get; }
 
         /// <summary>
-        /// Gets and Sets the state of the menu
+        /// Gets or Sets the state of the menu
         /// </summary>
         public bool MenuIsOpen
         {
