@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Autofac;
+using Resizer.Domain.Infrastructure.Messenger;
 
 namespace Resizer.Gui
 {
@@ -14,6 +15,8 @@ namespace Resizer.Gui
         /// <param name="builder">Instance of the container builder to register the dependencies to</param>
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<EventAggregator>().As<IEventAggregator>();
+
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel")).SingleInstance();
         }
     }

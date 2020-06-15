@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Resizer.Domain\Resizer.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="Infrastructure\Styles\ToggleButton.xaml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Page>
