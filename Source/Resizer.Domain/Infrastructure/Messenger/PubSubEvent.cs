@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Resizer.Gui.Infrastructure.Common.Messenger.Strategies;
+using Resizer.Domain.Infrastructure.Messenger.Strategies;
 
-namespace Resizer.Gui.Infrastructure.Common.Messenger
+namespace Resizer.Domain.Infrastructure.Messenger
 {
     /// <summary>
     /// Defines a class that mnages publication of and subscription to events

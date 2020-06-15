@@ -1,4 +1,4 @@
-﻿using Resizer.Gui.Infrastructure.Common.Messenger;
+﻿using Resizer.Domain.Infrastructure.Messenger;
 
 namespace Resizer.Domain.Infrastructure.Events
 {
