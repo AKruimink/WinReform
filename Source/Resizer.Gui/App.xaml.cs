@@ -23,7 +23,7 @@ namespace Resizer.Gui
             base.OnStartup(e);
 
             var builder = new ContainerBuilder();
-            builder.RegisterModule(new UiModule());
+            builder.RegisterModule(new DependencyModule());
             _container = builder.Build();
 
             using var scope = _container.BeginLifetimeScope();
