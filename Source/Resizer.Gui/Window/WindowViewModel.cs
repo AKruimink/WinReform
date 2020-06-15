@@ -2,6 +2,7 @@
 using System.Reflection;
 using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
+using Resizer.Gui.Settings;
 
 namespace Resizer.Gui.Window
 {
@@ -27,6 +28,11 @@ namespace Resizer.Gui.Window
         private bool _menuIsOpen;
 
         /// <summary>
+        /// Gets the <see cref="GeneralSettingsViewModel"/>
+        /// </summary>
+        public GeneralSettingsViewModel GeneralSettings { get; private set; }
+
+        /// <summary>
         /// Shows the project source code on Github
         /// </summary>
         public DelegateCommand ShowSourceOnGithubCommand { get; }
@@ -39,8 +45,11 @@ namespace Resizer.Gui.Window
         /// <summary>
         /// Create a new instance of the <see cref="WindowViewModel"/>
         /// </summary>
-        public WindowViewModel()
+        /// <param name="generalSettings">Instance of the <see cref="GeneralSettingsViewModel"/></param>
+        public WindowViewModel(GeneralSettingsViewModel generalSettings)
         {
+            GeneralSettings = generalSettings;
+
             Version = $"v:{Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(3)}";
 
             ShowSourceOnGithubCommand = new DelegateCommand(() =>
