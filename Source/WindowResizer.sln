@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resizer.Gui.Tests", "..\Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resizer.Domain.Tests", "..\Tests\Resizer.Domain.Tests\Resizer.Domain.Tests.csproj", "{CFBD6348-95C2-4D8E-ABF3-2B6D91907E24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resizer.Domain", "Resizer.Domain\Resizer.Domain.csproj", "{E566DD1C-0C60-47AB-9309-5D7C42940D6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resizer.Domain", "Resizer.Domain\Resizer.Domain.csproj", "{E566DD1C-0C60-47AB-9309-5D7C42940D6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
