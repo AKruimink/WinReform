@@ -1,11 +1,11 @@
-﻿using Resizer.Gui.Infrastructure.Common.Messenger;
-using Resizer.Gui.Infrastructure.Common.Messenger.Strategies;
-using Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks;
+﻿using Resizer.Domain.Infrastructure.Messenger;
+using Resizer.Domain.Infrastructure.Messenger.Strategies;
+using Resizer.Domain.Tests.Infrastructure.Messenger.Mocks;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger
+namespace Resizer.Domain.Tests.Infrastructure.Messenger
 {
     /// <summary>
     /// Tests for the <see cref="PubSubEvent"/>

@@ -1,7 +1,7 @@
-﻿using Resizer.Gui.Infrastructure.Common.Messenger;
-using Resizer.Gui.Infrastructure.Common.Messenger.Strategies;
+﻿using Resizer.Domain.Infrastructure.Messenger;
+using Resizer.Domain.Infrastructure.Messenger.Strategies;
 
-namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks
+namespace Resizer.Domain.Tests.Infrastructure.Messenger.Mocks
 {
     /// <summary>
     /// Defines a mock implementation of <see cref="EventBase"/>

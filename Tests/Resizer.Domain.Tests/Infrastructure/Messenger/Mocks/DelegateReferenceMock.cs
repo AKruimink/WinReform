@@ -1,7 +1,7 @@
-﻿using Resizer.Gui.Infrastructure.Common.Messenger;
+﻿using Resizer.Domain.Infrastructure.Messenger;
 using System;
 
-namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks
+namespace Resizer.Domain.Tests.Infrastructure.Messenger.Mocks
 {
     /// <summary>
     /// Defines a mock implementation of <see cref="IDelegateReference"/>

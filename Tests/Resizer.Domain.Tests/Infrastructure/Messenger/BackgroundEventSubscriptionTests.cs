@@ -1,10 +1,10 @@
-﻿using Resizer.Gui.Infrastructure.Common.Messenger.Strategies;
-using Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks;
+﻿using Resizer.Domain.Infrastructure.Messenger.Strategies;
+using Resizer.Domain.Tests.Infrastructure.Messenger.Mocks;
 using System;
 using System.Threading;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger
+namespace Resizer.Domain.Tests.Infrastructure.Messenger
 {
     /// <summary>
     /// Tests for the <see cref="BackgroundEventSubscription"/>

@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks
+namespace Resizer.Domain.Tests.Infrastructure.Messenger.Mocks
 {
     /// <summary>
     /// Defines a mock implementation of <see cref="SynchronizationContext"/>

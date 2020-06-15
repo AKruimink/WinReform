@@ -1,8 +1,8 @@
-﻿using Resizer.Gui.Infrastructure.Common.Messenger;
-using Resizer.Gui.Infrastructure.Common.Messenger.Strategies;
+﻿using Resizer.Domain.Infrastructure.Messenger;
+using Resizer.Domain.Infrastructure.Messenger.Strategies;
 using System;
 
-namespace Resizer.Gui.Tests.Infrastructure.Common.Messenger.Mocks
+namespace Resizer.Domain.Tests.Infrastructure.Messenger.Mocks
 {
     public class EventSubscriptionMock : IEventSubscription
     {

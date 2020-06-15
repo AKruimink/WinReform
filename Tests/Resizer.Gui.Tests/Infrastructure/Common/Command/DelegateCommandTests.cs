@@ -1,6 +1,6 @@
-﻿using Resizer.Gui.Infrastructure.Common.Command;
+﻿using Resizer.Domain.Tests.Mocks;
+using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Tests.Infrastructure.Common.Command.Mocks;
-using Resizer.Gui.Tests.Mocks;
 using System;
 using Xunit;
 
