@@ -3,7 +3,7 @@
     /// <summary>
     /// Defines a class that provides design time general application settings data
     /// </summary>
-    public class GeneralSettingsDesignModel
+    public class ApplicationSettingsDesignModel
     {
         /// <summary>
         /// Gets or Sets an idicator that defines if dark theme should be used
@@ -21,9 +21,9 @@
         public bool MinimizeToSystemTray { get; set; }
 
         /// <summary>
-        /// Create a new instance of the <see cref="GeneralSettingsDesignModel"/>
+        /// Create a new instance of the <see cref="ApplicationSettingsDesignModel"/>
         /// </summary>
-        public GeneralSettingsDesignModel()
+        public ApplicationSettingsDesignModel()
         {
             UseDarkTheme = true;
             MinimizeOnClose = false;

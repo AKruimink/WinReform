@@ -87,8 +87,8 @@
                    IsPaneOpen="{Binding MenuIsOpen, Mode=TwoWay}"
                    PaneBackground="{DynamicResource MahApps.Brushes.Flyout.Background}">
         <mah:SplitView.Pane>
-            <settings:GeneralSettingsView DataContext="{Binding GeneralSettings}" 
-                                          Margin="5"/>
+            <settings:ApplicationSettingsView DataContext="{Binding ApplicationSettings}" 
+                                              Margin="5"/>
         </mah:SplitView.Pane>
         <mah:SplitView.Content>
             <Grid>

@@ -5,7 +5,7 @@ namespace Resizer.Gui.Settings
     /// <summary>
     /// Defines a class that provides general application settings data
     /// </summary>
-    public class GeneralSettingsViewModel : ViewModelBase
+    public class ApplicationSettingsViewModel : ViewModelBase
     {
         /// <summary>
         /// Gets or Sets an idicator that defines if dark theme should be used
@@ -41,9 +41,9 @@ namespace Resizer.Gui.Settings
         private bool _minimizeToSystemTray;
 
         /// <summary>
-        /// Create a new instance of the <see cref="GeneralSettingsViewModel"/>
+        /// Create a new instance of the <see cref="ApplicationSettingsViewModel"/>
         /// </summary>
-        public GeneralSettingsViewModel()
+        public ApplicationSettingsViewModel()
         {
 
         }

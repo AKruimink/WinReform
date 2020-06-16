@@ -16,12 +16,12 @@ namespace Resizer.Gui.Settings
     /// <summary>
     /// Interaction logic for GeneralSettingsView.xaml
     /// </summary>
-    public partial class GeneralSettingsView : UserControl
+    public partial class ApplicationSettingsView : UserControl
     {
         /// <summary>
-        /// Create a new instance of <see cref="GeneralSettingsView"/>
+        /// Create a new instance of <see cref="ApplicationSettingsView"/>
         /// </summary>
-        public GeneralSettingsView()
+        public ApplicationSettingsView()
         {
             InitializeComponent();
         }
