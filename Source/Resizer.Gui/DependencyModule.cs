@@ -31,8 +31,8 @@ namespace Resizer.Gui
             builder.RegisterType<EventAggregator>().As<IEventAggregator>();
 
             // Settings
-            builder.RegisterType<SettingsStore>().As<ISettingsStore>();
-            builder.RegisterType<SettingsFactory>().As<ISettingsFactory>();
+            builder.RegisterType<SettingStore>().As<ISettingStore>();
+            builder.RegisterType<SettingFactory>().As<ISettingFactory>();
 
             return builder;
         }
