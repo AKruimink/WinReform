@@ -9,7 +9,7 @@ namespace Resizer.Domain.Settings
     /// <summary>
     /// Defines a class that loads and saves settings
     /// </summary>
-    public class SettingsStore : ISettingsStore
+    public class SettingStore : ISettingStore
     {
         /// <summary>
         /// Path to where the setting files are saved
@@ -17,37 +17,37 @@ namespace Resizer.Domain.Settings
         private readonly string _filePath;
 
         /// <summary>
-        /// Create a new instance of the <see cref="SettingsStore"/>
+        /// Create a new instance of the <see cref="SettingStore"/>
         /// </summary>
-        public SettingsStore()
+        public SettingStore()
         {
             _filePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         }
 
         ///<inheritdoc/>
-        public TSettings Load<TSettings>() where TSettings : new()
+        public TSetting Load<TSetting>() where TSetting : new()
         {
-            var file = Path.Combine(_filePath, $"{typeof(TSettings).Name}.xml");
+            var file = Path.Combine(_filePath, $"{typeof(TSetting).Name}.xml");
             var fileInfo = new FileInfo(file);
 
             // Create default settings if non exist
-            if(!fileInfo.Exists || fileInfo.Length == 0)
+            if (!fileInfo.Exists || fileInfo.Length == 0)
             {
-                Save(new TSettings());
+                Save(new TSetting());
             }
 
-            var serializer = new XmlSerializer(typeof(TSettings));
+            var serializer = new XmlSerializer(typeof(TSetting));
 
             using var reader = new StreamReader(file);
-            return (TSettings)serializer.Deserialize(reader);
+            return (TSetting)serializer.Deserialize(reader);
         }
 
         ///<inheritdoc/>
-        public void Save<TSettings>(TSettings settings)
+        public void Save<TSetting>(TSetting settings)
         {
-            var file = Path.Combine(_filePath, $"{typeof(TSettings).Name}.xml");
+            var file = Path.Combine(_filePath, $"{typeof(TSetting).Name}.xml");
             var settingsFile = new XmlDocument();
-            var serializer = new XmlSerializer(typeof(TSettings));
+            var serializer = new XmlSerializer(typeof(TSetting));
 
             using var stream = new MemoryStream();
             serializer.Serialize(stream, settings);
