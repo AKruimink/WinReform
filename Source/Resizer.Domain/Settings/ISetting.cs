@@ -7,6 +7,11 @@
     public interface ISetting<TSetting>
     {
         /// <summary>
+        /// Gets the current settings
+        /// </summary>
+        TSetting CurrentSetting { get; }
+
+        /// <summary>
         /// Save settings
         /// </summary>
         /// <param name="item">The setting to save</param>

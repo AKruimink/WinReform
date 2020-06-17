@@ -1,4 +1,5 @@
-﻿using Resizer.Domain.Infrastructure.Messenger;
+﻿using System;
+using Resizer.Domain.Infrastructure.Messenger;
 
 namespace Resizer.Domain.Settings
 {
@@ -24,8 +25,8 @@ namespace Resizer.Domain.Settings
         /// <param name="eventAggregator">The <see cref="EventAggregator"/> used to notify subscribers of setting changes</param>
         public SettingFactory(ISettingStore settingStore, IEventAggregator eventAggregator)
         {
-            _settingStore = settingStore;
-            _eventAggregator = eventAggregator;
+            _settingStore = settingStore ?? throw new ArgumentNullException(nameof(settingStore));
+            _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
         }
 
         ///<inheritdoc/>

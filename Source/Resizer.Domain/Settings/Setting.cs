@@ -20,9 +20,7 @@ namespace Resizer.Domain.Settings
         /// </summary>
         private readonly IEventAggregator _eventAggregator;
 
-        /// <summary>
-        /// The current settings
-        /// </summary>
+        /// <inheritdoc/>
         public TSetting CurrentSetting
         {
             get => _currentSetting;
