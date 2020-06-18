@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Resizer.Domain.Infrastructure.Messenger;
 
 namespace Resizer.Domain.Settings
@@ -19,6 +20,12 @@ namespace Resizer.Domain.Settings
         private readonly IEventAggregator _eventAggregator;
 
         /// <summary>
+        /// Cached settings
+        /// // TODO: Ass some sort of contract to <see cref="Setting{TSetting}"/> that allows the cache to be set forcing an <see cref="ISetting{TSetting}"/> instance instead of any object
+        /// </summary>
+        private readonly Dictionary<Type, object> _settings = new Dictionary<Type, object>();
+
+        /// <summary>
         /// Create a new instance of the <see cref="SettingFactory"/>
         /// </summary>
         /// <param name="settingStore">The <see cref="SettingStore"/> used by <see cref="Setting{TSetting}"/> to load and save settings</param>
@@ -32,7 +39,20 @@ namespace Resizer.Domain.Settings
         ///<inheritdoc/>
         public ISetting<TSetting> Create<TSetting>() where TSetting : new()
         {
-            return new Setting<TSetting>(_settingStore, _eventAggregator);
+            lock(_settings)
+            {
+                if(!_settings.TryGetValue(typeof(TSetting), out var existingSetting))
+                {
+                    var newSetting = new Setting<TSetting>(_settingStore, _eventAggregator);
+                    _settings[typeof(Setting<TSetting>)] = newSetting;
+
+                    return newSetting;
+                }
+                else
+                {
+                    return (ISetting<TSetting>)existingSetting;
+                }
+            }
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Resizer.Domain.Tests.Settings
         #region Create Tests
 
         [Fact]
-        public void Create_ValidExecution_ShouldReturnSettings()
+        public void Create_GetNewAndExistingEvent_ShouldReturnTheSameSettings()
         {
             // Prepare
             var settingStoreMock = new SettingStoreMock();
@@ -68,11 +68,11 @@ namespace Resizer.Domain.Tests.Settings
             ISettingFactory settingFactory = new SettingFactory(settingStoreMock, eventAggregatorMock);
 
             // Act
-            var setting = settingFactory.Create<ApplicationSettings>();
+            var setting1 = settingFactory.Create<ApplicationSettings>();
+            var setting2 = settingFactory.Create<ApplicationSettings>();
 
             // Assert
-            Assert.NotNull(setting);
-            Assert.IsType<ApplicationSettings>(setting.CurrentSetting);
+            Assert.Equal(setting1, setting2);
         }
 
         #endregion
