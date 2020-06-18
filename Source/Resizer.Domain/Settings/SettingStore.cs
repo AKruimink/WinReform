@@ -8,6 +8,7 @@ namespace Resizer.Domain.Settings
 {
     /// <summary>
     /// Defines a class that loads and saves settings
+    /// TODO: Make Load and Save awaitable in SettingStore
     /// </summary>
     public class SettingStore : ISettingStore
     {

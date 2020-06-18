@@ -15,6 +15,6 @@
         /// Save settings
         /// </summary>
         /// <param name="item">The setting to save</param>
-        void Save(TSetting settings);
+        void Save(TSetting setting);
     }
 }

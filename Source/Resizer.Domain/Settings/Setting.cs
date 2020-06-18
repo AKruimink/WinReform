@@ -21,69 +21,99 @@ namespace Resizer.Domain.Settings
         private readonly IEventAggregator _eventAggregator;
 
         /// <inheritdoc/>
-        public TSetting CurrentSetting
-        {
-            get => _currentSetting;
-            private set
-            {
-                _currentSetting = value;
-                _eventAggregator.GetEvent<SettingChangedEvent>().Publish(typeof(TSetting));
-            }
-        }
-
-        private TSetting _currentSetting;
-
+        public TSetting CurrentSetting { get; set; }
         /// <summary>
         /// Create a new instance of the <see cref="Setting{TSetting}"/>
         /// </summary>
         /// <param name="settingStore"><see cref="ISettingStore"/> used for loading and saving settings</param>
         /// <param name="eventAggregator"><see cref="IEventAggregator"/> used to notify subscribers about settings changes</param>
-        public Setting(ISettingStore settingsStore, IEventAggregator eventAggregator)
+        public Setting(ISettingStore settingStore, IEventAggregator eventAggregator)
         {
-            _settingStore = settingsStore;
-            _eventAggregator = eventAggregator;
+            _settingStore = settingStore ?? throw new ArgumentNullException(nameof(settingStore));
+            _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
 
-            //TODO: fix the need for double assignment of CurrentSettings to avoid Null Reference complain of a generic type in Settings
-            _currentSetting = _settingStore.Load<TSetting>();
-            CurrentSetting = _currentSetting;
-
+            CurrentSetting = _settingStore.Load<TSetting>();
         }
 
         /// <inheritdoc/>
-        public void Save(TSetting settings)
+        public void Save(TSetting setting)
         {
-            if (Equals(settings))
+            try
             {
-                return; // No changes have occured
-            }
+                _settingStore.Save(setting);
+                CurrentSetting = setting;
 
-            _settingStore.Save(settings);
-            _currentSetting = settings;
+                NotifySettingsChanged();
+            }
+            catch(Exception ex)
+            {
+                // TODO replace Console.Writeline with some form of logging
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
-        /// Comapires the existing settings with new settings
+        /// Compair a <see cref="Setting{TSetting}"/> to the current <see cref="Setting{TSetting}"/>
         /// </summary>
-        /// <param name="newSettings">The settings to compaire</param>
+        /// <param name="other">The <see cref="Setting{TSetting}"/> to compaire</param>
         /// <returns>Returns <see langword="true"/> if the settings are equal, otherwise returns <see langword="false"/></returns>
-        public bool Equals(TSetting newSettings)
+        public bool Equals(TSetting other)
         {
-            if (newSettings is null)
+            if (other is null)
             {
                 return false;
             }
 
-            if (ReferenceEquals(_currentSetting, newSettings))
+            if (ReferenceEquals(CurrentSetting, other))
             {
                 return true;
             }
 
-            if (newSettings.GetType() != _currentSetting?.GetType())
+            if (other.GetType() != GetType())
             {
                 return false;
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Compair a object to <see cref="Setting{TSetting}"/>
+        /// </summary>
+        /// <param name="obj">The object to compair</param>
+        /// <returns>Returns <see langword="true"/> if the settings are equal, otherwise returns <see langword="false"/></returns>
+        public override bool Equals(object? obj)
+        {
+            if (obj is null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(CurrentSetting, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((Setting<TSetting>) obj);
+        }
+
+        /// <summary>
+        /// Get the hashcode of the current object
+        /// </summary>
+        /// <returns>Returns the hashcode of the current object</returns>
+        public override int GetHashCode() => base.GetHashCode();
+
+        /// <summary>
+        /// Notifies all subscribers of a settings change
+        /// </summary>
+        private void NotifySettingsChanged()
+        {
+            _eventAggregator.GetEvent<SettingChangedEvent>().Publish(typeof(TSetting));
         }
     }
 }
