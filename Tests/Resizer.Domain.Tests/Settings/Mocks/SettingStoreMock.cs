@@ -3,6 +3,9 @@ using System;
 
 namespace Resizer.Domain.Tests.Settings.Mocks
 {
+    /// <summary>
+    /// Mock implementation of <see cref="ISettingStore"/>
+    /// </summary>
     public class SettingStoreMock : ISettingStore
     {
         /// <summary>
@@ -23,6 +26,7 @@ namespace Resizer.Domain.Tests.Settings.Mocks
         ///<inheritdoc/>
         public TSetting Load<TSetting>() where TSetting : new()
         {
+            Executed = true;
             SettingType = typeof(TSetting);
             return new TSetting();
         }
