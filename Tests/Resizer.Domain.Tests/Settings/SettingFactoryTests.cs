@@ -32,7 +32,6 @@ namespace Resizer.Domain.Tests.Settings
         public void Constructor_NullSettingStore_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
             var eventAggregatorMock = new EventAggregatorMock();
             ISettingFactory settingFactory;
 
@@ -47,7 +46,6 @@ namespace Resizer.Domain.Tests.Settings
         public void Constructor_NullEventAggregator_ShouldThrowArgumentNullException()
         {
             var settingStoreMock = new SettingStoreMock();
-            var eventAggregatorMock = new EventAggregatorMock();
             ISettingFactory settingFactory;
 
             // Assert
