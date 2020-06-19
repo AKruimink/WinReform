@@ -1,5 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Reflection;
+using System.Windows;
+using System.Windows.Navigation;
+using ControlzEx.Theming;
+using Resizer.Domain.Infrastructure.Events;
+using Resizer.Domain.Infrastructure.Messenger;
+using Resizer.Domain.Settings;
 using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
 using Resizer.Gui.Settings;
@@ -28,9 +35,14 @@ namespace Resizer.Gui.Window
         private bool _menuIsOpen;
 
         /// <summary>
-        /// Gets the <see cref="GeneralSettingsViewModel"/>
+        /// <see cref="IEventAggregator"/> used to be notified when the general setting have changed
         /// </summary>
-        public GeneralSettingsViewModel GeneralSettings { get; private set; }
+        private readonly IEventAggregator _eventAggregator;
+
+        /// <summary>
+        /// Gets the <see cref="ApplicationSettingsViewModel"/>
+        /// </summary>
+        public ApplicationSettingsViewModel ApplicationSettings { get; }
 
         /// <summary>
         /// Shows the project source code on Github
@@ -45,13 +57,13 @@ namespace Resizer.Gui.Window
         /// <summary>
         /// Create a new instance of the <see cref="WindowViewModel"/>
         /// </summary>
-        /// <param name="generalSettings">Instance of the <see cref="GeneralSettingsViewModel"/></param>
-        public WindowViewModel(GeneralSettingsViewModel generalSettings)
+        /// <param name="generalSettings">Instance of the <see cref="ApplicationSettingsViewModel"/></param>
+        public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, ApplicationSettingsViewModel applicationSettings)
         {
-            GeneralSettings = generalSettings;
+            _eventAggregator = eventAggregator;
+            ApplicationSettings = applicationSettings;
 
             Version = $"v:{Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(3)}";
-
             ShowSourceOnGithubCommand = new DelegateCommand(() =>
             {
                 var psi = new ProcessStartInfo
@@ -61,7 +73,6 @@ namespace Resizer.Gui.Window
                 };
                 Process.Start(psi);
             });
-
             ShowVersionsOnGithubCommand = new DelegateCommand(() =>
             {
                 var psi = new ProcessStartInfo
@@ -71,6 +82,31 @@ namespace Resizer.Gui.Window
                 };
                 Process.Start(psi);
             });
+
+            _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
+            ApplicationSettingsChanged(settingFactory.Create<ApplicationSettings>()); // Manualy set the application settings once as we wont be notified until something changes
+        }
+
+        /// <summary>
+        /// Invoked when the general application settings have changed
+        /// </summary>
+        public void ApplicationSettingsChanged(ISetting<ApplicationSettings> settings)
+        {
+            UpdateTheme(settings.CurrentSetting.UseDarkTheme);
+        }
+
+        /// <summary>
+        /// Updates the current application theme
+        /// </summary>
+        /// <param name="useDarkTheme">Indicates if the current theme should be <see cref="ThemeManager.BaseColorDark"/></param>
+        private void UpdateTheme(bool useDarkTheme)
+        {
+            var themeName = useDarkTheme ? ThemeManager.BaseColorDark : ThemeManager.BaseColorLight;
+
+            if(ThemeManager.Current.DetectTheme()?.BaseColorScheme != themeName)
+            {
+                ThemeManager.Current.ChangeThemeBaseColor(Application.Current, themeName);
+            }     
         }
     }
 }
