@@ -124,7 +124,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
 
         #endregion
 
-
         #region Contains Tests
 
         [Fact]

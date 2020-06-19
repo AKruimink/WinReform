@@ -10,7 +10,7 @@ namespace Resizer.Domain.Settings
     public class SettingFactory : ISettingFactory
     {
         /// <summary>
-        /// The <see cref="SettingStore"/> used to load and save settings data from file
+        /// The <see cref="ISettingStore"/> used to load and save settings data from file
         /// </summary>
         private readonly ISettingStore _settingStore;
 
