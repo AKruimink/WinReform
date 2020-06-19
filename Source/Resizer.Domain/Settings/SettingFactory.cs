@@ -44,7 +44,7 @@ namespace Resizer.Domain.Settings
                 if(!_settings.TryGetValue(typeof(TSetting), out var existingSetting))
                 {
                     var newSetting = new Setting<TSetting>(_settingStore, _eventAggregator);
-                    _settings[typeof(Setting<TSetting>)] = newSetting;
+                    _settings[typeof(TSetting)] = newSetting;
 
                     return newSetting;
                 }
