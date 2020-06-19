@@ -25,9 +25,13 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Resizer.Gui;component/Infrastructure/Styles/ToggleButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
+            <SolidColorBrush x:Key="Splitview.Overlay" Opacity="0.7" Color="{DynamicResource MahApps.Colors.ThemeForeground}"/>
         </ResourceDictionary>
     </mah:MetroWindow.Resources>
+
     
+
     <!-- Left title items -->
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
@@ -82,17 +86,17 @@
 
     <!-- Content -->
     <mah:SplitView DisplayMode="Overlay"
-                   OverlayBrush="Black"
-                   Opacity="0.75"
+                   OverlayBrush="{StaticResource Splitview.Overlay}"
+                   Opacity="0.50"
                    IsPaneOpen="{Binding MenuIsOpen, Mode=TwoWay}"
                    PaneBackground="{DynamicResource MahApps.Brushes.Flyout.Background}">
         <mah:SplitView.Pane>
-            <settings:ApplicationSettingsView DataContext="{Binding ApplicationSettings}" 
-                                              Margin="5"/>
+            <Grid>
+                <settings:ApplicationSettingsView Margin="5" DataContext="{Binding ApplicationSettings}"/>
+            </Grid>
         </mah:SplitView.Pane>
         <mah:SplitView.Content>
             <Grid>
-                
             </Grid>        
         </mah:SplitView.Content>
     </mah:SplitView>
