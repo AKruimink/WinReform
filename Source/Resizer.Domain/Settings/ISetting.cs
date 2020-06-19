@@ -12,9 +12,8 @@
         TSetting CurrentSetting { get; }
 
         /// <summary>
-        /// Save settings
+        /// Save the current settings
         /// </summary>
-        /// <param name="item">The setting to save</param>
-        void Save(TSetting setting);
+        void Save();
     }
 }

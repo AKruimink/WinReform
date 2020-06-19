@@ -36,12 +36,11 @@ namespace Resizer.Domain.Settings
         }
 
         /// <inheritdoc/>
-        public void Save(TSetting setting)
+        public void Save()
         {
             try
             {
-                _settingStore.Save(setting);
-                CurrentSetting = setting;
+                _settingStore.Save(CurrentSetting);
 
                 NotifySettingsChanged();
             }
@@ -113,7 +112,7 @@ namespace Resizer.Domain.Settings
         /// </summary>
         private void NotifySettingsChanged()
         {
-            _eventAggregator.GetEvent<SettingChangedEvent>().Publish(typeof(TSetting));
+            _eventAggregator.GetEvent<SettingChangedEvent<TSetting>>().Publish(this);
         }
     }
 }
