@@ -28,11 +28,11 @@ namespace Resizer.Gui
         private ContainerBuilder RegisterDomainDependencies(ContainerBuilder builder)
         {
             // Events
-            builder.RegisterType<EventAggregator>().As<IEventAggregator>();
+            builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
 
             // Settings
-            builder.RegisterType<SettingStore>().As<ISettingStore>();
-            builder.RegisterType<SettingFactory>().As<ISettingFactory>();
+            builder.RegisterType<SettingStore>().As<ISettingStore>().InstancePerDependency();
+            builder.RegisterType<SettingFactory>().As<ISettingFactory>().SingleInstance();
 
             return builder;
         }
@@ -44,7 +44,7 @@ namespace Resizer.Gui
         /// <returns>Returns <see cref="ContainerBuilder"/> with the newly added <see cref="Gui"/> dependencies</returns>
         private ContainerBuilder RegisterGuiDependencies(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel")).SingleInstance();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel")).InstancePerDependency();
 
             return builder;
         }
