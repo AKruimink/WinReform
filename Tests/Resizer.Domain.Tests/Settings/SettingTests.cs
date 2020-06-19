@@ -93,7 +93,7 @@ namespace Resizer.Domain.Tests.Settings
 
             // Act
             setting.CurrentSetting.UseDarkTheme = true;
-            setting.Save(setting.CurrentSetting);
+            setting.Save();
 
             // Assert
             Assert.True(settingStoreMock.Executed);
@@ -111,7 +111,7 @@ namespace Resizer.Domain.Tests.Settings
             Assert.False(eventAggregatorMock.Executed);
 
             // Act
-            setting.Save(setting.CurrentSetting);
+            setting.Save();
 
             // Assert
             Assert.True(eventAggregatorMock.Executed);
