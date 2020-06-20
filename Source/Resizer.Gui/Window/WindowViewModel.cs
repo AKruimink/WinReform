@@ -35,6 +35,11 @@ namespace Resizer.Gui.Window
         private bool _menuIsOpen;
 
         /// <summary>
+        /// Gets or Sets an idicator that defines if the window should be minimized when closed
+        /// </summary>
+        public bool MinimizeOnClose { get; set; }
+
+        /// <summary>
         /// <see cref="IEventAggregator"/> used to be notified when the general setting have changed
         /// </summary>
         private readonly IEventAggregator _eventAggregator;
@@ -93,6 +98,7 @@ namespace Resizer.Gui.Window
         public void ApplicationSettingsChanged(ISetting<ApplicationSettings> settings)
         {
             UpdateTheme(settings.CurrentSetting.UseDarkTheme);
+            MinimizeOnClose = settings.CurrentSetting.MinimizeOnClose;
         }
 
         /// <summary>

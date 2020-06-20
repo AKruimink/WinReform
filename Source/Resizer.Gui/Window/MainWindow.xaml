@@ -14,6 +14,7 @@
                  NonActiveWindowTitleBrush="{DynamicResource MahApps.Brushes.WindowTitle}"
                  UseLayoutRounding="True"
                  WindowStartupLocation="CenterScreen"
+                 Closing="MetroWindow_Closing"
                  Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={converters:RatioConverter}, ConverterParameter='0.6'}"
                  MinHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={converters:RatioConverter}, ConverterParameter='0.6'}"
                  Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={converters:RatioConverter}, ConverterParameter='0.25'}"
