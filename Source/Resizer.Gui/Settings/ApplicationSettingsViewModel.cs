@@ -41,22 +41,6 @@ namespace Resizer.Gui.Settings
         private bool _minimizeOnClose;
 
         /// <summary>
-        /// Gets or Sets an idicator that defines if the window should be minimized to the system tray
-        /// </summary>
-        public bool MinimizeToSystemTray
-        {
-            get => _minimizeToSystemTray;
-            set
-            {
-                SetProperty(ref _minimizeToSystemTray, value);
-                _settings.CurrentSetting.MinimizeToSystemTray = value;
-                SaveSettings();
-            }
-        }
-
-        private bool _minimizeToSystemTray;
-
-        /// <summary>
         /// <see cref="ISetting{TSetting}"/> containing the <see cref="ApplicationSettings"/>
         /// </summary>
         private readonly ISetting<ApplicationSettings> _settings;
@@ -70,7 +54,6 @@ namespace Resizer.Gui.Settings
 
             UseDarkTheme = _settings.CurrentSetting.UseDarkTheme;
             MinimizeOnClose = _settings.CurrentSetting.MinimizeOnClose;
-            MinimizeToSystemTray = _settings.CurrentSetting.MinimizeToSystemTray;
         }
 
         /// <summary>

@@ -60,16 +60,5 @@
                   VerticalAlignment="Center"
                   Margin="5"
                   IsChecked="{Binding MinimizeOnClose}"/>
-
-        <TextBlock Grid.Row="4"
-                   Grid.Column="0"
-                   VerticalAlignment="Center"
-                   Margin="8"
-                   Text="Minimize To System Tray"/>
-        <CheckBox Grid.Row="4"
-                  Grid.Column="1"
-                  VerticalAlignment="Center"
-                  Margin="5"
-                  IsChecked="{Binding MinimizeToSystemTray}"/>
     </Grid>
 </UserControl>
