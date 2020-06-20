@@ -95,7 +95,7 @@ namespace Resizer.Gui.Window
         /// <summary>
         /// Invoked when the general application settings have changed
         /// </summary>
-        public void ApplicationSettingsChanged(ISetting<ApplicationSettings> settings)
+        private void ApplicationSettingsChanged(ISetting<ApplicationSettings> settings)
         {
             UpdateTheme(settings.CurrentSetting.UseDarkTheme);
             MinimizeOnClose = settings.CurrentSetting.MinimizeOnClose;
