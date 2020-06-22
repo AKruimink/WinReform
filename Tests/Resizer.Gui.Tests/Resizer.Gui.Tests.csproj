@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Resizer.Domain\Resizer.Domain.csproj" />
     <ProjectReference Include="..\..\Source\Resizer.Gui\Resizer.Gui.csproj" />
     <ProjectReference Include="..\Resizer.Domain.Tests\Resizer.Domain.Tests.csproj" />
   </ItemGroup>
