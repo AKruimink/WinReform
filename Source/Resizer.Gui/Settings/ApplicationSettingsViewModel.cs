@@ -1,4 +1,5 @@
-﻿using Resizer.Domain.Settings;
+﻿using System;
+using Resizer.Domain.Settings;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
 
 namespace Resizer.Gui.Settings
@@ -48,9 +49,9 @@ namespace Resizer.Gui.Settings
         /// <summary>
         /// Create a new instance of the <see cref="ApplicationSettingsViewModel"/>
         /// </summary>
-        public ApplicationSettingsViewModel(ISettingFactory settingfactory)
+        public ApplicationSettingsViewModel(ISettingFactory settingFactory)
         {
-            _settings = settingfactory.Create<ApplicationSettings>();
+            _settings = settingFactory?.Create<ApplicationSettings>() ?? throw new ArgumentNullException(nameof(settingFactory));
 
             UseDarkTheme = _settings.CurrentSetting.UseDarkTheme;
             MinimizeOnClose = _settings.CurrentSetting.MinimizeOnClose;
