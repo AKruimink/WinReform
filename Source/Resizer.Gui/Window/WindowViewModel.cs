@@ -40,6 +40,11 @@ namespace Resizer.Gui.Window
         public bool MinimizeOnClose { get; set; }
 
         /// <summary>
+        /// <see cref="ISettingFactory"/> used to load the application settings on creation
+        /// </summary>
+        private readonly ISettingFactory _settingFactory;
+
+        /// <summary>
         /// <see cref="IEventAggregator"/> used to be notified when the general setting have changed
         /// </summary>
         private readonly IEventAggregator _eventAggregator;
@@ -59,14 +64,17 @@ namespace Resizer.Gui.Window
         /// </summary>
         public DelegateCommand ShowVersionsOnGithubCommand { get; }
 
+        public DelegateCommand WindowLoadedCommand { get; }
+
         /// <summary>
         /// Create a new instance of the <see cref="WindowViewModel"/>
         /// </summary>
         /// <param name="generalSettings">Instance of the <see cref="ApplicationSettingsViewModel"/></param>
         public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, ApplicationSettingsViewModel applicationSettings)
         {
-            _eventAggregator = eventAggregator;
-            ApplicationSettings = applicationSettings;
+            _settingFactory = settingFactory ?? throw new ArgumentNullException(nameof(settingFactory));
+            _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
+            ApplicationSettings = applicationSettings ?? throw new ArgumentNullException(nameof(applicationSettings));
 
             Version = $"v:{Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(3)}";
             ShowSourceOnGithubCommand = new DelegateCommand(() =>
@@ -87,9 +95,16 @@ namespace Resizer.Gui.Window
                 };
                 Process.Start(psi);
             });
+            WindowLoadedCommand = new DelegateCommand(WindowLoaded);
+        }
 
+        /// <summary>
+        /// Loads all the settings once the window is loaded
+        /// </summary>
+        private void WindowLoaded()
+        {
+            ApplicationSettingsChanged(_settingFactory.Create<ApplicationSettings>()); // Manualy set the application settings once as we wont be notified until something changes
             _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
-            ApplicationSettingsChanged(settingFactory.Create<ApplicationSettings>()); // Manualy set the application settings once as we wont be notified until something changes
         }
 
         /// <summary>
@@ -109,7 +124,7 @@ namespace Resizer.Gui.Window
         {
             var themeName = useDarkTheme ? ThemeManager.BaseColorDark : ThemeManager.BaseColorLight;
 
-            if(ThemeManager.Current.DetectTheme()?.BaseColorScheme != themeName)
+            if(ThemeManager.Current.DetectTheme()?.BaseColorScheme != themeName && Application.Current != null)
             {
                 ThemeManager.Current.ChangeThemeBaseColor(Application.Current, themeName);
             }     
