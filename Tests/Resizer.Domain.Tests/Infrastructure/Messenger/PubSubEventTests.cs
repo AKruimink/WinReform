@@ -37,7 +37,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             public ICollection<IEventSubscription> CurrentSubscriptions => Subscriptions;
         }
 
-        #endregion
+        #endregion Test Fixtures
 
         #region Subscribe Tests
 
@@ -88,10 +88,9 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             // Assert
             Assert.NotNull(filter);
             Assert.True(filter!(""));
-
         }
 
-        #endregion
+        #endregion Subscribe Tests
 
         #region Unsubscribe Tests
 
@@ -131,7 +130,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.False(pubSubEvent.Contains(action.Action));
         }
 
-        #endregion
+        #endregion Unsubscribe Tests
 
         #region Publish Tests
 
@@ -141,7 +140,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             // Prepare
         }
 
-        #endregion
+        #endregion Publish Tests
 
         #region Contains Tests
 
@@ -169,6 +168,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.True(pubSubEvent.Contains(action.Action));
         }
 
-        #endregion
+        #endregion Contains Tests
     }
 }

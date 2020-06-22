@@ -16,7 +16,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger.Mocks
         /// </summary>
         public bool PublishActionCalled { get; set; }
 
-
         /// <summary>
         /// <see cref="SubscriptionToken"/> assigned to this subscription by <see cref="EventBase"/>
         /// </summary>

@@ -18,7 +18,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger.Mocks
         /// </summary>
         public DelegateReferenceMock()
         {
-
         }
 
         /// <summary>

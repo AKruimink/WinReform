@@ -59,6 +59,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             //Assert.Equal(SynchronizationContextMock.SynchronizationContext, calledSyncContext);
         }
 
-        #endregion
+        #endregion InvokeAction Tests
     }
 }

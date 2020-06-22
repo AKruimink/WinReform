@@ -35,6 +35,6 @@ namespace Resizer.Gui.Tests.Settings
             });
         }
 
-        #endregion
+        #endregion Constructor Tests
     }
 }

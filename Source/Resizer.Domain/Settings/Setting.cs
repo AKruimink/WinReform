@@ -22,6 +22,7 @@ namespace Resizer.Domain.Settings
 
         /// <inheritdoc/>
         public TSetting CurrentSetting { get; set; }
+
         /// <summary>
         /// Create a new instance of the <see cref="Setting{TSetting}"/>
         /// </summary>

@@ -1,7 +1,7 @@
 ﻿namespace Resizer.Domain.Tests.Mocks
 {
     /// <summary>
-    /// Defines a mock implementation of a delegate handler 
+    /// Defines a mock implementation of a delegate handler
     /// </summary>
     public class DelegateHandlerMock
     {

@@ -72,6 +72,6 @@ namespace Resizer.Gui.Tests.Window
             });
         }
 
-        #endregion
+        #endregion Constructor Tests
     }
 }

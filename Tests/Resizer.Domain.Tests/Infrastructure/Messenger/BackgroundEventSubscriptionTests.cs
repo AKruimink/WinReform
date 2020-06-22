@@ -54,6 +54,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.NotEqual(SynchronizationContext.Current, calledSyncContext);
         }
 
-        #endregion
+        #endregion InvokeAction Tests
     }
 }

@@ -151,7 +151,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             });
         }
 
-        #endregion
+        #endregion Constructor Tests
 
         #region SubscriptionToken Tests
 
@@ -189,7 +189,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.Same(subscriptionToken, eventSubscription.SubscriptionToken);
         }
 
-        #endregion
+        #endregion SubscriptionToken Tests
 
         #region GetAction Tests
 
@@ -238,7 +238,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.Null(publishAction);
         }
 
-        #endregion
+        #endregion GetAction Tests
 
         #region GetExecutionStrategy Tests
 
@@ -346,7 +346,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.False(actionExecuted);
         }
 
-        #endregion
+        #endregion GetExecutionStrategy Tests
 
         #region InvokeAction Tests
 
@@ -390,7 +390,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
 
             // Act
 
-
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -431,6 +430,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.Equal("someString", passedArgument);
         }
 
-        #endregion
+        #endregion InvokeAction Tests
     }
 }

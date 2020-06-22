@@ -73,7 +73,7 @@ namespace Resizer.Domain.Tests.Settings
             Assert.True(settingStoreMock.Executed);
         }
 
-        #endregion
+        #endregion Constructor Tests
 
         #region Save Tests
 
@@ -115,10 +115,9 @@ namespace Resizer.Domain.Tests.Settings
             Assert.True(eventAggregatorMock.Executed);
         }
 
-        #endregion
+        #endregion Save Tests
 
         #region Equal Tests
-
 
         [Fact]
         public void Equal_EqualSettings_ShouldReturnTrue()
@@ -157,6 +156,6 @@ namespace Resizer.Domain.Tests.Settings
             Assert.False(setting1.Equals(null!));
         }
 
-        #endregion
+        #endregion Equal Tests
     }
 }

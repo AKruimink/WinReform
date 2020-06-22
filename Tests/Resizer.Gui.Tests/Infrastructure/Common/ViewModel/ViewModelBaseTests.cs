@@ -75,7 +75,7 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel
             Assert.True(invoked);
         }
 
-        #endregion
+        #endregion SetProperty Tests
 
         #region OnPropertyChanged Tests
 
@@ -101,6 +101,6 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel
             Assert.True(invoked);
         }
 
-        #endregion
+        #endregion OnPropertyChanged Tests
     }
 }

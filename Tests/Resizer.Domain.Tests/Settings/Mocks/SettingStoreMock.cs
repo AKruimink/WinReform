@@ -29,7 +29,6 @@ namespace Resizer.Domain.Tests.Settings.Mocks
             Executed = true;
             SettingType = typeof(TSetting);
             return new TSetting();
-
         }
 
         ///<inheritdoc/>

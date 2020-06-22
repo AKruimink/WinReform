@@ -22,7 +22,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger.Mocks
         /// </summary>
         public Action? ActionToExecute { get; set; }
 
-
         /// <summary>
         /// Action that doesnt take a argument
         /// </summary>

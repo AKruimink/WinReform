@@ -25,7 +25,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.True(eventBase.Contains(eventSubscription.SubscriptionToken!));
         }
 
-        #endregion
+        #endregion InternalSubscribe Tests
 
         #region InternalUnsubscribe Tests
 
@@ -48,7 +48,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.False(eventBase.Contains(eventSubscription.SubscriptionToken!));
         }
 
-        #endregion
+        #endregion InternalUnsubscribe Tests
 
         #region InternalPublish Tests
 
@@ -62,7 +62,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             {
                 PublishActionReturnValue = delegate { eventPublished = true; }
             };
-
 
             // Act
             eventBase.Subscribe(eventSubscription);
@@ -89,7 +88,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             {
                 PublishActionReturnValue = delegate { secondEventPublished = true; }
             };
-
 
             // Act
             eventBase.Subscribe(firstEventSubscription);
@@ -122,7 +120,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.False(eventBase.Contains(token));
         }
 
-        #endregion
+        #endregion InternalPublish Tests
 
         #region Contains Tests
 
@@ -138,6 +136,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.True(eventbase.Contains(token));
         }
 
-        #endregion
+        #endregion Contains Tests
     }
 }

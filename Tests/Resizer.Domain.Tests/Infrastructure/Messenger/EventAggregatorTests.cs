@@ -14,7 +14,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
         [Fact]
         public void GetEvent_GetNewAndExistingEvent_ShouldReturnTheSameEvent()
         {
-            // Prepare 
+            // Prepare
             var eventAggregator = new EventAggregator();
 
             // Act
@@ -25,6 +25,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.Equal(instance1, instance2);
         }
 
-        #endregion
+        #endregion GetEvent Tests
     }
 }

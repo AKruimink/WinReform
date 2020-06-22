@@ -58,9 +58,11 @@ namespace Resizer.Domain.Infrastructure.Messenger
                 case ThreadOption.BackgroundThread:
                     subscription = new BackgroundEventSubscription(actionReference);
                     break;
+
                 case ThreadOption.PublisherThread:
                     subscription = new EventSubscription(actionReference);
                     break;
+
                 case ThreadOption.UIThread:
                     if (SynchronizationContext == null)
                     {
@@ -68,6 +70,7 @@ namespace Resizer.Domain.Infrastructure.Messenger
                     }
                     subscription = new DispatcherEventSubscription(actionReference, SynchronizationContext);
                     break;
+
                 default:
                     subscription = new EventSubscription(actionReference);
                     break;
@@ -174,7 +177,6 @@ namespace Resizer.Domain.Infrastructure.Messenger
         public virtual SubscriptionToken Subscribe(Action<TPayLoad> action, ThreadOption threadOption, bool keepSubscriberReferenceAlive)
         {
             return Subscribe(action, threadOption, keepSubscriberReferenceAlive, null);
-
         }
 
         /// <summary>
@@ -204,9 +206,11 @@ namespace Resizer.Domain.Infrastructure.Messenger
                 case ThreadOption.BackgroundThread:
                     subscription = new BackgroundEventSubscription<TPayLoad>(actionReference, filterReference);
                     break;
+
                 case ThreadOption.PublisherThread:
                     subscription = new EventSubscription<TPayLoad>(actionReference, filterReference);
                     break;
+
                 case ThreadOption.UIThread:
                     if (SynchronizationContext == null)
                     {
@@ -214,6 +218,7 @@ namespace Resizer.Domain.Infrastructure.Messenger
                     }
                     subscription = new DispatcherEventSubscription<TPayLoad>(actionReference, filterReference, SynchronizationContext);
                     break;
+
                 default:
                     subscription = new EventSubscription<TPayLoad>(actionReference, filterReference);
                     break;

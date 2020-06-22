@@ -71,8 +71,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.NotNull(delegateReference.Delegate);
         }
 
-
-        #endregion
+        #endregion Constructor Tests
 
         #region GetDelegate Tests
 
@@ -108,7 +107,7 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.Null(delegateReference.Delegate);
         }
 
-        #endregion
+        #endregion GetDelegate Tests
 
         #region DelegateEquals Tests
 
@@ -173,7 +172,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.True(delegateReference.DelegateEquals(null!));
         }
 
-
         [Fact]
         public void DelegateEquals_EqualStaticDelegate_ShouldReturnTrue()
         {
@@ -186,6 +184,6 @@ namespace Resizer.Domain.Tests.Infrastructure.Messenger
             Assert.True(delegateReference.DelegateEquals((Action)DelegateHandlerMock.StaticMethod));
         }
 
-        #endregion
+        #endregion DelegateEquals Tests
     }
 }

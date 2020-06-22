@@ -55,7 +55,7 @@ namespace Resizer.Domain.Tests.Settings
             });
         }
 
-        #endregion
+        #endregion Constructor Tests
 
         #region Create Tests
 
@@ -75,6 +75,6 @@ namespace Resizer.Domain.Tests.Settings
             Assert.Equal(setting1, setting2);
         }
 
-        #endregion
+        #endregion Create Tests
     }
 }
