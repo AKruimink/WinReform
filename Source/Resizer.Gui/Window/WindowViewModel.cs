@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Navigation;
 using ControlzEx.Theming;
 using Resizer.Domain.Infrastructure.Events;
 using Resizer.Domain.Infrastructure.Messenger;
@@ -124,10 +123,10 @@ namespace Resizer.Gui.Window
         {
             var themeName = useDarkTheme ? ThemeManager.BaseColorDark : ThemeManager.BaseColorLight;
 
-            if(ThemeManager.Current.DetectTheme()?.BaseColorScheme != themeName && Application.Current != null)
+            if (ThemeManager.Current.DetectTheme()?.BaseColorScheme != themeName && Application.Current != null)
             {
                 ThemeManager.Current.ChangeThemeBaseColor(Application.Current, themeName);
-            }     
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Resizer.Gui
         {
             var vm = (WindowViewModel)DataContext;
 
-            if(vm.MinimizeOnClose)
+            if (vm.MinimizeOnClose)
             {
                 WindowState = WindowState.Minimized;
                 e.Cancel = true;

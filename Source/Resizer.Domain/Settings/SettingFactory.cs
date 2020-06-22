@@ -39,9 +39,9 @@ namespace Resizer.Domain.Settings
         ///<inheritdoc/>
         public ISetting<TSetting> Create<TSetting>() where TSetting : new()
         {
-            lock(_settings)
+            lock (_settings)
             {
-                if(!_settings.TryGetValue(typeof(TSetting), out var existingSetting))
+                if (!_settings.TryGetValue(typeof(TSetting), out var existingSetting))
                 {
                     var newSetting = new Setting<TSetting>(_settingStore, _eventAggregator);
                     _settings[typeof(TSetting)] = newSetting;

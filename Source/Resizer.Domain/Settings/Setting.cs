@@ -44,7 +44,7 @@ namespace Resizer.Domain.Settings
 
                 NotifySettingsChanged();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // TODO replace Console.Writeline with some form of logging
                 Console.WriteLine(ex.Message);
@@ -98,7 +98,7 @@ namespace Resizer.Domain.Settings
                 return false;
             }
 
-            return Equals((Setting<TSetting>) obj);
+            return Equals((Setting<TSetting>)obj);
         }
 
         /// <summary>

@@ -2,8 +2,6 @@
 using Resizer.Domain.Tests.Mocks;
 using Resizer.Domain.Tests.Settings.Mocks;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Resizer.Domain.Tests.Settings

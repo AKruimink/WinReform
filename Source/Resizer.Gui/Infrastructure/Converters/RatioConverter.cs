@@ -33,7 +33,7 @@ namespace Resizer.Gui.Infrastructure.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var size = 0d;
-            if(value != null)
+            if (value != null)
             {
                 size = System.Convert.ToDouble(value, CultureInfo.InvariantCulture) * System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
             }
