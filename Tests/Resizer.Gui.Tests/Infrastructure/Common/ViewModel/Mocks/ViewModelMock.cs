@@ -3,7 +3,7 @@
 namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel.Mocks
 {
     /// <summary>
-    /// Defines a mock implementation of a view model 
+    /// Defines a mock implementation of a view model
     /// </summary>
     public class ViewModelMock : ViewModelBase
     {

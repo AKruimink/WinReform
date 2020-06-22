@@ -1,6 +1,6 @@
-﻿using Resizer.Gui.Infrastructure.Common.Command;
+﻿using Resizer.Domain.Tests.Mocks;
+using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Tests.Infrastructure.Common.Command.Mocks;
-using Resizer.Gui.Tests.Mocks;
 using System;
 using Xunit;
 
@@ -121,7 +121,7 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.Command
             });
         }
 
-        #endregion
+        #endregion Constructor Tests
 
         #region Execute Tests
 
@@ -176,7 +176,7 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.Command
             Assert.True(executeCalled);
         }
 
-        #endregion
+        #endregion Execute Tests
 
         #region CanExecute Tests
 
@@ -284,6 +284,6 @@ namespace Resizer.Gui.Tests.Infrastructure.Common.Command
             Assert.True(executeCalled);
         }
 
-        #endregion
+        #endregion CanExecute Tests
     }
 }

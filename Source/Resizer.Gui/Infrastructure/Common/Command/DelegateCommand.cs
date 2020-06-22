@@ -10,7 +10,7 @@ namespace Resizer.Gui.Infrastructure.Common.Command
     public class DelegateCommand : DelegateCommandBase
     {
         /// <summary>
-        /// The <see cref="Action"/> to execute 
+        /// The <see cref="Action"/> to execute
         /// </summary>
         private readonly Action _executeMethod;
 
@@ -78,7 +78,7 @@ namespace Resizer.Gui.Infrastructure.Common.Command
     public class DelegateCommand<T> : DelegateCommandBase
     {
         /// <summary>
-        /// The <see cref="Action"/> to execute 
+        /// The <see cref="Action"/> to execute
         /// </summary>
         private readonly Action<T> _executeMethod;
 

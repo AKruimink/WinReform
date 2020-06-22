@@ -78,6 +78,5 @@ namespace Resizer.Gui.Infrastructure.Common.ViewModel
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }
