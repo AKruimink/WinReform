@@ -9,6 +9,7 @@ using Resizer.Domain.Settings;
 using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
 using Resizer.Gui.Settings;
+using Resizer.Gui.Sizer;
 
 namespace Resizer.Gui.Window
 {
@@ -53,6 +54,8 @@ namespace Resizer.Gui.Window
         /// </summary>
         public ApplicationSettingsViewModel ApplicationSettings { get; }
 
+        public SizerViewModel Sizer { get; }
+
         /// <summary>
         /// Shows the project source code on Github
         /// </summary>
@@ -67,13 +70,15 @@ namespace Resizer.Gui.Window
 
         /// <summary>
         /// Create a new instance of the <see cref="WindowViewModel"/>
+        /// //TODO fix the <see cref="WindowViewModel"/> summary
         /// </summary>
         /// <param name="generalSettings">Instance of the <see cref="ApplicationSettingsViewModel"/></param>
-        public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, ApplicationSettingsViewModel applicationSettings)
+        public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, ApplicationSettingsViewModel applicationSettings, SizerViewModel sizer)
         {
             _settingFactory = settingFactory ?? throw new ArgumentNullException(nameof(settingFactory));
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             ApplicationSettings = applicationSettings ?? throw new ArgumentNullException(nameof(applicationSettings));
+            Sizer = sizer ?? throw new ArgumentNullException(nameof(sizer));
 
             Version = $"v:{Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(3)}";
             ShowSourceOnGithubCommand = new DelegateCommand(() =>
