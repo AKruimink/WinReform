@@ -46,10 +46,10 @@ namespace Resizer.Gui.Infrastructure.Extensions
                     }
                     else
                     {
-                        if (Comparer<T>.Default.Compare(collection[itemIndex], item) == 1)
+                        if((!collection[i]?.Equals(item)) ?? false)
                         {
                             // Item has changed, replace it
-                            collection.Insert(itemIndex, item);
+                            collection.Insert(i, item);
                         }
                     }
                 }
