@@ -10,7 +10,7 @@ namespace Resizer.Domain.Windows
     /// <summary>
     /// Defines a class that acts as model for active windows running on the system
     /// </summary>
-    public class Window : IComparable<Window>
+    public class Window : IEquatable<Window>, IComparable<Window>
     {
         /// <summary>
         /// Gets or Sets the id of the window used as identification
@@ -36,7 +36,7 @@ namespace Resizer.Domain.Windows
         /// <summary>
         /// Gets or Sets the dimensions of the window
         /// </summary>
-        public Dimensions Dimensions { get; set; }
+        public Dimension Dimensions { get; set; }
 
         /// <summary>
         /// Gets the resolution of the application
@@ -44,31 +44,42 @@ namespace Resizer.Domain.Windows
         public string Resolution => $"{Dimensions.Width} x {Dimensions.Height}";
 
         /// <summary>
-        /// Compares a object with the current object
+        /// Comapares the current <see cref="Window"/> to a given <see cref="Window"/>
         /// </summary>
         /// <param name="other"><see cref="Window"/> to compare to the current instance</param>
-        /// <returns>Returns -1 if the object's arent equal, 0 if the objects are identical and 1 if the object are equal but have some differences in the assigned values</returns>
+        /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="Window"/>, otherwise returns <see langword="false"/></returns>
+        public bool Equals([AllowNull] Window other)
+            => other?.Id == Id
+            && other?.WindowHandle == WindowHandle
+            && other?.Description == Description
+            && other?.Dimensions == Dimensions;
+
+        /// <summary>
+        /// Comapares the current <see cref="Window"/> to a given <see cref="object"/>
+        /// </summary>
+        /// <param name="obj"><see cref="object"/> to compare to the current instance</param>
+        /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="object"/>, otherwise returns <see langword="false"/></returns>
+        public override bool Equals(object? obj)
+            => obj is Window window && Equals(window);
+
+        /// <summary>
+        /// Gets the hashCode of the <see cref="Window"/>
+        /// </summary>
+        /// <returns>Returns <see cref="int"/> containing a unique hashcode that represents the instance of the current <see cref="Window"/></returns>
+        public override int GetHashCode() => (Id, WindowHandle, Description, Dimensions).GetHashCode();
+
+        /// <summary>
+        /// Compare if the current <see cref="Window"/> represents the same item as a given <see cref="Window"/>
+        /// </summary>
+        /// <param name="other"><see cref="Window"/> to compare against</param>
+        /// <returns>Returns <see langword="true"/> if the <see cref="Window"/> represent the same <see cref="Window"/>, otherwise returns <see langword="false"/></returns>
         public int CompareTo([AllowNull] Window other)
         {
-            if (Id != other?.Id)
+            if (Id == other?.Id)
             {
-                // Objects don't represent the same Window
-                return -1;
+                return 0;
             }
-
-            foreach (var property in GetType().GetProperties())
-            {
-                var currentValue = property.GetValue(this);
-                var otherValue = property.GetValue(other);
-
-                if (currentValue == otherValue)
-                {
-                    // Object contains atleast 1 changed item
-                    return 1;
-                }
-            }
-
-            return 0;
+            return -1;
         }
     }
 }
