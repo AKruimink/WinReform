@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Resizer.Gui.Sizer
+namespace Resizer.Gui.ActiveWindows
 {
-    interface IActiveWindowsViewModel
+    class ActiveWindowsDesignModel
     {
     }
 }

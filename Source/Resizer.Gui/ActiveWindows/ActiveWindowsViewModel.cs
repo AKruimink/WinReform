@@ -11,7 +11,7 @@ using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
 using Resizer.Gui.Infrastructure.Extensions;
 
-namespace Resizer.Gui.Sizer
+namespace Resizer.Gui.ActiveWindows
 {
     /// <summary>
     /// Defines a class that handles the active windows and managing of them

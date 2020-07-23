@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Resizer.Gui.Sizer
+namespace Resizer.Gui.ActiveWindows
 {
     /// <summary>
     /// Interaction logic for ActiveWindowsView.xaml
