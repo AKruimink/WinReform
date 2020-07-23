@@ -29,7 +29,7 @@ namespace Resizer.Gui
             using var scope = _container.BeginLifetimeScope();
             var window = new MainWindow()
             {
-                DataContext = scope.Resolve<WindowViewModel>()
+                DataContext = scope.Resolve<IWindowViewModel>()
             };
             window.Show();
         }

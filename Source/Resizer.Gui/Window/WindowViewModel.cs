@@ -6,10 +6,10 @@ using ControlzEx.Theming;
 using Resizer.Domain.Infrastructure.Events;
 using Resizer.Domain.Infrastructure.Messenger;
 using Resizer.Domain.Settings;
+using Resizer.Gui.ActiveWindows;
 using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
 using Resizer.Gui.Settings;
-using Resizer.Gui.Sizer;
 
 namespace Resizer.Gui.Window
 {
@@ -49,6 +49,11 @@ namespace Resizer.Gui.Window
         public IApplicationSettingsViewModel ApplicationSettings { get; }
 
         /// <summary>
+        /// Gets the <see cref="ActiveWindowsViewModel"/>
+        /// </summary>
+        public IActiveWindowsViewModel ActiveWindows { get; }
+
+        /// <summary>
         /// Shows the project source code on Github
         /// </summary>
         public DelegateCommand ShowSourceOnGithubCommand { get; }
@@ -65,12 +70,12 @@ namespace Resizer.Gui.Window
         /// //TODO fix the <see cref="WindowViewModel"/> summary
         /// </summary>
         /// <param name="generalSettings">Instance of the <see cref="ApplicationSettingsViewModel"/></param>
-        public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, IApplicationSettingsViewModel applicationSettings)
+        public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, IApplicationSettingsViewModel applicationSettings, IActiveWindowsViewModel activeWindows)
         {
             _settingFactory = settingFactory ?? throw new ArgumentNullException(nameof(settingFactory));
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             ApplicationSettings = applicationSettings ?? throw new ArgumentNullException(nameof(applicationSettings));
-            //Sizer = sizer ?? throw new ArgumentNullException(nameof(sizer));
+            ActiveWindows = activeWindows ?? throw new ArgumentNullException(nameof(activeWindows));
 
             Version = $"v:{Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(3)}";
             ShowSourceOnGithubCommand = new DelegateCommand(() =>

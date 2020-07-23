@@ -7,7 +7,8 @@
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:converters="clr-namespace:Resizer.Gui.Infrastructure.Converters"
                  xmlns:settings="clr-namespace:Resizer.Gui.Settings"
-                 xmlns:local="clr-namespace:Resizer.Gui.Window" xmlns:sizer="clr-namespace:Resizer.Gui.Sizer"
+                 xmlns:activeWindows="clr-namespace:Resizer.Gui.ActiveWindows"
+                 xmlns:local="clr-namespace:Resizer.Gui.Window" 
                  mc:Ignorable="d"
                  d:DataContext="{d:DesignInstance local:WindowDesignModel, IsDesignTimeCreatable=True}"
                  Title="WindowResizer"
@@ -104,7 +105,7 @@
         </mah:SplitView.Pane>
         <mah:SplitView.Content>
             <Grid>
-                <sizer:ActiveWindowsView DataContext="{Binding Sizer}"/>
+                <activeWindows:ActiveWindowsView DataContext="{Binding ActiveWindows}"/>
             </Grid>
         </mah:SplitView.Content>
     </mah:SplitView>
