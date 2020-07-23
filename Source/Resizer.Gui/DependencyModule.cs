@@ -2,6 +2,7 @@
 using Autofac;
 using Resizer.Domain.Infrastructure.Messenger;
 using Resizer.Domain.Settings;
+using Resizer.Domain.Windows;
 
 namespace Resizer.Gui
 {
@@ -34,6 +35,9 @@ namespace Resizer.Gui
             builder.RegisterType<SettingStore>().As<ISettingStore>().InstancePerDependency();
             builder.RegisterType<SettingFactory>().As<ISettingFactory>().SingleInstance();
 
+            // Windows
+            builder.RegisterType<WindowService>().As<IWindowService>().InstancePerDependency();
+
             return builder;
         }
 
@@ -44,7 +48,8 @@ namespace Resizer.Gui
         /// <returns>Returns <see cref="ContainerBuilder"/> with the newly added <see cref="Gui"/> dependencies</returns>
         private ContainerBuilder RegisterGuiDependencies(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel")).InstancePerDependency();
+            // Viewmodels
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel")).AsImplementedInterfaces().InstancePerDependency();
 
             return builder;
         }
