@@ -16,16 +16,12 @@ namespace Resizer.Gui.Window
     /// <summary>
     /// Defines a class that provides and handles application information
     /// </summary>
-    public class WindowViewModel : ViewModelBase
+    public class WindowViewModel : ViewModelBase, IWindowViewModel
     {
-        /// <summary>
-        /// Gets the version of the application
-        /// </summary>
+        ///<inheritdoc/>
         public string Version { get; }
 
-        /// <summary>
-        /// Gets or Sets the state of the menu
-        /// </summary>
+        ///<inheritdoc/>
         public bool MenuIsOpen
         {
             get => _menuIsOpen;
@@ -34,9 +30,7 @@ namespace Resizer.Gui.Window
 
         private bool _menuIsOpen;
 
-        /// <summary>
-        /// Gets or Sets an idicator that defines if the window should be minimized when closed
-        /// </summary>
+        ///<inheritdoc/>
         public bool MinimizeOnClose { get; set; }
 
         /// <summary>
@@ -52,9 +46,7 @@ namespace Resizer.Gui.Window
         /// <summary>
         /// Gets the <see cref="ApplicationSettingsViewModel"/>
         /// </summary>
-        public ApplicationSettingsViewModel ApplicationSettings { get; }
-
-        public SizerViewModel Sizer { get; }
+        public IApplicationSettingsViewModel ApplicationSettings { get; }
 
         /// <summary>
         /// Shows the project source code on Github
@@ -73,12 +65,12 @@ namespace Resizer.Gui.Window
         /// //TODO fix the <see cref="WindowViewModel"/> summary
         /// </summary>
         /// <param name="generalSettings">Instance of the <see cref="ApplicationSettingsViewModel"/></param>
-        public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, ApplicationSettingsViewModel applicationSettings, SizerViewModel sizer)
+        public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, IApplicationSettingsViewModel applicationSettings)
         {
             _settingFactory = settingFactory ?? throw new ArgumentNullException(nameof(settingFactory));
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             ApplicationSettings = applicationSettings ?? throw new ArgumentNullException(nameof(applicationSettings));
-            Sizer = sizer ?? throw new ArgumentNullException(nameof(sizer));
+            //Sizer = sizer ?? throw new ArgumentNullException(nameof(sizer));
 
             Version = $"v:{Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(3)}";
             ShowSourceOnGithubCommand = new DelegateCommand(() =>

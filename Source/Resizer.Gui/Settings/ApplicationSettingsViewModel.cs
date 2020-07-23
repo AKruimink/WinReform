@@ -7,11 +7,9 @@ namespace Resizer.Gui.Settings
     /// <summary>
     /// Defines a class that provides general application settings data
     /// </summary>
-    public class ApplicationSettingsViewModel : ViewModelBase
+    public class ApplicationSettingsViewModel : ViewModelBase, IApplicationSettingsViewModel
     {
-        /// <summary>
-        /// Gets or Sets an idicator that defines if dark theme should be used
-        /// </summary>
+        ///<inheritdoc/>
         public bool UseDarkTheme
         {
             get => _useDarkTheme;
@@ -25,9 +23,7 @@ namespace Resizer.Gui.Settings
 
         private bool _useDarkTheme = true;
 
-        /// <summary>
-        /// Gets or Sets an idicator that defines if the window should be minimized when closed
-        /// </summary>
+        ///<inheritdoc/>
         public bool MinimizeOnClose
         {
             get => _minimizeOnClose;
