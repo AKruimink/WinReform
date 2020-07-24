@@ -1,6 +1,7 @@
 ﻿using Resizer.Domain.Tests.Mocks;
 using Resizer.Domain.Tests.Settings.Mocks;
 using Resizer.Gui.Settings;
+using Resizer.Gui.Tests.Mocks;
 using Resizer.Gui.Window;
 using System;
 using Xunit;
@@ -20,10 +21,11 @@ namespace Resizer.Gui.Tests.Window
             // Prepare
             var settingFactoryMock = new SettingFactoryMock();
             var eventAggregatorMock = new EventAggregatorMock();
-            var applicationSettings = new ApplicationSettingsViewModel(settingFactoryMock); // TODO: Probably wanna mock view model by implementing a interface for them
+            var applicationSettings = new ApplicationSettingsViewModelMock();
+            var activeWindows = new ActiveWindowsViewModelMock();
 
             // Act
-            var viewModel = new WindowViewModel(settingFactoryMock, eventAggregatorMock, applicationSettings);
+            var viewModel = new WindowViewModel(settingFactoryMock, eventAggregatorMock, applicationSettings, activeWindows);
 
             // Assert
             Assert.NotNull(viewModel);
@@ -35,12 +37,13 @@ namespace Resizer.Gui.Tests.Window
             // Prepare
             var settingFactoryMock = new SettingFactoryMock();
             var eventAggregatorMock = new EventAggregatorMock();
-            var applicationSettings = new ApplicationSettingsViewModel(settingFactoryMock);
+            var applicationSettings = new ApplicationSettingsViewModelMock();
+            var activeWindows = new ActiveWindowsViewModelMock();
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new WindowViewModel(null!, eventAggregatorMock, applicationSettings);
+                var viewModel = new WindowViewModel(null!, eventAggregatorMock, applicationSettings, activeWindows);
             });
         }
 
@@ -49,12 +52,13 @@ namespace Resizer.Gui.Tests.Window
         {
             // Prepare
             var settingFactoryMock = new SettingFactoryMock();
-            var applicationSettings = new ApplicationSettingsViewModel(settingFactoryMock);
+            var applicationSettings = new ApplicationSettingsViewModelMock();
+            var activeWindows = new ActiveWindowsViewModelMock();
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new WindowViewModel(settingFactoryMock, null!, applicationSettings);
+                var viewModel = new WindowViewModel(settingFactoryMock, null!, applicationSettings, activeWindows);
             });
         }
 
@@ -64,11 +68,27 @@ namespace Resizer.Gui.Tests.Window
             // Prepare
             var settingFactoryMock = new SettingFactoryMock();
             var eventAggregatorMock = new EventAggregatorMock();
+            var activeWindows = new ActiveWindowsViewModelMock();
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new WindowViewModel(settingFactoryMock, eventAggregatorMock, null!);
+                var viewModel = new WindowViewModel(settingFactoryMock, eventAggregatorMock, null!, activeWindows);
+            });
+        }
+
+        [Fact]
+        public void Construct_NullActiveWindows_ShouldThrowArgumentNullException()
+        {
+            // Prepare
+            var settingFactoryMock = new SettingFactoryMock();
+            var eventAggregatorMock = new EventAggregatorMock();
+            var applicationSettings = new ApplicationSettingsViewModelMock();
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var viewModel = new WindowViewModel(settingFactoryMock, eventAggregatorMock, applicationSettings, null!);
             });
         }
 
