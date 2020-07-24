@@ -21,10 +21,10 @@ namespace Resizer.Domain.Windows
         /// TODO: should probably move GetWindowsRect to its own service, as it will be required for more then just this
         /// </summary>
         /// <param name="hwnd">The <see cref="IntPtr"/> that points towarts the window to get the dimensions of</param>
-        /// <param name="lpRect">The <see cref="Dimensions"/> that is returned</param>
-        /// <returns>Returns <see cref="Dimensions"/> containing the dimensions of the window</returns>
+        /// <param name="lpRect">The <see cref="Dimension"/> that is returned</param>
+        /// <returns>Returns <see cref="Dimension"/> containing the dimensions of the window</returns>
         [DllImport("user32.dll", SetLastError =true)]
-        public static extern bool GetWindowRect(IntPtr hwnd, out Dimensions lpRect);
+        public static extern bool GetWindowRect(IntPtr hwnd, out Dimension lpRect);
 
         /// <inheritdoc/>
         public IEnumerable<Window> GetActiveWindows()
@@ -48,15 +48,15 @@ namespace Resizer.Domain.Windows
                 });
             }
 
-            return windows;
+            return windows.OrderBy(w => w.Description).ToList();
         }
 
         /// <summary>
         /// Get the dimensions of a window
         /// </summary>
         /// <param name="handle">The <see cref="IntPtr"/> of the window to get the dimensions from</param>
-        /// <returns>Returns <see cref="Dimensions"/> containing all the dimensions of the window</returns>
-        private Dimensions GetWindowDimensions(IntPtr handle)
+        /// <returns>Returns <see cref="Dimension"/> containing all the dimensions of the window</returns>
+        private Dimension GetWindowDimensions(IntPtr handle)
         {
             if(GetWindowRect(handle, out var dimensions))
             {
