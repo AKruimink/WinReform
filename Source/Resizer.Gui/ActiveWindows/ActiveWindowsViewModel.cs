@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Data;
+using System.Windows.Threading;
 using Resizer.Domain.Infrastructure.Events;
 using Resizer.Domain.Infrastructure.Messenger;
 using Resizer.Domain.Windows;
@@ -54,6 +55,14 @@ namespace Resizer.Gui.ActiveWindows
         ///<inheritdoc/>
         public ICollectionView FilteredActiveWindows { get; set; }
 
+        ///<inheritdoc/>
+        public bool ShouldAutomaticallyRefresh { get; set; }
+
+        /// <summary>
+        /// <see cref="DispatcherTimer"/> used to trigger the automatic refresh
+        /// </summary>
+        private DispatcherTimer _autoRefreshTmer;
+
         /// <summary>
         /// <see cref="IWindowService"/> used to get all active windows
         /// </summary>
@@ -86,6 +95,28 @@ namespace Resizer.Gui.ActiveWindows
                 var window = w as Domain.Windows.Window;
                 return window?.Description.Contains(WindowFilter, StringComparison.OrdinalIgnoreCase) ?? false;
             };
+
+            _autoRefreshTmer = new DispatcherTimer();
+            _autoRefreshTmer.Tick += OnAutoRefreshEvent;
+            _autoRefreshTmer.Interval = TimeSpan.FromMilliseconds(1000);
+            _autoRefreshTmer.Start();
+        }
+
+        /// <summary>
+        /// Occures when the Refresh timer is finished and updates the <see cref="ActiveWindows"/> with the latest items 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnAutoRefreshEvent(object? sender, EventArgs e)
+        {
+            _autoRefreshTmer.Stop();
+
+            if(ShouldAutomaticallyRefresh)
+            {
+                RefreshActiveWindows();
+            }
+
+            _autoRefreshTmer.Start();
         }
 
         /// <summary>

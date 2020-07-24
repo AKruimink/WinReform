@@ -30,5 +30,10 @@ namespace Resizer.Gui.ActiveWindows
         /// Gets or Sets a filtered list of all <see cref="ActiveWindows"/>
         /// </summary>
         ICollectionView FilteredActiveWindows { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the state that defines if the Active Windows list should automaticly refresh every x seconds
+        /// </summary>
+        bool ShouldAutomaticallyRefresh { get; set; }
     }
 }
