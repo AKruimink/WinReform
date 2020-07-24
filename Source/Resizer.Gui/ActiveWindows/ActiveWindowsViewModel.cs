@@ -98,6 +98,15 @@ namespace Resizer.Gui.ActiveWindows
         }
 
         /// <summary>
+        /// Refreshes the <see cref="ActiveWindows"/> with a new list of active windows
+        /// </summary>
+        public void RefreshActiveWindows()
+        {
+            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
+            // TODO send message out containing selected items, for the resizer and locator to pick up, and use
+        }
+
+        /// <summary>
         /// Occures when the Refresh timer is finished and updates the <see cref="ActiveWindows"/> with the latest items
         /// </summary>
         /// <param name="sender"></param>
@@ -112,15 +121,6 @@ namespace Resizer.Gui.ActiveWindows
             }
 
             _autoRefreshTmer.Start();
-        }
-
-        /// <summary>
-        /// Refreshes the <see cref="ActiveWindows"/> with a new list of active windows
-        /// </summary>
-        public void RefreshActiveWindows()
-        {
-            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
-            // TODO send message out containing selected items, for the resizer and locator to pick up, and use
         }
     }
 }
