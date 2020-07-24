@@ -57,7 +57,7 @@
                       SelectionMode="Extended"
                       HorizontalScrollBarVisibility="Auto"
                       Style="{DynamicResource MahApps.Styles.DataGrid.Azure}"
-                      ItemsSource="{Binding ActiveWindows}"
+                      ItemsSource="{Binding FilteredActiveWindows}"
                       CanUserAddRows="False"
                       mah:MultiSelectorHelper.SelectedItems="{Binding SelectedActiveWindows}">
                 <DataGrid.Columns>

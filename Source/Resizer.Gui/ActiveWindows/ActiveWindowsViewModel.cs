@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Windows.Data;
 using Resizer.Domain.Infrastructure.Events;
 using Resizer.Domain.Infrastructure.Messenger;
 using Resizer.Domain.Windows;
@@ -36,6 +38,22 @@ namespace Resizer.Gui.ActiveWindows
 
         private ObservableCollection<Domain.Windows.Window> _selectedActiveWindows = new ObservableCollection<Domain.Windows.Window>();
 
+        ///<inheritdoc/>
+        public string WindowFilter
+        {
+            get => _windowFilter;
+            set
+            {
+                SetProperty(ref _windowFilter, value);
+                FilteredActiveWindows.Refresh();
+            }
+        }
+
+        private string _windowFilter = string.Empty;
+
+        ///<inheritdoc/>
+        public ICollectionView FilteredActiveWindows { get; set; }
+
         /// <summary>
         /// <see cref="IWindowService"/> used to get all active windows
         /// </summary>
@@ -56,6 +74,18 @@ namespace Resizer.Gui.ActiveWindows
 
             RefreshActiveWindowsCommand = new DelegateCommand(RefreshActiveWindows);
             ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
+
+            FilteredActiveWindows = CollectionViewSource.GetDefaultView(ActiveWindows);
+            FilteredActiveWindows.Filter = w =>
+            {
+                if (string.IsNullOrEmpty(WindowFilter))
+                {
+                    return true;
+                }
+
+                var window = w as Domain.Windows.Window;
+                return window?.Description.Contains(WindowFilter, StringComparison.OrdinalIgnoreCase) ?? false;
+            };
         }
 
         /// <summary>

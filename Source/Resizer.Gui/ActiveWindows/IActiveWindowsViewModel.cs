@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 
 namespace Resizer.Gui.ActiveWindows
@@ -19,5 +20,15 @@ namespace Resizer.Gui.ActiveWindows
         /// Gets or Sets all the selected active windows currently open on the system
         /// </summary>
         ObservableCollection<Domain.Windows.Window> SelectedActiveWindows { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the filter applied to the <see cref="ActiveWindows"/> collection used by <see cref="FilteredActiveWindows"/>
+        /// </summary>
+        string WindowFilter { get; set; }
+
+        /// <summary>
+        /// Gets or Sets a filtered list of all <see cref="ActiveWindows"/>
+        /// </summary>
+        ICollectionView FilteredActiveWindows { get; set; }
     }
 }
