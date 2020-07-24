@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Resizer.Domain.Tests\Resizer.Domain.Tests.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\Common\Command\Mocks\" />
+  </ItemGroup>
+
 </Project>

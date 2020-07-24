@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 
-namespace Resizer.Gui.Tests.Mocks
+namespace Resizer.Gui.Tests.ActiveWindows.Mocks
 {
     /// <summary>
     /// Mock implementation of <see cref="IActiveWindowsViewModel"/>

@@ -1,4 +1,5 @@
 ﻿using Resizer.Domain.Settings;
+using Resizer.Domain.Tests.Infrastructure.Messenger.Mocks;
 using Resizer.Domain.Tests.Mocks;
 using Resizer.Domain.Tests.Settings.Mocks;
 using System;

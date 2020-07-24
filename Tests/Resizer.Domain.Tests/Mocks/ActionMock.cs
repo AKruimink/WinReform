@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Resizer.Domain.Tests.Infrastructure.Messenger.Mocks
+namespace Resizer.Domain.Tests.Mocks
 {
     /// <summary>
     /// Defines a mock implementation of a <see cref="Action"/>

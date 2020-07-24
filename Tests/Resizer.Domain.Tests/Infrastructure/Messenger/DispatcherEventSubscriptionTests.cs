@@ -1,5 +1,6 @@
 ﻿using Resizer.Domain.Infrastructure.Messenger.Strategies;
 using Resizer.Domain.Tests.Infrastructure.Messenger.Mocks;
+using Resizer.Domain.Tests.Mocks;
 using System;
 using System.Threading;
 using Xunit;

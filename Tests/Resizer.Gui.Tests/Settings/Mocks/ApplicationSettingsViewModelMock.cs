@@ -1,6 +1,6 @@
 ﻿using Resizer.Gui.Settings;
 
-namespace Resizer.Gui.Tests.Mocks
+namespace Resizer.Gui.Tests.Settings.Mocks
 {
     /// <summary>
     /// Mock implementation of <see cref="IApplicationSettingsViewModel"/>
