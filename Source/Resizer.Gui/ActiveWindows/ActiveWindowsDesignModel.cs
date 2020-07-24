@@ -24,6 +24,9 @@ namespace Resizer.Gui.ActiveWindows
         ///<inheritdoc/>
         public ICollectionView FilteredActiveWindows { get; set; }
 
+        ///<inheritdoc/>
+        public bool ShouldAutomaticallyRefresh { get; set; } = true;
+
         /// <summary>
         /// Create a new instance of the <see cref="ActiveWindowsDesignModel"/>
         /// </summary>

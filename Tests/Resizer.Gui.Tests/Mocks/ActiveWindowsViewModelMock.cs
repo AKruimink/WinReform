@@ -22,6 +22,9 @@ namespace Resizer.Gui.Tests.Mocks
         ///<inheritdoc/>
         public ICollectionView FilteredActiveWindows { get; set; }
 
+        ///<inheritdoc/>
+        public bool ShouldAutomaticallyRefresh { get; set; }
+
         /// <summary>
         /// Create a new instance of <see cref="ActiveWindowsViewModelMock"/>
         /// </summary>
