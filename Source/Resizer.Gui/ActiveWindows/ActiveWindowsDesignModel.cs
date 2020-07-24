@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Data;
 using Resizer.Gui.Infrastructure.Extensions;
 
 namespace Resizer.Gui.ActiveWindows
@@ -17,6 +19,12 @@ namespace Resizer.Gui.ActiveWindows
 
         ///<inheritdoc/>
         public ObservableCollection<Domain.Windows.Window> SelectedActiveWindows { get; set; } = new ObservableCollection<Domain.Windows.Window>();
+
+        ///<inheritdoc/>
+        public string WindowFilter { get; set; } = string.Empty;
+
+        ///<inheritdoc/>
+        public ICollectionView FilteredActiveWindows { get; set; }
 
         /// <summary>
         /// Create a new instance of the <see cref="ActiveWindowsDesignModel"/>
@@ -50,6 +58,8 @@ namespace Resizer.Gui.ActiveWindows
 
             ActiveWindows.UpdateCollection(windows);
             SelectedActiveWindows.UpdateCollection(new List<Domain.Windows.Window> { windows[1] });
+
+            FilteredActiveWindows = CollectionViewSource.GetDefaultView(ActiveWindows);
         }
     }
 }
