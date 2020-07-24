@@ -14,13 +14,11 @@ using Resizer.Gui.Infrastructure.Extensions;
 namespace Resizer.Gui.ActiveWindows
 {
     /// <summary>
-    /// Defines a class that handles the active windows and managing of them
+    /// Defines a class that provides active windows running on the system and management of said windows
     /// </summary>
-    public class ActiveWindowsViewModel : ViewModelBase
+    public class ActiveWindowsViewModel : ViewModelBase, IActiveWindowsViewModel
     {
-        /// <summary>
-        /// Gets or Sets the active windows
-        /// </summary>
+        ///<inheritdoc/>
         public ObservableCollection<Domain.Windows.Window> ActiveWindows
         {
             get => _activeWindows;
@@ -29,9 +27,7 @@ namespace Resizer.Gui.ActiveWindows
 
         private ObservableCollection<Domain.Windows.Window> _activeWindows = new ObservableCollection<Domain.Windows.Window>();
 
-        /// <summary>
-        /// Gets or Sets the selected active windows
-        /// </summary>
+        ///<inheritdoc/>
         public ObservableCollection<Domain.Windows.Window> SelectedActiveWindows
         {
             get => _selectedActiveWindows;
@@ -64,16 +60,11 @@ namespace Resizer.Gui.ActiveWindows
 
         /// <summary>
         /// Refreshes the <see cref="ActiveWindows"/> with a new list of active windows
-        /// TODO: <see cref="ActiveWindows"/> in <see cref="ActiveWindowsViewModel"/> should probably be updated instead of repalced by <see cref="RefreshActiveWindows"/>
         /// </summary>
         public void RefreshActiveWindows()
         {
-            foreach(var item in ActiveWindows)
-            {
-                Debug.WriteLine(item.Description);
-            }
             ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
-            //SelectedActiveWindows = selectedItems;
+            // TODO send message out containing selected items, for the resizer and locator to pick up, and use 
         }
     }
 }
