@@ -1,7 +1,4 @@
 ﻿using Resizer.Gui.Settings;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Resizer.Gui.Tests.Mocks
 {

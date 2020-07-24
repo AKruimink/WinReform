@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using Resizer.Domain.Infrastructure.Events;
-using Resizer.Domain.Infrastructure.Messenger;
 
 namespace Resizer.Domain.Windows
 {
@@ -23,7 +19,7 @@ namespace Resizer.Domain.Windows
         /// <param name="hwnd">The <see cref="IntPtr"/> that points towarts the window to get the dimensions of</param>
         /// <param name="lpRect">The <see cref="Dimension"/> that is returned</param>
         /// <returns>Returns <see cref="Dimension"/> containing the dimensions of the window</returns>
-        [DllImport("user32.dll", SetLastError =true)]
+        [DllImport("user32.dll", SetLastError = true)]
         public static extern bool GetWindowRect(IntPtr hwnd, out Dimension lpRect);
 
         /// <inheritdoc/>
@@ -31,9 +27,9 @@ namespace Resizer.Domain.Windows
         {
             var windows = new List<Window>();
 
-            foreach(var process in Process.GetProcesses())
+            foreach (var process in Process.GetProcesses())
             {
-                if(process.MainWindowHandle == IntPtr.Zero)
+                if (process.MainWindowHandle == IntPtr.Zero)
                 {
                     continue; // Process doesn't own a window
                 }
@@ -58,7 +54,7 @@ namespace Resizer.Domain.Windows
         /// <returns>Returns <see cref="Dimension"/> containing all the dimensions of the window</returns>
         private Dimension GetWindowDimensions(IntPtr handle)
         {
-            if(GetWindowRect(handle, out var dimensions))
+            if (GetWindowRect(handle, out var dimensions))
             {
                 return dimensions;
             }

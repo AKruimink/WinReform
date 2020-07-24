@@ -8,7 +8,7 @@
                  xmlns:converters="clr-namespace:Resizer.Gui.Infrastructure.Converters"
                  xmlns:settings="clr-namespace:Resizer.Gui.Settings"
                  xmlns:activeWindows="clr-namespace:Resizer.Gui.ActiveWindows"
-                 xmlns:local="clr-namespace:Resizer.Gui.Window" 
+                 xmlns:local="clr-namespace:Resizer.Gui.Window"
                  mc:Ignorable="d"
                  d:DataContext="{d:DesignInstance local:WindowDesignModel, IsDesignTimeCreatable=True}"
                  Title="WindowResizer"
@@ -105,7 +105,7 @@
         </mah:SplitView.Pane>
         <mah:SplitView.Content>
             <Grid>
-                <activeWindows:ActiveWindowsView DataContext="{Binding ActiveWindows}"/>
+                <activeWindows:ActiveWindowsView DataContext="{Binding ActiveWindows}" />
             </Grid>
         </mah:SplitView.Content>
     </mah:SplitView>

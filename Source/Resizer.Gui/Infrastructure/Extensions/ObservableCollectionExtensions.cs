@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Resizer.Gui.Infrastructure.Extensions
 {
@@ -21,16 +19,16 @@ namespace Resizer.Gui.Infrastructure.Extensions
         /// <param name="newCollection"><see cref="IList"/> containing the items and order for the collection to be updated to</param>
         public static void UpdateCollection<T>(this ObservableCollection<T> collection, IList<T> newCollection)
         {
-            if(newCollection == null || newCollection.Count == 0)
+            if (newCollection == null || newCollection.Count == 0)
             {
                 collection.Clear();
                 return;
             }
 
             var i = 0;
-            foreach(var item in newCollection)
+            foreach (var item in newCollection)
             {
-                if(collection.Count > i)
+                if (collection.Count > i)
                 {
                     var itemIndex = collection.IndexOf(collection.Where(i => Comparer<T>.Default.Compare(i, item) == 0).FirstOrDefault());
 
@@ -46,7 +44,7 @@ namespace Resizer.Gui.Infrastructure.Extensions
                     }
                     else
                     {
-                        if((!collection[i]?.Equals(item)) ?? false)
+                        if ((!collection[i]?.Equals(item)) ?? false)
                         {
                             // Item has changed, replace it
                             collection.Insert(i, item);
@@ -63,7 +61,7 @@ namespace Resizer.Gui.Infrastructure.Extensions
             }
 
             // Remove all old items
-            while(collection.Count > newCollection.Count)
+            while (collection.Count > newCollection.Count)
             {
                 collection.RemoveAt(i);
             }

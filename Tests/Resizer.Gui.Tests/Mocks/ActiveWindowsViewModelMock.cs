@@ -1,9 +1,6 @@
 ﻿using Resizer.Gui.ActiveWindows;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Data;
 
 namespace Resizer.Gui.Tests.Mocks
@@ -23,7 +20,7 @@ namespace Resizer.Gui.Tests.Mocks
         public string WindowFilter { get; set; } = string.Empty;
 
         ///<inheritdoc/>
-        public ICollectionView FilteredActiveWindows { get; set; } 
+        public ICollectionView FilteredActiveWindows { get; set; }
 
         /// <summary>
         /// Create a new instance of <see cref="ActiveWindowsViewModelMock"/>

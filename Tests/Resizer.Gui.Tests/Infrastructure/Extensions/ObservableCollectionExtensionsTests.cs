@@ -1,10 +1,7 @@
 ﻿using Resizer.Domain.Tests.Mocks;
 using Resizer.Gui.Infrastructure.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Infrastructure.Extensions
@@ -27,7 +24,7 @@ namespace Resizer.Gui.Tests.Infrastructure.Extensions
             Assert.DoesNotContain(collection, item => item.Id == 1);
 
             // Act
-            collection.UpdateCollection(new List<ModelMock> { model1});
+            collection.UpdateCollection(new List<ModelMock> { model1 });
 
             // Assert
             Assert.Contains(collection, item => item.Id == 1);
@@ -46,7 +43,7 @@ namespace Resizer.Gui.Tests.Infrastructure.Extensions
             collection.Add(model2);
             collection.Add(model3);
 
-            var newCollection = new List<ModelMock>{ model2, model1, model3 };
+            var newCollection = new List<ModelMock> { model2, model1, model3 };
 
             // Assert
             Assert.NotEqual(newCollection, collection);
@@ -101,6 +98,6 @@ namespace Resizer.Gui.Tests.Infrastructure.Extensions
             Assert.Equal(model1, collection[0]);
         }
 
-        #endregion
+        #endregion UpdateCollection Tests
     }
 }

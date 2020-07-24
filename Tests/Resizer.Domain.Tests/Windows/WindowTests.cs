@@ -1,7 +1,5 @@
 ﻿using Resizer.Domain.Windows;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Resizer.Domain.Tests.Windows
@@ -51,7 +49,7 @@ namespace Resizer.Domain.Tests.Windows
             Assert.False(window1.Equals("Invalid Type"));
         }
 
-        #endregion
+        #endregion Equals Tests
 
         #region GetHashCode Tests
 
@@ -85,7 +83,7 @@ namespace Resizer.Domain.Tests.Windows
             Assert.NotEqual(hashCode1, hashCode2);
         }
 
-        #endregion
+        #endregion GetHashCode Tests
 
         #region CompareTo Tests
 
@@ -127,6 +125,6 @@ namespace Resizer.Domain.Tests.Windows
             Assert.True(window1.CompareTo(null) == -1);
         }
 
-        #endregion
+        #endregion CompareTo Tests
     }
 }

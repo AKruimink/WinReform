@@ -1,7 +1,4 @@
 ﻿using Resizer.Domain.Windows;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Resizer.Domain.Tests.Windows
@@ -51,7 +48,7 @@ namespace Resizer.Domain.Tests.Windows
             Assert.False(dimension1.Equals(1));
         }
 
-        #endregion
+        #endregion Equals Tests
 
         #region GetHashCode Tests
 
@@ -85,6 +82,6 @@ namespace Resizer.Domain.Tests.Windows
             Assert.NotEqual(hashCode1, hashCode2);
         }
 
-        #endregion
+        #endregion GetHashCode Tests
     }
 }

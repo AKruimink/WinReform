@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace Resizer.Domain.Windows
 {
@@ -45,7 +43,7 @@ namespace Resizer.Domain.Windows
         /// </summary>
         /// <param name="other"><see cref="Dimension"/> to compare to the current instance</param>
         /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="Dimension"/>, otherwise returns <see langword="false"/></returns>
-        public bool Equals([AllowNull] Dimension other) 
+        public bool Equals([AllowNull] Dimension other)
             => other.Left == Left
             && other.Top == Top
             && other.Right == Right
@@ -56,7 +54,7 @@ namespace Resizer.Domain.Windows
         /// </summary>
         /// <param name="obj"><see cref="object"/> to compare to the current instance</param>
         /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="object"/>, otherwise returns <see langword="false"/></returns>
-        public override bool Equals(object? obj) 
+        public override bool Equals(object? obj)
             => obj is Dimension dimensions && Equals(dimensions);
 
         /// <summary>
@@ -65,12 +63,12 @@ namespace Resizer.Domain.Windows
         /// <returns>Returns <see cref="int"/> containing a unique hashcode that represents the instance of the current <see cref="Dimension"/></returns>
         public override int GetHashCode() => (Left, Top, Right, Bottom).GetHashCode();
 
-        public static bool operator == (Dimension d1, Dimension d2)
+        public static bool operator ==(Dimension d1, Dimension d2)
         {
             return d1.Equals(d2);
         }
 
-        public static bool operator != (Dimension d1, Dimension d2)
+        public static bool operator !=(Dimension d1, Dimension d2)
         {
             return !(d1 == d2);
         }

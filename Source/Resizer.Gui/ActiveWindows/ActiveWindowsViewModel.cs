@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Windows.Data;
 using System.Windows.Threading;
-using Resizer.Domain.Infrastructure.Events;
-using Resizer.Domain.Infrastructure.Messenger;
 using Resizer.Domain.Windows;
 using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
@@ -61,7 +56,7 @@ namespace Resizer.Gui.ActiveWindows
         /// <summary>
         /// <see cref="DispatcherTimer"/> used to trigger the automatic refresh
         /// </summary>
-        private DispatcherTimer _autoRefreshTmer;
+        private readonly DispatcherTimer _autoRefreshTmer;
 
         /// <summary>
         /// <see cref="IWindowService"/> used to get all active windows
@@ -103,7 +98,7 @@ namespace Resizer.Gui.ActiveWindows
         }
 
         /// <summary>
-        /// Occures when the Refresh timer is finished and updates the <see cref="ActiveWindows"/> with the latest items 
+        /// Occures when the Refresh timer is finished and updates the <see cref="ActiveWindows"/> with the latest items
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -111,7 +106,7 @@ namespace Resizer.Gui.ActiveWindows
         {
             _autoRefreshTmer.Stop();
 
-            if(ShouldAutomaticallyRefresh)
+            if (ShouldAutomaticallyRefresh)
             {
                 RefreshActiveWindows();
             }
@@ -125,7 +120,7 @@ namespace Resizer.Gui.ActiveWindows
         public void RefreshActiveWindows()
         {
             ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
-            // TODO send message out containing selected items, for the resizer and locator to pick up, and use 
+            // TODO send message out containing selected items, for the resizer and locator to pick up, and use
         }
     }
 }

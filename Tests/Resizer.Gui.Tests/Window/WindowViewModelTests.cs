@@ -1,6 +1,5 @@
 ﻿using Resizer.Domain.Tests.Mocks;
 using Resizer.Domain.Tests.Settings.Mocks;
-using Resizer.Gui.Settings;
 using Resizer.Gui.Tests.Mocks;
 using Resizer.Gui.Window;
 using System;

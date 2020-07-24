@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using System.Drawing;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Interop;
@@ -38,7 +36,7 @@ namespace Resizer.Gui.Infrastructure.Converters
         /// <returns>Returns a <see cref="double"/> containing the calculated ratio</returns>
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value == null)
+            if (value == null)
             {
                 return null;
             }
