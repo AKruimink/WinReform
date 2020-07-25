@@ -1,8 +1,6 @@
 ﻿using Resizer.Domain.Tests.Infrastructure.Messenger.Mocks;
-using Resizer.Domain.Tests.Mocks;
 using Resizer.Domain.Tests.Settings.Mocks;
 using Resizer.Gui.Tests.ActiveWindows.Mocks;
-using Resizer.Gui.Tests.Mocks;
 using Resizer.Gui.Tests.Settings.Mocks;
 using Resizer.Gui.Window;
 using System;

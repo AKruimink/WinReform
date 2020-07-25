@@ -1,9 +1,6 @@
 ﻿using Resizer.Domain.Tests.Windows.Mocks;
-using Resizer.Domain.Windows;
 using Resizer.Gui.ActiveWindows;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Resizer.Gui.Tests.ActiveWindows
@@ -28,7 +25,7 @@ namespace Resizer.Gui.Tests.ActiveWindows
         [Fact]
         public void Construct_ValidArguments_ShouldConstructActiveWindowsViewModel()
         {
-            // Prepare 
+            // Prepare
             var windowService = new WindowServiceMock();
 
             // Act
@@ -38,14 +35,14 @@ namespace Resizer.Gui.Tests.ActiveWindows
             Assert.NotNull(viewModel);
         }
 
-        #endregion
+        #endregion Constructor Tests
 
         #region RefreshActiveWindows tests
 
         [Fact]
         public void RefreshActiveWindows_Execution_ShouldCallWindowService()
         {
-            // Prepare 
+            // Prepare
             var windowService = new WindowServiceMock();
             var viewmodel = new ActiveWindowsViewModel(windowService);
 
@@ -57,6 +54,6 @@ namespace Resizer.Gui.Tests.ActiveWindows
             Assert.True(windowService.GetActiveWindowsCalled);
         }
 
-        #endregion
+        #endregion RefreshActiveWindows tests
     }
 }

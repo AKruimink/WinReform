@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 using Xunit;
 
 namespace Resizer.Gui.Tests.Infrastructure.Extensions
@@ -55,6 +52,6 @@ namespace Resizer.Gui.Tests.Infrastructure.Extensions
             Assert.False(result);
         }
 
-        #endregion
+        #endregion UpdateCollection Tests
     }
 }

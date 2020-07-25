@@ -1,7 +1,5 @@
 ﻿using Resizer.Domain.Windows;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Resizer.Domain.Tests.Windows.Mocks
 {
