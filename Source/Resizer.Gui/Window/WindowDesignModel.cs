@@ -3,17 +3,16 @@
     /// <summary>
     /// Defines a class that provides design time application information
     /// </summary>
-    public class WindowDesignModel
+    public class WindowDesignModel : IWindowViewModel
     {
-        /// <summary>
-        /// Gets or Sets the version of the application
-        /// </summary>
+        ///<inheritdoc/>
         public string Version { get; set; }
 
-        /// <summary>
-        /// Gets or Sets the state of the menu
-        /// </summary>
+        ///<inheritdoc/>
         public bool MenuIsOpen { get; set; }
+
+        ///<inheritdoc/>
+        public bool MinimizeOnClose { get; set; }
 
         /// <summary>
         /// Create a new instance of the <see cref="WindowDesignModel"/>
@@ -22,6 +21,7 @@
         {
             Version = $"v0.0.0";
             MenuIsOpen = true;
+            MinimizeOnClose = false;
         }
     }
 }

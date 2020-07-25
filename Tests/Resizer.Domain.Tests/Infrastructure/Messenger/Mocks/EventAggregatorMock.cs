@@ -1,7 +1,7 @@
 ﻿using Resizer.Domain.Infrastructure.Messenger;
 using System;
 
-namespace Resizer.Domain.Tests.Mocks
+namespace Resizer.Domain.Tests.Infrastructure.Messenger.Mocks
 {
     /// <summary>
     /// Mock implementation of <see cref="IEventAggregator"/>

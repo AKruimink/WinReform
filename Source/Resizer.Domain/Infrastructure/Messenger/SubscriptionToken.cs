@@ -25,7 +25,7 @@ namespace Resizer.Domain.Infrastructure.Messenger
         /// </summary>
         /// <param name="subscriptionToken">The <see cref="SubscriptionToken"/> to compair with the current <see cref="SubscriptionToken"/></param>
         /// <returns>Returns <see langword="true"/> if the <see cref="SubscriptionToken"/> is equal, otherwise it returns <see langword="false"/></returns>
-        public bool Equals(SubscriptionToken subscriptionToken)
+        public bool Equals(SubscriptionToken? subscriptionToken)
         {
             if (subscriptionToken == null)
             {

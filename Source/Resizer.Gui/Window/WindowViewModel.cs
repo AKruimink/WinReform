@@ -6,6 +6,7 @@ using ControlzEx.Theming;
 using Resizer.Domain.Infrastructure.Events;
 using Resizer.Domain.Infrastructure.Messenger;
 using Resizer.Domain.Settings;
+using Resizer.Gui.ActiveWindows;
 using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
 using Resizer.Gui.Settings;
@@ -15,16 +16,12 @@ namespace Resizer.Gui.Window
     /// <summary>
     /// Defines a class that provides and handles application information
     /// </summary>
-    public class WindowViewModel : ViewModelBase
+    public class WindowViewModel : ViewModelBase, IWindowViewModel
     {
-        /// <summary>
-        /// Gets the version of the application
-        /// </summary>
+        ///<inheritdoc/>
         public string Version { get; }
 
-        /// <summary>
-        /// Gets or Sets the state of the menu
-        /// </summary>
+        ///<inheritdoc/>
         public bool MenuIsOpen
         {
             get => _menuIsOpen;
@@ -33,9 +30,7 @@ namespace Resizer.Gui.Window
 
         private bool _menuIsOpen;
 
-        /// <summary>
-        /// Gets or Sets an idicator that defines if the window should be minimized when closed
-        /// </summary>
+        ///<inheritdoc/>
         public bool MinimizeOnClose { get; set; }
 
         /// <summary>
@@ -51,7 +46,12 @@ namespace Resizer.Gui.Window
         /// <summary>
         /// Gets the <see cref="ApplicationSettingsViewModel"/>
         /// </summary>
-        public ApplicationSettingsViewModel ApplicationSettings { get; }
+        public IApplicationSettingsViewModel ApplicationSettings { get; }
+
+        /// <summary>
+        /// Gets the <see cref="ActiveWindowsViewModel"/>
+        /// </summary>
+        public IActiveWindowsViewModel ActiveWindows { get; }
 
         /// <summary>
         /// Shows the project source code on Github
@@ -67,13 +67,15 @@ namespace Resizer.Gui.Window
 
         /// <summary>
         /// Create a new instance of the <see cref="WindowViewModel"/>
+        /// //TODO fix the <see cref="WindowViewModel"/> summary
         /// </summary>
         /// <param name="generalSettings">Instance of the <see cref="ApplicationSettingsViewModel"/></param>
-        public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, ApplicationSettingsViewModel applicationSettings)
+        public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, IApplicationSettingsViewModel applicationSettings, IActiveWindowsViewModel activeWindows)
         {
             _settingFactory = settingFactory ?? throw new ArgumentNullException(nameof(settingFactory));
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             ApplicationSettings = applicationSettings ?? throw new ArgumentNullException(nameof(applicationSettings));
+            ActiveWindows = activeWindows ?? throw new ArgumentNullException(nameof(activeWindows));
 
             Version = $"v:{Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(3)}";
             ShowSourceOnGithubCommand = new DelegateCommand(() =>
