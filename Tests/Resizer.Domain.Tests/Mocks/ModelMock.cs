@@ -16,7 +16,7 @@ namespace Resizer.Domain.Tests.Mocks
         /// <summary>
         /// Gets or Sets a random <see cref="string"/> property
         /// </summary>
-        public string SomeText { get; set; }
+        public string SomeText { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or Sets a random <see cref="int"/> property

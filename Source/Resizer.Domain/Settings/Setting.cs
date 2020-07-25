@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Resizer.Domain.Infrastructure.Events;
 using Resizer.Domain.Infrastructure.Messenger;
 
@@ -57,7 +58,7 @@ namespace Resizer.Domain.Settings
         /// </summary>
         /// <param name="other">The <see cref="Setting{TSetting}"/> to compaire</param>
         /// <returns>Returns <see langword="true"/> if the settings are equal, otherwise returns <see langword="false"/></returns>
-        public bool Equals(TSetting other)
+        public bool Equals([AllowNull]TSetting other)
         {
             if (other is null)
             {
