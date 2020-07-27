@@ -8,9 +8,11 @@
                  xmlns:converters="clr-namespace:Resizer.Gui.Infrastructure.Converters"
                  xmlns:settings="clr-namespace:Resizer.Gui.Settings"
                  xmlns:activeWindows="clr-namespace:Resizer.Gui.ActiveWindows"
+                 xmlns:viewModel="clr-namespace:Resizer.Gui.Infrastructure.Common.ViewModel"
                  xmlns:local="clr-namespace:Resizer.Gui.Window"
                  mc:Ignorable="d"
                  d:DataContext="{d:DesignInstance local:WindowDesignModel, IsDesignTimeCreatable=True}"
+                 viewModel:ViewModelLocator.WireViewModel="{x:Type local:WindowViewModel}"
                  Title="WindowResizer"
                  TitleCharacterCasing="Normal"
                  WindowTitleBrush="{DynamicResource MahApps.Brushes.WindowTitle}"
@@ -100,12 +102,12 @@
                    PaneBackground="{DynamicResource MahApps.Brushes.Flyout.Background}">
         <mah:SplitView.Pane>
             <Grid>
-                <settings:ApplicationSettingsView Margin="5" DataContext="{Binding ApplicationSettings}" />
+                <settings:ApplicationSettingsView Margin="5" />
             </Grid>
         </mah:SplitView.Pane>
         <mah:SplitView.Content>
             <Grid>
-                <activeWindows:ActiveWindowsView DataContext="{Binding ActiveWindows}" />
+                <activeWindows:ActiveWindowsView />
             </Grid>
         </mah:SplitView.Content>
     </mah:SplitView>

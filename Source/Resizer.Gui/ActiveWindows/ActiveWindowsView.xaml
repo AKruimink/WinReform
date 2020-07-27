@@ -5,9 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:converters="clr-namespace:Resizer.Gui.Infrastructure.Converters"
+             xmlns:viewModel="clr-namespace:Resizer.Gui.Infrastructure.Common.ViewModel"
              xmlns:local="clr-namespace:Resizer.Gui.ActiveWindows"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:ActiveWindowsDesignModel, IsDesignTimeCreatable=True}"
+             viewModel:ViewModelLocator.WireViewModel="{x:Type local:ActiveWindowsViewModel}"
              d:DesignHeight="400"
              d:DesignWidth="400">
     <Grid>
