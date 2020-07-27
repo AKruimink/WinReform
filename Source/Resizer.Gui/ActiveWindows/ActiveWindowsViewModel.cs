@@ -4,6 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
+using Resizer.Domain.Infrastructure.Events;
+using Resizer.Domain.Infrastructure.Messenger;
+using Resizer.Domain.Settings;
 using Resizer.Domain.Windows;
 using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
@@ -16,6 +19,11 @@ namespace Resizer.Gui.ActiveWindows
     /// </summary>
     public class ActiveWindowsViewModel : ViewModelBase, IActiveWindowsViewModel
     {
+        /// <summary>
+        /// State that defines if the Active Windows list should automaticly refresh every 1000 miliseconds
+        /// </summary>
+        private bool _autoRefreshActiveWindows;
+
         ///<inheritdoc/>
         public ObservableCollection<Domain.Windows.Window> ActiveWindows
         {
@@ -50,13 +58,20 @@ namespace Resizer.Gui.ActiveWindows
         ///<inheritdoc/>
         public ICollectionView FilteredActiveWindows { get; set; }
 
-        ///<inheritdoc/>
-        public bool ShouldAutomaticallyRefresh { get; set; }
-
         /// <summary>
         /// <see cref="DispatcherTimer"/> used to trigger the automatic refresh
         /// </summary>
-        private readonly DispatcherTimer _autoRefreshTmer;
+        private readonly DispatcherTimer _autoRefreshTimer;
+
+        /// <summary>
+        /// <see cref="ISettingFactory"/> used to load the application settings on creation
+        /// </summary>
+        private readonly ISettingFactory _settingFactory;
+
+        /// <summary>
+        /// <see cref="IEventAggregator"/> used to be notified when the general setting have changed
+        /// </summary>
+        private readonly IEventAggregator _eventAggregator;
 
         /// <summary>
         /// <see cref="IWindowService"/> used to get all active windows
@@ -69,16 +84,25 @@ namespace Resizer.Gui.ActiveWindows
         public DelegateCommand RefreshActiveWindowsCommand { get; }
 
         /// <summary>
+        /// Setup the view after it's loaded in
+        /// </summary>
+        public DelegateCommand ViewLoadedCommand { get; }
+
+        /// <summary>
         /// Create a new instance of the <see cref="ActiveWindowsViewModel"/>
         /// </summary>
         /// <param name="windowService"><see cref="IWindowService"/> used to get all active windows</param>
-        public ActiveWindowsViewModel(IWindowService windowService)
+        public ActiveWindowsViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, IWindowService windowService)
         {
+            _settingFactory = settingFactory ?? throw new ArgumentNullException(nameof(settingFactory));
+            _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             _windowService = windowService ?? throw new ArgumentNullException(nameof(windowService));
 
+            // setup the commands
             RefreshActiveWindowsCommand = new DelegateCommand(RefreshActiveWindows);
-            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
+            ViewLoadedCommand = new DelegateCommand(ViewLoaded);
 
+            // setup the filter view
             FilteredActiveWindows = CollectionViewSource.GetDefaultView(ActiveWindows);
             FilteredActiveWindows.Filter = w =>
             {
@@ -91,10 +115,11 @@ namespace Resizer.Gui.ActiveWindows
                 return window?.Description.Contains(WindowFilter, StringComparison.OrdinalIgnoreCase) ?? false;
             };
 
-            _autoRefreshTmer = new DispatcherTimer();
-            _autoRefreshTmer.Tick += OnAutoRefreshEvent;
-            _autoRefreshTmer.Interval = TimeSpan.FromMilliseconds(1000);
-            _autoRefreshTmer.Start();
+            // Setup the refresh timer
+            _autoRefreshTimer = new DispatcherTimer();
+            _autoRefreshTimer.Tick += OnAutoRefreshEvent;
+            _autoRefreshTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            _autoRefreshTimer.Start();
         }
 
         /// <summary>
@@ -113,14 +138,35 @@ namespace Resizer.Gui.ActiveWindows
         /// <param name="e"></param>
         private void OnAutoRefreshEvent(object? sender, EventArgs e)
         {
-            _autoRefreshTmer.Stop();
+            _autoRefreshTimer.Stop();
 
-            if (ShouldAutomaticallyRefresh)
+            if (_autoRefreshActiveWindows)
             {
                 RefreshActiveWindows();
             }
 
-            _autoRefreshTmer.Start();
+            _autoRefreshTimer.Start();
+        }
+
+        /// <summary>
+        /// Loads all the settings once the view has been loaded
+        /// </summary>
+        private void ViewLoaded()
+        {
+            // Setup the event aggregator that listens to changes to the automatic refresh
+            ApplicationSettingsChanged(_settingFactory.Create<ApplicationSettings>()); // Manualy set the application settings once as we wont be notified until something changes
+            _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
+
+            // Load the Active Windows once
+            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
+        }
+
+        /// <summary>
+        /// Invoked when the general application settings have changed
+        /// </summary>
+        private void ApplicationSettingsChanged(ISetting<ApplicationSettings> settings)
+        {
+            _autoRefreshActiveWindows = settings.CurrentSetting.AutoRefreshActiveWindows;
         }
     }
 }

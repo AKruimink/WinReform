@@ -18,9 +18,9 @@
         public bool MinimizeOnClose { get; set; } = false;
 
         /// <summary>
-        /// Gets or Sets an idicator that defines if the window should be minimized to the system tray
+        /// Gets or Sets an indicator that defines if the Active Windows list should automaticly be updated
         /// <remarks>Defaults to <see langword="false"/></remarks>
         /// </summary>
-        public bool MinimizeToSystemTray { get; set; } = false;
+        public bool AutoRefreshActiveWindows { get; set; } = false;
     }
 }
