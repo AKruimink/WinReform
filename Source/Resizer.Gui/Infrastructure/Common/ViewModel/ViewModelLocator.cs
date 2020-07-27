@@ -80,19 +80,5 @@ namespace Resizer.Gui.Infrastructure.Common.ViewModel
                 element.DataContext = viewModel;
             }
         }
-
-        /// <summary>
-        /// Provides an easy lookup of all indexes
-        /// </summary>
-        ///private static IIndex<Type, ViewModelBase> _lookup;
-
-        /// <summary>
-        /// Sets the <see cref="IIndex{Type, ViewModelBase}"/> used for viewmodel lookup
-        /// </summary>
-        /// <param name="lookup"><see cref="IIndex{Type, ViewModelBase}"/> of all viewmodels</param>
-        //public static void SetLookup(IIndex<Type, ViewModelBase> lookup)
-        //{
-        //    _lookup = lookup;
-        //}
     }
 }
