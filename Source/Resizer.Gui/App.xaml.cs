@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Autofac;
-using Resizer.Gui.Window;
+using Resizer.Gui.Infrastructure.Common.ViewModel;
 
 namespace Resizer.Gui
 {
@@ -22,15 +23,17 @@ namespace Resizer.Gui
         {
             base.OnStartup(e);
 
+            // Construct the DI
             var builder = new ContainerBuilder();
             builder.RegisterModule(new DependencyModule());
             _container = builder.Build();
 
+            // Setup the viewmodel locator
             using var scope = _container.BeginLifetimeScope();
-            var window = new MainWindow()
-            {
-                DataContext = scope.Resolve<IWindowViewModel>()
-            };
+            ViewModelLocator.SetViewModelFactory(scope.Resolve<Func<Type, ViewModelBase>>());
+
+            // Setup the main window
+            var window = new MainWindow();
             window.Show();
         }
 

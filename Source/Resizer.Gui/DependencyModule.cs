@@ -1,8 +1,11 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using Autofac;
 using Resizer.Domain.Infrastructure.Messenger;
 using Resizer.Domain.Settings;
 using Resizer.Domain.Windows;
+using Resizer.Gui.Infrastructure.Common.ViewModel;
 
 namespace Resizer.Gui
 {
@@ -49,7 +52,17 @@ namespace Resizer.Gui
         private ContainerBuilder RegisterGuiDependencies(ContainerBuilder builder)
         {
             // Viewmodels
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel")).AsImplementedInterfaces().InstancePerDependency();
+            var viewModels = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsClass && t.Name.EndsWith("ViewModel"));
+            foreach (var viewmodel in viewModels)
+            {
+                builder.RegisterType(viewmodel).Keyed<ViewModelBase>(viewmodel).InstancePerDependency();
+            }
+
+            builder.Register<Func<Type, ViewModelBase>>(c =>
+            {
+                var context = c.Resolve<IComponentContext>();
+                return (type) => context.ResolveKeyed<ViewModelBase>(type);
+            });
 
             return builder;
         }
