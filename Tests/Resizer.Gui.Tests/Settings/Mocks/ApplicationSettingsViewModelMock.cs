@@ -12,5 +12,8 @@ namespace Resizer.Gui.Tests.Settings.Mocks
 
         ///<inheritdoc/>
         public bool MinimizeOnClose { get; set; }
+
+        ///<inheritdoc/>
+        public bool AutoRefreshActiveWindows { get; set; }
     }
 }
