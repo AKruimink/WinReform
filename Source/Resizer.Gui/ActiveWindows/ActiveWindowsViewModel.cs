@@ -84,6 +84,11 @@ namespace Resizer.Gui.ActiveWindows
         public DelegateCommand RefreshActiveWindowsCommand { get; }
 
         /// <summary>
+        /// Setup the view after it's loaded in
+        /// </summary>
+        public DelegateCommand ViewLoadedCommand { get; }
+
+        /// <summary>
         /// Create a new instance of the <see cref="ActiveWindowsViewModel"/>
         /// </summary>
         /// <param name="windowService"><see cref="IWindowService"/> used to get all active windows</param>
@@ -95,7 +100,7 @@ namespace Resizer.Gui.ActiveWindows
 
             // setup the commands
             RefreshActiveWindowsCommand = new DelegateCommand(RefreshActiveWindows);
-            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
+            ViewLoadedCommand = new DelegateCommand(ViewLoaded);
 
             // setup the filter view
             FilteredActiveWindows = CollectionViewSource.GetDefaultView(ActiveWindows);
@@ -109,10 +114,6 @@ namespace Resizer.Gui.ActiveWindows
                 var window = w as Domain.Windows.Window;
                 return window?.Description.Contains(WindowFilter, StringComparison.OrdinalIgnoreCase) ?? false;
             };
-
-            // Setup the event aggregator that listens to changes to the automatic refresh
-            ApplicationSettingsChanged(_settingFactory.Create<ApplicationSettings>()); // Manualy set the application settings once as we wont be notified until something changes
-            _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
 
             // Setup the refresh timer
             _autoRefreshTimer = new DispatcherTimer();
@@ -145,6 +146,19 @@ namespace Resizer.Gui.ActiveWindows
             }
 
             _autoRefreshTimer.Start();
+        }
+
+        /// <summary>
+        /// Loads all the settings once the view has been loaded
+        /// </summary>
+        private void ViewLoaded()
+        {
+            // Setup the event aggregator that listens to changes to the automatic refresh
+            ApplicationSettingsChanged(_settingFactory.Create<ApplicationSettings>()); // Manualy set the application settings once as we wont be notified until something changes
+            _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
+
+            // Load the Active Windows once
+            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
         }
 
         /// <summary>
