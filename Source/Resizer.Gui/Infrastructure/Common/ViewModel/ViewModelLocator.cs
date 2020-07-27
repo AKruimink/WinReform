@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Net;
-using System.Text;
 using System.Windows;
-using Autofac.Features.Indexed;
 
 namespace Resizer.Gui.Infrastructure.Common.ViewModel
 {
@@ -49,7 +45,7 @@ namespace Resizer.Gui.Infrastructure.Common.ViewModel
         {
             obj.SetValue(WireViewModelProperty, value);
         }
-        
+
         /// <summary>
         /// Raised when <see cref="WireViewModelProperty"/> changed and attempts to set the datacontext
         /// </summary>
@@ -57,11 +53,11 @@ namespace Resizer.Gui.Infrastructure.Common.ViewModel
         /// <param name="e"></param>
         private static void WireViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if(!DesignerProperties.GetIsInDesignMode(d))
+            if (!DesignerProperties.GetIsInDesignMode(d))
             {
-                if((Type)e.NewValue != (Type)e.OldValue)
+                if ((Type)e.NewValue != (Type)e.OldValue)
                 {
-                    if(s_viewmodelFactory == null)
+                    if (s_viewmodelFactory == null)
                     {
                         throw new NullReferenceException("The ViewModelLocator did not have it's factory method set");
                     }
@@ -79,7 +75,7 @@ namespace Resizer.Gui.Infrastructure.Common.ViewModel
         /// <param name="viewModel">The object to be set as the DataContext</param>
         private static void Bind(object view, object viewModel)
         {
-            if(view is FrameworkElement element)
+            if (view is FrameworkElement element)
             {
                 element.DataContext = viewModel;
             }

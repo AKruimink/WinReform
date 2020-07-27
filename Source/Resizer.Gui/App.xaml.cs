@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Autofac;
-using Autofac.Core;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
-using Resizer.Gui.Window;
 
 namespace Resizer.Gui
 {

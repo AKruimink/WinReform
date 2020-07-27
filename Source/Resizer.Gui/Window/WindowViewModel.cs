@@ -6,7 +6,6 @@ using ControlzEx.Theming;
 using Resizer.Domain.Infrastructure.Events;
 using Resizer.Domain.Infrastructure.Messenger;
 using Resizer.Domain.Settings;
-using Resizer.Gui.ActiveWindows;
 using Resizer.Gui.Infrastructure.Common.Command;
 using Resizer.Gui.Infrastructure.Common.ViewModel;
 using Resizer.Gui.Settings;

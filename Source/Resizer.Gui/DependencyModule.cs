@@ -53,7 +53,7 @@ namespace Resizer.Gui
         {
             // Viewmodels
             var viewModels = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsClass && t.Name.EndsWith("ViewModel"));
-            foreach(var viewmodel in viewModels)
+            foreach (var viewmodel in viewModels)
             {
                 builder.RegisterType(viewmodel).Keyed<ViewModelBase>(viewmodel).InstancePerDependency();
             }
