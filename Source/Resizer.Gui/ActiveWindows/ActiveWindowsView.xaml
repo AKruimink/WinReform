@@ -12,9 +12,19 @@
              viewModel:ViewModelLocator.WireViewModel="{x:Type local:ActiveWindowsViewModel}"
              d:DesignHeight="400"
              d:DesignWidth="400">
+
+    <!-- Resources -->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="DataGridTextColumnTrim" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <Grid>
         <!-- Content -->
-        <Grid Margin="5">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
@@ -22,7 +32,7 @@
 
             <!-- Active Windows Settings -->
             <Grid Grid.Row="0"
-                  Margin="0 0 0 10">
+                  Margin="0 5 0 5">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
@@ -38,18 +48,18 @@
                          Text="{Binding WindowFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Center"
-                         Margin="0 0 5 0" />
+                         Margin="5 0 5 0" />
                 <CheckBox Grid.Row="0"
                           Grid.Column="1"
                           Content="Auto Refresh"
                           IsChecked="{Binding ShouldAutomaticallyRefresh}"
                           HorizontalAlignment="Stretch"
-                          Margin="5 2 0 2" />
+                          Margin="5 2 5 2" />
                 <Button Grid.Row="1"
                         Grid.Column="1"
                         Content="Refresh"
                         Command="{Binding RefreshActiveWindowsCommand}"
-                        Margin="5 2 0 2 " />
+                        Margin="5 2 5 2 " />
             </Grid>
 
             <!-- Active Window List -->
@@ -58,34 +68,39 @@
                       GridLinesVisibility="Vertical"
                       SelectionMode="Extended"
                       HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Disabled"
                       Style="{DynamicResource MahApps.Styles.DataGrid.Azure}"
                       ItemsSource="{Binding FilteredActiveWindows}"
                       CanUserAddRows="False"
                       mah:MultiSelectorHelper.SelectedItems="{Binding SelectedActiveWindows}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Application"
-                                            Width="9*"
+                                            Width="5*"
                                             SortMemberPath="Description">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal"
                                             VerticalAlignment="Center">
-                                    <Image Height="16"
+                                    <Image x:Name="WindowIcon"
+                                           Height="16"
                                            Width="16"
-                                           Margin="0 0 5 0"
+                                           Margin="5 0 5 0"
                                            Source="{Binding Icon, Converter={converters:BitmapToImageSourceConverter}}" />
-                                    <TextBlock MaxWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}"
+                                    <TextBlock MaxWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth,
+                                        Converter={converters:SubtractionConverter}, ConverterParameter=26}"
                                                TextTrimming="CharacterEllipsis"
-                                               Text="{Binding Description}" />
+                                               Text="{Binding Description}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="PID"
-                                        Width="2*"
+                                        Width="1*"
+                                        ElementStyle="{StaticResource DataGridTextColumnTrim}"
                                         Binding="{Binding Id}" />
                     <DataGridTextColumn Header="Resolution"
-                                        Width="3*"
+                                        Width="2*"
+                                        ElementStyle="{StaticResource DataGridTextColumnTrim}"
                                         Binding="{Binding Resolution}" />
                 </DataGrid.Columns>
             </DataGrid>
