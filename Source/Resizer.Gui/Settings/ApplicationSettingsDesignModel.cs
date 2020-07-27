@@ -11,6 +11,9 @@
         ///<inheritdoc/>
         public bool MinimizeOnClose { get; set; }
 
+        ///<inheritdoc/>
+        public bool AutoRefreshActiveWindows { get; set; }
+
         /// <summary>
         /// Create a new instance of the <see cref="ApplicationSettingsDesignModel"/>
         /// </summary>
@@ -18,6 +21,7 @@
         {
             UseDarkTheme = true;
             MinimizeOnClose = false;
+            AutoRefreshActiveWindows = true;
         }
     }
 }

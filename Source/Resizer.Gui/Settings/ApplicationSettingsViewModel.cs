@@ -37,6 +37,20 @@ namespace Resizer.Gui.Settings
 
         private bool _minimizeOnClose;
 
+        ///<inheritdoc/>
+        public bool AutoRefreshActiveWindows
+        {
+            get => _autoRefreshActiveWindows;
+            set
+            {
+                SetProperty(ref _autoRefreshActiveWindows, value);
+                _settings.CurrentSetting.AutoRefreshActiveWindows = value;
+                SaveSettings();
+            }
+        }
+
+        private bool _autoRefreshActiveWindows;
+
         /// <summary>
         /// <see cref="ISetting{TSetting}"/> containing the <see cref="ApplicationSettings"/>
         /// </summary>
@@ -51,6 +65,7 @@ namespace Resizer.Gui.Settings
 
             UseDarkTheme = _settings.CurrentSetting.UseDarkTheme;
             MinimizeOnClose = _settings.CurrentSetting.MinimizeOnClose;
+            AutoRefreshActiveWindows = _settings.CurrentSetting.AutoRefreshActiveWindows;
         }
 
         /// <summary>
