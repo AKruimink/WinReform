@@ -31,23 +31,11 @@ namespace Resizer.Gui
             _container = builder.Build();
 
             // Setup the viewmodel locator
-            ViewModelLocator.SetViewModelFactory((type) =>
-            {
-                if(!type.IsAssignableTo<ViewModelBase>())
-                {
-                    throw new InvalidOperationException("The type provided to the ViewModel factory resolver can not be cast to ViewModelBase");
-                }
-
-                return _container.ResolveKeyed<ViewModelBase>(type);
-                //return _container.Resolve(type) as ViewModelBase;
-            });
+            using var scope = _container.BeginLifetimeScope();
+            ViewModelLocator.SetViewModelFactory(scope.Resolve<Func<Type, ViewModelBase>>());
 
             // Setup the main window
-            using var scope = _container.BeginLifetimeScope();
             var window = new MainWindow();
-            //{
-            //    DataContext = scope.Resolve(typeof(WindowViewModel))
-            //};
             window.Show();
         }
 

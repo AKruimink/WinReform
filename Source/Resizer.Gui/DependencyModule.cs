@@ -58,15 +58,11 @@ namespace Resizer.Gui
                 builder.RegisterType(viewmodel).Keyed<ViewModelBase>(viewmodel).InstancePerDependency();
             }
 
-            //builder.Register<Func<Type, ViewModelBase>>(c =>
-            //{
-            //    var context = c.Resolve<IComponentContext>();
-            //    return (type) => context.ResolveKeyed<ViewModelBase>(type);
-            //});
-
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel")).Keyed<ViewModelBase>(typeof()).InstancePerDependency();
-
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel")).AsImplementedInterfaces().InstancePerDependency();
+            builder.Register<Func<Type, ViewModelBase>>(c =>
+            {
+                var context = c.Resolve<IComponentContext>();
+                return (type) => context.ResolveKeyed<ViewModelBase>(type);
+            });
 
             return builder;
         }
