@@ -10,7 +10,7 @@
              viewModel:ViewModelLocator.WireViewModel="{x:Type local:UtilitiesViewModel}"
              d:DesignHeight="450" 
              d:DesignWidth="800">
-    <Grid Background="Blue">
+    <Grid>
             
     </Grid>
 </UserControl>

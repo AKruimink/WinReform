@@ -8,6 +8,7 @@
                  xmlns:converters="clr-namespace:Resizer.Gui.Infrastructure.Converters"
                  xmlns:settings="clr-namespace:Resizer.Gui.Settings"
                  xmlns:activeWindows="clr-namespace:Resizer.Gui.ActiveWindows"
+                 xmlns:utilities="clr-namespace:Resizer.Gui.Utilities"
                  xmlns:viewModel="clr-namespace:Resizer.Gui.Infrastructure.Common.ViewModel"
                  xmlns:local="clr-namespace:Resizer.Gui.Window"
                  mc:Ignorable="d"
@@ -20,10 +21,10 @@
                  UseLayoutRounding="True"
                  WindowStartupLocation="CenterScreen"
                  Closing="MetroWindow_Closing"
-                 Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={converters:RatioConverter}, ConverterParameter='0.6'}"
-                 MinHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={converters:RatioConverter}, ConverterParameter='0.6'}"
-                 Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={converters:RatioConverter}, ConverterParameter='0.25'}"
-                 MinWidth="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={converters:RatioConverter}, ConverterParameter='0.25'}">
+                 Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={converters:RatioConverter}, ConverterParameter='0.5'}"
+                 MinHeight="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={converters:RatioConverter}, ConverterParameter='0.5'}"
+                 Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={converters:RatioConverter}, ConverterParameter='0.21'}"
+                 MinWidth="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={converters:RatioConverter}, ConverterParameter='0.21'}">
 
     <!-- Resources used in the view -->
     <mah:MetroWindow.Resources>
@@ -107,7 +108,30 @@
         </mah:SplitView.Pane>
         <mah:SplitView.Content>
             <Grid>
-                <activeWindows:ActiveWindowsView />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <activeWindows:ActiveWindowsView Grid.Row="0"/>
+
+                <mah:MetroTabControl Grid.Row="1"
+                                     Margin="0 5 0 5"
+                                     KeepVisualTreeInMemoryWhenChangingTabs="True"
+                                     mah:TabControlHelper.Underlined="TabPanel">
+                    <mah:MetroTabItem Header="Resizer"
+                                      mah:HeaderedControlHelper.HeaderFontSize="18">
+                        
+                    </mah:MetroTabItem>
+                    <mah:MetroTabItem Header="Locator"
+                                      mah:HeaderedControlHelper.HeaderFontSize="18">
+                        
+                    </mah:MetroTabItem>
+                    <mah:MetroTabItem Header="Utilities"
+                                      mah:HeaderedControlHelper.HeaderFontSize="18">
+                        <utilities:UtilitiesView/>
+                    </mah:MetroTabItem>
+                </mah:MetroTabControl>
             </Grid>
         </mah:SplitView.Content>
     </mah:SplitView>
