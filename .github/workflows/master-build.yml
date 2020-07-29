@@ -1,0 +1,33 @@
+name: 'master build'
+
+on:
+  pull_request:
+    branches:
+      - master
+
+# Defines environment variables
+env:
+  NETCORE_VERSION: '3.1.200'
+
+jobs:
+  build:
+    name: 'master build'
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        
+      #Setup the environment 
+      - name: 'setup .NET Core SDK ${{ env.NETCORE_VERSION }}'
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.NETCORE_VERSION }}
+                  
+      # Restore all nuget packages to prevent issues during build
+      - name: 'restore nuget packages'
+        working-directory: './src'
+        run: dotnet restore
+        
+      # Build the application
+      - name: 'build application'
+        working-directory: './src'
+        run: dotnet build --configuration Release --no-restore
