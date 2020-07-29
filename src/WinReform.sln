@@ -8,13 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Gui", "WinReform.Gui\WinReform.Gui.csproj", "{5106CAC9-A541-43BD-B29F-7D021E3E6B29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Gui", "WinReform\WinReform.Gui\WinReform.Gui.csproj", "{5106CAC9-A541-43BD-B29F-7D021E3E6B29}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Gui.Tests", "..\Tests\WinReform.Gui.Tests\WinReform.Gui.Tests.csproj", "{7797442B-03C9-4C8E-8E68-2AB52F1440F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Gui.Tests", "Tests\WinReform.Gui.Tests\WinReform.Gui.Tests.csproj", "{7797442B-03C9-4C8E-8E68-2AB52F1440F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Domain", "WinReform.Domain\WinReform.Domain.csproj", "{E566DD1C-0C60-47AB-9309-5D7C42940D6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Domain", "WinReform\WinReform.Domain\WinReform.Domain.csproj", "{E566DD1C-0C60-47AB-9309-5D7C42940D6C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Domain.Tests", "..\Tests\WinReform.Domain.Tests\WinReform.Domain.Tests.csproj", "{CFBD6348-95C2-4D8E-ABF3-2B6D91907E24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Domain.Tests", "Tests\WinReform.Domain.Tests\WinReform.Domain.Tests.csproj", "{CFBD6348-95C2-4D8E-ABF3-2B6D91907E24}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{505639D8-7DA4-4E01-9284-835F04F245FD}"
 EndProject
