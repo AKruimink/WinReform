@@ -12,5 +12,20 @@
     <a href="https://github.com/AKruimink/WindowResizer/releases/latest">
         <img src="https://img.shields.io/github/release/AKruimink/WindowResizer.svg?style=flat-square">
     </a>
+    <br>
+    <p> Add branch badges here </p>
+    <br>
+    <a href="https://github.com/AKruimink/WindowResizer/issues">
+        <img src="https://img.shields.io/github/issues-raw/AKruimink/WindowResizer.svg?style=flat-square">
+    </a>
+    <a href="https://github.com/AKruimink/WindowResizer/issues">
+        <img src="https://img.shields.io/github/issues-closed-raw/AKruimink/WindowResizer.svg?style=flat-square">
+    </a>
+    <a href="https://github.com/AKruimink/WindowResizer/issues">
+        <img src="https://img.shields.io/github/issues-pr-raw/AKruimink/WindowResizer.svg?style=flat-square">
+    </a>
+    <a href="https://github.com/AKruimink/WindowResizer/issues">
+        <img src="https://img.shields.io/github/issues-pr-closed-raw/AKruimink/WindowResizer.svg?style=flat-square">
+    </a>
   </a>
 </div>
