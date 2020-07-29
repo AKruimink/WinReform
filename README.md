@@ -15,14 +15,14 @@
     </a>
     <br>
     <!-- CD/CI Badges-->
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22master-build%22">
-        <img src="https://github.com/AKruimink/WinReform/workflows/Test%20and%20Build/badge.svg?branch=master">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22master+build%22">
+        <img src="https://github.com/AKruimink/WinReform/workflows/develop%20build/badge.svg?branch=master">
     </a>
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22develop-build%22">
-        <img src="https://github.com/AKruimink/WinReform/workflows/Test%20and%20Build/badge.svg?branch=develop">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22develop+build%22">
+        <img src="https://github.com/AKruimink/WinReform/workflows/develop%20build/badge.svg?branch=develop">
     </a>
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22unit-tests%22">
-        <img src="https://github.com/AKruimink/WinReform/workflows/Test%20and%20Build/badge.svg?branch=master">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22unit+tests%22">
+        <img src="https://github.com/AKruimink/WinReform/workflows/unit%20tests/badge.svg">
     </a>
     <br>
     <!--Issues and Pull Request Badges -->
