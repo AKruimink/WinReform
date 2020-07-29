@@ -28,4 +28,4 @@ jobs:
       # Run the project unit tests
       - name: 'run unit tests'
         working-directory: './src'
-        run: dotnet test --no-build --configuration Release
+        run: dotnet test --configuration Release
