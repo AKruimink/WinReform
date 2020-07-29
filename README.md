@@ -4,7 +4,7 @@
     </a>
     <h1>WindowResizer</h1>
     <p>
-        A small tool to help resizing and relocation of stubborn windows.
+        A simple tool to help resize and relocate stubborn windows.
     </p>
     <!-- Project Info Badges -->
     <a href="https://github.com/nblockchain/AKruimink/WindowResizer/develop/LICENCE.md">
@@ -45,9 +45,9 @@
 
 This application wouldn't exist without the help of several amazing open source project that i love. If you like this app i recommend checking out the following.
 
- - [MahApps](https://github.com/MahApps/MahApps.Metro) which helped modernize the application by providing amazing visual and tools.
- - [Autofac](https://github.com/autofac/Autofac) which helped manage all the dependencies that the application relies on.
- - [Dotnet](https://github.com/dotnet/core) which of course provided the possibility to create this application to begin with.
+ - [MahApps](https://github.com/MahApps/MahApps.Metro) which helped modernize the application by providing amazing tools and visuals.
+ - [Autofac](https://github.com/autofac/Autofac) which helped manage all the dependencies that the application relied on.
+ - [DotNet](https://github.com/dotnet/core) which of course provided the possibility to create this application to begin with.
 
 ## License
 
