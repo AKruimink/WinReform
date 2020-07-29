@@ -45,6 +45,7 @@
 WinReform is a utility tool that exists to solve resolution issues with older applications.
 Many old games/applications were not designed with today's bigger screens in mind. 
 Often this results into extremely large or small windows with no possibility to resize them.
+
 WinReform is here to help with these kind of applications. 
 By utilizing the Windows API it allows for non resizable windows to be resized to your resolution of choice or move windows that have mysteriously disappeared outside of your screen bounds.
 No matter the application, as long as it contains a window, WinReform will be able to help!
