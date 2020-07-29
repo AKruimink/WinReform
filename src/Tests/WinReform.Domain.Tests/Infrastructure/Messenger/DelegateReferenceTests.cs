@@ -1,10 +1,10 @@
-﻿using Resizer.Domain.Infrastructure.Messenger;
-using Resizer.Domain.Tests.Mocks;
+﻿using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Tests.Mocks;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Resizer.Domain.Tests.Infrastructure.Messenger
+namespace WinReform.Domain.Tests.Infrastructure.Messenger
 {
     /// <summary>
     /// Tests for the <see cref="DelegateReference"/>

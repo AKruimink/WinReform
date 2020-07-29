@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Resizer.Gui.ActiveWindows
+namespace WinReform.Gui.ActiveWindows
 {
     /// <summary>
     /// Interaction logic for ActiveWindowsView.xaml

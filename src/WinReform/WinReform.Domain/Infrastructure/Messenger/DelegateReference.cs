@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Resizer.Domain.Infrastructure.Messenger
+namespace WinReform.Domain.Infrastructure.Messenger
 {
     /// <summary>
     /// Defines a class that holds a references to a delegate

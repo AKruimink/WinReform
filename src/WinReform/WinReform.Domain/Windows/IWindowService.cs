@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Resizer.Domain.Windows
+namespace WinReform.Domain.Windows
 {
     /// <summary>
     /// Represents a class that acts as a service for managing active windows

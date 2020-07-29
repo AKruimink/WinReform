@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 
-namespace Resizer.Gui.Infrastructure.Common.ViewModel
+namespace WinReform.Gui.Infrastructure.Common.ViewModel
 {
     public static class ViewModelLocator
     {

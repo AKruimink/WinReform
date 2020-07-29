@@ -1,6 +1,6 @@
-﻿using Resizer.Gui.Infrastructure.Common.ViewModel;
+﻿using WinReform.Gui.Infrastructure.Common.ViewModel;
 
-namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel.Mocks
+namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel.Mocks
 {
     /// <summary>
     /// Defines a mock implementation of a view model

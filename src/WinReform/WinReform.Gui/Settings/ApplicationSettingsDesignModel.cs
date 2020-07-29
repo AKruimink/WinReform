@@ -1,4 +1,4 @@
-﻿namespace Resizer.Gui.Settings
+﻿namespace WinReform.Gui.Settings
 {
     /// <summary>
     /// Defines a class that provides design time general application settings data

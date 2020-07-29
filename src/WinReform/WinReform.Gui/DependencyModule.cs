@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Reflection;
 using Autofac;
-using Resizer.Domain.Infrastructure.Messenger;
-using Resizer.Domain.Settings;
-using Resizer.Domain.Windows;
-using Resizer.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Settings;
+using WinReform.Domain.Windows;
+using WinReform.Gui.Infrastructure.Common.ViewModel;
 
-namespace Resizer.Gui
+namespace WinReform.Gui
 {
     /// <summary>
     /// Defines a class that registers all <see cref="Gui"/> dependencies

@@ -1,8 +1,8 @@
-﻿using Resizer.Domain.Infrastructure.Messenger;
-using Resizer.Domain.Tests.Infrastructure.Messenger.Mocks;
+﻿using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
 using Xunit;
 
-namespace Resizer.Domain.Tests.Infrastructure.Messenger
+namespace WinReform.Domain.Tests.Infrastructure.Messenger
 {
     /// <summary>
     /// Tests for the <see cref="IEventAggregator"/>

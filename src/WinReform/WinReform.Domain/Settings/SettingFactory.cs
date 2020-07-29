@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Resizer.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Infrastructure.Messenger;
 
-namespace Resizer.Domain.Settings
+namespace WinReform.Domain.Settings
 {
     /// <summary>
     /// Defines a class handles the construction of <see cref="ISetting{T}"/>

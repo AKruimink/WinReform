@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace Resizer.Gui.ActiveWindows
+namespace WinReform.Gui.ActiveWindows
 {
     /// <summary>
     /// Represents a class that provides active windows running on the system and management of said windows

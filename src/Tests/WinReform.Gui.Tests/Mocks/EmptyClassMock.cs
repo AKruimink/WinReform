@@ -1,4 +1,4 @@
-﻿namespace Resizer.Gui.Tests.Mocks
+﻿namespace WinReform.Gui.Tests.Mocks
 {
     /// <summary>
     /// Defines a mock implementation of an empty class

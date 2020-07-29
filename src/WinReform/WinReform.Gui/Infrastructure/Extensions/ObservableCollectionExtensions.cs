@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Resizer.Gui.Infrastructure.Extensions
+namespace WinReform.Gui.Infrastructure.Extensions
 {
     /// <summary>
     /// Defines a class that contains all the extensions for <see cref="ObservableCollection{T}"/>

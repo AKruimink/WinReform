@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using MahApps.Metro.Controls;
-using Resizer.Gui.Window;
+using WinReform.Gui.Window;
 
-namespace Resizer.Gui
+namespace WinReform.Gui
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

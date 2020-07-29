@@ -1,9 +1,9 @@
-﻿using Resizer.Gui.ActiveWindows;
+﻿using WinReform.Gui.ActiveWindows;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 
-namespace Resizer.Gui.Tests.ActiveWindows.Mocks
+namespace WinReform.Gui.Tests.ActiveWindows.Mocks
 {
     /// <summary>
     /// Mock implementation of <see cref="IActiveWindowsViewModel"/>

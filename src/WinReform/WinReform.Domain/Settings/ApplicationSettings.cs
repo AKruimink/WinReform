@@ -1,4 +1,4 @@
-﻿namespace Resizer.Domain.Settings
+﻿namespace WinReform.Domain.Settings
 {
     /// <summary>
     /// Defines a class that acts as model for the application settings

@@ -4,15 +4,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
-using Resizer.Domain.Infrastructure.Events;
-using Resizer.Domain.Infrastructure.Messenger;
-using Resizer.Domain.Settings;
-using Resizer.Domain.Windows;
-using Resizer.Gui.Infrastructure.Common.Command;
-using Resizer.Gui.Infrastructure.Common.ViewModel;
-using Resizer.Gui.Infrastructure.Extensions;
+using WinReform.Domain.Infrastructure.Events;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Settings;
+using WinReform.Domain.Windows;
+using WinReform.Gui.Infrastructure.Common.Command;
+using WinReform.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Gui.Infrastructure.Extensions;
 
-namespace Resizer.Gui.ActiveWindows
+namespace WinReform.Gui.ActiveWindows
 {
     /// <summary>
     /// Defines a class that provides active windows running on the system and management of said windows

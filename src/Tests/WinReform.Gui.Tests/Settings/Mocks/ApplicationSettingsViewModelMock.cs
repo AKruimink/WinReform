@@ -1,6 +1,6 @@
-﻿using Resizer.Gui.Settings;
+﻿using WinReform.Gui.Settings;
 
-namespace Resizer.Gui.Tests.Settings.Mocks
+namespace WinReform.Gui.Tests.Settings.Mocks
 {
     /// <summary>
     /// Mock implementation of <see cref="IApplicationSettingsViewModel"/>

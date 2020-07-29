@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 using Autofac;
-using Resizer.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Gui.Infrastructure.Common.ViewModel;
 
-namespace Resizer.Gui
+namespace WinReform.Gui
 {
     /// <summary>
     /// Interaction logic for App.xaml

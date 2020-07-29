@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Infrastructure.Extensions
+namespace WinReform.Gui.Tests.Infrastructure.Extensions
 {
     /// <summary>
     /// Tests for the <see cref="StringExtensions"/>

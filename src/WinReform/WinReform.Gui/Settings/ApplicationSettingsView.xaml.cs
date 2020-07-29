@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Resizer.Gui.Settings
+namespace WinReform.Gui.Settings
 {
     /// <summary>
     /// Interaction logic for GeneralSettingsView.xaml

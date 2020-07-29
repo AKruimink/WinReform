@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Resizer.Domain.Tests.Mocks
+namespace WinReform.Domain.Tests.Mocks
 {
     /// <summary>
     /// Mock implementation of a model

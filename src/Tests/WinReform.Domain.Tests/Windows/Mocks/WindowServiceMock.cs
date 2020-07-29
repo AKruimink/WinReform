@@ -1,7 +1,7 @@
-﻿using Resizer.Domain.Windows;
+﻿using WinReform.Domain.Windows;
 using System.Collections.Generic;
 
-namespace Resizer.Domain.Tests.Windows.Mocks
+namespace WinReform.Domain.Tests.Windows.Mocks
 {
     /// <summary>
     /// Mock implementation of <see cref="IWindowService"/>

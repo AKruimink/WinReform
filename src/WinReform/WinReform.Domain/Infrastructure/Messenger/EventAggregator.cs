@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Resizer.Domain.Infrastructure.Messenger
+namespace WinReform.Domain.Infrastructure.Messenger
 {
     /// <summary>
     /// Defines a class that gets the instance of a <see cref="PubSubEvent"/> event

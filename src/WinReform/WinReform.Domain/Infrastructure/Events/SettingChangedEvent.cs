@@ -1,7 +1,7 @@
-﻿using Resizer.Domain.Infrastructure.Messenger;
-using Resizer.Domain.Settings;
+﻿using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Settings;
 
-namespace Resizer.Domain.Infrastructure.Events
+namespace WinReform.Domain.Infrastructure.Events
 {
     /// <summary>
     /// Defines a class that acts as a contract for when a settings have changed

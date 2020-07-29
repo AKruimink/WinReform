@@ -1,4 +1,4 @@
-﻿namespace Resizer.Gui.Window
+﻿namespace WinReform.Gui.Window
 {
     /// <summary>
     /// Defines a class that provides design time application information

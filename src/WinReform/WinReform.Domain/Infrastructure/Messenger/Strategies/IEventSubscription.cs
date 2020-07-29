@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Resizer.Domain.Infrastructure.Messenger.Strategies
+namespace WinReform.Domain.Infrastructure.Messenger.Strategies
 {
     /// <summary>
     /// Represents a subscription to a event used by <see cref="EventBase"/>

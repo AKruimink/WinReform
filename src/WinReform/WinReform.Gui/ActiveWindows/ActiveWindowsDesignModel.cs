@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
-using Resizer.Gui.Infrastructure.Extensions;
+using WinReform.Gui.Infrastructure.Extensions;
 
-namespace Resizer.Gui.ActiveWindows
+namespace WinReform.Gui.ActiveWindows
 {
     /// <summary>
     /// Defines a class that provides active windows running on the system and management of said windows during design time

@@ -1,4 +1,4 @@
-﻿namespace Resizer.Gui.Window
+﻿namespace WinReform.Gui.Window
 {
     /// <summary>
     /// Represents a class that provides general application information

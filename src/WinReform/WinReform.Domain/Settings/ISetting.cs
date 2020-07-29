@@ -1,4 +1,4 @@
-﻿namespace Resizer.Domain.Settings
+﻿namespace WinReform.Domain.Settings
 {
     /// <summary>
     /// Represents a class that represents a setting

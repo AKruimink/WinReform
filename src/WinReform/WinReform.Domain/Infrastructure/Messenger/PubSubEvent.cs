@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Resizer.Domain.Infrastructure.Messenger.Strategies;
+using WinReform.Domain.Infrastructure.Messenger.Strategies;
 
-namespace Resizer.Domain.Infrastructure.Messenger
+namespace WinReform.Domain.Infrastructure.Messenger
 {
     /// <summary>
     /// Defines a class that mnages publication of and subscription to events

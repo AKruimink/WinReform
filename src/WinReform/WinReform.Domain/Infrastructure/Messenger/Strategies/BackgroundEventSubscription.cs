@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Resizer.Domain.Infrastructure.Messenger.Strategies
+namespace WinReform.Domain.Infrastructure.Messenger.Strategies
 {
     /// <summary>
     /// Defines a subscription to a event that executes on a background thread

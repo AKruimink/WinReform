@@ -1,8 +1,8 @@
 ﻿using System;
-using Resizer.Domain.Settings;
-using Resizer.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Domain.Settings;
+using WinReform.Gui.Infrastructure.Common.ViewModel;
 
-namespace Resizer.Gui.Settings
+namespace WinReform.Gui.Settings
 {
     /// <summary>
     /// Defines a class that provides general application settings data

@@ -7,7 +7,7 @@ using System.Windows.Interop;
 using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 
-namespace Resizer.Gui.Infrastructure.Converters
+namespace WinReform.Gui.Infrastructure.Converters
 {
     /// <summary>
     /// Defines a clas that converts a <see cref="BitMap"/> to a <see cref="BitMapSource"/>

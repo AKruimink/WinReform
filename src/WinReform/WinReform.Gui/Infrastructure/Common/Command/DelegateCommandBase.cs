@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Windows.Input;
 
-namespace Resizer.Gui.Infrastructure.Common.Command
+namespace WinReform.Gui.Infrastructure.Common.Command
 {
     /// <summary>
     /// Defines a base command

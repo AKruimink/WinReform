@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Resizer.Domain.Infrastructure.Messenger.Strategies;
+using WinReform.Domain.Infrastructure.Messenger.Strategies;
 
-namespace Resizer.Domain.Infrastructure.Messenger
+namespace WinReform.Domain.Infrastructure.Messenger
 {
     /// <summary>
     /// Defines base class that allows publication and subscriptioon to events

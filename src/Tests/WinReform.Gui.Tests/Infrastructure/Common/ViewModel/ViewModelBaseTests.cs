@@ -1,7 +1,7 @@
-﻿using Resizer.Gui.Tests.Infrastructure.Common.ViewModel.Mocks;
+﻿using WinReform.Gui.Tests.Infrastructure.Common.ViewModel.Mocks;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Infrastructure.Common.ViewModel
+namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
 {
     /// <summary>
     /// Tests for the <see cref="ViewModelBase"/>

@@ -3,14 +3,14 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using ControlzEx.Theming;
-using Resizer.Domain.Infrastructure.Events;
-using Resizer.Domain.Infrastructure.Messenger;
-using Resizer.Domain.Settings;
-using Resizer.Gui.Infrastructure.Common.Command;
-using Resizer.Gui.Infrastructure.Common.ViewModel;
-using Resizer.Gui.Settings;
+using WinReform.Domain.Infrastructure.Events;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Settings;
+using WinReform.Gui.Infrastructure.Common.Command;
+using WinReform.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Gui.Settings;
 
-namespace Resizer.Gui.Window
+namespace WinReform.Gui.Window
 {
     /// <summary>
     /// Defines a class that provides and handles application information

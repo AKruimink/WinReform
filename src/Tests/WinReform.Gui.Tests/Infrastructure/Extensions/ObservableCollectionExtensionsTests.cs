@@ -1,10 +1,10 @@
-﻿using Resizer.Domain.Tests.Mocks;
-using Resizer.Gui.Infrastructure.Extensions;
+﻿using WinReform.Domain.Tests.Mocks;
+using WinReform.Gui.Infrastructure.Extensions;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Infrastructure.Extensions
+namespace WinReform.Gui.Tests.Infrastructure.Extensions
 {
     /// <summary>
     /// Tests for the <see cref="ObservableCollectionExtensions"/>

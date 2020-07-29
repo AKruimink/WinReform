@@ -1,4 +1,4 @@
-﻿namespace Resizer.Domain.Tests.Windows
+﻿namespace WinReform.Domain.Tests.Windows
 {
     /// <summary>
     /// Tests for the <see cref="WindowService"/>

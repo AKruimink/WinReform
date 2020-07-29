@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Resizer.Domain.Tests.Mocks
+namespace WinReform.Domain.Tests.Mocks
 {
     /// <summary>
     /// Defines a mock implementation of a <see cref="Action"/>

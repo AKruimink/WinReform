@@ -1,9 +1,9 @@
-﻿using Resizer.Domain.Tests.Settings.Mocks;
-using Resizer.Gui.Settings;
+﻿using WinReform.Domain.Tests.Settings.Mocks;
+using WinReform.Gui.Settings;
 using System;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Settings
+namespace WinReform.Gui.Tests.Settings
 {
     /// <summary>
     /// Tests for the <see cref="ApplicationSettingsViewModel"/>

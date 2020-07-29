@@ -1,10 +1,10 @@
-﻿using Resizer.Domain.Tests.Mocks;
-using Resizer.Gui.Infrastructure.Common.Command;
-using Resizer.Gui.Tests.Mocks;
+﻿using WinReform.Domain.Tests.Mocks;
+using WinReform.Gui.Infrastructure.Common.Command;
+using WinReform.Gui.Tests.Mocks;
 using System;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Infrastructure.Common.Command
+namespace WinReform.Gui.Tests.Infrastructure.Common.Command
 {
     /// <summary>
     /// Tests for the <see cref="DelegateCommand"/>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Resizer.Domain.Infrastructure.Messenger
+namespace WinReform.Domain.Infrastructure.Messenger
 {
     /// <summary>
     /// Defines subscription token used to identify a <see cref="EventSubscription"/>

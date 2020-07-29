@@ -1,10 +1,10 @@
-﻿using Resizer.Domain.Tests.Infrastructure.Messenger.Mocks;
-using Resizer.Domain.Tests.Settings.Mocks;
-using Resizer.Gui.Window;
+﻿using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
+using WinReform.Domain.Tests.Settings.Mocks;
+using WinReform.Gui.Window;
 using System;
 using Xunit;
 
-namespace Resizer.Gui.Tests.Window
+namespace WinReform.Gui.Tests.Window
 {
     /// <summary>
     /// Tests for the <see cref="WindowViewModel"/>

@@ -1,7 +1,7 @@
-﻿using Resizer.Domain.Settings;
+﻿using WinReform.Domain.Settings;
 using System;
 
-namespace Resizer.Domain.Tests.Settings.Mocks
+namespace WinReform.Domain.Tests.Settings.Mocks
 {
     /// <summary>
     /// Mock implementation of <see cref="ISettingStore"/>

@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace Resizer.Domain.Windows
+namespace WinReform.Domain.Windows
 {
     /// <summary>
     /// Defines a class that acts as a service for managing active windows

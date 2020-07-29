@@ -1,10 +1,10 @@
-﻿using Resizer.Domain.Settings;
-using Resizer.Domain.Tests.Infrastructure.Messenger.Mocks;
-using Resizer.Domain.Tests.Settings.Mocks;
+﻿using WinReform.Domain.Settings;
+using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
+using WinReform.Domain.Tests.Settings.Mocks;
 using System;
 using Xunit;
 
-namespace Resizer.Domain.Tests.Settings
+namespace WinReform.Domain.Tests.Settings
 {
     /// <summary>
     /// Tests for the <see cref="SettingFactory"/>

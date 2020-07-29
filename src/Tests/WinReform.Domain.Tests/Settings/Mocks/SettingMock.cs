@@ -1,6 +1,6 @@
-﻿using Resizer.Domain.Settings;
+﻿using WinReform.Domain.Settings;
 
-namespace Resizer.Domain.Tests.Settings.Mocks
+namespace WinReform.Domain.Tests.Settings.Mocks
 {
     public class SettingMock<TSetting> : ISetting<TSetting> where TSetting : new()
     {

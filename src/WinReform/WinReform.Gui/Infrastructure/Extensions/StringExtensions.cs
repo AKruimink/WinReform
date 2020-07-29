@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Resizer.Gui.Infrastructure.Extensions
+namespace WinReform.Gui.Infrastructure.Extensions
 {
     /// <summary>
     /// Defines a class that contains all the extensions for <see cref="string"/>

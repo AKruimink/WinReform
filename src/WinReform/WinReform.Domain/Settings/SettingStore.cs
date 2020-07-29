@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Resizer.Domain.Settings
+namespace WinReform.Domain.Settings
 {
     /// <summary>
     /// Defines a class that loads and saves settings

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Resizer.Gui.Infrastructure.Converters
+namespace WinReform.Gui.Infrastructure.Converters
 {
     /// <summary>
     /// Defines a class that Calulates a value by subtracting a given value from the base value

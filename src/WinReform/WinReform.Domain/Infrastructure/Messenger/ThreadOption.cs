@@ -1,4 +1,4 @@
-﻿namespace Resizer.Domain.Infrastructure.Messenger
+﻿namespace WinReform.Domain.Infrastructure.Messenger
 {
     /// <summary>
     /// Represents the thread on which a <see cref="PubSubEvent"/> subscriber will be called

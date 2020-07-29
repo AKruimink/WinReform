@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using Resizer.Domain.Infrastructure.Events;
-using Resizer.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Infrastructure.Events;
+using WinReform.Domain.Infrastructure.Messenger;
 
-namespace Resizer.Domain.Settings
+namespace WinReform.Domain.Settings
 {
     /// <summary>
     /// Defines a class that represents a setting

@@ -1,8 +1,8 @@
-﻿using Resizer.Domain.Windows;
+﻿using WinReform.Domain.Windows;
 using System;
 using Xunit;
 
-namespace Resizer.Domain.Tests.Windows
+namespace WinReform.Domain.Tests.Windows
 {
     /// <summary>
     /// Tests for the <see cref="Window"/>

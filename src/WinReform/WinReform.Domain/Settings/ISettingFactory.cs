@@ -1,4 +1,4 @@
-﻿namespace Resizer.Domain.Settings
+﻿namespace WinReform.Domain.Settings
 {
     /// <summary>
     /// Represents a class handles the construction of <see cref="ISetting{T}"/>

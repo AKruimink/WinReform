@@ -1,10 +1,10 @@
-﻿using Resizer.Domain.Infrastructure.Messenger;
-using Resizer.Domain.Infrastructure.Messenger.Strategies;
-using Resizer.Domain.Tests.Infrastructure.Messenger.Mocks;
+﻿using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Infrastructure.Messenger.Strategies;
+using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
 using System;
 using Xunit;
 
-namespace Resizer.Domain.Tests.Infrastructure.Messenger
+namespace WinReform.Domain.Tests.Infrastructure.Messenger
 {
     /// <summary>
     /// Tests for the <see cref="EventSubscription"/>

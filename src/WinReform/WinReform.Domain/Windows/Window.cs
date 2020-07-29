@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 
-namespace Resizer.Domain.Windows
+namespace WinReform.Domain.Windows
 {
     /// <summary>
     /// Defines a class that acts as model for active windows running on the system

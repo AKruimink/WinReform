@@ -1,11 +1,11 @@
-﻿using Resizer.Domain.Tests.Infrastructure.Messenger.Mocks;
-using Resizer.Domain.Tests.Settings.Mocks;
-using Resizer.Domain.Tests.Windows.Mocks;
-using Resizer.Gui.ActiveWindows;
+﻿using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
+using WinReform.Domain.Tests.Settings.Mocks;
+using WinReform.Domain.Tests.Windows.Mocks;
+using WinReform.Gui.ActiveWindows;
 using System;
 using Xunit;
 
-namespace Resizer.Gui.Tests.ActiveWindows
+namespace WinReform.Gui.Tests.ActiveWindows
 {
     /// <summary>
     /// Tests for the <see cref="ActiveWindowsViewModel"/>
