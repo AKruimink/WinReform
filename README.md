@@ -7,7 +7,7 @@
         A small tool to help resizing and relocation of stubborn windows.
     </p>
     <a href="https://github.com/nblockchain/AKruimink/WindowResizer/master/LICENCE.md">
-        <img src="https://img.shields.io/github/release/AKruimink/WindowResizer.svg?style=flat-square">
+        <img src="https://img.shields.io/github/license/AKruimink/WindowResizer.svg?style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WindowResizer/releases/latest">
         <img src="https://img.shields.io/github/release/AKruimink/WindowResizer.svg?style=flat-square">
