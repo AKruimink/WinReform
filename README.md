@@ -15,11 +15,14 @@
     </a>
     <br>
     <!-- CD/CI Badges-->
-    <a href="https://github.com/AKruimink/WindowResizer/actions?query=workflow%3A%22Test+and+Build%22">
+    <a href="https://github.com/AKruimink/WindowResizer/actions?query=workflow%3A%22master-build%22">
         <img src="https://github.com/AKruimink/WindowResizer/workflows/Test%20and%20Build/badge.svg?branch=master">
     </a>
-    <a href="https://github.com/AKruimink/WindowResizer/actions?query=workflow%3A%22Test+and+Build%22">
+    <a href="https://github.com/AKruimink/WindowResizer/actions?query=workflow%3A%22develop-build%22">
         <img src="https://github.com/AKruimink/WindowResizer/workflows/Test%20and%20Build/badge.svg?branch=develop">
+    </a>
+    <a href="https://github.com/AKruimink/WindowResizer/actions?query=workflow%3A%22unit-tests%22">
+        <img src="https://github.com/AKruimink/WindowResizer/workflows/Test%20and%20Build/badge.svg?branch=master">
     </a>
     <br>
     <!--Issues and Pull Request Badges -->
@@ -37,3 +40,15 @@
     </a>
   </a>
 </div>
+
+## Roll Call
+
+This application wouldn't exist without the help of several amazing open source project that i love. If you like this app i recommend checking out the following.
+
+ - [MahApps](https://github.com/MahApps/MahApps.Metro) which helped modernize the application by providing amazing visual and tools.
+ - [Autofac](https://github.com/autofac/Autofac) which helped manage all the dependencies that the application relies on.
+ - [Dotnet](https://github.com/dotnet/core) which of course provided the possibility to create this application to begin with.
+
+## License
+
+WindowResizer is provided as-is under the Apache License Version 2.0 license. For more information see [LICENSE](./LICENSE).
