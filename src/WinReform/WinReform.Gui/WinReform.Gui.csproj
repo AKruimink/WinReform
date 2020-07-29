@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Resizer.Domain\Resizer.Domain.csproj" />
+    <ProjectReference Include="..\..\WinReform\WinReform.Domain\WinReform.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

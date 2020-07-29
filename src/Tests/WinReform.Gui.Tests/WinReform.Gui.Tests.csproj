@@ -14,13 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Resizer.Domain\Resizer.Domain.csproj" />
-    <ProjectReference Include="..\..\Source\Resizer.Gui\Resizer.Gui.csproj" />
-    <ProjectReference Include="..\Resizer.Domain.Tests\Resizer.Domain.Tests.csproj" />
+    <ProjectReference Include="..\..\WinReform\WinReform.Domain\WinReform.Domain.csproj" />
+    <ProjectReference Include="..\..\WinReform\WinReform.Gui\WinReform.Gui.csproj" />
+    <ProjectReference Include="..\WinReform.Domain.Tests\WinReform.Domain.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Infrastructure\Common\Command\Mocks\" />
   </ItemGroup>
-
+  
 </Project>
