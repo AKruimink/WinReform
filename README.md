@@ -51,4 +51,4 @@ This application wouldn't exist without the help of several amazing open source 
 
 ## License
 
-WindowResizer is provided as-is under the Apache License Version 2.0 license. For more information see [LICENSE](./LICENSE).
+WindowResizer is provided as-is under the Apache License Version 2.0 license. For more information see [LICENSE](./LICENSE.md).
