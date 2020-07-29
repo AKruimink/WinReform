@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
@@ -37,7 +38,11 @@ namespace Resizer.Gui.ActiveWindows
         public ObservableCollection<Domain.Windows.Window> SelectedActiveWindows
         {
             get => _selectedActiveWindows;
-            set => SetProperty(ref _selectedActiveWindows, value);
+            set
+            {
+                SetProperty(ref _selectedActiveWindows, value);
+                
+            }
         }
 
         private ObservableCollection<Domain.Windows.Window> _selectedActiveWindows = new ObservableCollection<Domain.Windows.Window>();
@@ -120,7 +125,11 @@ namespace Resizer.Gui.ActiveWindows
             _autoRefreshTimer.Tick += OnAutoRefreshEvent;
             _autoRefreshTimer.Interval = TimeSpan.FromMilliseconds(1000);
             _autoRefreshTimer.Start();
+
+            
         }
+
+        
 
         /// <summary>
         /// Refreshes the <see cref="ActiveWindows"/> with a new list of active windows
@@ -128,7 +137,6 @@ namespace Resizer.Gui.ActiveWindows
         public void RefreshActiveWindows()
         {
             ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
-            // TODO send message out containing selected items, for the resizer and locator to pick up, and use
         }
 
         /// <summary>
@@ -153,9 +161,10 @@ namespace Resizer.Gui.ActiveWindows
         /// </summary>
         private void ViewLoaded()
         {
-            // Setup the event aggregator that listens to changes to the automatic refresh
+            // Setup the event aggregator that listens to changes to the automatic refresh and notifies of selected active windows changes
             ApplicationSettingsChanged(_settingFactory.Create<ApplicationSettings>()); // Manualy set the application settings once as we wont be notified until something changes
             _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
+            SelectedActiveWindows.CollectionChanged += SelectedActiveWindowsChanged;
 
             // Load the Active Windows once
             ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
@@ -167,6 +176,16 @@ namespace Resizer.Gui.ActiveWindows
         private void ApplicationSettingsChanged(ISetting<ApplicationSettings> settings)
         {
             _autoRefreshActiveWindows = settings.CurrentSetting.AutoRefreshActiveWindows;
+        }
+
+        /// <summary>
+        /// Invoked when <see cref="SelectedActiveWindows"/> changed and notifies all event subscribers of said change
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectedActiveWindowsChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            _eventAggregator.GetEvent<ActiveWindowsSelectionChangedEvent>().Publish(SelectedActiveWindows.ToList());
         }
     }
 }
