@@ -41,17 +41,24 @@
   </a>
 </div>
 
-## The Problem
-Ever used an an game or program that was not designed for todays screen resolutions, or an application that was developed for a fixed size
+## About
+WinReform is a utility tool that exists to solve resolution issues with older applications.
+Many old games/applications were not designed with today's bigger screens in mind. 
+Often this results into extremely large or small windows with no possibility to resize them.
+WinReform is here to help with these kind of applications. 
+By utilizing the Windows API it allows for non resizable windows to be resized to your resolution of choice or move windows that have mysteriously disappeared outside of your screen bounds.
+No matter the application, as long as it contains a window, WinReform will be able to help!
+
 
 ## Roll Call
-
 This application wouldn't exist without the help of several amazing open source project that I love. If you like this app I recommend checking out the following.
 
  - [MahApps](https://github.com/MahApps/MahApps.Metro) which helped modernize the application by providing amazing tools and visuals.
  - [Autofac](https://github.com/autofac/Autofac) which helped manage all the dependencies that the application relied on.
- - [DotNet](https://github.com/dotnet/core) which of course provided the possibility to create this application to begin with.
+ - [DotNet](https://github.com/dotnet/core) which provided the possibility to create this application to begin with.
 
 ## License
-
 WinReform is provided as-is under the Apache License Version 2.0 license. For more information see [LICENSE](./LICENSE.md).
+
+## ShowRoom
+
