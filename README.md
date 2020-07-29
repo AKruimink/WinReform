@@ -62,4 +62,4 @@ This application wouldn't exist without the help of several amazing open source 
 WinReform is provided as-is under the Apache License Version 2.0 license. For more information see [LICENSE](./LICENSE.md).
 
 ## ShowRoom
-
+Pictures to be added after release 1.0.0
