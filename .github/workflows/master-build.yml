@@ -24,10 +24,10 @@ jobs:
                   
       # Restore all nuget packages to prevent issues during build
       - name: 'restore nuget packages'
-        working-directory: './src/WinReform'
+        working-directory: './src'
         run: dotnet restore
         
       # Build the application
       - name: 'build application'
-        working-directory: './src/WinReform'
+        working-directory: './src'
         run: dotnet build --configuration Release --no-restore

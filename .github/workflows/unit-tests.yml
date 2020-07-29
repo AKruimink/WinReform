@@ -22,10 +22,10 @@ jobs:
                   
       # Restore all nuget packages to prevent issues during build
       - name: 'restore nuget packages'
-        working-directory: './src/Tests'
+        working-directory: './src'
         run: dotnet restore
         
       # Run the project unit tests
       - name: 'run unit tests'
-        working-directory: './src/Tests'
+        working-directory: './src'
         run: dotnet test --no-build --configuration Release
