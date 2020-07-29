@@ -59,7 +59,7 @@ This application wouldn't exist without the help of several amazing open source 
  - [DotNet](https://github.com/dotnet/core) which provided the possibility to create this application to begin with.
 
 ## License
-WinReform is provided as-is under the Apache License Version 2.0 license. For more information see [LICENSE](./LICENSE.md).
+WinReform is provided as-is under the Apache License Version 2.0. For more information see [LICENSE](./LICENSE.md).
 
 ## ShowRoom
 Pictures to be added after release 1.0.0
