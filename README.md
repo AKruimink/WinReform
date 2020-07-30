@@ -6,7 +6,13 @@
     <p>
         A simple tool to help resize and relocate stubborn windows.
     </p>
-    <!-- Project Info Badges -->
+  </a>
+</div>
+
+<!-- Project Info Badges -->
+[![license](https://img.shields.io/github/license/AKruimink/WinReform.svg?style=flat-square)](https://github.com/nblockchain/AKruimink/WinReform/develop/LICENCE.md)
+[![release](https://img.shields.io/github/release/AKruimink/WinReform.svg?style=flat-square)](https://github.com/AKruimink/WinReform/releases/latest)
+    
     <a href="https://github.com/nblockchain/AKruimink/WinReform/develop/LICENCE.md">
         <img src="https://img.shields.io/github/license/AKruimink/WinReform.svg?style=flat-square">
     </a>
@@ -38,8 +44,7 @@
     <a href="https://github.com/AKruimink/WinReform/pulls">
         <img src="https://img.shields.io/github/issues-pr-closed-raw/AKruimink/WinReform.svg?style=flat-square">
     </a>
-  </a>
-</div>
+
 
 ## About
 WinReform is a utility tool that exists to solve resolution issues with older applications.
