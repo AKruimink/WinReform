@@ -20,13 +20,13 @@
     <br>
     <!-- CD/CI Badges-->
     <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Abuild-project">
-        <img src="https://github.com/AKruimink/WinReform/workflows/build-project/badge.svg?label=master?branch=master&event=push">
+        <img src="https://github.com/AKruimink/WinReform/workflows/build-project/badge.svg?label=master&branch=master&event=push">
     </a>
     <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Abuild-project">
-        <img src="https://github.com/AKruimink/WinReform/workflows/build-project/badge.svg?label=develop?branch=develop&event=push">
+        <img src="https://github.com/AKruimink/WinReform/workflows/build-project/badge.svg?text=develop?branch=develop&event=push">
     </a>
     <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Atest-project">
-        <img src="https://github.com/AKruimink/WinReform/workflows/test-project/badge.svg?label=tests?branch=develop&event=push">
+        <img src="https://github.com/AKruimink/WinReform/workflows/test-project/badge.svg?text=tests&branch=develop&event=push">
     </a>
     <br>
     <!--Issues and Pull Request Badges -->
