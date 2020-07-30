@@ -15,14 +15,14 @@
     </a>
     <br>
     <!-- CD/CI Badges-->
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22master+build%22">
-        <img src="https://github.com/AKruimink/WinReform/workflows/develop%20build/badge.svg?branch=master">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Abuild-project">
+        <img src="https://github.com/AKruimink/WinReform/workflows/build-project/badge.svg?branch=master&event=push">
     </a>
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22develop+build%22">
-        <img src="https://github.com/AKruimink/WinReform/workflows/develop%20build/badge.svg?branch=develop">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Abuild-project">
+        <img src="https://github.com/AKruimink/WinReform/workflows/build-project/badge.svg?branch=develop&event=push">
     </a>
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22unit+tests%22">
-        <img src="https://github.com/AKruimink/WinReform/workflows/unit%20tests/badge.svg">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Atest-project">
+        <img src="https://github.com/AKruimink/WinReform/workflows/test-project/badge.svg?branch=develop&event=push">
     </a>
     <br>
     <!--Issues and Pull Request Badges -->
