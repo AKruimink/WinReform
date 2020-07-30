@@ -9,7 +9,6 @@
     </p>
   </a>
 </div>
-https://img.shields.io/github/workflow/status/AKruimink/WinReform/build-project.svg?label=release&style=flat-square&branch=develop&event=push
 <!-- Project Info Badges -->
 <a href="https://github.com/nblockchain/AKruimink/WinReform/develop/LICENCE.md">
         <img src="https://img.shields.io/github/license/AKruimink/WinReform.svg?label=license&style=flat-square">
