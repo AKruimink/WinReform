@@ -1,9 +1,11 @@
-name: 'develop build'
+name: 'build-project'
 
 on:
-  pull_request:
-    branches:
+  push: #Push always triggers after a merge
+    branches: 
+      - master
       - develop
+  pull_request:
 
 # Defines environment variables
 env:
@@ -11,7 +13,7 @@ env:
 
 jobs:
   build:
-    name: 'develop build'
+    name: 'run-project-build'
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,7 +29,7 @@ jobs:
         working-directory: './src'
         run: dotnet restore
         
-      # Build the application
-      - name: 'build application'
+      # Build the project
+      - name: 'build project'
         working-directory: './src'
         run: dotnet build --configuration Release --no-restore
