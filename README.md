@@ -9,38 +9,38 @@
     </p>
   </a>
 </div>
-
+https://img.shields.io/github/workflow/status/AKruimink/WinReform/build-project.svg?label=release&style=flat-square&branch=develop&event=push
 <!-- Project Info Badges -->
 <a href="https://github.com/nblockchain/AKruimink/WinReform/develop/LICENCE.md">
-        <img src="https://img.shields.io/github/license/AKruimink/WinReform.svg?label=license?style=flat-square">
+        <img src="https://img.shields.io/github/license/AKruimink/WinReform.svg?label=license&style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WinReform/releases/latest">
-        <img src="https://img.shields.io/github/release/AKruimink/WinReform.svg?label=release?style=flat-square">
+        <img src="https://img.shields.io/github/release/AKruimink/WinReform.svg?label=release&style=flat-square">
     </a>
     <br>
     <!-- CD/CI Badges-->
     <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Abuild-project">
-        <img src="https://github.com/AKruimink/WinReform/workflows/build-project/badge.svg?label=master&branch=master&event=push">
+        <img src="https://img.shields.io/github/workflow/status/AKruimink/WinReform/build-project/master?label=master&style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Abuild-project">
-        <img src="https://github.com/AKruimink/WinReform/workflows/build-project/badge.svg?text=develop?branch=develop&event=push">
+        <img src="https://img.shields.io/github/workflow/status/AKruimink/WinReform/build-project/develop?label=develop&style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Atest-project">
-        <img src="https://github.com/AKruimink/WinReform/workflows/test-project/badge.svg?text=tests&branch=develop&event=push">
+        <img src="https://img.shields.io/github/workflow/status/AKruimink/WinReform/test-project/develop?label=tests&style=flat-square">
     </a>
     <br>
     <!--Issues and Pull Request Badges -->
     <a href="https://github.com/AKruimink/WinReform/issues">
-        <img src="https://img.shields.io/github/issues-raw/AKruimink/WinReform.svg?label=open%issues?style=flat-square">
+        <img src="https://img.shields.io/github/issues-raw/AKruimink/WinReform.svg?label=open%20issues&style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WinReform/issues">
-        <img src="https://img.shields.io/github/issues-closed-raw/AKruimink/WinReform.svg?label=closed%issues?style=flat-square">
+        <img src="https://img.shields.io/github/issues-closed-raw/AKruimink/WinReform.svg?label=closed%20issues&style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WinReform/pulls">
-        <img src="https://img.shields.io/github/issues-pr-raw/AKruimink/WinReform.svg?label=open%pull%requests?style=flat-square">
+        <img src="https://img.shields.io/github/issues-pr-raw/AKruimink/WinReform.svg?label=open%20pull%20requests&style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WinReform/pulls">
-        <img src="https://img.shields.io/github/issues-pr-closed-raw/AKruimink/WinReform.svg?label=closed%pull%requests?style=flat-square">
+        <img src="https://img.shields.io/github/issues-pr-closed-raw/AKruimink/WinReform.svg?label=closed%20pull%20requests&style=flat-square">
     </a>
 
 ## About
