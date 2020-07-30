@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Resizer.Gui.Utilities
+namespace WinReform.Gui.Utilities
 {
     /// <summary>
     /// Interaction logic for UtilitiesView.xaml

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Resizer.Domain.Infrastructure.Events;
-using Resizer.Domain.Infrastructure.Messenger;
-using Resizer.Gui.Infrastructure.Common.Command;
-using Resizer.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Domain.Infrastructure.Events;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Gui.Infrastructure.Common.Command;
+using WinReform.Gui.Infrastructure.Common.ViewModel;
 
-namespace Resizer.Gui.Utilities
+namespace WinReform.Gui.Utilities
 {
     /// <summary>
     /// Defines a class that provides window resizing utility data
