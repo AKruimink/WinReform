@@ -1,0 +1,35 @@
+name: 'build-project'
+
+on:
+  push: #Push always triggers after a merge
+    branches: 
+      - master
+      - develop
+  pull_request:
+
+# Defines environment variables
+env:
+  NETCORE_VERSION: '3.1.200'
+
+jobs:
+  build:
+    name: 'run-project-build'
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        
+      #Setup the environment 
+      - name: 'setup .NET Core SDK ${{ env.NETCORE_VERSION }}'
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.NETCORE_VERSION }}
+                  
+      # Restore all nuget packages to prevent issues during build
+      - name: 'restore nuget packages'
+        working-directory: './src'
+        run: dotnet restore
+        
+      # Build the project
+      - name: 'build project'
+        working-directory: './src'
+        run: dotnet build --configuration Release --no-restore

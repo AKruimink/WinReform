@@ -1,0 +1,42 @@
+﻿using WinReform.Domain.Settings;
+using System;
+
+namespace WinReform.Domain.Tests.Settings.Mocks
+{
+    /// <summary>
+    /// Mock implementation of <see cref="ISettingStore"/>
+    /// </summary>
+    public class SettingStoreMock : ISettingStore
+    {
+        /// <summary>
+        /// Indicates if the request has been executed
+        /// </summary>
+        public bool Executed { get; set; } = false;
+
+        /// <summary>
+        /// Arguments passed to the mock method
+        /// </summary>
+        public object? Arguments { get; set; }
+
+        /// <summary>
+        /// <see cref="Type"/> of the setting passed
+        /// </summary>
+        public Type? SettingType { get; set; }
+
+        ///<inheritdoc/>
+        public TSetting Load<TSetting>() where TSetting : new()
+        {
+            Executed = true;
+            SettingType = typeof(TSetting);
+            return new TSetting();
+        }
+
+        ///<inheritdoc/>
+        public void Save<TSetting>(TSetting settings)
+        {
+            Executed = true;
+            Arguments = settings;
+            SettingType = typeof(TSetting);
+        }
+    }
+}
