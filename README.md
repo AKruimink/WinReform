@@ -1,3 +1,4 @@
+<!-- Markdown doesnt like aligning stuff -->
 <div align="center">
     <a href="https://github.com/AKruimink/WinReform">
         <img alt="WinReform" height="200" width="200" src="https://raw.githubusercontent.com/AKruimink/WinReform/develop/docs/logo.png">
@@ -8,38 +9,39 @@
     </p>
     <!-- Project Info Badges -->
     <a href="https://github.com/nblockchain/AKruimink/WinReform/develop/LICENCE.md">
-        <img src="https://img.shields.io/github/license/AKruimink/WinReform.svg?style=flat-square">
+        <img src="https://img.shields.io/github/license/AKruimink/WinReform.svg?label=license&style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WinReform/releases/latest">
-        <img src="https://img.shields.io/github/release/AKruimink/WinReform.svg?style=flat-square">
+        <img src="https://img.shields.io/github/release/AKruimink/WinReform.svg?label=release&style=flat-square">
     </a>
     <br>
     <!-- CD/CI Badges-->
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22master+build%22">
-        <img src="https://github.com/AKruimink/WinReform/workflows/develop%20build/badge.svg?branch=master">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Abuild-project">
+        <img src="https://img.shields.io/github/workflow/status/AKruimink/WinReform/build-project/master?label=master&style=flat-square">
     </a>
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22develop+build%22">
-        <img src="https://github.com/AKruimink/WinReform/workflows/develop%20build/badge.svg?branch=develop">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Abuild-project">
+        <img src="https://img.shields.io/github/workflow/status/AKruimink/WinReform/build-project/develop?label=develop&style=flat-square">
     </a>
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3A%22unit+tests%22">
-        <img src="https://github.com/AKruimink/WinReform/workflows/unit%20tests/badge.svg">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Atest-project">
+        <img src="https://img.shields.io/github/workflow/status/AKruimink/WinReform/test-project/develop?label=tests&style=flat-square">
     </a>
     <br>
     <!--Issues and Pull Request Badges -->
     <a href="https://github.com/AKruimink/WinReform/issues">
-        <img src="https://img.shields.io/github/issues-raw/AKruimink/WinReform.svg?style=flat-square">
+        <img src="https://img.shields.io/github/issues-raw/AKruimink/WinReform.svg?label=open%20issues&style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WinReform/issues">
-        <img src="https://img.shields.io/github/issues-closed-raw/AKruimink/WinReform.svg?style=flat-square">
+        <img src="https://img.shields.io/github/issues-closed-raw/AKruimink/WinReform.svg?label=closed%20issues&style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WinReform/pulls">
-        <img src="https://img.shields.io/github/issues-pr-raw/AKruimink/WinReform.svg?style=flat-square">
+        <img src="https://img.shields.io/github/issues-pr-raw/AKruimink/WinReform.svg?label=open%20pull%20requests&style=flat-square">
     </a>
     <a href="https://github.com/AKruimink/WinReform/pulls">
-        <img src="https://img.shields.io/github/issues-pr-closed-raw/AKruimink/WinReform.svg?style=flat-square">
+        <img src="https://img.shields.io/github/issues-pr-closed-raw/AKruimink/WinReform.svg?label=closed%20pull%20requests&style=flat-square">
     </a>
   </a>
 </div>
+
 
 ## About
 WinReform is a utility tool that exists to solve resolution issues with older applications.
