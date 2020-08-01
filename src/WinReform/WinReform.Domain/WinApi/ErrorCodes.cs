@@ -151,8 +151,6 @@ namespace WinReform.Domain.WinApi
         /// </summary>
         public bool Failed => (int)Result < 0;
 
-    
-
         /// <summary>
         /// Throws an exception if the unmanaged method failed to execute
         /// </summary>
@@ -173,8 +171,8 @@ namespace WinReform.Domain.WinApi
 #endif
                 // We want to convert HResult to a more appropriate exeption type than ComException.
                 // Marshal.ThrowExceptionForHr does this for us, but the general call users GetErrorInfo
-                // It sets it ignores the hResult that we provided, this works for the first time but fails on the second.
-                // To avoid this we explicitly use the overload that ignores the iErrorInfo
+                // If sets it ignores the HResult that we provided, this works for the first time but fails on the second.
+                // To avoid this we explicitly use the overload that ignores the IErrorInfo
                 var ex = Marshal.GetExceptionForHR((int)Result, new IntPtr(-1));
 
                 // If we get nothing better then ComExceptrion from the Marshal
