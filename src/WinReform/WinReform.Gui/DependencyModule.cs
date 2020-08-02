@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Autofac;
 using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Process;
 using WinReform.Domain.Settings;
 using WinReform.Domain.WinApi;
 using WinReform.Domain.Windows;
@@ -44,6 +45,9 @@ namespace WinReform.Gui
 
             // WinApi
             builder.RegisterType<WinApiService>().As<IWinApiService>().InstancePerDependency();
+
+            // Process
+            builder.RegisterType<ProcessService>().As<IProcessService>().InstancePerDependency();
 
             return builder;
         }
