@@ -4,6 +4,7 @@ using System.Reflection;
 using Autofac;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
+using WinReform.Domain.WinApi;
 using WinReform.Domain.Windows;
 using WinReform.Gui.Infrastructure.Common.ViewModel;
 
@@ -40,6 +41,9 @@ namespace WinReform.Gui
 
             // Windows
             builder.RegisterType<WindowService>().As<IWindowService>().InstancePerDependency();
+
+            // WinApi
+            builder.RegisterType<WinApiService>().As<IWinApiService>().InstancePerDependency();
 
             return builder;
         }
