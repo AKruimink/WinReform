@@ -62,6 +62,12 @@ namespace WinReform.Domain.WinApi
         }
 
         /// <summary>
+        /// Checks if the current <see cref="Rect"/> is empty
+        /// </summary>
+        /// <returns>Returns <see langword="true"/> if the current istance is empty, otherwise returns <see langword="false"/></returns>
+        public bool IsEmpty => Left >= Right || Top >= Bottom;
+
+        /// <summary>
         /// Gets a new <see cref="Rect"/>  that is large enough to contain both given rectangles
         /// </summary>
         /// <param name="rect1">First <see cref="Rect"/> to use for calculating a new rectangle size</param>
@@ -74,12 +80,6 @@ namespace WinReform.Domain.WinApi
             Right = Math.Max(rect1.Right, rect2.Right),
             Bottom = Math.Max(rect1.Bottom, rect2.Bottom)
         };
-
-        /// <summary>
-        /// Checks if the current <see cref="Rect"/> is empty
-        /// </summary>
-        /// <returns>Returns <see langword="true"/> if the current istance is empty, otherwise returns <see langword="false"/></returns>
-        public bool IsEmpty => Left >= Right || Top >= Bottom;
 
         /// <summary>
         /// Comapres the current <see cref="Rect"/> to a given <see cref="Rect"/>
