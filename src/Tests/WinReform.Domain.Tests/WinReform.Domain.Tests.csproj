@@ -17,8 +17,4 @@
     <ProjectReference Include="..\..\WinReform\WinReform.Domain\WinReform.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="WinApi\Mocks\" />
-  </ItemGroup>
-
 </Project>
