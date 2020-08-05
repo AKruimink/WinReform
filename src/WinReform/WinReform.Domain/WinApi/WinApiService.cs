@@ -76,7 +76,7 @@ namespace WinReform.Domain.WinApi
         private static extern IntPtr SetWindowLongPtr64(IntPtr hWnd, GwlType nIndex, IntPtr dwNewLong);
 
         /// <inheritdoc/>
-        public IntPtr GetWindowLongPtr(IntPtr hwnd, GwlType nIndex, IntPtr dwNewLong)
+        public IntPtr SetWindowLongPtr(IntPtr hwnd, GwlType nIndex, IntPtr dwNewLong)
         {
             IntPtr returnValue;
             if (IntPtr.Size == 8)

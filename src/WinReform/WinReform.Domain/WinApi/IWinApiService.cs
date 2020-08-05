@@ -31,6 +31,6 @@ namespace WinReform.Domain.WinApi
         /// <param name="nIndex"><see cref="GwlType"/> of the data to be requested</param>
         /// <param name="dwNewLong"><see cref="IntPtr"/> containing the new values to be set</param>
         /// <returns>Returns <see cref="IntPtr"/> with the newly set values</returns>
-        IntPtr GetWindowLongPtr(IntPtr hwnd, GwlType nIndex, IntPtr dwNewLong);
+        IntPtr SetWindowLongPtr(IntPtr hwnd, GwlType nIndex, IntPtr dwNewLong);
     }
 }
