@@ -107,6 +107,11 @@ namespace WinReform.Domain.WinApi
         CannotFindWndClass = 1407,
 
         /// <summary>
+        /// Invalid window handle
+        /// </summary>
+        InvalidWindowHandle = 1400,
+
+        /// <summary>
         /// Window class was already registered
         /// </summary>
         ClassAlreadyExists = 1410,

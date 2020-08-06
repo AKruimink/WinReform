@@ -127,7 +127,7 @@ namespace WinReform.Domain.WinApi
         {
             if (!Enum.IsDefined(typeof(HResultType), result))
             {
-                throw new InvalidOperationException($"{result} is not an underlying value of {typeof(WinApiErrorType)}");
+                throw new InvalidOperationException($"{result} is not an underlying value of {typeof(HResultType)}");
             }
             Result = (HResultType)result;
         }
@@ -227,7 +227,7 @@ namespace WinReform.Domain.WinApi
         public override string ToString()
         {
             // set the default return value to a hex representation of the HResult (0x########)
-            var returnValue = string.Format(CultureInfo.InvariantCulture, "0x{0:X8}", Result);
+            var returnValue = string.Format(CultureInfo.InvariantCulture, "0x{0:X8}", (uint)Result);
 
             // Try to get the name of the current HResult
             var resultName = Enum.GetName(typeof(HResultType), Result);
