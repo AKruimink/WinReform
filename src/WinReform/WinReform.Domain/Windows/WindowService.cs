@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using WinReform.Domain.Process;
 using WinReform.Domain.WinApi;
+using WinReform.Domain.WinApi.Types;
 
 namespace WinReform.Domain.Windows
 {
@@ -42,22 +44,52 @@ namespace WinReform.Domain.Windows
 
             foreach (var process in _processService.GetActiveProcesses())
             {
-                if (process.MainWindowHandle == IntPtr.Zero)
+                try
                 {
-                    continue; // Process doesn't own a window
-                }
+                    if (process.MainWindowHandle == IntPtr.Zero)
+                    {
+                        continue; // Process doesn't own a window
+                    }
 
-                windows.Add(new Window()
+                    windows.Add(new Window()
+                    {
+                        Id = process.Id,
+                        WindowHandle = process.MainWindowHandle,
+                        Description = process.MainModule?.FileVersionInfo.FileDescription ?? string.Empty,
+                        Icon = Icon.ExtractAssociatedIcon(process.MainModule?.FileName).ToBitmap(),
+                        Dimensions = _winApiService.GetWindowRect(process.MainWindowHandle)
+                    });
+                }
+                catch (Win32Exception)
                 {
-                    Id = process.Id,
-                    WindowHandle = process.MainWindowHandle,
-                    Description = process.MainModule.FileVersionInfo.FileDescription,
-                    Icon = Icon.ExtractAssociatedIcon(process.MainModule.FileName).ToBitmap(),
-                    Dimensions = _winApiService.GetWindowRect(process.MainWindowHandle)
-                });
+                    continue;
+                }
             }
 
             return windows.OrderBy(w => w.Description).ToList();
+        }
+
+        /// <inheritdoc/>
+        public bool SetResizableBorder(Window window)
+        {
+            try
+            {
+                var currentStyle = _winApiService.GetWindowLongPtr(window.WindowHandle, GwlType.Style);
+                if (_winApiService.SetWindowLongPtr(window.WindowHandle, GwlType.Style, (IntPtr)((long)currentStyle | (long)WsStyleType.OverlappedWindow)) != IntPtr.Zero)
+                {
+                    return true;
+                }
+                return false;
+            }catch
+            {
+                return false;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void RedrawWindow(Window window)
+        {
+            _winApiService.RedrawMenuBar(window.WindowHandle);
         }
     }
 }
