@@ -15,6 +15,7 @@
         <!-- Content-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -23,7 +24,19 @@
         <Button Grid.Row="0"
                 Grid.Column="0"
                 Margin="5"
-                Content="Set Resizable Border"
-                Command="{Binding SetResizableBorderCommand}"/>
+                Focusable="False"
+                Content="Resizable Border"
+                Command="{Binding SetResizableBorderCommand}"
+                Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
+                BorderThickness="1"/>
+
+        <Button Grid.Row="0"
+                Grid.Column="1"
+                Margin="5"
+                Focusable="False"
+                Content="Redraw Window"
+                Command="{Binding RedrawWindowCommand}"
+                Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
+                BorderThickness="1"/>
     </Grid>
 </UserControl>

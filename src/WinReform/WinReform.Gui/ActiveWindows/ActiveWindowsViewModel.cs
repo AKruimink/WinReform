@@ -74,7 +74,7 @@ namespace WinReform.Gui.ActiveWindows
         private readonly ISettingFactory _settingFactory;
 
         /// <summary>
-        /// <see cref="IEventAggregator"/> used to be notified when the general setting have changed
+        /// <see cref="IEventAggregator"/> used to be notified when the general setting have changed and notify about selected windows
         /// </summary>
         private readonly IEventAggregator _eventAggregator;
 
