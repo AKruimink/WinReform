@@ -14,7 +14,9 @@
                  mc:Ignorable="d"
                  d:DataContext="{d:DesignInstance local:WindowDesignModel, IsDesignTimeCreatable=True}"
                  viewModel:ViewModelLocator.WireViewModel="{x:Type local:WindowViewModel}"
-                 Title="WindowResizer"
+                 Icon="../Infrastructure/Resources/WinReform.ico"
+                 ShowIconOnTitleBar="False"
+                 Title="WinReform"
                  TitleCharacterCasing="Normal"
                  WindowTitleBrush="{DynamicResource MahApps.Brushes.WindowTitle}"
                  NonActiveWindowTitleBrush="{DynamicResource MahApps.Brushes.WindowTitle}"
@@ -53,7 +55,7 @@
                               IsChecked="{Binding MenuIsOpen}"
                               Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
                 <Button Command="{Binding ShowSourceOnGithubCommand}"
-                        ToolTip="WindowResizer on Github">
+                        ToolTip="WinReform on Github">
                     <Rectangle Height="22"
                                Width="22"
                                Fill="White">

@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Infrastructure\Resources\WinReform.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Infrastructure\Styles\ToggleButton.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="MahApps.Metro" Version="2.0.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
@@ -20,9 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Infrastructure\Styles\ToggleButton.xaml">
+    <Resource Include="Infrastructure\Resources\WinReform.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Infrastructure\Styles\ToggleButton.xaml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Page>
+    </Resource>
   </ItemGroup>
 
 </Project>
