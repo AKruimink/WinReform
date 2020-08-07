@@ -12,6 +12,22 @@ namespace WinReform.Domain.WinApi
     public class WinApiService : IWinApiService
     {
         /// <summary>
+        /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-drawmenubar"/>
+        /// </summary>
+        [DllImport("user32.dll", EntryPoint = "DrawMenuBar", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool DrawMenuBar(IntPtr hwnd);
+
+        /// <inheritdoc/>
+        public void RedrawMenuBar(IntPtr hwnd)
+        {
+            if (!DrawMenuBar(hwnd))
+            {
+                HResult.ThrowLastError();
+            }
+        }
+
+        /// <summary>
         /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowrect"/>
         /// </summary>
         [DllImport("user32.dll", EntryPoint ="GetWindowRect", SetLastError =true)]

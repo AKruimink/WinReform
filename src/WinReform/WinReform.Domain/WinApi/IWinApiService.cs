@@ -10,6 +10,12 @@ namespace WinReform.Domain.WinApi
     public interface IWinApiService
     {
         /// <summary>
+        /// Redraws the menu bar of a window
+        /// </summary>
+        /// <param name="hwnd"><see cref="IntPtr"/> containing the handle of the window to redraw the menu of</param>
+        void RedrawMenuBar(IntPtr hwnd);
+
+        /// <summary>
         /// Get the <see cref="Rect"/> of a given window
         /// </summary>
         /// <param name="hwnd"><see cref="IntPtr"/> containing the handle of the window to get the <see cref="Rect"/> of</param>
