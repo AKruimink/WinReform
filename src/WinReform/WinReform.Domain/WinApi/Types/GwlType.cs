@@ -23,7 +23,7 @@ namespace WinReform.Domain.WinApi
         /// <summary>
         /// Retrieve a handle to the parent window (if there is one)
         /// </summary>
-        HwndParanet = -8,
+        HwndParent = -8,
 
         /// <summary>
         /// Retrieve the identifier of the window
