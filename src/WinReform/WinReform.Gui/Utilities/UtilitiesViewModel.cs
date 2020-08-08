@@ -62,7 +62,7 @@ namespace WinReform.Gui.Utilities
         {
             foreach(var window in _selectedWindows)
             {
-                if (!_windowService.SetResizableBorder(window));
+                _windowService.SetResizableBorder(window);
             }
         }
 
