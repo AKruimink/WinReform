@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using WinReform.Domain.WinApi;
 
 namespace WinReform.Domain.Windows
 {
@@ -33,12 +34,12 @@ namespace WinReform.Domain.Windows
         /// <summary>
         /// Gets or Sets the dimensions of the window
         /// </summary>
-        public Dimension Dimensions { get; set; }
+        public Rect Dimensions { get; set; }
 
         /// <summary>
         /// Gets the resolution of the application
         /// </summary>
-        public string Resolution => $"{Dimensions.Width} x {Dimensions.Height}";
+        public string Resolution => $"{Dimensions.Right - Dimensions.Left} x {Dimensions.Bottom - Dimensions.Top}";
 
         /// <summary>
         /// Comapares the current <see cref="Window"/> to a given <see cref="Window"/>

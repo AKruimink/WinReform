@@ -19,8 +19,8 @@
 
         /// <summary>
         /// Gets or Sets an indicator that defines if the Active Windows list should automaticly be updated
-        /// <remarks>Defaults to <see langword="false"/></remarks>
+        /// <remarks>Defaults to <see langword="true"/></remarks>
         /// </summary>
-        public bool AutoRefreshActiveWindows { get; set; } = false;
+        public bool AutoRefreshActiveWindows { get; set; } = true;
     }
 }

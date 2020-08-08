@@ -72,7 +72,7 @@ namespace WinReform.Gui.Window
             {
                 var psi = new ProcessStartInfo
                 {
-                    FileName = "https://github.com/AKruimink/WindowResizer",
+                    FileName = "https://github.com/AKruimink/WinReform",
                     UseShellExecute = true
                 };
                 Process.Start(psi);
@@ -81,7 +81,7 @@ namespace WinReform.Gui.Window
             {
                 var psi = new ProcessStartInfo
                 {
-                    FileName = "https://github.com/AKruimink/WindowResizer/releases",
+                    FileName = "https://github.com/AKruimink/WinReform/releases",
                     UseShellExecute = true
                 };
                 Process.Start(psi);

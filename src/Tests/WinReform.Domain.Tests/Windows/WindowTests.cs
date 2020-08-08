@@ -1,6 +1,7 @@
 ﻿using WinReform.Domain.Windows;
 using System;
 using Xunit;
+using WinReform.Domain.WinApi;
 
 namespace WinReform.Domain.Tests.Windows
 {
@@ -15,8 +16,8 @@ namespace WinReform.Domain.Tests.Windows
         public void Equals_EqualWindow_ShouldReturnTrue()
         {
             // Prepare
-            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Dimension() };
-            var window2 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Dimension() };
+            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Rect() };
+            var window2 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Rect() };
 
             // Act
 
@@ -28,8 +29,8 @@ namespace WinReform.Domain.Tests.Windows
         public void Equals_UnEqualWindow_ShouldReturnFalse()
         {
             // Prepare
-            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Dimension() };
-            var window2 = new Window { Id = 2, WindowHandle = (IntPtr)2, Description = "Window2", Dimensions = new Dimension() };
+            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Rect() };
+            var window2 = new Window { Id = 2, WindowHandle = (IntPtr)2, Description = "Window2", Dimensions = new Rect() };
 
             // Act
 
@@ -41,7 +42,7 @@ namespace WinReform.Domain.Tests.Windows
         public void Equals_InvalidType_ShouldReturnFalse()
         {
             // Prepare
-            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Dimension() };
+            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Rect() };
 
             // Act
 
@@ -57,8 +58,8 @@ namespace WinReform.Domain.Tests.Windows
         public void GetHashCode_EqualInstances_ShouldReturnEqualHashCode()
         {
             // Prepare
-            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Dimension() };
-            var window2 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Dimension() };
+            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Rect() };
+            var window2 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Rect() };
 
             // Act
             var hashCode1 = window1.GetHashCode();
@@ -72,8 +73,8 @@ namespace WinReform.Domain.Tests.Windows
         public void GetHashCode_UnEqualInstances_ShouldReturnUniqueHashCode()
         {
             // Prepare
-            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Dimension() };
-            var window2 = new Window { Id = 2, WindowHandle = (IntPtr)2, Description = "Window2", Dimensions = new Dimension() };
+            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Rect() };
+            var window2 = new Window { Id = 2, WindowHandle = (IntPtr)2, Description = "Window2", Dimensions = new Rect() };
 
             // Act
             var hashCode1 = window1.GetHashCode();
@@ -91,8 +92,8 @@ namespace WinReform.Domain.Tests.Windows
         public void CompareTo_EqualId_ShouldReturnZero()
         {
             // Prepare
-            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Dimension() };
-            var window2 = new Window { Id = 1, WindowHandle = (IntPtr)2, Description = "Window2", Dimensions = new Dimension() };
+            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Rect() };
+            var window2 = new Window { Id = 1, WindowHandle = (IntPtr)2, Description = "Window2", Dimensions = new Rect() };
 
             // Act
 
@@ -104,8 +105,8 @@ namespace WinReform.Domain.Tests.Windows
         public void CompareTo_UnEqualId_ShouldReturnNegativeOne()
         {
             // Prepare
-            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Dimension() };
-            var window2 = new Window { Id = 2, WindowHandle = (IntPtr)2, Description = "Window2", Dimensions = new Dimension() };
+            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Rect() };
+            var window2 = new Window { Id = 2, WindowHandle = (IntPtr)2, Description = "Window2", Dimensions = new Rect() };
 
             // Act
 
@@ -117,7 +118,7 @@ namespace WinReform.Domain.Tests.Windows
         public void CompareTo_NullInstances_ShouldReturnNegativeOne()
         {
             // Prepare
-            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Dimension() };
+            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Rect() };
 
             // Act
 

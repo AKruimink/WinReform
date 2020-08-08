@@ -43,6 +43,7 @@
                   Grid.Column="1"
                   VerticalAlignment="Center"
                   Margin="5"
+                  ToolTip="If enabled the application will use a dark theme instead of the default light theme"
                   IsChecked="{Binding UseDarkTheme}" />
 
         <!-- Behaviour -->
@@ -63,6 +64,7 @@
                   Grid.Column="1"
                   VerticalAlignment="Center"
                   Margin="5"
+                  ToolTip="If enabled instead of closing the window will minimize when closed"
                   IsChecked="{Binding MinimizeOnClose}" />
         <TextBlock Grid.Row="4"
                    Grid.Column="0"
@@ -73,6 +75,7 @@
                   Grid.Column="1"
                   VerticalAlignment="Center"
                   Margin="5"
+                  ToolTip="If disabled the active window list and its information won't automatically refresh neither after a change to the window"
                   IsChecked="{Binding AutoRefreshActiveWindows}" />
     </Grid>
 </UserControl>

@@ -5,7 +5,16 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Infrastructure\Resources\WinReform.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Infrastructure\Styles\ToggleButton.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="5.2.0" />
@@ -19,9 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Infrastructure\Styles\ToggleButton.xaml">
+    <Resource Include="Infrastructure\Resources\WinReform.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Infrastructure\Styles\ToggleButton.xaml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Page>
+    </Resource>
   </ItemGroup>
 
 </Project>

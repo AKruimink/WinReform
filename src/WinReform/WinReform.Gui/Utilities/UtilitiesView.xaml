@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="WinReform.Gui.Utilities.UtilitiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:WinReform.Gui.Infrastructure.Common.ViewModel"
+             xmlns:local="clr-namespace:WinReform.Gui.Utilities"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance local:UtilitiesDesignModel, IsDesignTimeCreatable=True}"
+             viewModel:ViewModelLocator.WireViewModel="{x:Type local:UtilitiesViewModel}"
+             d:DesignHeight="400" 
+             d:DesignWidth="400">
+    
+    <Grid Margin="10">
+        <!-- Content-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0"
+                Grid.Column="0"
+                Margin="5"
+                Focusable="False"
+                ToolTip="Updates the existing window style to use a border style that allows for resizing with the mouse cursor"
+                Content="Resizable Border"
+                Command="{Binding SetResizableBorderCommand}"
+                Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
+                BorderThickness="1"/>
+
+        <Button Grid.Row="0"
+                Grid.Column="1"
+                Margin="5"
+                Focusable="False"
+                ToolTip="Forces a redraw of the window (could result in disappearing title bars for some applications)"
+                Content="Redraw Window"
+                Command="{Binding RedrawWindowCommand}"
+                Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
+                BorderThickness="1"/>
+    </Grid>
+</UserControl>

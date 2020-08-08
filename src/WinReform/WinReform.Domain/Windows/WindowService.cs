@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using WinReform.Domain.Process;
+using WinReform.Domain.WinApi;
+using WinReform.Domain.WinApi.Types;
 
 namespace WinReform.Domain.Windows
 {
@@ -13,52 +17,79 @@ namespace WinReform.Domain.Windows
     public class WindowService : IWindowService
     {
         /// <summary>
-        /// Gets the dimensions of a window
-        /// TODO: should probably move GetWindowsRect to its own service, as it will be required for more then just this
+        /// <see cref="IWinApiService"/> used to manage existing windows
         /// </summary>
-        /// <param name="hwnd">The <see cref="IntPtr"/> that points towarts the window to get the dimensions of</param>
-        /// <param name="lpRect">The <see cref="Dimension"/> that is returned</param>
-        /// <returns>Returns <see cref="Dimension"/> containing the dimensions of the window</returns>
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetWindowRect(IntPtr hwnd, out Dimension lpRect);
+        private readonly IWinApiService _winApiService;
+
+        /// <summary>
+        /// <see cref="IProcessService"/> used to active processes
+        /// </summary>
+        private readonly IProcessService _processService;
+
+        /// <summary>
+        /// Create a new instance of <see cref="WindowService"/>
+        /// </summary>
+        /// <param name="winApiService">Instance of <see cref="IWinApiService"/> used to manage existing windows</param>
+        /// <param name="processService">Instance of <see cref="IProcessService"/> used to manage active processes</param>
+        public WindowService(IWinApiService winApiService, IProcessService processService)
+        {
+            _winApiService = winApiService ?? throw new ArgumentNullException(nameof(winApiService));
+            _processService = processService ?? throw new ArgumentNullException(nameof(processService));
+        }
 
         /// <inheritdoc/>
         public IEnumerable<Window> GetActiveWindows()
         {
             var windows = new List<Window>();
 
-            foreach (var process in Process.GetProcesses())
+            foreach (var process in _processService.GetActiveProcesses())
             {
-                if (process.MainWindowHandle == IntPtr.Zero)
+                try
                 {
-                    continue; // Process doesn't own a window
-                }
+                    if (process.MainWindowHandle == IntPtr.Zero)
+                    {
+                        continue; // Process doesn't own a window
+                    }
 
-                windows.Add(new Window()
+                    windows.Add(new Window()
+                    {
+                        Id = process.Id,
+                        WindowHandle = process.MainWindowHandle,
+                        Description = process.MainModule?.FileVersionInfo.FileDescription ?? string.Empty,
+                        Icon = Icon.ExtractAssociatedIcon(process.MainModule?.FileName).ToBitmap(),
+                        Dimensions = _winApiService.GetWindowRect(process.MainWindowHandle)
+                    });
+                }
+                catch (Win32Exception)
                 {
-                    Id = process.Id,
-                    WindowHandle = process.MainWindowHandle,
-                    Description = process.MainModule.FileVersionInfo.FileDescription,
-                    Icon = Icon.ExtractAssociatedIcon(process.MainModule.FileName).ToBitmap(),
-                    Dimensions = GetWindowDimensions(process.MainWindowHandle)
-                });
+                    continue;
+                }
             }
 
             return windows.OrderBy(w => w.Description).ToList();
         }
 
-        /// <summary>
-        /// Get the dimensions of a window
-        /// </summary>
-        /// <param name="handle">The <see cref="IntPtr"/> of the window to get the dimensions from</param>
-        /// <returns>Returns <see cref="Dimension"/> containing all the dimensions of the window</returns>
-        private Dimension GetWindowDimensions(IntPtr handle)
+        /// <inheritdoc/>
+        public bool SetResizableBorder(Window window)
         {
-            if (GetWindowRect(handle, out var dimensions))
+            try
             {
-                return dimensions;
+                var currentStyle = _winApiService.GetWindowLongPtr(window.WindowHandle, GwlType.Style);
+                if (_winApiService.SetWindowLongPtr(window.WindowHandle, GwlType.Style, (IntPtr)((long)currentStyle | (long)WsStyleType.OverlappedWindow)) != IntPtr.Zero)
+                {
+                    return true;
+                }
+                return false;
+            }catch
+            {
+                return false;
             }
-            throw new ArgumentException("Provided handle does not correlated with an existing window", nameof(handle));
+        }
+
+        /// <inheritdoc/>
+        public void RedrawWindow(Window window)
+        {
+            _winApiService.RedrawMenuBar(window.WindowHandle);
         }
     }
 }
