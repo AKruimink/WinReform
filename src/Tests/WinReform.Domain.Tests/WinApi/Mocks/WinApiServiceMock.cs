@@ -28,5 +28,6 @@ namespace WinReform.Domain.Tests.WinApi.Mocks
 
         ///<inheritdoc/>
         public IntPtr SetWindowLongPtr(IntPtr hwnd, GwlType nIndex, IntPtr dwNewLong) => dwNewLong;
+        public void RedrawMenuBar(IntPtr hwnd) => throw new NotImplementedException();
     }
 }
