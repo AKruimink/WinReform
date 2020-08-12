@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Domain.Tests", "T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{505639D8-7DA4-4E01-9284-835F04F245FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinReform.Tests.Fixtures", "Tests\WinReform.Tests.Fixtures\WinReform.Tests.Fixtures.csproj", "{AC217ABC-6F3E-41D9-B9C7-2ABD87E7DDA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{CFBD6348-95C2-4D8E-ABF3-2B6D91907E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFBD6348-95C2-4D8E-ABF3-2B6D91907E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFBD6348-95C2-4D8E-ABF3-2B6D91907E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC217ABC-6F3E-41D9-B9C7-2ABD87E7DDA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC217ABC-6F3E-41D9-B9C7-2ABD87E7DDA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC217ABC-6F3E-41D9-B9C7-2ABD87E7DDA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC217ABC-6F3E-41D9-B9C7-2ABD87E7DDA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +53,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7797442B-03C9-4C8E-8E68-2AB52F1440F6} = {505639D8-7DA4-4E01-9284-835F04F245FD}
 		{CFBD6348-95C2-4D8E-ABF3-2B6D91907E24} = {505639D8-7DA4-4E01-9284-835F04F245FD}
+		{AC217ABC-6F3E-41D9-B9C7-2ABD87E7DDA5} = {505639D8-7DA4-4E01-9284-835F04F245FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {29422841-E57B-4CF3-BE36-7D47F94E6BD9}
