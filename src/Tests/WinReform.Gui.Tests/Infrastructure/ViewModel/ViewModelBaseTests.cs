@@ -1,4 +1,5 @@
-﻿using WinReform.Gui.Tests.Infrastructure.Common.ViewModel.Mocks;
+﻿using WinReform.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Tests.Fixtures;
 using Xunit;
 
 namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
@@ -6,7 +7,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
     /// <summary>
     /// Tests for the <see cref="ViewModelBase"/>
     /// </summary>
-    public class ViewModelBaseTests
+    public class ViewModelBaseTests : ViewModelBase
     {
         #region SetProperty Tests
 
@@ -14,17 +15,15 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
         public void SetProperty_NewValue_ShouldSetValue()
         {
             // Prepare
-            int value = 10;
-            var mockViewModel = new ViewModelMock();
+            var value = 10;
+            var viewModelFixture = new ViewModelFixture
+            {
+                // Act
+                Number = value
+            };
 
             // Assert
-            Assert.Equal(0, mockViewModel.IntProperty);
-
-            // Act
-            mockViewModel.IntProperty = value;
-
-            // Assert
-            Assert.Equal(value, mockViewModel.IntProperty);
+            Assert.Equal(value, viewModelFixture.Number);
         }
 
         [Fact]
@@ -33,23 +32,23 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
             // Prepare
             var oldValue = 10;
             var newValue = 10;
-            var mockViewModel = new ViewModelMock { IntProperty = oldValue };
+            var viewModelFixture = new ViewModelFixture { Number = oldValue };
             var invoked = false;
-            mockViewModel.PropertyChanged += (o, e) =>
+            viewModelFixture.PropertyChanged += (o, e) =>
             {
                 // Act
-                if(e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
+                if(e.PropertyName.Equals(nameof(viewModelFixture.Number)))
                 {
                     invoked = true;
                 }
             };
 
             // Act
-            mockViewModel.IntProperty = newValue;
+            viewModelFixture.Number = newValue;
 
             // Assert
             Assert.False(invoked);
-            Assert.Equal(oldValue, mockViewModel.IntProperty);
+            Assert.Equal(oldValue, viewModelFixture.Number);
         }
 
         [Fact]
@@ -57,19 +56,19 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
         {
             // Prepare
             var value = 10;
-            var mockViewModel = new ViewModelMock();
+            var viewModelFixture = new ViewModelFixture();
             var invoked = false;
-            mockViewModel.PropertyChanged += (o, e) =>
+            viewModelFixture.PropertyChanged += (o, e) =>
             {
                 // Act
-                if(e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
+                if(e.PropertyName.Equals(nameof(viewModelFixture.Number)))
                 {
                     invoked = true;
                 }
             };
 
             // Act
-            mockViewModel.IntProperty = value;
+            viewModelFixture.Number = value;
 
             // Assert
             Assert.True(invoked);
@@ -84,18 +83,18 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
         {
             // Prepare
             var invoked = false;
-            var mockViewModel = new ViewModelMock();
-            mockViewModel.PropertyChanged += (o, e) =>
+            var viewModelFixture = new ViewModelFixture();
+            viewModelFixture.PropertyChanged += (o, e) =>
             {
                 // Act
-                if(e.PropertyName.Equals(nameof(mockViewModel.IntProperty)))
+                if(e.PropertyName.Equals(nameof(viewModelFixture.Number)))
                 {
                     invoked = true;
                 }
             };
 
             // Act
-            mockViewModel.InvokeOnPropertyChanged();
+            RaisePropertyChanged(nameof(viewModelFixture.Number));
 
             //Assert
             Assert.True(invoked);

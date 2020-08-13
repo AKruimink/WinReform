@@ -1,8 +1,8 @@
-﻿using WinReform.Domain.Tests.Mocks;
-using WinReform.Gui.Infrastructure.Common.Command;
-using WinReform.Gui.Tests.Mocks;
+﻿using WinReform.Gui.Infrastructure.Common.Command;
 using System;
 using Xunit;
+using Moq;
+using WinReform.Tests.Fixtures;
 
 namespace WinReform.Gui.Tests.Infrastructure.Common.Command
 {
@@ -11,15 +11,13 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
     /// </summary>
     public class DelegateCommandTests
     {
+        private delegate void DelegateFixture(ClassFixture classFixture);
+
         #region Constructor Tests
 
         [Fact]
         public void Construct_Nulls_ShouldThrowArgumentNullException()
         {
-            // Prepare
-
-            // Act
-
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -30,10 +28,6 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         [Fact]
         public void Construct_NullExecuteMethod_ShouldThrowArgumentNullException()
         {
-            // Prepare
-
-            // Act
-
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -44,8 +38,6 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         [Fact]
         public void ConstructWithGenericType_Object_ShouldIntializesValues()
         {
-            // Prepare
-
             // Act
             var actual = new DelegateCommand<object>(param => { });
 
@@ -56,8 +48,6 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         [Fact]
         public void ConstructWithGenericType_Nullable_ShouldIntializesValues()
         {
-            // Prepare
-
             // Act
             var actual = new DelegateCommand<int?>(param => { });
 
@@ -68,10 +58,6 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         [Fact]
         public void ConstructWithGenericType_NonNullable_ShouldThrowInvalidCastException()
         {
-            // Prepare
-
-            // Act
-
             // Assert
             Assert.Throws<InvalidCastException>(() =>
             {
@@ -80,12 +66,8 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         }
 
         [Fact]
-        public void ConstructWithGenericType_Nulls_ShouldThrowArgumentNullException()
+        public void ConstructWithGenericType_NullParameters_ShouldThrowArgumentNullException()
         {
-            // Prepare
-
-            // Act
-
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -96,10 +78,6 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         [Fact]
         public void ConstructWithGenericType_NullExecuteMethod_ShouldThrowArgumentNullException()
         {
-            // Prepare
-
-            // Act
-
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -110,10 +88,6 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         [Fact]
         public void ConstructWithGenericType_NullCanExecuteMethod_ShouldThrowArgumentNullException()
         {
-            // Prepare
-
-            // Act
-
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -143,37 +117,35 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         public void Execute_PassObject_ShouldPassObject()
         {
             // Prepare
-            var handler = new DelegateHandlerMock();
-            var command = new DelegateCommand<object>(handler.Execute);
-            var parameter = new object();
+            var callBackActionMock = new Mock<Action<object>>();
+            var command = new DelegateCommand<object>(callBackActionMock.Object);
 
             // Act
-            command.Execute(parameter);
+            command.Execute(new object());
 
             // Assert
-            Assert.Same(parameter, handler.ExecuteParameter);
+            callBackActionMock.Verify(x => x, Times.Once);
         }
 
         [Fact]
         public void Execute_PassInstance_ShouldPassInstance()
         {
             // Prepare
-            var executeCalled = false;
-            var testClass = new EmptyClassMock();
-            var command = new DelegateCommand<EmptyClassMock>(delegate (EmptyClassMock parameter)
-            {
-                // Act
-                executeCalled = true;
+            ClassFixture? passedFakeClass = default;
+            var fakeClass = new ClassFixture();
+            var callBackActionMock = new Mock<Action<ClassFixture>>();
+            var command = new DelegateCommand<ClassFixture>(callBackActionMock.Object);
 
-                // Assert
-                Assert.Same(testClass, parameter);
-            });
+            callBackActionMock.Setup(x => x(It.IsAny<ClassFixture>()))
+                .Callback<ClassFixture>((obj) => passedFakeClass = obj);
 
             // Act
-            command.Execute(testClass);
+            command.Execute(fakeClass);
 
             // Assert
-            Assert.True(executeCalled);
+            callBackActionMock.Verify(x => x, Times.Once);
+            Assert.NotNull(passedFakeClass);
+            Assert.Equal(fakeClass, passedFakeClass);
         }
 
         #endregion Execute Tests
@@ -200,25 +172,26 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         public void CanExecute_PassObject_ShouldPassObject()
         {
             // Prepare
-            var handler = new DelegateHandlerMock();
-            var command = new DelegateCommand<object>(handler.Execute, handler.CanExecute);
             var parameter = new object();
-            handler.CanExecuteReturnValue = true;
-
+            var fakeClass = new ClassFixture();
+            var callBackActionMock = new Mock<Action<object>>();
+            var command = new DelegateCommand<object>(callBackActionMock.Object, (obj) => 
+            {
+                // Assert
+                Assert.Equal(parameter, obj);
+                return true; 
+            });
+            
             // Act
             var returnValue = command.CanExecute(parameter);
-
-            // Assert
-            Assert.Same(parameter, handler.CanExecuteParameter);
-            Assert.Equal(handler.CanExecuteReturnValue, returnValue);
         }
 
         [Fact]
         public void CanExecute_Unassigned_ShouldReturnTrue()
         {
             // Prepare
-            var handler = new DelegateHandlerMock();
-            var command = new DelegateCommand<object>(handler.Execute);
+            var callBackActionMock = new Mock<Action<object>>();
+            var command = new DelegateCommand<object>(callBackActionMock.Object);
 
             // Act
             var returnValue = command.CanExecute(null!);
@@ -231,13 +204,12 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         public void CanExecute_RaiseCanExecuteChanged_ShouldReturnTrue()
         {
             // Prepare
-            var handler = new DelegateHandlerMock();
-            var command = new DelegateCommand<object>(handler.Execute);
+            var callBackActionMock = new Mock<Action<object>>();
+            var command = new DelegateCommand<object>(callBackActionMock.Object);
             var canExecuteChangedRaised = false;
 
             // Act
-            command.CanExecuteChanged += delegate
-            { canExecuteChangedRaised = true; };
+            command.CanExecuteChanged += delegate { canExecuteChangedRaised = true; };
             command.RaiseCanExecuteChanged();
 
             // Assert
@@ -266,11 +238,11 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         {
             // Prepare
             var executeCalled = false;
-            var testClass = new EmptyClassMock();
-            var command = new DelegateCommand<EmptyClassMock>((p) => { }, delegate (EmptyClassMock parameter)
+            var fakeClass = new ClassFixture();
+            var command = new DelegateCommand<ClassFixture>((p) => { }, delegate (ClassFixture parameter)
             {
                 // Assert
-                Assert.Same(testClass, parameter);
+                Assert.Same(fakeClass, parameter);
 
                 // Act
                 executeCalled = true;
@@ -278,7 +250,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
             });
 
             // Act
-            command.CanExecute(testClass);
+            command.CanExecute(fakeClass);
 
             // Assert
             Assert.True(executeCalled);

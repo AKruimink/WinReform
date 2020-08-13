@@ -18,7 +18,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Extensions
             var other = "Random";
 
             // Act
-            bool result = source.Contains(other, StringComparison.OrdinalIgnoreCase);
+            var result = source.Contains(other, StringComparison.OrdinalIgnoreCase);
 
             // Assert
             Assert.True(result);
@@ -32,7 +32,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Extensions
             var other = "Invalid";
 
             // Act
-            bool result = source.Contains(other, StringComparison.OrdinalIgnoreCase);
+            var result = source.Contains(other, StringComparison.OrdinalIgnoreCase);
 
             // Assert
             Assert.False(result);
@@ -46,7 +46,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Extensions
             var other = "random";
 
             // Act
-            bool result = source.Contains(other, StringComparison.InvariantCulture);
+            var result = source.Contains(other, StringComparison.InvariantCulture);
 
             // Assert
             Assert.False(result);
