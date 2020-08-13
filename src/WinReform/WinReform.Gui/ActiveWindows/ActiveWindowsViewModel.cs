@@ -125,11 +125,7 @@ namespace WinReform.Gui.ActiveWindows
             _autoRefreshTimer.Tick += OnAutoRefreshEvent;
             _autoRefreshTimer.Interval = TimeSpan.FromMilliseconds(1000);
             _autoRefreshTimer.Start();
-
-            
         }
-
-        
 
         /// <summary>
         /// Refreshes the <see cref="ActiveWindows"/> with a new list of active windows

@@ -1,9 +1,10 @@
-﻿using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
-using WinReform.Domain.Tests.Settings.Mocks;
-using WinReform.Domain.Tests.Windows.Mocks;
-using WinReform.Gui.ActiveWindows;
+﻿using WinReform.Gui.ActiveWindows;
 using System;
 using Xunit;
+using Moq;
+using WinReform.Domain.Windows;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Settings;
 
 namespace WinReform.Gui.Tests.ActiveWindows
 {
@@ -18,12 +19,12 @@ namespace WinReform.Gui.Tests.ActiveWindows
         public void Construct_ValidArguments_ShouldConstructActiveWindowsViewModel()
         {
             // Prepare
-            var settingFactoryMock = new SettingFactoryMock();
-            var eventAggregatorMock = new EventAggregatorMock();
-            var windowService = new WindowServiceMock();
+            var settingFactoryMock = new Mock<ISettingFactory>();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
+            var windowServiceMock = new Mock<IWindowService>();
 
             // Act
-            var viewModel = new ActiveWindowsViewModel(settingFactoryMock, eventAggregatorMock, windowService);
+            var viewModel = new ActiveWindowsViewModel(settingFactoryMock.Object, eventAggregatorMock.Object, windowServiceMock.Object);
 
             // Assert
             Assert.NotNull(viewModel);
@@ -34,13 +35,13 @@ namespace WinReform.Gui.Tests.ActiveWindows
         public void Construct_NullSettingFactory_ShouldThrowArgumentNullException()
         {
             // Prepare 
-            var eventAggregatorMock = new EventAggregatorMock();
-            var windowService = new WindowServiceMock();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
+            var windowServiceMock = new Mock<IWindowService>();
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new ActiveWindowsViewModel(null!, eventAggregatorMock, windowService);
+                var viewModel = new ActiveWindowsViewModel(null!, eventAggregatorMock.Object, windowServiceMock.Object);
             });
         }
 
@@ -49,13 +50,13 @@ namespace WinReform.Gui.Tests.ActiveWindows
         public void Construct_NullEventAggregator_ShouldThrowArgumentNullException()
         {
             // Prepare 
-            var settingFactoryMock = new SettingFactoryMock();
-            var windowService = new WindowServiceMock();
+            var settingFactoryMock = new Mock<ISettingFactory>();
+            var windowServiceMock = new Mock<IWindowService>();
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new ActiveWindowsViewModel(settingFactoryMock, null!, windowService);
+                var viewModel = new ActiveWindowsViewModel(settingFactoryMock.Object, null!, windowServiceMock.Object);
             });
         }
 
@@ -63,13 +64,13 @@ namespace WinReform.Gui.Tests.ActiveWindows
         public void Construct_NullWindowService_ShouldThrowArgumentNullException()
         {
             // Prepare 
-            var settingFactoryMock = new SettingFactoryMock();
-            var eventAggregatorMock = new EventAggregatorMock();
+            var settingFactoryMock = new Mock<ISettingFactory>();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new ActiveWindowsViewModel(settingFactoryMock, eventAggregatorMock, null!);
+                var viewModel = new ActiveWindowsViewModel(settingFactoryMock.Object, eventAggregatorMock.Object, null!);
             });
         }
 
@@ -81,17 +82,16 @@ namespace WinReform.Gui.Tests.ActiveWindows
         public void RefreshActiveWindows_Execution_ShouldCallWindowService()
         {
             // Prepare
-            var settingFactoryMock = new SettingFactoryMock();
-            var eventAggregatorMock = new EventAggregatorMock();
-            var windowService = new WindowServiceMock();
-            var viewmodel = new ActiveWindowsViewModel(settingFactoryMock, eventAggregatorMock, windowService);
+            var settingFactoryMock = new Mock<ISettingFactory>();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
+            var windowServiceMock = new Mock<IWindowService>();
+            var viewmodel = new ActiveWindowsViewModel(settingFactoryMock.Object, eventAggregatorMock.Object, windowServiceMock.Object);
 
             // Act
-            windowService.GetActiveWindowsCalled = false;
             viewmodel.RefreshActiveWindows();
 
             // Assert
-            Assert.True(windowService.GetActiveWindowsCalled);
+            windowServiceMock.Verify(x => x.GetActiveWindows(), Times.AtLeastOnce());
         }
 
         #endregion RefreshActiveWindows tests
