@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\WinReform\WinReform.Gui\WinReform.Gui.csproj" />
+  </ItemGroup>
+
 </Project>
