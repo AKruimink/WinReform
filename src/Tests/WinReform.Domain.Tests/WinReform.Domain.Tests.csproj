@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\WinReform\WinReform.Domain\WinReform.Domain.csproj" />
+    <ProjectReference Include="..\WinReform.Tests.Fixtures\WinReform.Tests.Fixtures.csproj" />
   </ItemGroup>
 
 </Project>
