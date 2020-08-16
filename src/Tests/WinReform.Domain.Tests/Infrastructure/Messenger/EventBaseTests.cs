@@ -1,4 +1,7 @@
-﻿using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
+﻿using Moq;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Infrastructure.Messenger.Strategies;
+using WinReform.Tests.Fixtures;
 using Xunit;
 
 namespace WinReform.Domain.Tests.Infrastructure.Messenger
@@ -14,15 +17,15 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void InternalSubscribe_SubscribeEvent_ShouldSubscribeToEvent()
         {
             // Prepare
-            var eventBase = new EventBaseMock();
-            var eventSubscription = new EventSubscriptionMock();
+            var eventBase = new EventFixture();
+            var eventSubscriptionMock = new Mock<IEventSubscription>();
 
             // Act
-            eventBase.Subscribe(eventSubscription);
+            var token = eventBase.Subscribe(eventSubscriptionMock.Object);
 
             // Assert
-            Assert.NotNull(eventSubscription.SubscriptionToken);
-            Assert.True(eventBase.Contains(eventSubscription.SubscriptionToken!));
+            Assert.NotNull(token);
+            Assert.True(eventBase.Contains(token));
         }
 
         #endregion InternalSubscribe Tests
@@ -33,19 +36,19 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void InternalUnsubscribe_UnsubscribeEvent_ShouldUnubscribeFromEvent()
         {
             // Prepare
-            var eventBase = new EventBaseMock();
-            var eventSubscription = new EventSubscriptionMock();
-            eventBase.Subscribe(eventSubscription);
+            var eventBase = new EventFixture();
+            var eventSubscriptionMock = new Mock<IEventSubscription>();
+            var token = eventBase.Subscribe(eventSubscriptionMock.Object);
 
             // Assert
-            Assert.NotNull(eventSubscription.SubscriptionToken);
-            Assert.True(eventBase.Contains(eventSubscription.SubscriptionToken!));
+            Assert.NotNull(token);
+            Assert.True(eventBase.Contains(token));
 
             // Act
-            eventBase.Unsubscribe(eventSubscription.SubscriptionToken!);
+            eventBase.Unsubscribe(token);
 
             // Assert
-            Assert.False(eventBase.Contains(eventSubscription.SubscriptionToken!));
+            Assert.False(eventBase.Contains(token));
         }
 
         #endregion InternalUnsubscribe Tests
@@ -57,18 +60,16 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         {
             // Prepare
             var eventPublished = false;
-            var eventBase = new EventBaseMock();
-            var eventSubscription = new EventSubscriptionMock
-            {
-                PublishActionReturnValue = delegate { eventPublished = true; }
-            };
+            var eventBase = new EventFixture();
+            var eventSubscriptionMock = new Mock<IEventSubscription>();
+            eventSubscriptionMock.Setup(x => x.GetExecutionStrategy()).Returns(delegate { eventPublished = true; });
 
             // Act
-            eventBase.Subscribe(eventSubscription);
+            eventBase.Subscribe(eventSubscriptionMock.Object);
             eventBase.Publish();
 
             // Assert
-            Assert.True(eventSubscription.PublishActionCalled);
+            eventSubscriptionMock.Verify(x => x, Times.Once());
             Assert.True(eventPublished);
         }
 
@@ -76,48 +77,43 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void InternalPublish_PublishEvent_ShouldNotifyMultipleSubscription()
         {
             // Prepare
-            var firstEventPublished = false;
-            var secondEventPublished = false;
-            var eventBase = new EventBaseMock();
-            var firstEventSubscription = new EventSubscriptionMock
-            {
-                PublishActionReturnValue = delegate { firstEventPublished = true; }
-            };
+            var eventPublished1 = false;
+            var eventPublished2 = false;
+            var eventBase = new EventFixture();
+            var eventSubscriptionMock1 = new Mock<IEventSubscription>();
+            var eventSubscriptionMock2 = new Mock<IEventSubscription>();
+            eventSubscriptionMock1.Setup(x => x.GetExecutionStrategy()).Returns(delegate { eventPublished1 = true; });
+            eventSubscriptionMock2.Setup(x => x.GetExecutionStrategy()).Returns(delegate { eventPublished2 = true; });
 
-            var secondEventSubscription = new EventSubscriptionMock
-            {
-                PublishActionReturnValue = delegate { secondEventPublished = true; }
-            };
+            eventSubscriptionMock1.Setup(x => x.GetExecutionStrategy()).Returns(null);
 
             // Act
-            eventBase.Subscribe(firstEventSubscription);
-            eventBase.Subscribe(secondEventSubscription);
+            eventBase.Subscribe(eventSubscriptionMock1.Object);
+            eventBase.Subscribe(eventSubscriptionMock2.Object);
             eventBase.Publish();
 
             // Assert
-            Assert.True(firstEventSubscription.PublishActionCalled);
-            Assert.True(firstEventPublished);
+            eventSubscriptionMock1.Verify(x => x, Times.Once());
+            Assert.True(eventPublished1);
 
-            Assert.True(secondEventSubscription.PublishActionCalled);
-            Assert.True(secondEventPublished);
+            eventSubscriptionMock2.Verify(x => x, Times.Once());
+            Assert.True(eventPublished2);
         }
 
         [Fact]
         public void InternalPublish_NullReference_ShouldPruneStratagies()
         {
             // Prepare
-            var eventBase = new EventBaseMock();
-            var eventSubscription = new EventSubscriptionMock
-            {
-                PublishActionReturnValue = null
-            };
-            var token = eventBase.Subscribe(eventSubscription);
+            var eventBase = new EventFixture();
+            var eventSubscriptionMock = new Mock<IEventSubscription>();
+            eventSubscriptionMock.Setup(x => x.GetExecutionStrategy()).Returns(null);
+            var token = eventBase.Subscribe(eventSubscriptionMock.Object);
 
             // Act
             eventBase.Publish();
 
             // Assert
-            Assert.False(eventBase.Contains(token));
+            Assert.NotNull(token);
         }
 
         #endregion InternalPublish Tests
@@ -128,12 +124,12 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void Contains_SearchByToken_ShouldFindSubscriber()
         {
             // Prepare
-            var eventbase = new EventBaseMock();
-            var eventSubscription = new EventSubscriptionMock();
-            var token = eventbase.Subscribe(eventSubscription);
+            var eventBase = new EventFixture();
+            var eventSubscriptionMock = new Mock<IEventSubscription>();
+            var token = eventBase.Subscribe(eventSubscriptionMock.Object);
 
             // Assert
-            Assert.True(eventbase.Contains(token));
+            Assert.True(eventBase.Contains(token));
         }
 
         #endregion Contains Tests

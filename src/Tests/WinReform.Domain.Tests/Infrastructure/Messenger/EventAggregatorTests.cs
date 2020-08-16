@@ -1,5 +1,5 @@
 ﻿using WinReform.Domain.Infrastructure.Messenger;
-using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
+using WinReform.Tests.Fixtures;
 using Xunit;
 
 namespace WinReform.Domain.Tests.Infrastructure.Messenger
@@ -18,8 +18,8 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             var eventAggregator = new EventAggregator();
 
             // Act
-            var instance1 = eventAggregator.GetEvent<EventBaseMock>();
-            var instance2 = eventAggregator.GetEvent<EventBaseMock>();
+            var instance1 = eventAggregator.GetEvent<EventFixture>();
+            var instance2 = eventAggregator.GetEvent<EventFixture>();
 
             // Assert
             Assert.Equal(instance1, instance2);

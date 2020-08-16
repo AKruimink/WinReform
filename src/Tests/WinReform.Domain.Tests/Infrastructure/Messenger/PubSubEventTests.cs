@@ -1,9 +1,10 @@
 ﻿using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Infrastructure.Messenger.Strategies;
-using WinReform.Domain.Tests.Mocks;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
+using Moq;
+using System;
 
 namespace WinReform.Domain.Tests.Infrastructure.Messenger
 {
@@ -17,11 +18,8 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         /// <summary>
         /// Defines a mock implementation of a non generic pub sub event
         /// </summary>
-        private class PubSubEventMock : PubSubEvent
+        private class PubSubEventFixture : PubSubEvent
         {
-            /// <summary>
-            /// Gets all the current subscriptions
-            /// </summary>
             public ICollection<IEventSubscription> CurrentSubscriptions => Subscriptions;
         }
 
@@ -29,11 +27,8 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         /// Defines a mock implementation of a generic pub sub event
         /// </summary>
         /// <typeparam name="TPayLoad">The type of argument that will be passed to the subscriber</typeparam>
-        private class PubSubEventMock<TPayLoad> : PubSubEvent<TPayLoad>
+        private class PubSubEventFixture<TPayLoad> : PubSubEvent<TPayLoad>
         {
-            /// <summary>
-            /// Gets all the current subscriptions
-            /// </summary>
             public ICollection<IEventSubscription> CurrentSubscriptions => Subscriptions;
         }
 
@@ -45,12 +40,11 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void SubscribeNonGeneric_DefaultThread_ShouldPublishOnSubscriberThread()
         {
             // Prepare
-            static void Action()
-            { }
-            var pubsubEvent = new PubSubEventMock();
+            Action actionReference = () => { };
+            var pubsubEvent = new PubSubEventFixture();
 
             // Act
-            var token = pubsubEvent.Subscribe(Action);
+            var token = pubsubEvent.Subscribe(actionReference);
 
             // Assert
             Assert.Equal(1, pubsubEvent.CurrentSubscriptions.Count);
@@ -61,12 +55,11 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void SubscribeGeneric_DefaultThread_ShouldPublishOnSubscriberThread()
         {
             // Prepare
-            static void Action(string args)
-            { }
-            var pubsubEvent = new PubSubEventMock<string>();
+            Action<string> actionReference = (arg) => { };
+            var pubsubEvent = new PubSubEventFixture<string>();
 
             // Act
-            var token = pubsubEvent.Subscribe(Action);
+            var token = pubsubEvent.Subscribe(actionReference);
 
             // Assert
             Assert.Equal(1, pubsubEvent.CurrentSubscriptions.Count);
@@ -77,11 +70,11 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void Subscribe_DefaultFilter_ShouldReturnTrue()
         {
             // Prepare
-            var pubSubEvent = new PubSubEventMock<string>();
-            var action = new ActionMock();
+            Action<string> actionReference = (arg) => { };
+            var pubSubEvent = new PubSubEventFixture<string>();
 
             // Act
-            pubSubEvent.Subscribe(action.Action);
+            pubSubEvent.Subscribe(actionReference);
             var eventSubscription = pubSubEvent.CurrentSubscriptions.FirstOrDefault() as EventSubscription<string>;
             var filter = eventSubscription?.GetFilter;
 
@@ -98,36 +91,36 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void UnsubscribeNonGeneric_UnsubscribeByAction_ShouldUnsubscribe()
         {
             // Prepare
-            var pubSubEvent = new PubSubEventMock();
-            var action = new ActionMock();
-            var token = pubSubEvent.Subscribe(action.Action);
+            Action actionReference = () => { };
+            var pubSubEvent = new PubSubEventFixture();
+            var token = pubSubEvent.Subscribe(actionReference);
 
             // Assert
-            Assert.True(pubSubEvent.Contains(action.Action));
+            Assert.True(pubSubEvent.Contains(actionReference));
 
             // Act
-            pubSubEvent.Unsubscribe(action.Action);
+            pubSubEvent.Unsubscribe(actionReference);
 
             // Assert
-            Assert.False(pubSubEvent.Contains(action.Action));
+            Assert.False(pubSubEvent.Contains(actionReference));
         }
 
         [Fact]
         public void UnsubscribeGeneric_UnsubscribeByAction_ShouldUnsubscribe()
         {
             // Prepare
-            var pubSubEvent = new PubSubEventMock<string>();
-            var action = new ActionMock();
-            var token = pubSubEvent.Subscribe(action.Action);
+            Action<string> actionReference = (arg) => { };
+            var pubSubEvent = new PubSubEventFixture<string>();
+            var token = pubSubEvent.Subscribe(actionReference);
 
             // Assert
-            Assert.True(pubSubEvent.Contains(action.Action));
+            Assert.True(pubSubEvent.Contains(actionReference));
 
             // Act
-            pubSubEvent.Unsubscribe(action.Action);
+            pubSubEvent.Unsubscribe(actionReference);
 
             // Assert
-            Assert.False(pubSubEvent.Contains(action.Action));
+            Assert.False(pubSubEvent.Contains(actionReference));
         }
 
         #endregion Unsubscribe Tests
@@ -148,24 +141,24 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void ContainsNonGeneric_SearchByAction_ShouldFindSubscriber()
         {
             // Prepare
-            var pubSubEvent = new PubSubEventMock();
-            var action = new ActionMock();
-            var token = pubSubEvent.Subscribe(action.Action);
+            Action actionReference = () => { };
+            var pubSubEvent = new PubSubEventFixture();
+            var token = pubSubEvent.Subscribe(actionReference);
 
             // Assert
-            Assert.True(pubSubEvent.Contains(action.Action));
+            Assert.True(pubSubEvent.Contains(actionReference));
         }
 
         [Fact]
         public void ContainsGeneric_SearchByAction_ShouldFindSubscriber()
         {
             // Prepare
-            var pubSubEvent = new PubSubEventMock<string>();
-            var action = new ActionMock();
-            var token = pubSubEvent.Subscribe(action.Action);
+            Action<string> actionReference = (arg) => { };
+            var pubSubEvent = new PubSubEventFixture<string>();
+            var token = pubSubEvent.Subscribe(actionReference);
 
             // Assert
-            Assert.True(pubSubEvent.Contains(action.Action));
+            Assert.True(pubSubEvent.Contains(actionReference));
         }
 
         #endregion Contains Tests

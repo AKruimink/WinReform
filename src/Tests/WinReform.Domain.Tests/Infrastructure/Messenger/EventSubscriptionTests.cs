@@ -1,8 +1,8 @@
 ﻿using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Infrastructure.Messenger.Strategies;
-using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
 using System;
 using Xunit;
+using Moq;
 
 namespace WinReform.Domain.Tests.Infrastructure.Messenger
 {
@@ -16,10 +16,6 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         [Fact]
         public void ConstructNonGeneric_NullActionReference_ShouldThrowArgumentNullException()
         {
-            // Prepare
-
-            // Act
-
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -31,14 +27,13 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void ConstructGeneric_NullActionReference_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)(arg => { return true; }) };
-
-            // Act
+            var delegateReferenceMock = new Mock<IDelegateReference>();
+            delegateReferenceMock.Setup(x => x.Delegate).Returns((Predicate<object>)delegate { return true; });
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var eventSubscription = new EventSubscription<object>(null!, mockFilterReference);
+                var eventSubscription = new EventSubscription<object>(null!, delegateReferenceMock.Object);
             });
         }
 
@@ -46,14 +41,13 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void ConstructGeneric_NullFilterReference_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
-
-            // Act
+            var delegateReferenceMock = new Mock<IDelegateReference>();
+            delegateReferenceMock.Setup(x => x.Delegate).Returns((Action<object>)delegate { });
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var eventSubscription = new EventSubscription<object>(mockActionReference, null!);
+                var eventSubscription = new EventSubscription<object>(delegateReferenceMock.Object, null!);
             });
         }
 
@@ -61,14 +55,13 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void ConstructNonGeneric_NullAction_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = null };
-
-            // Act
+            var delegateReferenceMock = new Mock<IDelegateReference>();
+            delegateReferenceMock.Setup(x => x.Delegate).Returns(null);
 
             // Assert
             Assert.Throws<ArgumentException>(() =>
             {
-                var eventSubscription = new EventSubscription(mockActionReference);
+                var eventSubscription = new EventSubscription(delegateReferenceMock.Object);
             });
         }
 
@@ -76,15 +69,15 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void ConstructGeneric_NullAction_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = null };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)(arg => { return true; }) };
-
-            // Act
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns(null);
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<object>)delegate { return true; });
 
             // Assert
             Assert.Throws<ArgumentException>(() =>
             {
-                var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+                var eventSubscription = new EventSubscription<object>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
             });
         }
 
@@ -92,15 +85,15 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void ConstructGeneric_NullFilter_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = null };
-
-            // Act
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<object>)delegate { });
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns(null);
 
             // Assert
             Assert.Throws<ArgumentException>(() =>
             {
-                var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+                var eventSubscription = new EventSubscription<object>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
             });
         }
 
@@ -108,14 +101,13 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void ConstructNonGeneric_DifferentTargetTypeActionReference_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<int>)delegate { } };
-
-            // Act
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<int>)delegate { });
 
             // Assert
             Assert.Throws<ArgumentException>(() =>
             {
-                var eventSubscription = new EventSubscription(mockActionReference);
+                var eventSubscription = new EventSubscription(delegateActionReferenceMock.Object);
             });
         }
 
@@ -123,15 +115,15 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void ConstructGeneric_DifferentTargetTypeActionReference_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<int>)delegate { } };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)(arg => { return true; }) };
-
-            // Act
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<int>)delegate { });
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<object>)delegate { return true; });
 
             // Assert
             Assert.Throws<ArgumentException>(() =>
             {
-                var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+                var eventSubscription = new EventSubscription<object>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
             });
         }
 
@@ -139,15 +131,15 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void ConstructGeneric_DifferentTargetTypeFilterReference_ShouldThrowArgumentException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<int>)(arg => { return true; }) };
-
-            // Act
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<object>)delegate { });
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<int>)delegate { return true; });
 
             // Assert
             Assert.Throws<ArgumentException>(() =>
             {
-                var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+                var eventSubscription = new EventSubscription<object>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
             });
         }
 
@@ -159,15 +151,17 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void SubscriptionTokenNonGeneric_Intialize_ShouldInitialize()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { } };
-            var eventSubscription = new EventSubscription(mockActionReference);
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action)delegate { });
+
+            var eventSubscription = new EventSubscription(delegateActionReferenceMock.Object);
             var subscriptionToken = new SubscriptionToken();
 
             // Act
             eventSubscription.SubscriptionToken = subscriptionToken;
 
             // Assert
-            Assert.Same(mockActionReference.Delegate, eventSubscription.GetAction);
+            Assert.Same(delegateActionReferenceMock.Object, eventSubscription.GetAction);
             Assert.Same(subscriptionToken, eventSubscription.SubscriptionToken);
         }
 
@@ -175,17 +169,20 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void SubscriptionTokenGeneric_Intialize_ShouldInitialize()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)(arg => { return true; }) };
-            var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<object>)delegate { });
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<object>)delegate { return true; });
+
+            var eventSubscription = new EventSubscription<object>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
             var subscriptionToken = new SubscriptionToken();
 
             // Act
             eventSubscription.SubscriptionToken = subscriptionToken;
 
             // Assert
-            Assert.Same(mockActionReference.Delegate, eventSubscription.GetAction);
-            Assert.Same(mockFilterReference.Delegate, eventSubscription.GetFilter);
+            Assert.Same(delegateActionReferenceMock.Object, eventSubscription.GetAction);
+            Assert.Same(delegateFilterReferenceMock.Object, eventSubscription.GetFilter);
             Assert.Same(subscriptionToken, eventSubscription.SubscriptionToken);
         }
 
@@ -197,8 +194,9 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void GetActionNonGeneric_NullAction_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { } };
-            var eventSubscription = new EventSubscription(mockActionReference);
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action)delegate { });
+            var eventSubscription = new EventSubscription(delegateActionReferenceMock.Object);
             Action<object[]>? publishAction;
 
             // Act
@@ -208,7 +206,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             Assert.NotNull(publishAction);
 
             // Act
-            mockActionReference.Delegate = null;
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns(null);
             publishAction = eventSubscription.GetExecutionStrategy();
 
             // Assert
@@ -219,9 +217,12 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void GetActionGeneric_NullAction_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)(arg => { return true; }) };
-            var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<object>)delegate { });
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<object>)delegate { return true; });
+
+            var eventSubscription = new EventSubscription<object>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
             Action<object[]>? publishAction;
 
             // Act
@@ -231,7 +232,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             Assert.NotNull(publishAction);
 
             // Act
-            mockActionReference.Delegate = null;
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns(null);
             publishAction = eventSubscription.GetExecutionStrategy();
 
             // Assert
@@ -248,9 +249,13 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             // Prepare
             string? passedArgumentToAction = null;
             string? passedArgumentToFilter = null;
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<string>)(obj => passedArgumentToAction = obj) };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<string>)(obj => { passedArgumentToFilter = obj; return true; }) };
-            var eventSubscription = new EventSubscription<string>(mockActionReference, mockFilterReference);
+
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<string>)(obj => { passedArgumentToAction = obj; }));
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<string>)(obj => { passedArgumentToFilter = obj; return true; }));
+
+            var eventSubscription = new EventSubscription<string>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
             var publishAction = eventSubscription.GetExecutionStrategy();
 
             // Act
@@ -265,8 +270,10 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void GetExecutionStrategyNonGeneric_NullAction_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { } };
-            var eventSubscription = new EventSubscription(mockActionReference);
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action)delegate { });
+
+            var eventSubscription = new EventSubscription(delegateActionReferenceMock.Object);
             Action<object[]>? publishAction;
 
             // Act
@@ -276,7 +283,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             Assert.NotNull(publishAction);
 
             // Act
-            mockActionReference.Delegate = null;
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns(null);
             publishAction = eventSubscription.GetExecutionStrategy();
 
             // Assert
@@ -287,9 +294,12 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void GetExecutionStrategyGeneric_NullAction_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<int>)delegate { } };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<int>)delegate { return false; } };
-            var eventSubscription = new EventSubscription<int>(mockActionReference, mockFilterReference);
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<object>)delegate { });
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<object>)delegate { return false; });
+
+            var eventSubscription = new EventSubscription<int>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
             Action<object[]>? publishAction;
 
             // Act
@@ -299,7 +309,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             Assert.NotNull(publishAction);
 
             // Act
-            mockActionReference.Delegate = null;
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns(null);
             publishAction = eventSubscription.GetExecutionStrategy();
 
             // Assert
@@ -310,9 +320,12 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void GetExecutionStrategyGeneric_NullFilter_ShouldReturnNull()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<int>)delegate { } };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<int>)delegate { return false; } };
-            var eventSubscription = new EventSubscription<int>(mockActionReference, mockFilterReference);
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<object>)delegate { });
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<object>)delegate { return false; });
+
+            var eventSubscription = new EventSubscription<int>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
             Action<object[]>? publishAction;
 
             // Act
@@ -322,7 +335,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             Assert.NotNull(publishAction);
 
             // Act
-            mockFilterReference.Delegate = null;
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns(null);
             publishAction = eventSubscription.GetExecutionStrategy();
 
             // Assert
@@ -334,9 +347,13 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         {
             // Prepare
             var actionExecuted = false;
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<int>)delegate { actionExecuted = true; } };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<int>)delegate { return false; } };
-            var eventSubscription = new EventSubscription<int>(mockActionReference, mockFilterReference);
+
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<int>)(obj => actionExecuted = true)) ;
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<int>)delegate { return false; });
+
+            var eventSubscription = new EventSubscription<int>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
             var publishAction = eventSubscription.GetExecutionStrategy();
 
             // Act
@@ -355,11 +372,14 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         {
             // Prepare
             var actionExecuted = false;
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { actionExecuted = true; } };
-            var eventSubscription = new EventSubscription(mockActionReference);
+
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action)delegate { actionExecuted = true; });
+
+            var eventSubscription = new EventSubscription(delegateActionReferenceMock.Object);
 
             // Act
-            eventSubscription.InvokeAction((Action)mockActionReference.Delegate);
+            eventSubscription.InvokeAction((Action)delegateActionReferenceMock.Object.Delegate!);
 
             // Assert
             Assert.True(actionExecuted);
@@ -370,12 +390,16 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         {
             // Prepare
             var actionExecuted = false;
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { actionExecuted = true; } };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)delegate { return false; } };
-            var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<object>)(obj => actionExecuted = true));
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<object>)delegate { return false; });
+
+            var eventSubscription = new EventSubscription<object>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
 
             // Act
-            eventSubscription.InvokeAction((Action<object>)mockActionReference.Delegate, "testString");
+            eventSubscription.InvokeAction((Action<object>)delegateActionReferenceMock.Object.Delegate!, "testString");
 
             // Assert
             Assert.True(actionExecuted);
@@ -385,10 +409,9 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void InvokeActionNonGeneric_NullAction_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action)delegate { } };
-            var eventSubscription = new EventSubscription(mockActionReference);
-
-            // Act
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action)delegate { });
+            var eventSubscription = new EventSubscription(delegateActionReferenceMock.Object);
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
@@ -401,9 +424,12 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void InvokeActionGeneric_NullAction_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { } };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)delegate { return true; } };
-            var eventSubscription = new EventSubscription<object>(mockActionReference, mockFilterReference);
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action)delegate { });
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<object>)delegate { return true; });
+
+            var eventSubscription = new EventSubscription<object>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
 
             // Act
 
@@ -419,12 +445,16 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         {
             // Prepare
             string? passedArgument = null;
-            var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<string>)(obj => passedArgument = obj) };
-            var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<string>)delegate { return true; } };
-            var eventSubscription = new EventSubscription<string>(mockActionReference, mockFilterReference);
+
+            var delegateActionReferenceMock = new Mock<IDelegateReference>();
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<string>)(obj => passedArgument = obj));
+            var delegateFilterReferenceMock = new Mock<IDelegateReference>();
+            delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<string>)delegate { return true; });
+
+            var eventSubscription = new EventSubscription<string>(delegateActionReferenceMock.Object, delegateFilterReferenceMock.Object);
 
             // Act
-            eventSubscription.InvokeAction((Action<string>)mockActionReference.Delegate, "someString");
+            eventSubscription.InvokeAction((Action<string>)delegateActionReferenceMock.Object.Delegate!, "someString");
 
             // Assert
             Assert.Equal("someString", passedArgument);
