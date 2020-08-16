@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\WinReform\WinReform.Gui\WinReform.Gui.csproj" />
+    <ProjectReference Include="..\..\WinReform\WinReform.Domain\WinReform.Domain.csproj" />
   </ItemGroup>
 
 </Project>
