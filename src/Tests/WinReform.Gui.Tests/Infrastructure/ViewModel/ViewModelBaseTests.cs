@@ -9,6 +9,35 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
     /// </summary>
     public class ViewModelBaseTests : ViewModelBase
     {
+        /// <summary>
+        /// Defines a class that represents a viewmodel fixture that provides a fake implementation of <see cref="ViewModelBase"/>
+        /// </summary>
+        private class ViewModelFixture : ViewModelBase
+        {
+            /// <summary>
+            /// Gets or Sets a test text 
+            /// </summary>
+            public string Text
+            {
+                get => _text;
+                set => SetProperty(ref _text, value);
+            }
+
+            private string _text;
+
+            /// <summary>
+            /// Gets or Sets a test number
+            /// </summary>
+            public int Number
+            {
+                get => _number;
+                set => SetProperty(ref _number, value);
+            }
+
+            private int _number;
+        }
+
+
         #region SetProperty Tests
 
         [Fact]
