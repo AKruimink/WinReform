@@ -80,6 +80,7 @@ namespace WinReform.Domain.Tests.Settings
         {
             // Prepare
             var settingStoreMock = new Mock<ISettingStore>();
+            settingStoreMock.Setup(x => x.Load<ApplicationSettings>()).Returns(new ApplicationSettings());
             var eventAggregatorMock = new Mock<IEventAggregator>();
             var setting = new Setting<ApplicationSettings>(settingStoreMock.Object, eventAggregatorMock.Object);
 
@@ -118,6 +119,7 @@ namespace WinReform.Domain.Tests.Settings
         {
             // Prepare
             var settingStoreMock = new Mock<ISettingStore>();
+            settingStoreMock.Setup(x => x.Load<ApplicationSettings>()).Returns(new ApplicationSettings());
             var eventAggregatorMock = new Mock<IEventAggregator>();
             var setting = new Setting<ApplicationSettings>(settingStoreMock.Object, eventAggregatorMock.Object);
 
