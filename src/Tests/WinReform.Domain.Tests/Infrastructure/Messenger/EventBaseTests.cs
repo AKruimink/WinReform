@@ -19,6 +19,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             // Prepare
             var eventBase = new EventFixture();
             var eventSubscriptionMock = new Mock<IEventSubscription>();
+            eventSubscriptionMock.SetupAllProperties();
 
             // Act
             var token = eventBase.Subscribe(eventSubscriptionMock.Object);
@@ -38,6 +39,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             // Prepare
             var eventBase = new EventFixture();
             var eventSubscriptionMock = new Mock<IEventSubscription>();
+            eventSubscriptionMock.SetupAllProperties();
             var token = eventBase.Subscribe(eventSubscriptionMock.Object);
 
             // Assert
@@ -69,7 +71,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             eventBase.Publish();
 
             // Assert
-            eventSubscriptionMock.Verify(x => x, Times.Once());
+            eventSubscriptionMock.Verify(x => x.GetExecutionStrategy(), Times.Once());
             Assert.True(eventPublished);
         }
 
@@ -85,18 +87,16 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             eventSubscriptionMock1.Setup(x => x.GetExecutionStrategy()).Returns(delegate { eventPublished1 = true; });
             eventSubscriptionMock2.Setup(x => x.GetExecutionStrategy()).Returns(delegate { eventPublished2 = true; });
 
-            eventSubscriptionMock1.Setup(x => x.GetExecutionStrategy()).Returns(null);
-
             // Act
             eventBase.Subscribe(eventSubscriptionMock1.Object);
             eventBase.Subscribe(eventSubscriptionMock2.Object);
             eventBase.Publish();
 
             // Assert
-            eventSubscriptionMock1.Verify(x => x, Times.Once());
+            eventSubscriptionMock1.Verify(x => x.GetExecutionStrategy(), Times.Once());
             Assert.True(eventPublished1);
 
-            eventSubscriptionMock2.Verify(x => x, Times.Once());
+            eventSubscriptionMock2.Verify(x => x.GetExecutionStrategy(), Times.Once());
             Assert.True(eventPublished2);
         }
 
@@ -107,13 +107,14 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             var eventBase = new EventFixture();
             var eventSubscriptionMock = new Mock<IEventSubscription>();
             eventSubscriptionMock.Setup(x => x.GetExecutionStrategy()).Returns(null);
+            eventSubscriptionMock.SetupAllProperties();
             var token = eventBase.Subscribe(eventSubscriptionMock.Object);
 
             // Act
             eventBase.Publish();
 
             // Assert
-            Assert.NotNull(token);
+            Assert.False(eventBase.Contains(token));
         }
 
         #endregion InternalPublish Tests
