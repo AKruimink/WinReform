@@ -9,5 +9,14 @@ namespace WinReform.Tests.Fixtures
     /// </summary>
     public class ClassFixture
     {
+        /// <summary>
+        /// Empty method
+        /// </summary>
+        public void EmptyMethod() { }
+
+        /// <summary>
+        /// Empty static method
+        /// </summary>
+        public static void StaticEmptyMethod() { }
     }
 }
