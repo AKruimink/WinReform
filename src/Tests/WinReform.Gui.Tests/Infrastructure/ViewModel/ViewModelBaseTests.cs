@@ -23,7 +23,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
                 set => SetProperty(ref _text, value);
             }
 
-            private string _text;
+            private string _text = string.Empty;
 
             /// <summary>
             /// Gets or Sets a test number
@@ -35,6 +35,15 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
             }
 
             private int _number;
+
+            /// <summary>
+            /// Raises the RaisePropertyChanged of the <see cref="ViewModelBase"/>
+            /// </summary>
+            /// <param name="propertyName">Name of the property that changed</param>
+            public void InvokePropertyChanged(string propertyName)
+            {
+                RaisePropertyChanged(propertyName);
+            }
         }
 
 
@@ -123,7 +132,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
             };
 
             // Act
-            RaisePropertyChanged(nameof(viewModelFixture.Number));
+            viewModelFixture.InvokePropertyChanged(nameof(viewModelFixture.Number));
 
             //Assert
             Assert.True(invoked);
