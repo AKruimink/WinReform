@@ -117,35 +117,38 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
         public void Execute_PassObject_ShouldPassObject()
         {
             // Prepare
+            object? passedObject = null;
+            var objectToPass = new object();
             var callBackActionMock = new Mock<Action<object>>();
             var command = new DelegateCommand<object>(callBackActionMock.Object);
+            callBackActionMock.Setup(x => x(It.IsAny<object>())).Callback<object>((obj) => passedObject = obj);
 
             // Act
-            command.Execute(new object());
+            command.Execute(objectToPass);
 
             // Assert
-            callBackActionMock.Verify(x => x, Times.Once);
+            Assert.NotNull(passedObject);
+            Assert.Equal(objectToPass, passedObject);
         }
 
         [Fact]
         public void Execute_PassInstance_ShouldPassInstance()
         {
             // Prepare
-            ClassFixture? passedFakeClass = default;
-            var fakeClass = new ClassFixture();
+            ClassFixture? passedClassFixture = default;
+            var classFixture = new ClassFixture();
             var callBackActionMock = new Mock<Action<ClassFixture>>();
             var command = new DelegateCommand<ClassFixture>(callBackActionMock.Object);
 
             callBackActionMock.Setup(x => x(It.IsAny<ClassFixture>()))
-                .Callback<ClassFixture>((obj) => passedFakeClass = obj);
+                .Callback<ClassFixture>((obj) => passedClassFixture = obj);
 
             // Act
-            command.Execute(fakeClass);
+            command.Execute(classFixture);
 
             // Assert
-            callBackActionMock.Verify(x => x, Times.Once);
-            Assert.NotNull(passedFakeClass);
-            Assert.Equal(fakeClass, passedFakeClass);
+            Assert.NotNull(passedClassFixture);
+            Assert.Equal(classFixture, passedClassFixture);
         }
 
         #endregion Execute Tests
