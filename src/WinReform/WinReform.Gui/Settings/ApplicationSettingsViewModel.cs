@@ -58,11 +58,13 @@ namespace WinReform.Gui.Settings
 
         /// <summary>
         /// Create a new instance of the <see cref="ApplicationSettingsViewModel"/>
+        /// <param name="applicationSettings"><see cref="ISetting{ApplicationSettings}"/> of the current app settings</param>
         /// </summary>
-        public ApplicationSettingsViewModel(ISettingFactory settingFactory)
+        public ApplicationSettingsViewModel(ISetting<ApplicationSettings> applicationSettings)
         {
-            _settings = settingFactory?.Create<ApplicationSettings>() ?? throw new ArgumentNullException(nameof(settingFactory));
+            _settings = applicationSettings ?? throw new ArgumentNullException(nameof(applicationSettings));
 
+            // Setup view
             UseDarkTheme = _settings.CurrentSetting.UseDarkTheme;
             MinimizeOnClose = _settings.CurrentSetting.MinimizeOnClose;
             AutoRefreshActiveWindows = _settings.CurrentSetting.AutoRefreshActiveWindows;

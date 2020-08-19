@@ -39,13 +39,6 @@
         </ResourceDictionary>
     </mah:MetroWindow.Resources>
 
-    <!-- Window Triggers -->
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding WindowLoadedCommand}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
-
     <!-- Left title items -->
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
