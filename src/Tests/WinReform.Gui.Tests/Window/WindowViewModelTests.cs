@@ -4,6 +4,7 @@ using Xunit;
 using WinReform.Domain.Settings;
 using Moq;
 using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Infrastructure.Events;
 
 namespace WinReform.Gui.Tests.Window
 {
@@ -18,11 +19,13 @@ namespace WinReform.Gui.Tests.Window
         public void Construct_ValidConstruction_ShouldCreateWindowViewModel()
         {
             // Prepare
-            var settingFactoryMock = new Mock<ISettingFactory>();
             var eventAggregatorMock = new Mock<IEventAggregator>();
+            var applicationSettingMock = new Mock<ISetting<ApplicationSettings>>();
+
+            eventAggregatorMock.Setup(x => x.GetEvent<SettingChangedEvent<ApplicationSettings>>()).Returns(new Mock<SettingChangedEvent<ApplicationSettings>>().Object);
 
             // Act
-            var viewModel = new WindowViewModel(settingFactoryMock.Object, eventAggregatorMock.Object);
+            var viewModel = new WindowViewModel(eventAggregatorMock.Object, applicationSettingMock.Object);
 
             // Assert
             Assert.NotNull(viewModel);
@@ -33,11 +36,12 @@ namespace WinReform.Gui.Tests.Window
         {
             // Prepare
             var eventAggregatorMock = new Mock<IEventAggregator>();
+            eventAggregatorMock.Setup(x => x.GetEvent<SettingChangedEvent<ApplicationSettings>>()).Returns(new Mock<SettingChangedEvent<ApplicationSettings>>().Object);
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new WindowViewModel(null!, eventAggregatorMock.Object);
+                var viewModel = new WindowViewModel(eventAggregatorMock.Object, null!);
             });
         }
 
@@ -45,12 +49,12 @@ namespace WinReform.Gui.Tests.Window
         public void Construct_NullEventAggregator_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var settingFactoryMock = new Mock<ISettingFactory>();
+            var applicationSettingMock = new Mock<ISetting<ApplicationSettings>>();
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new WindowViewModel(settingFactoryMock.Object, null!);
+                var viewModel = new WindowViewModel(null!, applicationSettingMock.Object);
             });
         }
 

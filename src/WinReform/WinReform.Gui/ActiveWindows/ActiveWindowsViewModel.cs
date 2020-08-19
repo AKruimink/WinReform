@@ -94,6 +94,7 @@ namespace WinReform.Gui.ActiveWindows
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
             _windowService = windowService ?? throw new ArgumentNullException(nameof(windowService));
+            _ = applicationSettings ?? throw new ArgumentNullException(nameof(windowService));
 
             // setup commands
             RefreshActiveWindowsCommand = new DelegateCommand(RefreshActiveWindows);

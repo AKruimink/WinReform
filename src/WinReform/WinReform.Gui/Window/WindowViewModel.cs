@@ -57,6 +57,7 @@ namespace WinReform.Gui.Window
         {
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
+            _ = applicationSettings ?? throw new ArgumentNullException(nameof(applicationSettings));
             ApplicationSettingsChanged(applicationSettings);
 
             // Setup commands

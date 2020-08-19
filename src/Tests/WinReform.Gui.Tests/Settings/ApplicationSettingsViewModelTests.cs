@@ -17,10 +17,11 @@ namespace WinReform.Gui.Tests.Settings
         public void Construct_ValidConstruction_ShouldCreateViewModel()
         {
             // Prepare
-            var settingFactoryMock = new Mock<ISettingFactory>();
+            var applicationSettingMock = new Mock<ISetting<ApplicationSettings>>();
+            applicationSettingMock.Setup(x => x.CurrentSetting).Returns(new Mock<ApplicationSettings>().Object);
 
             // Act
-            var viewModel = new ApplicationSettingsViewModel(settingFactoryMock.Object);
+            var viewModel = new ApplicationSettingsViewModel(applicationSettingMock.Object);
 
             // Assert
             Assert.NotNull(viewModel);

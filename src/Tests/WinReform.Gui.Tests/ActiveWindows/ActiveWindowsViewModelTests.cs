@@ -5,6 +5,7 @@ using Moq;
 using WinReform.Domain.Windows;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
+using WinReform.Domain.Infrastructure.Events;
 
 namespace WinReform.Gui.Tests.ActiveWindows
 {
@@ -19,12 +20,14 @@ namespace WinReform.Gui.Tests.ActiveWindows
         public void Construct_ValidArguments_ShouldConstructActiveWindowsViewModel()
         {
             // Prepare
-            var settingFactoryMock = new Mock<ISettingFactory>();
             var eventAggregatorMock = new Mock<IEventAggregator>();
             var windowServiceMock = new Mock<IWindowService>();
+            var applicationSettingMock = new Mock<ISetting<ApplicationSettings>>();
+
+            eventAggregatorMock.Setup(x => x.GetEvent<SettingChangedEvent<ApplicationSettings>>()).Returns(new Mock<SettingChangedEvent<ApplicationSettings>>().Object);
 
             // Act
-            var viewModel = new ActiveWindowsViewModel(settingFactoryMock.Object, eventAggregatorMock.Object, windowServiceMock.Object);
+            var viewModel = new ActiveWindowsViewModel(eventAggregatorMock.Object, windowServiceMock.Object, applicationSettingMock.Object);
 
             // Assert
             Assert.NotNull(viewModel);
@@ -38,10 +41,12 @@ namespace WinReform.Gui.Tests.ActiveWindows
             var eventAggregatorMock = new Mock<IEventAggregator>();
             var windowServiceMock = new Mock<IWindowService>();
 
+            eventAggregatorMock.Setup(x => x.GetEvent<SettingChangedEvent<ApplicationSettings>>()).Returns(new Mock<SettingChangedEvent<ApplicationSettings>>().Object);
+
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new ActiveWindowsViewModel(null!, eventAggregatorMock.Object, windowServiceMock.Object);
+                var viewModel = new ActiveWindowsViewModel(eventAggregatorMock.Object, windowServiceMock.Object, null!);
             });
         }
 
@@ -50,13 +55,13 @@ namespace WinReform.Gui.Tests.ActiveWindows
         public void Construct_NullEventAggregator_ShouldThrowArgumentNullException()
         {
             // Prepare 
-            var settingFactoryMock = new Mock<ISettingFactory>();
             var windowServiceMock = new Mock<IWindowService>();
+            var applicationSettingMock = new Mock<ISetting<ApplicationSettings>>();
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new ActiveWindowsViewModel(settingFactoryMock.Object, null!, windowServiceMock.Object);
+                var viewModel = new ActiveWindowsViewModel(null!, windowServiceMock.Object, applicationSettingMock.Object);
             });
         }
 
@@ -64,13 +69,15 @@ namespace WinReform.Gui.Tests.ActiveWindows
         public void Construct_NullWindowService_ShouldThrowArgumentNullException()
         {
             // Prepare 
-            var settingFactoryMock = new Mock<ISettingFactory>();
             var eventAggregatorMock = new Mock<IEventAggregator>();
+            var applicationSettingMock = new Mock<ISetting<ApplicationSettings>>();
+
+            eventAggregatorMock.Setup(x => x.GetEvent<SettingChangedEvent<ApplicationSettings>>()).Returns(new Mock<SettingChangedEvent<ApplicationSettings>>().Object);
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var viewModel = new ActiveWindowsViewModel(settingFactoryMock.Object, eventAggregatorMock.Object, null!);
+                var viewModel = new ActiveWindowsViewModel(eventAggregatorMock.Object, null!, applicationSettingMock.Object);
             });
         }
 
@@ -82,10 +89,13 @@ namespace WinReform.Gui.Tests.ActiveWindows
         public void RefreshActiveWindows_Execution_ShouldCallWindowService()
         {
             // Prepare
-            var settingFactoryMock = new Mock<ISettingFactory>();
             var eventAggregatorMock = new Mock<IEventAggregator>();
             var windowServiceMock = new Mock<IWindowService>();
-            var viewmodel = new ActiveWindowsViewModel(settingFactoryMock.Object, eventAggregatorMock.Object, windowServiceMock.Object);
+            var applicationSettingMock = new Mock<ISetting<ApplicationSettings>>();
+
+            eventAggregatorMock.Setup(x => x.GetEvent<SettingChangedEvent<ApplicationSettings>>()).Returns(new Mock<SettingChangedEvent<ApplicationSettings>>().Object);
+
+            var viewmodel = new ActiveWindowsViewModel(eventAggregatorMock.Object, windowServiceMock.Object, applicationSettingMock.Object);
 
             // Act
             viewmodel.RefreshActiveWindows();
