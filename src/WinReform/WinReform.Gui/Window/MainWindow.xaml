@@ -8,6 +8,7 @@
                  xmlns:converters="clr-namespace:WinReform.Gui.Infrastructure.Converters"
                  xmlns:settings="clr-namespace:WinReform.Gui.Settings"
                  xmlns:activeWindows="clr-namespace:WinReform.Gui.ActiveWindows"
+                 xmlns:resizer="clr-namespace:WinReform.Gui.Resizer"
                  xmlns:utilities="clr-namespace:WinReform.Gui.Utilities"
                  xmlns:viewModel="clr-namespace:WinReform.Gui.Infrastructure.Common.ViewModel"
                  xmlns:local="clr-namespace:WinReform.Gui.Window"
@@ -116,6 +117,7 @@
                                      mah:TabControlHelper.Underlined="TabPanel">
                     <mah:MetroTabItem Header="Resizer"
                                       mah:HeaderedControlHelper.HeaderFontSize="18">
+                        <resizer:ResizerView/>
                     </mah:MetroTabItem>
                     <mah:MetroTabItem Header="Locator"
                                       mah:HeaderedControlHelper.HeaderFontSize="18">
