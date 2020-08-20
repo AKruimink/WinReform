@@ -38,7 +38,7 @@ namespace WinReform.Gui.Infrastructure.Converters
                 newValue = System.Convert.ToInt32(value, CultureInfo.InvariantCulture) - System.Convert.ToInt32(parameter, CultureInfo.InvariantCulture);
             }
 
-            return newValue;
+            return newValue < 0 ? 0 : newValue;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace WinReform.Gui.Infrastructure.Converters
                 newValue = System.Convert.ToInt32(value, CultureInfo.InvariantCulture) + System.Convert.ToInt32(parameter, CultureInfo.InvariantCulture);
             }
 
-            return newValue;
+            return newValue < 0 ? 0 : newValue;
         }
     }
 }
