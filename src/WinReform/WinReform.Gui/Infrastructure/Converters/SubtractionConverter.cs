@@ -22,7 +22,6 @@ namespace WinReform.Gui.Infrastructure.Converters
         /// <returns>Returns an instance of the <see cref="SubtractionConverter"/></returns>
         public override object ProvideValue(IServiceProvider serviceProvider) => _instance ?? (_instance = new SubtractionConverter());
 
-
         /// <summary>
         /// Calculate a new <see cref="int"/> by subtracting a value
         /// </summary>

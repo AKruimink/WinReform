@@ -1,7 +1,7 @@
-﻿using WinReform.Domain.Infrastructure.Messenger;
-using WinReform.Domain.Tests.Mocks;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Tests.Fixtures;
 using Xunit;
 
 namespace WinReform.Domain.Tests.Infrastructure.Messenger
@@ -16,10 +16,6 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         [Fact]
         public void Construct_NullDelegate_ShouldThrowNullArgumentException()
         {
-            // Prepare
-
-            // Act
-
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -31,11 +27,11 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public async Task Construct_KeepReferenceAliveTrue_ShouldPreventGarbageCollection()
         {
             // Prepare
-            var @delegate = new DelegateHandlerMock();
-            var delegateReference = new DelegateReference((Action)@delegate.EventMethod, true);
+            Action referenceAction = () => { };
+            var delegateReference = new DelegateReference(referenceAction, true);
 
             // Act
-            @delegate = null!;
+            referenceAction = null!;
             await Task.Delay(100);
             GC.Collect();
 
@@ -47,11 +43,11 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public async Task Construct_KeepReferenceAliveFalse_ShouldGetGarbageCollected()
         {
             // Prepare
-            var @delegate = new DelegateHandlerMock();
-            var delegateReference = new DelegateReference((Action)@delegate.EventMethod, true);
+            Action referenceAction = () => { };
+            var delegateReference = new DelegateReference(referenceAction, false);
 
             // Act
-            @delegate = null!;
+            referenceAction = null!;
             await Task.Delay(100);
             GC.Collect();
 
@@ -63,9 +59,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void Construct_WeakReferenceStaticDelegate_ShouldSet()
         {
             // Prepare
-            var delegateReference = new DelegateReference((Action)DelegateHandlerMock.StaticMethod, false);
-
-            // Act
+            var delegateReference = new DelegateReference((Action)ClassFixture.StaticEmptyMethod, false);
 
             // Assert
             Assert.NotNull(delegateReference.Delegate);
@@ -79,27 +73,27 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void GetDelegate_ActionDelegate_ShouldReturnAction()
         {
             // Prepare
-            var @delegate = new DelegateHandlerMock();
-            var action = new Action<string>(@delegate.ActionMethod);
+            var passedArgument = "";
+            void ReferenceAction(string arg) { passedArgument = arg; }
+            var action = new Action<string>(ReferenceAction);
             var delegateReference = new DelegateReference(action, false);
 
             // Act
             ((Action<string>)delegateReference.Delegate!)("payload");
 
             // Assert
-            Assert.Equal("payload", @delegate.MethodParameter);
+            Assert.Equal("payload", passedArgument);
         }
 
         [Fact]
         public async Task GetDelegate_DelegateNotAlive_ShouldReturnNull()
         {
             // Prepare
-            var @delegate = new DelegateHandlerMock();
-            var weakReference = new WeakReference(@delegate);
-            var delegateReference = new DelegateReference((Action)@delegate.EventMethod, false);
+            var classFixture = new ClassFixture();
+            var delegateReference = new DelegateReference((Action)classFixture.EmptyMethod, false);
 
             // Act
-            @delegate = null!;
+            classFixture = null!;
             await Task.Delay(100);
             GC.Collect();
 
@@ -115,36 +109,35 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void DelegateEquals_EqualDelegate_ShouldReturnTrue()
         {
             // Prepare
-            var @delegate = new DelegateHandlerMock();
-            var action = new Action<string>(@delegate.ActionMethod);
+            static void ReferenceAction(string arg) { }
+            var action = new Action<string>(ReferenceAction);
             var delegateReference = new DelegateReference(action, false);
 
-            // Act
-
             // Assert
-            Assert.True(delegateReference.DelegateEquals(new Action<string>(@delegate.ActionMethod)));
+            Assert.True(delegateReference.DelegateEquals(new Action<string>(ReferenceAction)));
         }
 
         [Fact]
         public void DelegateEquals_DoesntEqualDelegate_ShouldReturnFalse()
         {
             // Prepare
-            var @delegate = new DelegateHandlerMock();
-            var delegateReference = new DelegateReference(new Action<string>(@delegate.ActionMethod), false);
+            static void ReferenceAction(string arg) { }
+            Action eventAction = () => { };
+            var delegateReference = new DelegateReference(new Action<string>(ReferenceAction), false);
 
             // Act
 
             // Assert
-            Assert.False(delegateReference.DelegateEquals(new Action(@delegate.EventMethod)));
+            Assert.False(delegateReference.DelegateEquals(eventAction));
         }
 
         [Fact]
         public void DelegateEquals_EqualsNullDelegate_ShouldReturnFalse()
         {
             // Prepare
-            var @delegate = new DelegateHandlerMock();
-            var weakReference = new WeakReference(@delegate);
-            var delegateReference = new DelegateReference((Action)@delegate.EventMethod, false);
+            Action referenceAction = () => { };
+            var weakReference = new WeakReference(referenceAction);
+            var delegateReference = new DelegateReference(referenceAction, false);
 
             // Act
             GC.KeepAlive(weakReference);
@@ -158,12 +151,12 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public async Task DelegateEquals_EqualNullDelegateReferenceNotAlive_ShouldReturnTrue()
         {
             // Prepare
-            var @delegate = new DelegateHandlerMock();
-            var weakReference = new WeakReference(@delegate);
-            var delegateReference = new DelegateReference((Action)@delegate.EventMethod, false);
+            var classFixture = new ClassFixture();
+            var weakReference = new WeakReference((Action)classFixture.EmptyMethod);
+            var delegateReference = new DelegateReference((Action)classFixture.EmptyMethod, false);
 
             // Act
-            @delegate = null!;
+            classFixture = null!;
             await Task.Delay(100);
             GC.Collect();
 
@@ -176,12 +169,12 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void DelegateEquals_EqualStaticDelegate_ShouldReturnTrue()
         {
             // Prepare
-            var delegateReference = new DelegateReference((Action)DelegateHandlerMock.StaticMethod, false);
+            var delegateReference = new DelegateReference((Action)ClassFixture.StaticEmptyMethod, false);
 
             // Act
 
             // Assert
-            Assert.True(delegateReference.DelegateEquals((Action)DelegateHandlerMock.StaticMethod));
+            Assert.True(delegateReference.DelegateEquals((Action)ClassFixture.StaticEmptyMethod));
         }
 
         #endregion DelegateEquals Tests

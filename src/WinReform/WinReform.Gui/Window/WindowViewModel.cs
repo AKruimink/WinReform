@@ -8,7 +8,6 @@ using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
 using WinReform.Gui.Infrastructure.Common.Command;
 using WinReform.Gui.Infrastructure.Common.ViewModel;
-using WinReform.Gui.Settings;
 
 namespace WinReform.Gui.Window
 {
@@ -33,11 +32,6 @@ namespace WinReform.Gui.Window
         public bool MinimizeOnClose { get; set; }
 
         /// <summary>
-        /// <see cref="ISettingFactory"/> used to load the application settings on creation
-        /// </summary>
-        private readonly ISettingFactory _settingFactory;
-
-        /// <summary>
         /// <see cref="IEventAggregator"/> used to be notified when the general setting have changed
         /// </summary>
         private readonly IEventAggregator _eventAggregator;
@@ -53,20 +47,19 @@ namespace WinReform.Gui.Window
         public DelegateCommand ShowVersionsOnGithubCommand { get; }
 
         /// <summary>
-        /// Setup the window after it's loaded in
-        /// </summary>
-        public DelegateCommand WindowLoadedCommand { get; }
-
-        /// <summary>
         /// Create a new instance of the <see cref="WindowViewModel"/>
-        /// //TODO fix the <see cref="WindowViewModel"/> summary
         /// </summary>
-        /// <param name="generalSettings">Instance of the <see cref="ApplicationSettingsViewModel"/></param>
-        public WindowViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator)
+        /// <param name="eventAggregator"><see cref="IEventAggregator"/> used to be notified when the general setting have changed</param>
+        /// <param name="applicationSettings"><see cref="ISetting{ApplicationSettings}"/> of the current app settings</param>
+        ///
+        public WindowViewModel(IEventAggregator eventAggregator, ISetting<ApplicationSettings> applicationSettings)
         {
-            _settingFactory = settingFactory ?? throw new ArgumentNullException(nameof(settingFactory));
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
+            _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
+            _ = applicationSettings ?? throw new ArgumentNullException(nameof(applicationSettings));
+            ApplicationSettingsChanged(applicationSettings);
 
+            // Setup commands
             Version = $"v:{Assembly.GetEntryAssembly()?.GetName()?.Version?.ToString(3)}";
             ShowSourceOnGithubCommand = new DelegateCommand(() =>
             {
@@ -86,16 +79,6 @@ namespace WinReform.Gui.Window
                 };
                 Process.Start(psi);
             });
-            WindowLoadedCommand = new DelegateCommand(WindowLoaded);
-        }
-
-        /// <summary>
-        /// Loads all the settings once the window is loaded
-        /// </summary>
-        private void WindowLoaded()
-        {
-            ApplicationSettingsChanged(_settingFactory.Create<ApplicationSettings>()); // Manualy set the application settings once as we wont be notified until something changes
-            _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
         }
 
         /// <summary>
@@ -103,8 +86,11 @@ namespace WinReform.Gui.Window
         /// </summary>
         private void ApplicationSettingsChanged(ISetting<ApplicationSettings> settings)
         {
-            UpdateTheme(settings.CurrentSetting.UseDarkTheme);
-            MinimizeOnClose = settings.CurrentSetting.MinimizeOnClose;
+            if (settings.CurrentSetting != null)
+            {
+                UpdateTheme(settings.CurrentSetting.UseDarkTheme);
+                MinimizeOnClose = settings.CurrentSetting.MinimizeOnClose;
+            }
         }
 
         /// <summary>

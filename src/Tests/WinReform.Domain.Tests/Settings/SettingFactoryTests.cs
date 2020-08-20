@@ -1,7 +1,7 @@
-﻿using WinReform.Domain.Settings;
-using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
-using WinReform.Domain.Tests.Settings.Mocks;
-using System;
+﻿using System;
+using Moq;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Settings;
 using Xunit;
 
 namespace WinReform.Domain.Tests.Settings
@@ -17,12 +17,12 @@ namespace WinReform.Domain.Tests.Settings
         public void Constructor_Valid_ShouldCreateSettingFactory()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
-            var eventAggregatorMock = new EventAggregatorMock();
+            var settingStoreMock = new Mock<ISettingStore>();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
             ISettingFactory settingFactory;
 
             // Act
-            settingFactory = new SettingFactory(settingStoreMock, eventAggregatorMock);
+            settingFactory = new SettingFactory(settingStoreMock.Object, eventAggregatorMock.Object);
 
             // Assert
             Assert.NotNull(settingFactory);
@@ -32,26 +32,26 @@ namespace WinReform.Domain.Tests.Settings
         public void Constructor_NullSettingStore_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var eventAggregatorMock = new EventAggregatorMock();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
             ISettingFactory settingFactory;
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                settingFactory = new SettingFactory(null!, eventAggregatorMock);
+                settingFactory = new SettingFactory(null!, eventAggregatorMock.Object);
             });
         }
 
         [Fact]
         public void Constructor_NullEventAggregator_ShouldThrowArgumentNullException()
         {
-            var settingStoreMock = new SettingStoreMock();
+            var settingStoreMock = new Mock<ISettingStore>();
             ISettingFactory settingFactory;
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                settingFactory = new SettingFactory(settingStoreMock, null!);
+                settingFactory = new SettingFactory(settingStoreMock.Object, null!);
             });
         }
 
@@ -63,9 +63,9 @@ namespace WinReform.Domain.Tests.Settings
         public void Create_GetNewAndExistingEvent_ShouldReturnTheSameSettings()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
-            var eventAggregatorMock = new EventAggregatorMock();
-            ISettingFactory settingFactory = new SettingFactory(settingStoreMock, eventAggregatorMock);
+            var settingStoreMock = new Mock<ISettingStore>();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
+            ISettingFactory settingFactory = new SettingFactory(settingStoreMock.Object, eventAggregatorMock.Object);
 
             // Act
             var setting1 = settingFactory.Create<ApplicationSettings>();

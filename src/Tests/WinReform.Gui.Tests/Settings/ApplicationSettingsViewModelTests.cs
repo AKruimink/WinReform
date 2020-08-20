@@ -1,6 +1,7 @@
-﻿using WinReform.Domain.Tests.Settings.Mocks;
+﻿using System;
+using Moq;
+using WinReform.Domain.Settings;
 using WinReform.Gui.Settings;
-using System;
 using Xunit;
 
 namespace WinReform.Gui.Tests.Settings
@@ -16,10 +17,11 @@ namespace WinReform.Gui.Tests.Settings
         public void Construct_ValidConstruction_ShouldCreateViewModel()
         {
             // Prepare
-            var settingFactoryMock = new SettingFactoryMock();
+            var applicationSettingMock = new Mock<ISetting<ApplicationSettings>>();
+            applicationSettingMock.Setup(x => x.CurrentSetting).Returns(new Mock<ApplicationSettings>().Object);
 
             // Act
-            var viewModel = new ApplicationSettingsViewModel(settingFactoryMock);
+            var viewModel = new ApplicationSettingsViewModel(applicationSettingMock.Object);
 
             // Assert
             Assert.NotNull(viewModel);

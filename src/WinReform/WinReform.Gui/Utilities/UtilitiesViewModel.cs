@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using WinReform.Domain.Infrastructure.Events;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Windows;
@@ -54,15 +53,14 @@ namespace WinReform.Gui.Utilities
             RedrawWindowCommand = new DelegateCommand(RedrawWindow);
         }
 
-        
         /// <summary>
         /// Sets the window style of all selected windows to a resizable border
         /// </summary>
         public void SetResizableBorder()
         {
-            foreach(var window in _selectedWindows)
+            foreach (var window in _selectedWindows)
             {
-                if (!_windowService.SetResizableBorder(window));
+                _windowService.SetResizableBorder(window);
             }
         }
 
@@ -71,7 +69,7 @@ namespace WinReform.Gui.Utilities
         /// </summary>
         public void RedrawWindow()
         {
-            foreach(var window in _selectedWindows)
+            foreach (var window in _selectedWindows)
             {
                 _windowService.RedrawWindow(window);
             }

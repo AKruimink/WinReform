@@ -39,6 +39,9 @@ namespace WinReform.Gui
             // Settings
             builder.RegisterType<SettingStore>().As<ISettingStore>().InstancePerDependency();
             builder.RegisterType<SettingFactory>().As<ISettingFactory>().SingleInstance();
+            // TODO: implement generic when Autofac v6 releases
+            // https://github.com/autofac/Autofac/pull/1191
+            builder.Register(x => x.Resolve<ISettingFactory>().Create<ApplicationSettings>()).As<ISetting<ApplicationSettings>>();
 
             // Windows
             builder.RegisterType<WindowService>().As<IWindowService>().InstancePerDependency();

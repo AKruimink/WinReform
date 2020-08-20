@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using WinReform.Domain.Process;
 using WinReform.Domain.WinApi;
 using WinReform.Domain.WinApi.Types;
@@ -80,7 +78,8 @@ namespace WinReform.Domain.Windows
                     return true;
                 }
                 return false;
-            }catch
+            }
+            catch
             {
                 return false;
             }

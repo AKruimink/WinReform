@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace WinReform.Domain.WinApi
 {
@@ -26,7 +23,7 @@ namespace WinReform.Domain.WinApi
         /// <param name="errorCode"><see cref="int"/> of the error code thrown during the WinApi call</param>
         public WinApiError(int errorCode)
         {
-            if(!Enum.IsDefined(typeof(WinApiErrorType), errorCode))
+            if (!Enum.IsDefined(typeof(WinApiErrorType), errorCode))
             {
                 throw new InvalidOperationException($"{errorCode} is not an underlying value of {typeof(WinApiErrorType)}");
             }
@@ -89,7 +86,7 @@ namespace WinReform.Domain.WinApi
         /// <param name="winApiError"><see cref="WinApiError"/> to be converted to <see cref="HResult"/></param>
         public static explicit operator HResult(WinApiError winApiError)
         {
-            if(winApiError.Error <= 0)
+            if (winApiError.Error <= 0)
             {
                 return new HResult((uint)winApiError.Error);
             }
@@ -157,9 +154,9 @@ namespace WinReform.Domain.WinApi
         /// <param name="message">Optional message to about the exception</param>
         public void ThrowIfFailed(string? message = null)
         {
-            if(Failed)
+            if (Failed)
             {
-                if(string.IsNullOrEmpty(message))
+                if (string.IsNullOrEmpty(message))
                 {
                     message = ToString();
                 }
@@ -177,7 +174,7 @@ namespace WinReform.Domain.WinApi
 
                 // If we get nothing better then ComExceptrion from the Marshal
                 // we try and attempt to do it better ourself
-                if(ex?.GetType() == typeof(COMException))
+                if (ex?.GetType() == typeof(COMException))
                 {
                     ex = Facility switch
                     {
@@ -190,7 +187,7 @@ namespace WinReform.Domain.WinApi
                     // We use reflection in a throw call, this might be a bad idea in the long run.
                     // If we are throwing an exception i assume that its ok to take some time to give it back.
                     var cons = ex?.GetType().GetConstructor(new[] { typeof(string) });
-                    if(cons != null)
+                    if (cons != null)
                     {
                         ex = cons.Invoke(new object[] { message ?? "" }) as Exception;
                     }
@@ -231,7 +228,7 @@ namespace WinReform.Domain.WinApi
 
             // Try to get the name of the current HResult
             var resultName = Enum.GetName(typeof(HResultType), Result);
-            if(resultName != null)
+            if (resultName != null)
             {
                 returnValue = resultName;
             }

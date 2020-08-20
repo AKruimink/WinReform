@@ -53,31 +53,33 @@ namespace WinReform.Domain.Windows
             && other?.Dimensions == Dimensions;
 
         /// <summary>
-        /// Comapares the current <see cref="Window"/> to a given <see cref="object"/>
-        /// </summary>
-        /// <param name="obj"><see cref="object"/> to compare to the current instance</param>
-        /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="object"/>, otherwise returns <see langword="false"/></returns>
-        public override bool Equals(object? obj)
-            => obj is Window window && Equals(window);
-
-        /// <summary>
-        /// Gets the hashCode of the <see cref="Window"/>
-        /// </summary>
-        /// <returns>Returns <see cref="int"/> containing a unique hashcode that represents the instance of the current <see cref="Window"/></returns>
-        public override int GetHashCode() => (Id, WindowHandle, Description, Dimensions).GetHashCode();
-
-        /// <summary>
         /// Compare if the current <see cref="Window"/> represents the same item as a given <see cref="Window"/>
         /// </summary>
         /// <param name="other"><see cref="Window"/> to compare against</param>
         /// <returns>Returns <see langword="true"/> if the <see cref="Window"/> represent the same <see cref="Window"/>, otherwise returns <see langword="false"/></returns>
         public int CompareTo([AllowNull] Window other)
         {
-            if (Id == other?.Id)
+            if (other?.Id == Id)
             {
                 return 0;
             }
             return -1;
         }
+
+        /// <summary>
+        /// Comapares the current <see cref="Window"/> to a given <see cref="object"/>
+        /// </summary>
+        /// <param name="obj"><see cref="object"/> to compare to the current instance</param>
+        /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="object"/>, otherwise returns <see langword="false"/></returns>
+        public override bool Equals(object? obj)
+            => obj is Window window
+            && Equals(window);
+
+        /// <summary>
+        /// Gets the hashCode of the <see cref="Window"/>
+        /// </summary>
+        /// <returns>Returns <see cref="int"/> containing a unique hashcode that represents the instance of the current <see cref="Window"/></returns>
+        public override int GetHashCode()
+            => (Id, WindowHandle, Description, Dimensions).GetHashCode();
     }
 }

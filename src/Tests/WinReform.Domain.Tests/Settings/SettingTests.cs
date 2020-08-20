@@ -1,7 +1,8 @@
-﻿using WinReform.Domain.Settings;
-using WinReform.Domain.Tests.Infrastructure.Messenger.Mocks;
-using WinReform.Domain.Tests.Settings.Mocks;
-using System;
+﻿using System;
+using Moq;
+using WinReform.Domain.Infrastructure.Events;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Settings;
 using Xunit;
 
 namespace WinReform.Domain.Tests.Settings
@@ -17,12 +18,12 @@ namespace WinReform.Domain.Tests.Settings
         public void Constructor_Valid_ShouldCreateSetting()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
-            var eventAggregatorMock = new EventAggregatorMock();
+            var settingStoreMock = new Mock<ISettingStore>();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
             ISetting<ApplicationSettings> setting;
 
             // Act
-            setting = new Setting<ApplicationSettings>(settingStoreMock, eventAggregatorMock);
+            setting = new Setting<ApplicationSettings>(settingStoreMock.Object, eventAggregatorMock.Object);
 
             // Assert
             Assert.NotNull(setting);
@@ -32,13 +33,13 @@ namespace WinReform.Domain.Tests.Settings
         public void Constructor_NullSettingStore_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var eventAggregatorMock = new EventAggregatorMock();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
             ISetting<ApplicationSettings> setting;
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                setting = new Setting<ApplicationSettings>(null!, eventAggregatorMock);
+                setting = new Setting<ApplicationSettings>(null!, eventAggregatorMock.Object);
             });
         }
 
@@ -46,13 +47,13 @@ namespace WinReform.Domain.Tests.Settings
         public void Constructor_NullEventAggregator_ShouldThrowArgumentNullException()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
+            var settingStoreMock = new Mock<ISettingStore>();
             ISetting<ApplicationSettings> setting;
 
             // Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                setting = new Setting<ApplicationSettings>(settingStoreMock, null!);
+                setting = new Setting<ApplicationSettings>(settingStoreMock.Object, null!);
             });
         }
 
@@ -60,17 +61,14 @@ namespace WinReform.Domain.Tests.Settings
         public void Constructor_LoadSettings_ShouldLoadSettingsOnConstruct()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
-            var eventAggregatorMock = new EventAggregatorMock();
-
-            // Assert
-            Assert.False(settingStoreMock.Executed);
+            var settingStoreMock = new Mock<ISettingStore>();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
 
             // Act
-            _ = new Setting<ApplicationSettings>(settingStoreMock, eventAggregatorMock);
+            _ = new Setting<ApplicationSettings>(settingStoreMock.Object, eventAggregatorMock.Object);
 
             // Assert
-            Assert.True(settingStoreMock.Executed);
+            settingStoreMock.Verify(x => x.Load<ApplicationSettings>(), Times.Once());
         }
 
         #endregion Constructor Tests
@@ -81,38 +79,35 @@ namespace WinReform.Domain.Tests.Settings
         public void Save_Setting_ShouldSaveSettings()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
-            var eventAggregatorMock = new EventAggregatorMock();
-            var setting = new Setting<ApplicationSettings>(settingStoreMock, eventAggregatorMock);
-            settingStoreMock.Executed = false;
-
-            // Assert
-            Assert.False(settingStoreMock.Executed);
+            var settingStoreMock = new Mock<ISettingStore>();
+            settingStoreMock.Setup(x => x.Load<ApplicationSettings>()).Returns(new ApplicationSettings());
+            var eventAggregatorMock = new Mock<IEventAggregator>();
+            var setting = new Setting<ApplicationSettings>(settingStoreMock.Object, eventAggregatorMock.Object);
 
             // Act
             setting.CurrentSetting.UseDarkTheme = true;
             setting.Save();
 
             // Assert
-            Assert.True(settingStoreMock.Executed);
+            settingStoreMock.Verify(x => x.Save(It.IsAny<ApplicationSettings>()), Times.Once());
         }
 
         [Fact]
         public void Save_Settings_ShouldNotifySubscribers()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
-            var eventAggregatorMock = new EventAggregatorMock();
-            var setting = new Setting<ApplicationSettings>(settingStoreMock, eventAggregatorMock);
+            var settingStoreMock = new Mock<ISettingStore>();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
+            var settingsChangedEventMock = new Mock<SettingChangedEvent<ApplicationSettings>>();
+            var setting = new Setting<ApplicationSettings>(settingStoreMock.Object, eventAggregatorMock.Object);
 
-            // Assert
-            Assert.False(eventAggregatorMock.Executed);
+            eventAggregatorMock.Setup(x => x.GetEvent<SettingChangedEvent<ApplicationSettings>>()).Returns(settingsChangedEventMock.Object);
 
             // Act
             setting.Save();
 
             // Assert
-            Assert.True(eventAggregatorMock.Executed);
+            settingsChangedEventMock.Verify(x => x.Publish(It.IsAny<ISetting<ApplicationSettings>>()), Times.Once());
         }
 
         #endregion Save Tests
@@ -123,9 +118,10 @@ namespace WinReform.Domain.Tests.Settings
         public void Equal_EqualSettings_ShouldReturnTrue()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
-            var eventAggregatorMock = new EventAggregatorMock();
-            var setting = new Setting<ApplicationSettings>(settingStoreMock, eventAggregatorMock);
+            var settingStoreMock = new Mock<ISettingStore>();
+            settingStoreMock.Setup(x => x.Load<ApplicationSettings>()).Returns(new ApplicationSettings());
+            var eventAggregatorMock = new Mock<IEventAggregator>();
+            var setting = new Setting<ApplicationSettings>(settingStoreMock.Object, eventAggregatorMock.Object);
 
             // Assert
             Assert.True(setting.Equals(setting.CurrentSetting));
@@ -135,10 +131,10 @@ namespace WinReform.Domain.Tests.Settings
         public void Equal_UnequalSettings_ShouldReturnFalse()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
-            var eventAggregatorMock = new EventAggregatorMock();
-            var setting1 = new Setting<ApplicationSettings>(settingStoreMock, eventAggregatorMock);
-            var setting2 = new Setting<ApplicationSettings>(settingStoreMock, eventAggregatorMock);
+            var settingStoreMock = new Mock<ISettingStore>();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
+            var setting1 = new Setting<ApplicationSettings>(settingStoreMock.Object, eventAggregatorMock.Object);
+            var setting2 = new Setting<ApplicationSettings>(settingStoreMock.Object, eventAggregatorMock.Object);
 
             // Assert
             Assert.False(setting1.Equals(setting2.CurrentSetting));
@@ -148,9 +144,9 @@ namespace WinReform.Domain.Tests.Settings
         public void Equal_NullSettings_ShouldReturnFalse()
         {
             // Prepare
-            var settingStoreMock = new SettingStoreMock();
-            var eventAggregatorMock = new EventAggregatorMock();
-            var setting1 = new Setting<ApplicationSettings>(settingStoreMock, eventAggregatorMock);
+            var settingStoreMock = new Mock<ISettingStore>();
+            var eventAggregatorMock = new Mock<IEventAggregator>();
+            var setting1 = new Setting<ApplicationSettings>(settingStoreMock.Object, eventAggregatorMock.Object);
 
             // Assert
             Assert.False(setting1.Equals(null!));

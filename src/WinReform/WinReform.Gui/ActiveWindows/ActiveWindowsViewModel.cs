@@ -41,7 +41,6 @@ namespace WinReform.Gui.ActiveWindows
             set
             {
                 SetProperty(ref _selectedActiveWindows, value);
-                
             }
         }
 
@@ -69,11 +68,6 @@ namespace WinReform.Gui.ActiveWindows
         private readonly DispatcherTimer _autoRefreshTimer;
 
         /// <summary>
-        /// <see cref="ISettingFactory"/> used to load the application settings on creation
-        /// </summary>
-        private readonly ISettingFactory _settingFactory;
-
-        /// <summary>
         /// <see cref="IEventAggregator"/> used to be notified when the general setting have changed and notify about selected windows
         /// </summary>
         private readonly IEventAggregator _eventAggregator;
@@ -89,23 +83,20 @@ namespace WinReform.Gui.ActiveWindows
         public DelegateCommand RefreshActiveWindowsCommand { get; }
 
         /// <summary>
-        /// Setup the view after it's loaded in
-        /// </summary>
-        public DelegateCommand ViewLoadedCommand { get; }
-
-        /// <summary>
         /// Create a new instance of the <see cref="ActiveWindowsViewModel"/>
         /// </summary>
+        /// <param name="eventAggregator">        /// <see cref="IEventAggregator"/> used to be notified when the general setting have changed and notify about selected windows</param>
         /// <param name="windowService"><see cref="IWindowService"/> used to get all active windows</param>
-        public ActiveWindowsViewModel(ISettingFactory settingFactory, IEventAggregator eventAggregator, IWindowService windowService)
+        /// <param name="applicationSettings"><see cref="ISetting{ApplicationSettings}"/> of the current app settings</param>
+        public ActiveWindowsViewModel(IEventAggregator eventAggregator, IWindowService windowService, ISetting<ApplicationSettings> applicationSettings)
         {
-            _settingFactory = settingFactory ?? throw new ArgumentNullException(nameof(settingFactory));
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
+            _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
             _windowService = windowService ?? throw new ArgumentNullException(nameof(windowService));
+            _ = applicationSettings ?? throw new ArgumentNullException(nameof(windowService));
 
-            // setup the commands
+            // setup commands
             RefreshActiveWindowsCommand = new DelegateCommand(RefreshActiveWindows);
-            ViewLoadedCommand = new DelegateCommand(ViewLoaded);
 
             // setup the filter view
             FilteredActiveWindows = CollectionViewSource.GetDefaultView(ActiveWindows);
@@ -126,10 +117,11 @@ namespace WinReform.Gui.ActiveWindows
             _autoRefreshTimer.Interval = TimeSpan.FromMilliseconds(1000);
             _autoRefreshTimer.Start();
 
-            
+            // Setup view
+            ApplicationSettingsChanged(applicationSettings);
+            SelectedActiveWindows.CollectionChanged += SelectedActiveWindowsChanged;
+            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
         }
-
-        
 
         /// <summary>
         /// Refreshes the <see cref="ActiveWindows"/> with a new list of active windows
@@ -157,25 +149,14 @@ namespace WinReform.Gui.ActiveWindows
         }
 
         /// <summary>
-        /// Loads all the settings once the view has been loaded
-        /// </summary>
-        private void ViewLoaded()
-        {
-            // Setup the event aggregator that listens to changes to the automatic refresh and notifies of selected active windows changes
-            ApplicationSettingsChanged(_settingFactory.Create<ApplicationSettings>()); // Manualy set the application settings once as we wont be notified until something changes
-            _eventAggregator.GetEvent<SettingChangedEvent<ApplicationSettings>>().Subscribe(ApplicationSettingsChanged, ThreadOption.UIThread, false);
-            SelectedActiveWindows.CollectionChanged += SelectedActiveWindowsChanged;
-
-            // Load the Active Windows once
-            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
-        }
-
-        /// <summary>
         /// Invoked when the general application settings have changed
         /// </summary>
         private void ApplicationSettingsChanged(ISetting<ApplicationSettings> settings)
         {
-            _autoRefreshActiveWindows = settings.CurrentSetting.AutoRefreshActiveWindows;
+            if (settings.CurrentSetting != null)
+            {
+                _autoRefreshActiveWindows = settings.CurrentSetting.AutoRefreshActiveWindows;
+            }
         }
 
         /// <summary>
