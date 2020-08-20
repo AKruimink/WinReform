@@ -58,6 +58,7 @@ This application wouldn't exist without the help of several amazing open source 
 
  - [MahApps](https://github.com/MahApps/MahApps.Metro) which helped modernize the application by providing amazing tools and visuals.
  - [Autofac](https://github.com/autofac/Autofac) which helped manage all the dependencies that the application relied on.
+ - [Moq](https://github.com/moq/moq4) which allowed for a simpler time writing tests by taking the mocking out of our hands.
  - [DotNet](https://github.com/dotnet/core) which provided the possibility to create this application to begin with.
 
 ## License
