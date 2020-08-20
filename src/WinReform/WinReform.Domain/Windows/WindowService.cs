@@ -80,7 +80,8 @@ namespace WinReform.Domain.Windows
                     return true;
                 }
                 return false;
-            }catch
+            }
+            catch
             {
                 return false;
             }
