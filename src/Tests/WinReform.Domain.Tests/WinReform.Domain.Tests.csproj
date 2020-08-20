@@ -17,6 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\WinReform\WinReform.Domain\WinReform.Domain.csproj" />
     <ProjectReference Include="..\WinReform.Tests.Fixtures\WinReform.Tests.Fixtures.csproj" />
+    <ProjectReference Include="..\WinReform.Tests.Process.Fixture\WinReform.Tests.Process.Fixture.csproj" />
+    <ProjectReference Include="..\WinReform.Tests.WindowProcess.Fixture\WinReform.Tests.WindowProcess.Fixture.csproj" />
   </ItemGroup>
 
 </Project>
