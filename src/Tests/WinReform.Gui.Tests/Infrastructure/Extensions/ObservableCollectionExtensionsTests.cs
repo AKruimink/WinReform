@@ -1,8 +1,8 @@
-﻿using WinReform.Gui.Infrastructure.Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Xunit;
+using WinReform.Gui.Infrastructure.Extensions;
 using WinReform.Tests.Fixtures;
+using Xunit;
 
 namespace WinReform.Gui.Tests.Infrastructure.Extensions
 {

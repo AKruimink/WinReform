@@ -1,8 +1,6 @@
-﻿using WinReform.Domain.Infrastructure.Messenger.Strategies;
-using System;
-using System.Threading;
+﻿using System.Threading;
+using WinReform.Domain.Infrastructure.Messenger.Strategies;
 using Xunit;
-using Moq;
 
 namespace WinReform.Domain.Tests.Infrastructure.Messenger
 {
@@ -41,7 +39,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             //var completedEvent = new ManualResetEvent(false);
             //SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
             //SynchronizationContext? calledSyncContext = null; // TODO: calledSyncContext is always set to null, SynchronizationContext can be confusing
-            
+
             //var mockActionReference = new DelegateReferenceMock() { Delegate = (Action<object>)delegate { calledSyncContext = SynchronizationContext.Current; completedEvent.Set(); } };
             //var mockFilterReference = new DelegateReferenceMock() { Delegate = (Predicate<object>)delegate { return true; } };
             //var eventSubscription = new BackgroundEventSubscription<object>(mockActionReference, mockFilterReference);

@@ -1,8 +1,8 @@
-﻿using WinReform.Gui.Settings;
-using System;
-using Xunit;
+﻿using System;
 using Moq;
 using WinReform.Domain.Settings;
+using WinReform.Gui.Settings;
+using Xunit;
 
 namespace WinReform.Gui.Tests.Settings
 {

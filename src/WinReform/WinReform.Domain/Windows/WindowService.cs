@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using WinReform.Domain.Process;
 using WinReform.Domain.WinApi;
 using WinReform.Domain.WinApi.Types;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WinReform.Domain.Infrastructure.Messenger;
+﻿using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Infrastructure.Messenger.Strategies;
 
 namespace WinReform.Tests.Fixtures

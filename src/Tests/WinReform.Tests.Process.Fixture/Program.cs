@@ -7,7 +7,7 @@ namespace WinReform.Tests.Process.Fixture
     /// Defines a class that represents a fixture of a process without a window
     /// NOTE: The application automaticly closes after x seconds, this to make sure that if the test failed and the dispose isnt't triggered the app wont linger in the background forever
     /// </summary>
-    class Program
+    internal class Program
     {
         /// <summary>
         /// <see cref="Timer"/> that triggers an automatic close of the application
@@ -18,7 +18,7 @@ namespace WinReform.Tests.Process.Fixture
         /// Entry point of the application
         /// </summary>
         /// <param name="args">Arguments passed on startup</param>
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             _autoCloseTimer = new Timer(20000); // 20 seconds
             _autoCloseTimer.Elapsed += OnAutoCloseTimer;

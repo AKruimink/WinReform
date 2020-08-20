@@ -1,9 +1,8 @@
-﻿using WinReform.Domain.Infrastructure.Messenger;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using Xunit;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Tests.Fixtures;
+using Xunit;
 
 namespace WinReform.Domain.Tests.Infrastructure.Messenger
 {

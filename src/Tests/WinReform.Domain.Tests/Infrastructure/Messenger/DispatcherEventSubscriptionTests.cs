@@ -1,6 +1,5 @@
-﻿using WinReform.Domain.Infrastructure.Messenger.Strategies;
-using System;
-using System.Threading;
+﻿using System.Threading;
+using WinReform.Domain.Infrastructure.Messenger.Strategies;
 using Xunit;
 
 namespace WinReform.Domain.Tests.Infrastructure.Messenger

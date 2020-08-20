@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace WinReform.Domain.WinApi
 {
@@ -30,7 +27,7 @@ namespace WinReform.Domain.WinApi
         /// <summary>
         /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowrect"/>
         /// </summary>
-        [DllImport("user32.dll", EntryPoint ="GetWindowRect", SetLastError =true)]
+        [DllImport("user32.dll", EntryPoint = "GetWindowRect", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool GetWindowRect(IntPtr hwnd, out Rect lpRect);
 
@@ -61,7 +58,7 @@ namespace WinReform.Domain.WinApi
         {
             IntPtr returnValue;
             if (IntPtr.Size == 8)
-            {   
+            {
                 // 64 bit system
                 returnValue = GetWindowLongPtr64(hwnd, nIndex);
             }
@@ -71,7 +68,7 @@ namespace WinReform.Domain.WinApi
                 returnValue = GetWindowLongPtr32(hwnd, nIndex);
             }
 
-            if(returnValue == IntPtr.Zero)
+            if (returnValue == IntPtr.Zero)
             {
                 HResult.ThrowLastError();
             }

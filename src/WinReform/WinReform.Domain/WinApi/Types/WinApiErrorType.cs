@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WinReform.Domain.WinApi
+﻿namespace WinReform.Domain.WinApi
 {
     /// <summary>
     /// Defines a class that represents all the posible error codes thrown by <see cref="FacilityType.Win32"/>
     /// <a href="https://docs.microsoft.com/en-gb/windows/win32/debug/system-error-codes?redirectedfrom=MSDN">List of <see cref="FacilityType.Win32"/> error codes</a>
     /// TODO: possibly clean this enum up from the error codes that cannot be thrown by the available native calls in this application
     /// </summary>
-    internal enum  WinApiErrorType
+    internal enum WinApiErrorType
     {
         /// <summary>
         /// Operation completed sucessfully
@@ -74,7 +70,7 @@ namespace WinReform.Domain.WinApi
         /// <summary>
         /// Cannot nest calls to LoadModule
         /// </summary>
-        NestingNotAllowed= 215,
+        NestingNotAllowed = 215,
 
         /// <summary>
         /// Illegal operation attempted on a registery key that has been marked for deletion

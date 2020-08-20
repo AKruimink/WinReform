@@ -41,7 +41,6 @@ namespace WinReform.Gui.ActiveWindows
             set
             {
                 SetProperty(ref _selectedActiveWindows, value);
-                
             }
         }
 

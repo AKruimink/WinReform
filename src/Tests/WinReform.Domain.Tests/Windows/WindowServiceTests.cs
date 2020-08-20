@@ -19,12 +19,12 @@ namespace WinReform.Domain.Tests.Windows
         /// <summary>
         /// <see cref="List{System.Diagnostics.Process}"/> containing proccesses some of which own a window
         /// </summary>
-        private List<System.Diagnostics.Process> _windowProcessList = new List<System.Diagnostics.Process>();
+        private readonly List<System.Diagnostics.Process> _windowProcessList = new List<System.Diagnostics.Process>();
 
         /// <summary>
         /// <see cref="List{System.Diagnostics.Process}"/> containing processes non of which owns a window
         /// </summary>
-        private List<System.Diagnostics.Process> _processList = new List<System.Diagnostics.Process>();
+        private readonly List<System.Diagnostics.Process> _processList = new List<System.Diagnostics.Process>();
 
         /// <summary>
         /// Create a new instance of <see cref="WindowServiceTests"/>
@@ -118,7 +118,7 @@ namespace WinReform.Domain.Tests.Windows
             });
         }
 
-        #endregion
+        #endregion Constructor Tests
 
         #region GetActiveWindows Tests
 
@@ -178,7 +178,7 @@ namespace WinReform.Domain.Tests.Windows
             Assert.NotNull(result.FirstOrDefault()?.WindowHandle);
         }
 
-        #endregion
+        #endregion GetActiveWindows Tests
 
         #region SetResizableBorder Tests
 
@@ -202,7 +202,6 @@ namespace WinReform.Domain.Tests.Windows
             Assert.True(result);
         }
 
-
         [Fact]
         public void SetResizableBorder_InvalidWindow_ShouldReturnFalse()
         {
@@ -222,7 +221,6 @@ namespace WinReform.Domain.Tests.Windows
             // Assert
             Assert.False(result);
         }
-
 
         [Fact]
         public void SetResizableBorder_ThrownException_ShouldReturnFalse()
@@ -244,7 +242,7 @@ namespace WinReform.Domain.Tests.Windows
             Assert.False(result);
         }
 
-        #endregion
+        #endregion SetResizableBorder Tests
 
         #region RedrawWindow Tests
 
@@ -264,6 +262,6 @@ namespace WinReform.Domain.Tests.Windows
             winApiServiceMock.Verify(x => x.RedrawMenuBar(It.IsAny<IntPtr>()), Times.Once());
         }
 
-        #endregion
+        #endregion RedrawWindow Tests
     }
 }

@@ -1,8 +1,8 @@
-﻿using WinReform.Domain.Settings;
-using System;
-using Xunit;
+﻿using System;
 using Moq;
 using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Settings;
+using Xunit;
 
 namespace WinReform.Domain.Tests.Settings
 {

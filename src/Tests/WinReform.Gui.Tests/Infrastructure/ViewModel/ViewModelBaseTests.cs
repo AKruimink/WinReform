@@ -1,5 +1,4 @@
 ﻿using WinReform.Gui.Infrastructure.Common.ViewModel;
-using WinReform.Tests.Fixtures;
 using Xunit;
 
 namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
@@ -15,7 +14,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
         private class ViewModelFixture : ViewModelBase
         {
             /// <summary>
-            /// Gets or Sets a test text 
+            /// Gets or Sets a test text
             /// </summary>
             public string Text
             {
@@ -46,7 +45,6 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
             }
         }
 
-
         #region SetProperty Tests
 
         [Fact]
@@ -75,7 +73,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
             viewModelFixture.PropertyChanged += (o, e) =>
             {
                 // Act
-                if(e.PropertyName.Equals(nameof(viewModelFixture.Number)))
+                if (e.PropertyName.Equals(nameof(viewModelFixture.Number)))
                 {
                     invoked = true;
                 }
@@ -99,7 +97,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
             viewModelFixture.PropertyChanged += (o, e) =>
             {
                 // Act
-                if(e.PropertyName.Equals(nameof(viewModelFixture.Number)))
+                if (e.PropertyName.Equals(nameof(viewModelFixture.Number)))
                 {
                     invoked = true;
                 }
@@ -125,7 +123,7 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.ViewModel
             viewModelFixture.PropertyChanged += (o, e) =>
             {
                 // Act
-                if(e.PropertyName.Equals(nameof(viewModelFixture.Number)))
+                if (e.PropertyName.Equals(nameof(viewModelFixture.Number)))
                 {
                     invoked = true;
                 }

@@ -18,7 +18,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <Style x:Key="DataGridTextColumnTrim" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
-                <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -39,7 +39,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition  />
+                    <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Row="1"
@@ -58,7 +58,7 @@
                         Content="Refresh"
                         Command="{Binding RefreshActiveWindowsCommand}"
                         Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
             </Grid>
 
             <!-- Active Window List -->
@@ -88,7 +88,7 @@
                                     <TextBlock MaxWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth,
                                         Converter={converters:SubtractionConverter}, ConverterParameter=26}"
                                                TextTrimming="CharacterEllipsis"
-                                               Text="{Binding Description}"/>
+                                               Text="{Binding Description}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

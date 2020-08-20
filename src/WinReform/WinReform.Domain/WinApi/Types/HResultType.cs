@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WinReform.Domain.WinApi
+﻿namespace WinReform.Domain.WinApi
 {
     /// <summary>
     /// Defines a class that represents all the possible HResult values
@@ -71,7 +67,7 @@ namespace WinReform.Domain.WinApi
         /// Invalid TYMED structure
         /// </summary>
         Tymed = 0x80040069,
-        
+
         /// <summary>
         /// Invalid clipboard format
         /// </summary>

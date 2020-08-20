@@ -1,10 +1,9 @@
-﻿using WinReform.Domain.Infrastructure.Messenger;
-using WinReform.Domain.Infrastructure.Messenger.Strategies;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Infrastructure.Messenger.Strategies;
 using Xunit;
-using Moq;
-using System;
 
 namespace WinReform.Domain.Tests.Infrastructure.Messenger
 {

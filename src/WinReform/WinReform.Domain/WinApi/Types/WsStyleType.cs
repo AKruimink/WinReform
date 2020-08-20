@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WinReform.Domain.WinApi.Types
+﻿namespace WinReform.Domain.WinApi.Types
 {
     /// <summary>
     /// Defines a enum that represents all possible style that can be applied to a window
@@ -16,7 +12,7 @@ namespace WinReform.Domain.WinApi.Types
         Border = 0x00800000L,
 
         /// <summary>
-        /// Window has a title bar 
+        /// Window has a title bar
         /// <remarks>Includes <see cref="Border"/></remarks>
         /// </summary>
         Caption = 0x00C00000L,

@@ -1,10 +1,10 @@
-﻿using WinReform.Gui.Window;
-using System;
-using Xunit;
-using WinReform.Domain.Settings;
+﻿using System;
 using Moq;
-using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Infrastructure.Events;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Settings;
+using WinReform.Gui.Window;
+using Xunit;
 
 namespace WinReform.Gui.Tests.Window
 {

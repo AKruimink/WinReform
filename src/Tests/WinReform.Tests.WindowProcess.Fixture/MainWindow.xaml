@@ -7,6 +7,5 @@
         mc:Ignorable="d"
         Title="WindowProcess" Height="450" Width="800">
     <Grid>
-
     </Grid>
 </Window>

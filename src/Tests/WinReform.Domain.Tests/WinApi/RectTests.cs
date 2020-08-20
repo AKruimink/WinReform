@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WinReform.Domain.WinApi;
+﻿using WinReform.Domain.WinApi;
 using Xunit;
 
 namespace WinReform.Domain.Tests.WinApi
@@ -27,7 +24,7 @@ namespace WinReform.Domain.Tests.WinApi
             Assert.True(unionRect.Bottom >= rect1.Bottom);
         }
 
-        #endregion
+        #endregion Union Tests
 
         #region Equals Tests
 
@@ -69,7 +66,7 @@ namespace WinReform.Domain.Tests.WinApi
             Assert.False(rect1.Equals(1));
         }
 
-        #endregion
+        #endregion Equals Tests
 
         #region GetHashCode Tests
 
@@ -103,6 +100,6 @@ namespace WinReform.Domain.Tests.WinApi
             Assert.NotEqual(hashCode1, hashCode2);
         }
 
-        #endregion
+        #endregion GetHashCode Tests
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Moq;
 using WinReform.Domain.Infrastructure.Events;
 using WinReform.Domain.Infrastructure.Messenger;
@@ -63,6 +61,6 @@ namespace WinReform.Gui.Tests.Utilities
             });
         }
 
-        #endregion
+        #endregion Constructor Tests
     }
 }

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 
@@ -18,7 +13,7 @@ namespace WinReform.Tests.WindowProcess.Fixture
         /// <summary>
         /// <see cref="Timer"/> that triggers an automatic close of the application
         /// </summary>
-        private  Timer _autoCloseTimer;
+        private Timer _autoCloseTimer;
 
         /// <summary>
         /// Sets up the project

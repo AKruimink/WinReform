@@ -8,7 +8,6 @@ using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
 using WinReform.Gui.Infrastructure.Common.Command;
 using WinReform.Gui.Infrastructure.Common.ViewModel;
-using WinReform.Gui.Settings;
 
 namespace WinReform.Gui.Window
 {
@@ -52,7 +51,7 @@ namespace WinReform.Gui.Window
         /// </summary>
         /// <param name="eventAggregator"><see cref="IEventAggregator"/> used to be notified when the general setting have changed</param>
         /// <param name="applicationSettings"><see cref="ISetting{ApplicationSettings}"/> of the current app settings</param>
-        /// 
+        ///
         public WindowViewModel(IEventAggregator eventAggregator, ISetting<ApplicationSettings> applicationSettings)
         {
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
@@ -87,7 +86,7 @@ namespace WinReform.Gui.Window
         /// </summary>
         private void ApplicationSettingsChanged(ISetting<ApplicationSettings> settings)
         {
-            if(settings.CurrentSetting != null)
+            if (settings.CurrentSetting != null)
             {
                 UpdateTheme(settings.CurrentSetting.UseDarkTheme);
                 MinimizeOnClose = settings.CurrentSetting.MinimizeOnClose;

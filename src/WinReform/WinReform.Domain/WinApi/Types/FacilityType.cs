@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WinReform.Domain.WinApi
+﻿namespace WinReform.Domain.WinApi
 {
     /// <summary>
-    /// Defines a class that represents all possible facilities of the thrown errors 
+    /// Defines a class that represents all possible facilities of the thrown errors
     /// <a href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a">List of facilities</a>
     /// TODO: possibly clean this enum up from the facilities that cannot be thrown by the available native calls in this application
     /// </summary>

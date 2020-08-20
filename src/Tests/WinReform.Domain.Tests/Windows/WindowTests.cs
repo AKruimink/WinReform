@@ -1,7 +1,7 @@
-﻿using WinReform.Domain.Windows;
-using System;
-using Xunit;
+﻿using System;
 using WinReform.Domain.WinApi;
+using WinReform.Domain.Windows;
+using Xunit;
 
 namespace WinReform.Domain.Tests.Windows
 {

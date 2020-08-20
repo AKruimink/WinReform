@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WinReform.Domain.WinApi
 {
@@ -97,22 +95,22 @@ namespace WinReform.Domain.WinApi
         /// </summary>
         /// <param name="obj"><see cref="object"/> to compare against the current instance to</param>
         /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="object"/>, otherwise returns <see langword="false"/></returns>
-        public override bool Equals(object? obj) 
-            => obj is Rect rect 
+        public override bool Equals(object? obj)
+            => obj is Rect rect
             && Equals(rect);
 
         /// <summary>
         /// Gets the hashCode of the the current <see cref="Rect"/>
         /// </summary>
         /// <returns>Returns <see cref="int"/> containing a unique hashcode that represents the instance of the current <see cref="Rect"/></returns>
-        public override int GetHashCode() 
+        public override int GetHashCode()
             => (Left, Top, Right, Bottom).GetHashCode();
 
         /// <summary>
         /// Get the string representation of the current <see cref="Rect"/>
         /// </summary>
         /// <returns>Returns a <see cref="string"/> containing the current rectangle dimensions</returns>
-        public override string ToString() 
+        public override string ToString()
             => "RECT { left : " + Left + " / top : " + Top + " / right : " + Right + " / bottom : " + Bottom + " }";
 
         /// <summary>

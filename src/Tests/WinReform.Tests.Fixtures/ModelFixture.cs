@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace WinReform.Tests.Fixtures
 {
@@ -16,7 +14,7 @@ namespace WinReform.Tests.Fixtures
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets a test text 
+        /// Gets or Sets a test text
         /// </summary>
         public string Text { get; set; }
 
@@ -42,7 +40,7 @@ namespace WinReform.Tests.Fixtures
         /// <returns>Returns <see langword="true"/> if the given <see cref="ModelFixture"/> represents the same object, otherwise returns <see langword="false"/></returns>
         public int CompareTo([AllowNull] ModelFixture obj)
         {
-            if(obj?.Id == Id)
+            if (obj?.Id == Id)
             {
                 return 0;
             }

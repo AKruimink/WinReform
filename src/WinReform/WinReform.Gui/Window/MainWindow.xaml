@@ -104,11 +104,11 @@
         <mah:SplitView.Content>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
 
-                <activeWindows:ActiveWindowsView Grid.Row="0"/>
+                <activeWindows:ActiveWindowsView Grid.Row="0" />
 
                 <mah:MetroTabControl Grid.Row="1"
                                      Margin="0 5 0 5"
@@ -116,15 +116,13 @@
                                      mah:TabControlHelper.Underlined="TabPanel">
                     <mah:MetroTabItem Header="Resizer"
                                       mah:HeaderedControlHelper.HeaderFontSize="18">
-                        
                     </mah:MetroTabItem>
                     <mah:MetroTabItem Header="Locator"
                                       mah:HeaderedControlHelper.HeaderFontSize="18">
-                        
                     </mah:MetroTabItem>
                     <mah:MetroTabItem Header="Utilities"
                                       mah:HeaderedControlHelper.HeaderFontSize="18">
-                        <utilities:UtilitiesView/>
+                        <utilities:UtilitiesView />
                     </mah:MetroTabItem>
                 </mah:MetroTabControl>
             </Grid>

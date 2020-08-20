@@ -1,8 +1,8 @@
-﻿using WinReform.Gui.Infrastructure.Common.Command;
-using System;
-using Xunit;
+﻿using System;
 using Moq;
+using WinReform.Gui.Infrastructure.Common.Command;
 using WinReform.Tests.Fixtures;
+using Xunit;
 
 namespace WinReform.Gui.Tests.Infrastructure.Common.Command
 {
@@ -178,13 +178,13 @@ namespace WinReform.Gui.Tests.Infrastructure.Common.Command
             var parameter = new object();
             var fakeClass = new ClassFixture();
             var callBackActionMock = new Mock<Action<object>>();
-            var command = new DelegateCommand<object>(callBackActionMock.Object, (obj) => 
+            var command = new DelegateCommand<object>(callBackActionMock.Object, (obj) =>
             {
                 // Assert
                 Assert.Equal(parameter, obj);
-                return true; 
+                return true;
             });
-            
+
             // Act
             var returnValue = command.CanExecute(parameter);
         }

@@ -1,11 +1,11 @@
-﻿using WinReform.Gui.ActiveWindows;
-using System;
-using Xunit;
+﻿using System;
 using Moq;
-using WinReform.Domain.Windows;
+using WinReform.Domain.Infrastructure.Events;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
-using WinReform.Domain.Infrastructure.Events;
+using WinReform.Domain.Windows;
+using WinReform.Gui.ActiveWindows;
+using Xunit;
 
 namespace WinReform.Gui.Tests.ActiveWindows
 {
@@ -33,11 +33,10 @@ namespace WinReform.Gui.Tests.ActiveWindows
             Assert.NotNull(viewModel);
         }
 
-
         [Fact]
         public void Construct_NullSettingFactory_ShouldThrowArgumentNullException()
         {
-            // Prepare 
+            // Prepare
             var eventAggregatorMock = new Mock<IEventAggregator>();
             var windowServiceMock = new Mock<IWindowService>();
 
@@ -50,11 +49,10 @@ namespace WinReform.Gui.Tests.ActiveWindows
             });
         }
 
-
         [Fact]
         public void Construct_NullEventAggregator_ShouldThrowArgumentNullException()
         {
-            // Prepare 
+            // Prepare
             var windowServiceMock = new Mock<IWindowService>();
             var applicationSettingMock = new Mock<ISetting<ApplicationSettings>>();
 
@@ -68,7 +66,7 @@ namespace WinReform.Gui.Tests.ActiveWindows
         [Fact]
         public void Construct_NullWindowService_ShouldThrowArgumentNullException()
         {
-            // Prepare 
+            // Prepare
             var eventAggregatorMock = new Mock<IEventAggregator>();
             var applicationSettingMock = new Mock<ISetting<ApplicationSettings>>();
 

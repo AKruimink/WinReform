@@ -1,8 +1,8 @@
-﻿using WinReform.Domain.Infrastructure.Messenger;
-using WinReform.Domain.Infrastructure.Messenger.Strategies;
-using System;
-using Xunit;
+﻿using System;
 using Moq;
+using WinReform.Domain.Infrastructure.Messenger;
+using WinReform.Domain.Infrastructure.Messenger.Strategies;
+using Xunit;
 
 namespace WinReform.Domain.Tests.Infrastructure.Messenger
 {
@@ -349,7 +349,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             var actionExecuted = false;
 
             var delegateActionReferenceMock = new Mock<IDelegateReference>();
-            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<int>)(obj => actionExecuted = true)) ;
+            delegateActionReferenceMock.Setup(x => x.Delegate).Returns((Action<int>)(obj => actionExecuted = true));
             var delegateFilterReferenceMock = new Mock<IDelegateReference>();
             delegateFilterReferenceMock.Setup(x => x.Delegate).Returns((Predicate<int>)delegate { return false; });
 
