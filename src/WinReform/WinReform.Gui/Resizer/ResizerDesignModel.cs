@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WinReform.Domain.WinApi;
 
 namespace WinReform.Gui.Resizer
 {
@@ -9,5 +10,27 @@ namespace WinReform.Gui.Resizer
     /// </summary>
     public class ResizerDesignModel : IResizerViewModel
     {
+        ///<inheritdoc/>
+        public Dictionary<string, Rect> Resolutions { get; }
+
+        ///<inheritdoc/>
+        public string NewWidth { get; set; }
+
+        ///<inheritdoc/>
+        public string NewHeight { get; set; }
+
+        /// <summary>
+        /// Create a new instance of <see cref="ResizerDesignModel"/>
+        /// </summary>
+        public ResizerDesignModel()
+        {
+            Resolutions = new Dictionary<string, Rect>()
+            {
+                { "640x480 (4/3)", new Rect() {Right = 640, Bottom = 480 } },
+                { "720x480 (4/3)", new Rect() {Right = 720, Bottom = 480 } },
+            };
+            NewWidth = "1234";
+            NewHeight = "Ïnvalid Input";
+        }
     }
 }

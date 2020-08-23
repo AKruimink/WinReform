@@ -3,11 +3,103 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:viewModel="clr-namespace:WinReform.Gui.Infrastructure.Common.ViewModel"
+             xmlns:validation="clr-namespace:WinReform.Gui.Infrastructure.Validation"
              xmlns:local="clr-namespace:WinReform.Gui.Resizer"
-             mc:Ignorable="d" >
-    
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance local:ResizerDesignModel, IsDesignTimeCreatable=True}"
+             viewModel:ViewModelLocator.WireViewModel="{x:Type local:ResizerViewModel}">
+
     <!-- Content -->
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Manual Size -->
+        <TextBox Grid.Column="0"
+                 Grid.Row="0"
+                 mah:TextBoxHelper.ClearTextButton="True"
+                 mah:TextBoxHelper.Watermark="New Width"
+                 mah:ValidationHelper.ShowValidationErrorOnMouseOver="True"
+                 ToolTip="The new Width to set the selected windows to (keeps the current Width if left empty)"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Center"
+                 Margin="5">
+            <TextBox.Text>
+                <Binding Path="NewWidth"
+                         Mode="TwoWay"
+                         UpdateSourceTrigger="PropertyChanged"
+                         ValidatesOnNotifyDataErrors="True"
+                         ValidatesOnDataErrors="True"
+                         NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <validation:NumericValidationRule ValidationType="{x:Type system:Int32}"
+                                                          AllowNull="True"
+                                                          ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox Grid.Column="1"
+                 Grid.Row="0"
+                 mah:TextBoxHelper.ClearTextButton="True"
+                 mah:TextBoxHelper.Watermark="New Height"
+                 mah:ValidationHelper.ShowValidationErrorOnMouseOver="True"
+                 ToolTip="The new Height to set the selected windows to (keeps the current Height if left empty)"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Center"
+                 Margin="5">
+            <TextBox.Text>
+                <Binding Path="NewHeight"
+                         Mode="TwoWay"
+                         UpdateSourceTrigger="PropertyChanged"
+                         ValidatesOnNotifyDataErrors="True"
+                         ValidatesOnDataErrors="True"
+                         NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <validation:NumericValidationRule ValidationType="{x:Type system:Int32}"
+                                                          AllowNull="True"
+                                                          ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <Button Grid.Column="2"
+                Grid.Row="0"
+                Command="{Binding ApplyResizeCommand}"
+                Content="Apply"
+                ToolTip="Applies the custom Width and Height to all selected windows"
+                Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
+                HorizontalAlignment="Stretch"
+                Focusable="False"
+                Margin="5"/>
+        
+        <!-- Presets -->
+        <mah:DropDownButton Grid.Column="0"
+                            Grid.Row="1"
+                            Content="Presets"
+                            DisplayMemberPath="Key"
+                            ItemsSource="{Binding Resolutions}"
+                            Margin="5">
+            <mah:DropDownButton.ItemContainerStyle>
+                <Style BasedOn="{StaticResource {x:Type MenuItem}}"
+                       TargetType="{x:Type MenuItem}">
+                    <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.ApplyPresetCommand}"/>
+                    <Setter Property="CommandParameter" Value="{Binding Value}"/>
+                </Style>
+            </mah:DropDownButton.ItemContainerStyle>
+        </mah:DropDownButton>
     </Grid>
 </UserControl>
