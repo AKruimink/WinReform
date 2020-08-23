@@ -106,7 +106,10 @@ namespace WinReform.Gui.Resizer
         /// </summary>
         public void ApplyCustomResolution()
         {
-            ResizeWindows(new Rect { Right = Convert.ToInt32(NewWidth), Bottom = Convert.ToInt32(NewHeight) });
+            int.TryParse(NewWidth, out var width);
+            int.TryParse(NewHeight, out var height);
+
+            ResizeWindows(new Rect { Right = width, Bottom = height });
         }
 
         /// <summary>
@@ -129,7 +132,7 @@ namespace WinReform.Gui.Resizer
         {
             foreach (var window in _selectedWindows)
             {
-                //_windowService.ResizeWindow(window, newResolution);
+                _windowService.ResizeWindow(window, newResolution);
             }
         }
 
