@@ -50,7 +50,7 @@ namespace WinReform.Gui.Utilities
             _eventAggregator.GetEvent<ActiveWindowsSelectionChangedEvent>().Subscribe(ActiveWindowsSelectionChanged);
 
             SetResizableBorderCommand = new DelegateCommand(SetResizableBorder);
-            RedrawWindowCommand = new DelegateCommand(RedrawWindow);
+            RedrawWindowCommand = new DelegateCommand(RedrawWindows);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace WinReform.Gui.Utilities
         /// <summary>
         /// Redraws all selected windows
         /// </summary>
-        public void RedrawWindow()
+        public void RedrawWindows()
         {
             foreach (var window in _selectedWindows)
             {
