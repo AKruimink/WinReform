@@ -75,7 +75,6 @@ namespace WinReform.Domain.Windows
             var newPosition = new Rect { Left = window.Dimensions.Left, Top = window.Dimensions.Top, Right = newWidth, Bottom = newHeight };
 
             _winApiService.SetWindowPos(window.WindowHandle, newPosition, SwpType.NoMove | SwpType.NoActive | SwpType.NoZOrder);
-            RedrawWindow(window);
         }
 
         /// <inheritdoc/>
