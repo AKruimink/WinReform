@@ -20,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{505639D8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Tests.Fixtures", "Tests\WinReform.Tests.Fixtures\WinReform.Tests.Fixtures.csproj", "{AC217ABC-6F3E-41D9-B9C7-2ABD87E7DDA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinReform.Tests.Process.Fixture", "Tests\WinReform.Tests.Process.Fixture\WinReform.Tests.Process.Fixture.csproj", "{116D5589-AEB1-4B93-8E06-463B37053A59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Tests.Process.Fixture", "Tests\WinReform.Tests.Process.Fixture\WinReform.Tests.Process.Fixture.csproj", "{116D5589-AEB1-4B93-8E06-463B37053A59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinReform.Tests.WindowProcess.Fixture", "Tests\WinReform.Tests.WindowProcess.Fixture\WinReform.Tests.WindowProcess.Fixture.csproj", "{8DFC70C7-8E0F-4D07-A67E-4F08D338DE1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Tests.WindowProcess.Fixture", "Tests\WinReform.Tests.WindowProcess.Fixture\WinReform.Tests.WindowProcess.Fixture.csproj", "{8DFC70C7-8E0F-4D07-A67E-4F08D338DE1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -42,6 +42,22 @@ namespace WinReform.Domain.WinApi
         }
 
         /// <summary>
+        /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowpos"/
+        /// </summary>
+        [DllImport("user32.dll", EntryPoint = "SetWindowPos", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool SetWindowPos(IntPtr hwnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, SwpType uFlags);
+
+        /// <inheritdoc/>
+        public void SetWindowPos(IntPtr hwnd, Rect position, SwpType uFlags)
+        {
+            if (!SetWindowPos(hwnd, IntPtr.Zero, position.Left, position.Top, position.Right, position.Bottom, uFlags))
+            {
+                HResult.ThrowLastError();
+            }
+        }
+
+        /// <summary>
         /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlonga"/>
         /// </summary>
         [DllImport("user32.dll", EntryPoint = "GetWindowLong", SetLastError = true)]

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WinReform.Domain.WinApi;
 
 namespace WinReform.Domain.Windows
 {
@@ -12,6 +13,13 @@ namespace WinReform.Domain.Windows
         /// </summary>
         /// <returns>Returns <see cref="IEnumerable{Window}"/> containing all active windows on the system</returns>
         IEnumerable<Window> GetActiveWindows();
+
+        /// <summary>
+        /// Resize a window
+        /// </summary>
+        /// <param name="window"><see cref="Window"/> to be resized</param>
+        /// <param name="resolution"><see cref="Rect"/> containing the new size</param>
+        void ResizeWindow(Window window, Rect resolution);
 
         /// <summary>
         /// Sets the border style of a window to a resizable one

@@ -180,6 +180,75 @@ namespace WinReform.Domain.Tests.Windows
 
         #endregion GetActiveWindows Tests
 
+        #region ResizeWindow Tests
+
+        [Fact]
+        public void ResizeWindow_NewResolution_ShoulUseNewResolution()
+        {
+            // Prepare
+            Rect? sendRect = default;
+
+            var winApiServiceMock = new Mock<IWinApiService>();
+            var processServiceMock = new Mock<IProcessService>();
+
+            winApiServiceMock.Setup(x => x.SetWindowPos(It.IsAny<IntPtr>(), It.IsAny<Rect>(), It.IsAny<SwpType>()))
+                .Callback<IntPtr, Rect, SwpType>((handle, rect, swpType) => sendRect = rect);
+
+            var windowMock = new Window
+            {
+                WindowHandle = (IntPtr)1,
+                Dimensions = new Rect { Left = 1, Top = 1, Right = 100, Bottom = 200 }
+            };
+            var resolutionMock = new Rect
+            {
+                Left = 100,
+                Top = 200,
+                Right = 150,
+                Bottom = 250
+            };
+            var windowService = new WindowService(winApiServiceMock.Object, processServiceMock.Object);
+
+            // Act
+            windowService.ResizeWindow(windowMock, resolutionMock);
+
+            // Assert
+            Assert.NotNull(sendRect);
+            Assert.Equal(resolutionMock.Right, sendRect!.Value.Right);
+            Assert.Equal(resolutionMock.Bottom, sendRect!.Value.Bottom);
+            Assert.Equal(windowMock.Dimensions.Left, sendRect!.Value.Left);
+            Assert.Equal(windowMock.Dimensions.Top, sendRect!.Value.Top);
+        }
+
+        [Fact]
+        public void ResizeWindow_EmptyRect_ShoulUseOriginalDimensions()
+        {
+            // Prepare
+            Rect? sendRect = default;
+
+            var winApiServiceMock = new Mock<IWinApiService>();
+            var processServiceMock = new Mock<IProcessService>();
+
+            winApiServiceMock.Setup(x => x.SetWindowPos(It.IsAny<IntPtr>(), It.IsAny<Rect>(), It.IsAny<SwpType>()))
+                .Callback<IntPtr, Rect, SwpType>((handle, rect, swpType) => sendRect = rect);
+
+            var windowMock = new Window
+            {
+                WindowHandle = (IntPtr)1,
+                Dimensions = new Rect { Left = 1, Top = 1, Right = 100, Bottom = 200 }
+            };
+            var resolutionMock = new Rect();
+            var windowService = new WindowService(winApiServiceMock.Object, processServiceMock.Object);
+
+            // Act
+            windowService.ResizeWindow(windowMock, resolutionMock);
+
+            // Assert
+            Assert.NotNull(sendRect);
+            Assert.Equal(windowMock.Dimensions, sendRect);
+        }
+
+        #endregion ResizeWindow Tests
+
         #region SetResizableBorder Tests
 
         [Fact]
