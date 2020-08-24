@@ -60,10 +60,8 @@ namespace WinReform.Gui.Resizer
 
         private string _newHeight = string.Empty;
 
-        /// <summary>
-        /// <see cref="List{Domain.Windows.Window}"/> containing all currently selected windows
-        /// </summary>
-        private List<Domain.Windows.Window> _selectedWindows = new List<Domain.Windows.Window>();
+        ///<inheritdoc/>
+        public List<Domain.Windows.Window> SelectedWindows { get; set; } = new List<Domain.Windows.Window>();
 
         /// <summary>
         /// <see cref="IEventAggregator"/> used to be notified when the selected windows has changed
@@ -130,7 +128,7 @@ namespace WinReform.Gui.Resizer
         /// <param name="newResolution"><see cref="Rect"/> containing the new resolution</param>
         private void ResizeWindows(Rect newResolution)
         {
-            foreach (var window in _selectedWindows)
+            foreach (var window in SelectedWindows)
             {
                 _windowService.ResizeWindow(window, newResolution);
             }
@@ -142,7 +140,7 @@ namespace WinReform.Gui.Resizer
         /// <param name="windows"><see cref="List{Domain.Windows.Window}"/> containing all selected windows</param>
         private void ActiveWindowsSelectionChanged(List<Domain.Windows.Window> windows)
         {
-            _selectedWindows = windows;
+            SelectedWindows = windows;
         }
     }
 }

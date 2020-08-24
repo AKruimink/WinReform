@@ -26,5 +26,10 @@ namespace WinReform.Gui.Resizer
         /// NOTE: if left empty the original height of the window(s) will be used
         /// </summary>
         string NewHeight { get; set; }
+
+        /// <summary>
+        /// <see cref="List{Domain.Windows.Window}"/> containing all currently selected windows
+        /// </summary>
+        List<Domain.Windows.Window> SelectedWindows { get; set; }
     }
 }

@@ -19,6 +19,9 @@ namespace WinReform.Gui.Resizer
         ///<inheritdoc/>
         public string NewHeight { get; set; }
 
+        ///<inheritdoc/>
+        public List<Domain.Windows.Window> SelectedWindows { get; set; } = new List<Domain.Windows.Window>();
+
         /// <summary>
         /// Create a new instance of <see cref="ResizerDesignModel"/>
         /// </summary>
