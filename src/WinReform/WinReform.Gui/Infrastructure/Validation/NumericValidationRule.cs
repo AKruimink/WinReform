@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Windows.Controls;
 
 namespace WinReform.Gui.Infrastructure.Validation
@@ -32,9 +30,9 @@ namespace WinReform.Gui.Infrastructure.Validation
         {
             var strValue = Convert.ToString(value);
 
-            if(string.IsNullOrEmpty(strValue))
+            if (string.IsNullOrEmpty(strValue))
             {
-                if(AllowNull)
+                if (AllowNull)
                 {
                     return new ValidationResult(true, null);
                 }

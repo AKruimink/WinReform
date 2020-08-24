@@ -51,7 +51,7 @@ namespace WinReform.Domain.WinApi
         /// <inheritdoc/>
         public void SetWindowPos(IntPtr hwnd, Rect position, SwpType uFlags)
         {
-            if(!SetWindowPos(hwnd, IntPtr.Zero, position.Left, position.Top, position.Right, position.Bottom, uFlags))
+            if (!SetWindowPos(hwnd, IntPtr.Zero, position.Left, position.Top, position.Right, position.Bottom, uFlags))
             {
                 HResult.ThrowLastError();
             }

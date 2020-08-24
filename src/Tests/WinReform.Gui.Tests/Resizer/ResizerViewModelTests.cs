@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Moq;
 using WinReform.Domain.Infrastructure.Events;
 using WinReform.Domain.Infrastructure.Messenger;
@@ -64,7 +62,7 @@ namespace WinReform.Gui.Tests.Resizer
             });
         }
 
-        #endregion
+        #endregion Constructor Tests
 
         #region ApplyCustomResolution Tests
 
@@ -121,7 +119,7 @@ namespace WinReform.Gui.Tests.Resizer
             windowServiceMock.Verify(x => x.ResizeWindow(It.IsAny<Domain.Windows.Window>(), It.IsAny<Rect>()), Times.Never());
         }
 
-        #endregion
+        #endregion ApplyCustomResolution Tests
 
         #region ApplyPreset Tests
 
@@ -129,7 +127,7 @@ namespace WinReform.Gui.Tests.Resizer
         public void ApplyPreset_ValidRect_ShouldPassRect()
         {
             // Prepare
-            var rect = new Rect { Right = 10, Bottom = 20};
+            var rect = new Rect { Right = 10, Bottom = 20 };
             Rect? sendRect = default;
 
             var eventAggregatorMock = new Mock<IEventAggregator>();
@@ -192,6 +190,6 @@ namespace WinReform.Gui.Tests.Resizer
             windowServiceMock.Verify(x => x.ResizeWindow(It.IsAny<Domain.Windows.Window>(), It.IsAny<Rect>()), Times.Never());
         }
 
-        #endregion
+        #endregion ApplyPreset Tests
     }
 }

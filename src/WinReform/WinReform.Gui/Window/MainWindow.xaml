@@ -117,7 +117,7 @@
                                      mah:TabControlHelper.Underlined="TabPanel">
                     <mah:MetroTabItem Header="Resizer"
                                       mah:HeaderedControlHelper.HeaderFontSize="18">
-                        <resizer:ResizerView/>
+                        <resizer:ResizerView />
                     </mah:MetroTabItem>
                     <mah:MetroTabItem Header="Locator"
                                       mah:HeaderedControlHelper.HeaderFontSize="18">

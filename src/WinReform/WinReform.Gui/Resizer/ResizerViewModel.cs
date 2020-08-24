@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using WinReform.Domain.Infrastructure.Events;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.WinApi;
@@ -116,14 +115,14 @@ namespace WinReform.Gui.Resizer
         /// <param name="preset"><see cref="Rect"/> containing the new resolution</param>
         public void ApplyPreset(Rect? preset)
         {
-            if(preset.HasValue)
+            if (preset.HasValue)
             {
                 ResizeWindows(preset.Value);
             }
         }
 
         /// <summary>
-        /// Resizes all selected windows 
+        /// Resizes all selected windows
         /// </summary>
         /// <param name="newResolution"><see cref="Rect"/> containing the new resolution</param>
         private void ResizeWindows(Rect newResolution)

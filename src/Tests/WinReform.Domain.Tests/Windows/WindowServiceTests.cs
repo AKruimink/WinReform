@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Threading;
 using Moq;
 using WinReform.Domain.Process;
@@ -230,7 +229,7 @@ namespace WinReform.Domain.Tests.Windows
             var processServiceMock = new Mock<IProcessService>();
 
             winApiServiceMock.Setup(x => x.SetWindowPos(It.IsAny<IntPtr>(), It.IsAny<Rect>(), It.IsAny<SwpType>()))
-                .Callback<IntPtr, Rect, SwpType> ((handle, rect, swpType) => sendRect = rect);
+                .Callback<IntPtr, Rect, SwpType>((handle, rect, swpType) => sendRect = rect);
 
             var windowMock = new Window
             {
@@ -248,7 +247,7 @@ namespace WinReform.Domain.Tests.Windows
             Assert.Equal(windowMock.Dimensions, sendRect);
         }
 
-        #endregion
+        #endregion ResizeWindow Tests
 
         #region SetResizableBorder Tests
 
