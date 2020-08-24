@@ -8,7 +8,8 @@ namespace WinReform.Domain.WinApi
     /// Defines a class that represents all possible SWP type for the Set WindowPos method
     /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowpos">List of Swp values</a>
     /// </summary>
-    public enum SwpType : long
+    [Flags]
+    public enum SwpType : uint
     {
         /// <summary>
         /// Posts the request to the thread that own the window
@@ -17,13 +18,13 @@ namespace WinReform.Domain.WinApi
         AsyncWindowPos = 0x4000,
 
         /// <summary>
-        /// Prevents the generation of the <see cref="SyncPaint"/> message
+        /// Prevents the generation of the SyncPaint message
         /// </summary>
         DeferErase = 0x2000,
 
         /// <summary>
         /// Applies new frame styles set using the SetWindowLong function
-        /// NOTE: Sends a WM_NCCALCSIZE message to the window even when the size doesn't chage unless specified
+        /// NOTE: Sends a WM_NCCALCSIZE message to the window even when the size doesn't change unless specified
         /// </summary>
         FrameChanged = 0x0020,
 
