@@ -68,6 +68,17 @@ namespace WinReform.Domain.Windows
         }
 
         /// <inheritdoc/>
+        public void ResizeWindow(Window window, Rect resolution)
+        {
+            var newWidth = resolution.Right == 0 ? window.Dimensions.Right : resolution.Right;
+            var newHeight = resolution.Bottom == 0 ? window.Dimensions.Bottom : resolution.Bottom;
+            var newPosition = new Rect { Left = window.Dimensions.Left, Top = window.Dimensions.Top, Right = newWidth, Bottom = newHeight };
+
+            _winApiService.SetWindowPos(window.WindowHandle, newPosition, SwpType.NoMove | SwpType.NoActive | SwpType.NoZOrder);
+            RedrawWindow(window);
+        }
+
+        /// <inheritdoc/>
         public bool SetResizableBorder(Window window)
         {
             try
