@@ -22,6 +22,13 @@ namespace WinReform.Domain.Windows
         void ResizeWindow(Window window, Rect resolution);
 
         /// <summary>
+        /// Relocates a window
+        /// </summary>
+        /// <param name="window"><see cref="Window"/> to be relocated</param>
+        /// <param name="location"><see cref="Rect"/> containing the new location</param>
+        void RelocateWindow(Window window, Rect location);
+
+        /// <summary>
         /// Sets the border style of a window to a resizable one
         /// </summary>
         /// <param name="window"><see cref="Window"/> to change the border style of</param>
