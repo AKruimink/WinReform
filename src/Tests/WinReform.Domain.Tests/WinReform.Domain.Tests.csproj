@@ -21,4 +21,8 @@
     <ProjectReference Include="..\WinReform.Tests.WindowProcess.Fixture\WinReform.Tests.WindowProcess.Fixture.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Displays\" />
+  </ItemGroup>
+
 </Project>
