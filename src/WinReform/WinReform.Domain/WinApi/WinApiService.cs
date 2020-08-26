@@ -157,6 +157,7 @@ namespace WinReform.Domain.WinApi
             {
                 var monitor = new Monitor();
                 monitor.Size = (uint)Marshal.SizeOf(monitor);
+                monitor.MonitorHandle = hMonitor;
 
                 if (!GetMonitorInfo(hMonitor, ref monitor))
                 {

@@ -11,27 +11,32 @@ namespace WinReform.Domain.WinApi
     public struct Monitor : IEquatable<Monitor>
     {
         /// <summary>
-        /// Size of <see cref="Monitor"/> in bytes
+        /// Gets or Sets tje size of <see cref="Monitor"/> in bytes
         /// NOTE: Needs to be set as GetMonitorInfo uses it to determine the type of <see cref="struct"/> passed
         /// </summary>
         public uint Size { get; set; }
 
         /// <summary>
-        /// <see cref="Rect"/> containing the full resolution of the monitor
+        /// Gets or Sets the <see cref="Rect"/> containing the full resolution of the monitor
         /// </summary>
         public Rect MonitorSize { get; set; }
 
         /// <summary>
-        /// <see cref="Rect"/> containing the full working area
+        /// Gets or Sets the <see cref="Rect"/> containing the full working area
         /// NOTE: working area is <see cref="MonitorSize"/> minus the taskbar and additional desktop toolbars
         /// </summary>
         public Rect WorkArea { get; set; }
 
         /// <summary>
-        /// Flags that represent the attributes of the monitor
+        /// Gets or Sets the flags that represent the attributes of the monitor
         /// NOTE: only the MONITORINFOF_PRIMARY exists, so when set the monitor is set as the primary monitor
         /// </summary>
         public uint Flags { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the window handle that represents the <see cref="Monitor"/>
+        /// </summary>
+        public IntPtr MonitorHandle { get; set; }
 
         /// <summary>
         /// Comapres the current <see cref="Monitor"/> to a given <see cref="Monitor"/>
@@ -42,7 +47,8 @@ namespace WinReform.Domain.WinApi
             other.Size == Size
             && other.MonitorSize == MonitorSize
             && other.WorkArea == WorkArea
-            && other.Flags == Flags;
+            && other.Flags == Flags
+            && other.MonitorHandle == MonitorHandle;
 
         /// <summary>
         /// Compares the current <see cref="Monitor"/> to a given <see cref="object"/>
@@ -58,7 +64,7 @@ namespace WinReform.Domain.WinApi
         /// </summary>
         /// <returns>Returns <see cref="int"/> containing a unique hashcode that represents the instance of the current <see cref="Monitor"/></returns>
         public override int GetHashCode()
-            => (Size, MonitorSize, WorkArea, Flags).GetHashCode();
+            => (Size, MonitorSize, WorkArea, Flags, MonitorHandle).GetHashCode();
 
         /// <summary>
         /// Compare two instances of <see cref="Monitor"/> for equality
