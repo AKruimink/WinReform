@@ -13,6 +13,6 @@ namespace WinReform.Domain.Displays
         /// Gets all available displays
         /// </summary>
         /// <returns>Returns <see cref="List{Display}"/> containing all available displays</returns>
-        List<Display> GetDisplays();
+        List<Display> GetAllDisplays();
     }
 }

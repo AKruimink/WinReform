@@ -25,7 +25,7 @@ namespace WinReform.Domain.Displays
         }
 
         /// <inheritdoc/>
-        public List<Display> GetDisplays()
+        public List<Display> GetAllDisplays()
         {
             var displays = new List<Display>();
 
