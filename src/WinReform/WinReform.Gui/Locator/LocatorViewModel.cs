@@ -16,23 +16,54 @@ namespace WinReform.Gui.Locator
     /// </summary>
     public class LocatorViewModel : ViewModelBase, ILocatorViewModel
     {
-        ///<inheritdoc/>
-        public string NewXAxis
+        public Dictionary<string, LocationPreset> Locations { get; } = new Dictionary<string, LocationPreset>()
         {
-            get => _newXAxis;
-            set => SetProperty(ref _newXAxis, value);
+            { "Left-Top", new LocationPreset { HorizontalLocation = HorizontalLocationType.Left, VerticalLocation = VerticalLocationType.Top} },
+            { "Left-Center", new LocationPreset { HorizontalLocation = HorizontalLocationType.Left, VerticalLocation = VerticalLocationType.Center} },
+            { "Left-Bottom", new LocationPreset { HorizontalLocation = HorizontalLocationType.Left, VerticalLocation = VerticalLocationType.Bottom} },
+            { "Center-Top", new LocationPreset { HorizontalLocation = HorizontalLocationType.Center, VerticalLocation = VerticalLocationType.Top} },
+            { "Center", new LocationPreset { HorizontalLocation = HorizontalLocationType.Center, VerticalLocation = VerticalLocationType.Center} },
+            { "Center-Bottom", new LocationPreset { HorizontalLocation = HorizontalLocationType.Center, VerticalLocation = VerticalLocationType.Bottom} },
+            { "Right-Top", new LocationPreset { HorizontalLocation = HorizontalLocationType.Right, VerticalLocation = VerticalLocationType.Top} },
+            { "Right-Center", new LocationPreset { HorizontalLocation = HorizontalLocationType.Right, VerticalLocation = VerticalLocationType.Center} },
+            { "Right-Bottom", new LocationPreset { HorizontalLocation = HorizontalLocationType.Right, VerticalLocation = VerticalLocationType.Bottom} },
+        };
+
+        ///<inheritdoc/>
+        public string NewHorizontalLocation
+        {
+            get => _newHorizontalLocation;
+            set => SetProperty(ref _newHorizontalLocation, value);
         }
 
-        private string _newXAxis = string.Empty;
+        private string _newHorizontalLocation = string.Empty;
 
         ///<inheritdoc/>
-        public string NewYAxis
+        public string NewVerticalLocation
         {
-            get => _newYAxis;
-            set => SetProperty(ref _newYAxis, value);
+            get => _newVerticalLocation;
+            set => SetProperty(ref _newVerticalLocation, value);
         }
 
-        private string _newYAxis = string.Empty;
+        private string _newVerticalLocation = string.Empty;
+
+        ///<inheritdoc/>
+        public List<Display> AvailableDisplays
+        {
+            get => _availableDisplays;
+            set => SetProperty(ref _availableDisplays, value);
+        }
+
+        private List<Display> _availableDisplays = new List<Display>();
+
+        ///<inheritdoc/>
+        public Display? SelectedDisplay
+        {
+            get => _selectedDisplay;
+            set => SetProperty(ref _selectedDisplay, value);
+        }
+
+        private Display? _selectedDisplay;
 
         ///<inheritdoc/>
         public List<Domain.Windows.Window> SelectedWindows { get; set; } = new List<Domain.Windows.Window>();
@@ -60,7 +91,7 @@ namespace WinReform.Gui.Locator
         /// <summary>
         /// Applies a preset of <see cref="Resolutions"/> to all selected windows
         /// </summary>
-        public DelegateCommand ApplyPresetCommand { get; }
+        public DelegateCommand<LocationPreset?> ApplyPresetCommand { get; }
 
         public LocatorViewModel(IEventAggregator eventAggregator, IWindowService windowService, IDisplayService displayService)
         {
@@ -70,10 +101,11 @@ namespace WinReform.Gui.Locator
             _eventAggregator.GetEvent<ActiveWindowsSelectionChangedEvent>().Subscribe(ActiveWindowsSelectionChanged);
 
             // Loads windows
-
+            AvailableDisplays = _displayService.GetAllDisplays();
 
             // Setup commands
             ApplyCustomLocationCommand = new DelegateCommand(ApplyCustomLocation);
+            ApplyPresetCommand = new DelegateCommand<LocationPreset?>(ApplyPresetLocation);
         }
 
         /// <summary>
@@ -81,10 +113,45 @@ namespace WinReform.Gui.Locator
         /// </summary>
         public void ApplyCustomLocation()
         {
-            int.TryParse(NewXAxis, out var xAxis);
-            int.TryParse(NewYAxis, out var yAxis);
+            int.TryParse(NewHorizontalLocation, out var xAxis);
+            int.TryParse(NewVerticalLocation, out var yAxis);
 
             RelocateWindows(new Rect { Left = xAxis, Top = yAxis });
+        }
+
+        public void ApplyPresetLocation(LocationPreset? location)
+        {
+            foreach(var window in SelectedWindows)
+            {
+                var newLocation = new Rect();
+                switch(location?.HorizontalLocation)
+                {
+                    case HorizontalLocationType.Left:
+                        newLocation.Left = SelectedDisplay.WorkArea.Left;
+                        break;
+                    case HorizontalLocationType.Center:
+                        newLocation.Left = SelectedDisplay.WorkArea.Right - ((SelectedDisplay.WorkArea.Right - SelectedDisplay.WorkArea.Left) / 2) - (window.Dimensions.Right - window.Dimensions.Left) / 2;
+                        break;
+                    case HorizontalLocationType.Right:
+                        newLocation.Left = SelectedDisplay.WorkArea.Right - (window.Dimensions.Right - window.Dimensions.Left);
+                        break;
+                }
+
+                switch (location?.VerticalLocation)
+                {
+                    case VerticalLocationType.Top:
+                        newLocation.Top = SelectedDisplay.WorkArea.Top;
+                        break;
+                    case VerticalLocationType.Center:
+                        newLocation.Top = SelectedDisplay.WorkArea.Bottom - ((SelectedDisplay.WorkArea.Bottom - SelectedDisplay.WorkArea.Top) / 2) - (window.Dimensions.Bottom - window.Dimensions.Top) / 2;
+                        break;
+                    case VerticalLocationType.Bottom:
+                        newLocation.Top = SelectedDisplay.WorkArea.Bottom - (window.Dimensions.Bottom - window.Dimensions.Top);
+                        break;
+                }
+
+                _windowService.RelocateWindow(window, newLocation);
+            }
         }
 
         /// <summary>
