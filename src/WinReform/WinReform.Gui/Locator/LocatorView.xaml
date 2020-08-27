@@ -31,7 +31,7 @@
                  mah:TextBoxHelper.ClearTextButton="True"
                  mah:TextBoxHelper.Watermark="Horizontal Location"
                  mah:ValidationHelper.ShowValidationErrorOnMouseOver="True"
-                 ToolTip="The new horizontal location that the top left corner of the window will be moved to (keeps the current horizontal location if left empty)"
+                 ToolTip="The new horizontal location that the top left corner of the window will be moved to (defaults to 0 if left empty)"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Center"
                  Margin="5">
@@ -56,7 +56,7 @@
                  mah:TextBoxHelper.ClearTextButton="True"
                  mah:TextBoxHelper.Watermark="Vertical Location"
                  mah:ValidationHelper.ShowValidationErrorOnMouseOver="True"
-                 ToolTip="The new vertical location that the top left corner of the window will be moved to (keeps the current vertical location if left empty)"
+                 ToolTip="The new vertical location that the top left corner of the window will be moved to (defaults to 0 if left empty)"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Center"
                  Margin="5">
