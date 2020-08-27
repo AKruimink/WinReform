@@ -155,9 +155,11 @@ namespace WinReform.Domain.WinApi
 
             bool Callback(IntPtr hMonitor, IntPtr hdc, ref Rect lpRect, IntPtr dwData)
             {
-                var monitor = new Monitor();
-                monitor.Size = (uint)Marshal.SizeOf(monitor);
-                monitor.MonitorHandle = hMonitor;
+                var monitor = new Monitor
+                {
+                    Size = 40, // We harcode the value as Marshal.SizeOf returns a invalid value as our struct contains extra data (40 = MONITORINFO , 72 = MONITORINFOEX)
+                    MonitorHandle = hMonitor
+                };
 
                 if (!GetMonitorInfo(hMonitor, ref monitor))
                 {
