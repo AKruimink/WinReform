@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WinReform.Domain.Displays;
 
 namespace WinReform.Gui.Locator
 {
@@ -10,21 +11,28 @@ namespace WinReform.Gui.Locator
     public class LocatorDesignModel : ILocatorViewModel
     {
         ///<inheritdoc/>
-        public string NewXAxis { get; set; }
+        public string NewHorizontalLocation { get; set; }
+
 
         ///<inheritdoc/>
-        public string NewYAxis { get; set; }
+        public string NewVerticalLocation { get; set; }
 
         ///<inheritdoc/>
         public List<Domain.Windows.Window> SelectedWindows { get; set; } = new List<Domain.Windows.Window>();
+
+        ///<inheritdoc/>
+        public List<Display> AvailableDisplays { get; set; } = new List<Display>();
+
+        ///<inheritdoc/>
+        public Display? SelectedDisplay { get; set; }
 
         /// <summary>
         /// Create a new instance of the <see cref="LocatorDesignModel"/>
         /// </summary>
         public LocatorDesignModel()
         {
-            NewXAxis = 10.ToString();
-            NewYAxis = "Invalid Type";
+            NewHorizontalLocation = 10.ToString();
+            NewVerticalLocation = "Invalid Type";
         }
     }
 }

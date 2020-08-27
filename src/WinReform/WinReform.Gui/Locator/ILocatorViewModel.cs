@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WinReform.Domain.Displays;
 
 namespace WinReform.Gui.Locator
 {
@@ -11,16 +12,26 @@ namespace WinReform.Gui.Locator
     {
 
         /// <summary>
-        /// Gets or Sets the new X axis to be applied to all selected windows
-        /// NOTE: if left empty the original X axis of the window(s) will be used
+        /// Gets or Sets the new horizontal location to be applied to all selected windows
+        /// NOTE: if left empty the original horizontal location of the window(s) will be used
         /// </summary>
-        string NewXAxis { get; set; }
+        string NewHorizontalLocation { get; set; }
 
         /// <summary>
-        /// Gets or Sets The new Y axis to be applied to all selected windows
-        /// NOTE: if left empty the original Y axis of the window(s) will be used
+        /// Gets or Sets The new vertical location to be applied to all selected windows
+        /// NOTE: if left empty the original vertical location of the window(s) will be used
         /// </summary>
-        string NewYAxis { get; set; }
+        string NewVerticalLocation { get; set; }
+
+        /// <summary>
+        /// Gets or Sets all available displays that the preset can be applied to
+        /// </summary>
+        List<Display> AvailableDisplays { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the selected displat to apply the preset to
+        /// </summary>
+        Display? SelectedDisplay { get; set; }
 
         /// <summary>
         /// <see cref="List{Domain.Windows.Window}"/> containing all currently selected windows
