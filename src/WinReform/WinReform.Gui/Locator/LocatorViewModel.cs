@@ -16,19 +16,6 @@ namespace WinReform.Gui.Locator
     /// </summary>
     public class LocatorViewModel : ViewModelBase, ILocatorViewModel
     {
-        public Dictionary<string, LocationPreset> Locations { get; } = new Dictionary<string, LocationPreset>()
-        {
-            { "Left-Top", new LocationPreset { HorizontalLocation = HorizontalLocationType.Left, VerticalLocation = VerticalLocationType.Top} },
-            { "Left-Center", new LocationPreset { HorizontalLocation = HorizontalLocationType.Left, VerticalLocation = VerticalLocationType.Center} },
-            { "Left-Bottom", new LocationPreset { HorizontalLocation = HorizontalLocationType.Left, VerticalLocation = VerticalLocationType.Bottom} },
-            { "Center-Top", new LocationPreset { HorizontalLocation = HorizontalLocationType.Center, VerticalLocation = VerticalLocationType.Top} },
-            { "Center", new LocationPreset { HorizontalLocation = HorizontalLocationType.Center, VerticalLocation = VerticalLocationType.Center} },
-            { "Center-Bottom", new LocationPreset { HorizontalLocation = HorizontalLocationType.Center, VerticalLocation = VerticalLocationType.Bottom} },
-            { "Right-Top", new LocationPreset { HorizontalLocation = HorizontalLocationType.Right, VerticalLocation = VerticalLocationType.Top} },
-            { "Right-Center", new LocationPreset { HorizontalLocation = HorizontalLocationType.Right, VerticalLocation = VerticalLocationType.Center} },
-            { "Right-Bottom", new LocationPreset { HorizontalLocation = HorizontalLocationType.Right, VerticalLocation = VerticalLocationType.Bottom} },
-        };
-
         ///<inheritdoc/>
         public string NewHorizontalLocation
         {
@@ -57,13 +44,13 @@ namespace WinReform.Gui.Locator
         private List<Display> _availableDisplays = new List<Display>();
 
         ///<inheritdoc/>
-        public Display? SelectedDisplay
+        public Display SelectedDisplay
         {
             get => _selectedDisplay;
             set => SetProperty(ref _selectedDisplay, value);
         }
 
-        private Display? _selectedDisplay;
+        private Display _selectedDisplay = new Display();
 
         ///<inheritdoc/>
         public List<Domain.Windows.Window> SelectedWindows { get; set; } = new List<Domain.Windows.Window>();
@@ -91,7 +78,7 @@ namespace WinReform.Gui.Locator
         /// <summary>
         /// Applies a preset of <see cref="Resolutions"/> to all selected windows
         /// </summary>
-        public DelegateCommand<LocationPreset?> ApplyPresetCommand { get; }
+        public DelegateCommand<Location?> ApplyPresetCommand { get; }
 
         public LocatorViewModel(IEventAggregator eventAggregator, IWindowService windowService, IDisplayService displayService)
         {
@@ -105,7 +92,7 @@ namespace WinReform.Gui.Locator
 
             // Setup commands
             ApplyCustomLocationCommand = new DelegateCommand(ApplyCustomLocation);
-            ApplyPresetCommand = new DelegateCommand<LocationPreset?>(ApplyPresetLocation);
+            ApplyPresetCommand = new DelegateCommand<Location?>(ApplyPresetLocation);
         }
 
         /// <summary>
@@ -119,38 +106,45 @@ namespace WinReform.Gui.Locator
             RelocateWindows(new Rect { Left = xAxis, Top = yAxis });
         }
 
-        public void ApplyPresetLocation(LocationPreset? location)
+        /// <summary>
+        /// Relocates all selected windows to a given preset
+        /// </summary>
+        /// <param name="location"><see cref="Location"/> containing a preset location</param>
+        public void ApplyPresetLocation(Location? location)
         {
-            foreach(var window in SelectedWindows)
+             if(location != null )
             {
-                var newLocation = new Rect();
-                switch(location?.HorizontalLocation)
+                foreach (var window in SelectedWindows)
                 {
-                    case HorizontalLocationType.Left:
-                        newLocation.Left = SelectedDisplay.WorkArea.Left;
-                        break;
-                    case HorizontalLocationType.Center:
-                        newLocation.Left = SelectedDisplay.WorkArea.Right - ((SelectedDisplay.WorkArea.Right - SelectedDisplay.WorkArea.Left) / 2) - (window.Dimensions.Right - window.Dimensions.Left) / 2;
-                        break;
-                    case HorizontalLocationType.Right:
-                        newLocation.Left = SelectedDisplay.WorkArea.Right - (window.Dimensions.Right - window.Dimensions.Left);
-                        break;
-                }
+                    var newLocation = new Rect();
+                    switch (location?.HorizontalLocation)
+                    {
+                        case HorizontalLocationType.Left:
+                            newLocation.Left = SelectedDisplay.WorkArea.Left;
+                            break;
+                        case HorizontalLocationType.Center:
+                            newLocation.Left = SelectedDisplay.WorkArea.Right - ((SelectedDisplay.WorkArea.Right - SelectedDisplay.WorkArea.Left) / 2) - (window.Dimensions.Right - window.Dimensions.Left) / 2;
+                            break;
+                        case HorizontalLocationType.Right:
+                            newLocation.Left = SelectedDisplay.WorkArea.Right - (window.Dimensions.Right - window.Dimensions.Left);
+                            break;
+                    }
 
-                switch (location?.VerticalLocation)
-                {
-                    case VerticalLocationType.Top:
-                        newLocation.Top = SelectedDisplay.WorkArea.Top;
-                        break;
-                    case VerticalLocationType.Center:
-                        newLocation.Top = SelectedDisplay.WorkArea.Bottom - ((SelectedDisplay.WorkArea.Bottom - SelectedDisplay.WorkArea.Top) / 2) - (window.Dimensions.Bottom - window.Dimensions.Top) / 2;
-                        break;
-                    case VerticalLocationType.Bottom:
-                        newLocation.Top = SelectedDisplay.WorkArea.Bottom - (window.Dimensions.Bottom - window.Dimensions.Top);
-                        break;
-                }
+                    switch (location?.VerticalLocation)
+                    {
+                        case VerticalLocationType.Top:
+                            newLocation.Top = SelectedDisplay.WorkArea.Top;
+                            break;
+                        case VerticalLocationType.Center:
+                            newLocation.Top = SelectedDisplay.WorkArea.Bottom - ((SelectedDisplay.WorkArea.Bottom - SelectedDisplay.WorkArea.Top) / 2) - (window.Dimensions.Bottom - window.Dimensions.Top) / 2;
+                            break;
+                        case VerticalLocationType.Bottom:
+                            newLocation.Top = SelectedDisplay.WorkArea.Bottom - (window.Dimensions.Bottom - window.Dimensions.Top);
+                            break;
+                    }
 
-                _windowService.RelocateWindow(window, newLocation);
+                    _windowService.RelocateWindow(window, newLocation);
+                }
             }
         }
 

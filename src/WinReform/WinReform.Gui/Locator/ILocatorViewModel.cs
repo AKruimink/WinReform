@@ -31,7 +31,7 @@ namespace WinReform.Gui.Locator
         /// <summary>
         /// Gets or Sets the selected displat to apply the preset to
         /// </summary>
-        Display? SelectedDisplay { get; set; }
+        Display SelectedDisplay { get; set; }
 
         /// <summary>
         /// <see cref="List{Domain.Windows.Window}"/> containing all currently selected windows

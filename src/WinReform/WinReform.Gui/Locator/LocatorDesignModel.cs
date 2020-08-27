@@ -24,7 +24,7 @@ namespace WinReform.Gui.Locator
         public List<Display> AvailableDisplays { get; set; } = new List<Display>();
 
         ///<inheritdoc/>
-        public Display? SelectedDisplay { get; set; }
+        public Display SelectedDisplay { get; set; } = new Display();
 
         /// <summary>
         /// Create a new instance of the <see cref="LocatorDesignModel"/>
