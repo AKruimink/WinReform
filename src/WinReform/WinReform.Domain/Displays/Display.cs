@@ -32,6 +32,11 @@ namespace WinReform.Domain.Displays
         public Rect WorkArea { get; set; }
 
         /// <summary>
+        /// Gets the display number as readable string
+        /// </summary>
+        public string DisplayNumber => $"Display {Id}";
+
+        /// <summary>
         /// Comapares the current <see cref="Display"/> to a given <see cref="Display"/>
         /// </summary>
         /// <param name="other"><see cref="Display"/> to compare to the current instance</param>

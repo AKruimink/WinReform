@@ -33,7 +33,7 @@ namespace WinReform.Domain.Displays
             {
                 var display = new Display
                 {
-                    Id = monitor.GetHashCode(),
+                    Id = displays.Count + 1, // ID also functions as the monitor order
                     DisplayHandle = monitor.MonitorHandle,
                     Primary = monitor.Flags != 0,
                     WorkArea = monitor.WorkArea
