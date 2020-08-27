@@ -91,7 +91,7 @@
                             Grid.Row="1"
                             Content="Presets"
                             DisplayMemberPath="Key"
-                            ItemsSource="{Binding Resolutions}"
+                            ItemsSource="{Binding Source={x:Static local:Resolution.Resolutions}}"
                             Margin="5 10 5 5">
             <mah:DropDownButton.ItemContainerStyle>
                 <Style BasedOn="{StaticResource {x:Type MenuItem}}"
