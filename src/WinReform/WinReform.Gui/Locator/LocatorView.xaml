@@ -29,14 +29,14 @@
         <TextBox Grid.Column="0"
                  Grid.Row="0"
                  mah:TextBoxHelper.ClearTextButton="True"
-                 mah:TextBoxHelper.Watermark="New X axis"
+                 mah:TextBoxHelper.Watermark="Horizontal Location"
                  mah:ValidationHelper.ShowValidationErrorOnMouseOver="True"
-                 ToolTip="The new X axis that the top left corner of the window will be moved to (keeps the current X axis if left empty)"
+                 ToolTip="The new horizontal location that the top left corner of the window will be moved to (keeps the current horizontal location if left empty)"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Center"
                  Margin="5">
             <TextBox.Text>
-                <Binding Path="NewXAxis"
+                <Binding Path="NewHorizontalLocation"
                          Mode="TwoWay"
                          UpdateSourceTrigger="PropertyChanged"
                          ValidatesOnNotifyDataErrors="True"
@@ -54,14 +54,14 @@
         <TextBox Grid.Column="1"
                  Grid.Row="0"
                  mah:TextBoxHelper.ClearTextButton="True"
-                 mah:TextBoxHelper.Watermark="New Y axis"
+                 mah:TextBoxHelper.Watermark="Vertical Location"
                  mah:ValidationHelper.ShowValidationErrorOnMouseOver="True"
-                 ToolTip="The new Y axis that the top left corner of the window will be moved to (keeps the current Y axis if left empty)"
+                 ToolTip="The new vertical location that the top left corner of the window will be moved to (keeps the current vertical location if left empty)"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Center"
                  Margin="5">
             <TextBox.Text>
-                <Binding Path="NewYAxis"
+                <Binding Path="NewVerticalLocation"
                          Mode="TwoWay"
                          UpdateSourceTrigger="PropertyChanged"
                          ValidatesOnNotifyDataErrors="True"
@@ -91,15 +91,29 @@
                   Grid.Row="1"
                   SelectedIndex="0"
                   ItemsSource="{Binding AvailableDisplays}"
+                  DisplayMemberPath="DisplayNumber"
                   SelectedItem="{Binding SelectedDisplay}"
-                  Margin="5"/>
+                  ToolTip="Display to move the window to (Order is identical to screen order in windows)"
+                  IsEditable="False"
+                  Style="{DynamicResource MahApps.Styles.ComboBox.Virtualized}"
+                  Margin="5 10 5 5"/>
+
 
         <mah:DropDownButton Grid.Column="1"
                             Grid.Row="1"
                             Content="Presets"
                             DisplayMemberPath="Key"
                             ItemsSource="{Binding Locations}"
-                            Margin="5">
+                            Margin="5 10 5 5">
+            <mah:DropDownButton.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Key}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </mah:DropDownButton.GroupStyle>
             <mah:DropDownButton.ItemContainerStyle>
                 <Style BasedOn="{StaticResource {x:Type MenuItem}}"
                        TargetType="{x:Type MenuItem}">

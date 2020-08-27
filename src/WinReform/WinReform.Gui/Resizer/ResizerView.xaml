@@ -92,7 +92,7 @@
                             Content="Presets"
                             DisplayMemberPath="Key"
                             ItemsSource="{Binding Resolutions}"
-                            Margin="5">
+                            Margin="5 10 5 5">
             <mah:DropDownButton.ItemContainerStyle>
                 <Style BasedOn="{StaticResource {x:Type MenuItem}}"
                        TargetType="{x:Type MenuItem}">
