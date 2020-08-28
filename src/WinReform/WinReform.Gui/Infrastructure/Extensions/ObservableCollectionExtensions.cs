@@ -48,27 +48,17 @@ namespace WinReform.Gui.Infrastructure.Extensions
                         if ((!collection[i]?.Equals(item)) ?? false)
                         {
                             // Item has changed, replace it
-                            //collection.Insert(i, item);
-
-                            var sourceProperties = new List<PropertyInfo>();
-                            var targetProperties = new List<PropertyInfo>();
-
-                            foreach (var sourceProperty in item?.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                            if (item != null)
                             {
-                                var targetProperty = collection[i]?.GetType().GetProperty(sourceProperty.Name);
-
-                                sourceProperties.Add(sourceProperty);
-                                targetProperties.Add(targetProperty);
-                            }
-
-                            for(var y = 0; y < sourceProperties.Count; y++)
-                            {
-                                if(!targetProperties[y].CanWrite)
+                                foreach (var sourceProperty in item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
                                 {
-                                    continue;
-                                }
+                                    var targetProperty = collection[i]?.GetType().GetProperty(sourceProperty.Name);
 
-                                targetProperties[y].SetValue(collection[i], sourceProperties[y].GetValue(item, null), null);
+                                    if (targetProperty != null && targetProperty.CanWrite)
+                                    {
+                                        targetProperty.SetValue(collection[i], sourceProperty.GetValue(item, null), null);
+                                    }
+                                }
                             }
                         }
                     }
