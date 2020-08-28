@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using WinReform.Domain.Infrastructure.Model;
 using WinReform.Domain.WinApi;
 
 namespace WinReform.Domain.Windows
@@ -9,33 +10,63 @@ namespace WinReform.Domain.Windows
     /// <summary>
     /// Defines a class that acts as model for active windows running on the system
     /// </summary>
-    public class Window : IEquatable<Window>, IComparable<Window>
+    public class Window : ModelBase, IEquatable<Window>, IComparable<Window>
     {
         /// <summary>
         /// Gets or Sets the id of the window used as identification
         /// </summary>
-        public int Id { get; set; }
+        public int Id
+        {
+            get => _id;
+            set => SetProperty(ref _id, value);
+        }
+
+        private int _id;
 
         /// <summary>
         /// Gets or Sets the window handle used to manipulate window information through the WinApi
         /// </summary>
-        public IntPtr WindowHandle { get; set; }
+        public IntPtr WindowHandle
+        {
+            get => _windowHandle;
+            set => SetProperty(ref _windowHandle, value);
+        }
+
+        private IntPtr _windowHandle;
 
         /// <summary>
         /// Gets or Sets the description of the application that owns the window
         /// <remarks>Defaults to an empty string</remarks>
         /// </summary>
-        public string Description { get; set; } = "";
+        public string Description
+        {
+            get => _description;
+            set => SetProperty(ref _description, value);
+        }
+
+        private string _description = string.Empty;
 
         /// <summary>
         /// Gets or Sets the icon of the application that owns the window
         /// </summary>
-        public Bitmap? Icon { get; set; }
+        public Bitmap? Icon
+        {
+            get => _icon;
+            set => SetProperty(ref _icon, value);
+        }
+
+        private Bitmap? _icon;
 
         /// <summary>
         /// Gets or Sets the dimensions of the window
         /// </summary>
-        public Rect Dimensions { get; set; }
+        public Rect Dimensions
+        {
+            get => _dimensions;
+            set => SetProperty(ref _dimensions, value);
+        }
+
+        private Rect _dimensions;
 
         /// <summary>
         /// Gets the resolution of the application
