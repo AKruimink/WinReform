@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using WinReform.Domain.WinApi;
+using WinReform.Gui.Infrastructure.Collection;
 using WinReform.Gui.Infrastructure.Extensions;
 
 namespace WinReform.Gui.ActiveWindows
@@ -14,7 +15,7 @@ namespace WinReform.Gui.ActiveWindows
     public class ActiveWindowsDesignModel : IActiveWindowsViewModel
     {
         ///<inheritdoc/>
-        public ObservableCollection<Domain.Windows.Window> ActiveWindows { get; set; } = new ObservableCollection<Domain.Windows.Window>();
+        public TrulyObservableCollection<Domain.Windows.Window> ActiveWindows { get; set; } = new TrulyObservableCollection<Domain.Windows.Window>();
 
         ///<inheritdoc/>
         public ObservableCollection<Domain.Windows.Window> SelectedActiveWindows { get; set; } = new ObservableCollection<Domain.Windows.Window>();
