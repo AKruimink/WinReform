@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 
 namespace WinReform.Gui.Infrastructure.Extensions
 {
@@ -47,7 +48,28 @@ namespace WinReform.Gui.Infrastructure.Extensions
                         if ((!collection[i]?.Equals(item)) ?? false)
                         {
                             // Item has changed, replace it
-                            collection.Insert(i, item);
+                            //collection.Insert(i, item);
+
+                            var sourceProperties = new List<PropertyInfo>();
+                            var targetProperties = new List<PropertyInfo>();
+
+                            foreach (var sourceProperty in item?.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                            {
+                                var targetProperty = collection[i]?.GetType().GetProperty(sourceProperty.Name);
+
+                                sourceProperties.Add(sourceProperty);
+                                targetProperties.Add(targetProperty);
+                            }
+
+                            for(var y = 0; y < sourceProperties.Count; y++)
+                            {
+                                if(!targetProperties[y].CanWrite)
+                                {
+                                    continue;
+                                }
+
+                                targetProperties[y].SetValue(collection[i], sourceProperties[y].GetValue(item, null), null);
+                            }
                         }
                     }
                 }
