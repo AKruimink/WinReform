@@ -249,6 +249,34 @@ namespace WinReform.Domain.Tests.Windows
 
         #endregion ResizeWindow Tests
 
+        #region RelocateWindow Tests
+
+        [Fact]
+        public void RelocateWindow_Rect_ShouldPassRect()
+        {
+            // Prepare
+            Rect? sendRect = default;
+
+            var winApiServiceMock = new Mock<IWinApiService>();
+            var processServiceMock = new Mock<IProcessService>();
+
+            winApiServiceMock.Setup(x => x.SetWindowPos(It.IsAny<IntPtr>(), It.IsAny<Rect>(), It.IsAny<SwpType>()))
+                .Callback<IntPtr, Rect, SwpType>((handle, rect, swpType) => sendRect = rect);
+
+            var windowMock = new Window { WindowHandle = (IntPtr)1 };
+            var resolutionMock = new Rect { Left = 1, Top = 2, Right = 100, Bottom = 200 };
+            var windowService = new WindowService(winApiServiceMock.Object, processServiceMock.Object);
+
+            // Act
+            windowService.RelocateWindow(windowMock, resolutionMock);
+
+            // Assert
+            Assert.NotNull(sendRect);
+            Assert.Equal(resolutionMock, sendRect);
+        }
+
+        #endregion RelocateWindow Tests
+
         #region SetResizableBorder Tests
 
         [Fact]

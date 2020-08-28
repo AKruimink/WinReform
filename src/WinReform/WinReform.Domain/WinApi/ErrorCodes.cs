@@ -163,7 +163,7 @@ namespace WinReform.Domain.WinApi
 #if DEBUG
                 else
                 {
-                    message += $"({ToString()})";
+                    message += ToString();
                 }
 #endif
                 // We want to convert HResult to a more appropriate exeption type than ComException.

@@ -3,6 +3,9 @@ using Xunit;
 
 namespace WinReform.Domain.Tests.WinApi
 {
+    /// <summary>
+    /// Tests for the <see cref="Rect"/>
+    /// </summary>
     public class RectTests
     {
         #region Union Tests

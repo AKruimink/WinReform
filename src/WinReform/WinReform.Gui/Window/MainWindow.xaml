@@ -9,6 +9,7 @@
                  xmlns:settings="clr-namespace:WinReform.Gui.Settings"
                  xmlns:activeWindows="clr-namespace:WinReform.Gui.ActiveWindows"
                  xmlns:resizer="clr-namespace:WinReform.Gui.Resizer"
+                 xmlns:locator="clr-namespace:WinReform.Gui.Locator"
                  xmlns:utilities="clr-namespace:WinReform.Gui.Utilities"
                  xmlns:viewModel="clr-namespace:WinReform.Gui.Infrastructure.Common.ViewModel"
                  xmlns:local="clr-namespace:WinReform.Gui.Window"
@@ -121,6 +122,7 @@
                     </mah:MetroTabItem>
                     <mah:MetroTabItem Header="Locator"
                                       mah:HeaderedControlHelper.HeaderFontSize="18">
+                        <locator:LocatorView />
                     </mah:MetroTabItem>
                     <mah:MetroTabItem Header="Utilities"
                                       mah:HeaderedControlHelper.HeaderFontSize="18">

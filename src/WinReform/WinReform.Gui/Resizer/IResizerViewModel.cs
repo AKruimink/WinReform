@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using WinReform.Domain.WinApi;
 
 namespace WinReform.Gui.Resizer
 {
@@ -8,11 +7,6 @@ namespace WinReform.Gui.Resizer
     /// </summary>
     public interface IResizerViewModel
     {
-        /// <summary>
-        /// Gets all preset resolutions
-        /// </summary>
-        Dictionary<string, Rect> Resolutions { get; }
-
         /// <summary>
         /// Gets or Sets the new width to be applied to all selected windows
         /// NOTE: if left empty the original width of the window(s) will be used

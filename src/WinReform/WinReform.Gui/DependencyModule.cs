@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Autofac;
+using WinReform.Domain.Displays;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Process;
 using WinReform.Domain.Settings;
@@ -45,6 +46,9 @@ namespace WinReform.Gui
 
             // Windows
             builder.RegisterType<WindowService>().As<IWindowService>().InstancePerDependency();
+
+            // Display
+            builder.RegisterType<DisplayService>().As<IDisplayService>().InstancePerDependency();
 
             // WinApi
             builder.RegisterType<WinApiService>().As<IWinApiService>().InstancePerDependency();

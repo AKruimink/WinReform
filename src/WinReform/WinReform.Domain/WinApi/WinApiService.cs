@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace WinReform.Domain.WinApi
@@ -125,6 +126,53 @@ namespace WinReform.Domain.WinApi
             }
 
             return returnValue;
+        }
+
+        /// <summary>
+        /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmonitorinfoa"/>
+        /// </summary>
+        [DllImport("user32.dll", EntryPoint = "GetMonitorInfoA", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool GetMonitorInfo(IntPtr hMonitor, ref Monitor lpmi);
+
+        /// <summary>
+        /// Callback used by <see cref="EnumDisplayMonitors(IntPtr, IntPtr, EnumDisplayMonitorsDelegate, IntPtr)"/>
+        /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-monitorenumproc"/>
+        /// </summary>
+        private delegate bool EnumDisplayMonitorsDelegate(IntPtr hMonitor, IntPtr hdc, ref Rect lpRect, IntPtr dwData);
+
+        /// <summary>
+        /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-enumdisplaymonitors"/>
+        /// </summary>
+        [DllImport("user32.dll", EntryPoint = "EnumDisplayMonitors", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool EnumDisplayMonitors(IntPtr hdc, IntPtr lprcClip, EnumDisplayMonitorsDelegate lpfnEnum, IntPtr dwData);
+
+        /// <inheritdoc/>
+        public List<Monitor> GetAllMonitors()
+        {
+            var monitors = new List<Monitor>();
+
+            bool Callback(IntPtr hMonitor, IntPtr hdc, ref Rect lpRect, IntPtr dwData)
+            {
+                var monitor = new Monitor
+                {
+                    Size = 40, // We harcode the value as Marshal.SizeOf returns a invalid value as our struct contains extra data (40 = MONITORINFO , 72 = MONITORINFOEX)
+                    MonitorHandle = hMonitor
+                };
+
+                if (!GetMonitorInfo(hMonitor, ref monitor))
+                {
+                    HResult.ThrowLastError();
+                }
+
+                monitors.Add(monitor);
+                return true;
+            }
+
+            EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero, Callback, IntPtr.Zero);
+
+            return monitors;
         }
     }
 }

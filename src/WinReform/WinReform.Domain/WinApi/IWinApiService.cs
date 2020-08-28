@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WinReform.Domain.WinApi
 {
@@ -44,5 +45,11 @@ namespace WinReform.Domain.WinApi
         /// <param name="dwNewLong"><see cref="IntPtr"/> containing the new values to be set</param>
         /// <returns>Returns <see cref="IntPtr"/> with the newly set values</returns>
         IntPtr SetWindowLongPtr(IntPtr hwnd, GwlType nIndex, IntPtr dwNewLong);
+
+        /// <summary>
+        /// Gets all available monitors
+        /// </summary>
+        /// <returns>Returns <see cref="List{Monitor}"/> of all the monitors available</returns>
+        List<Monitor> GetAllMonitors();
     }
 }

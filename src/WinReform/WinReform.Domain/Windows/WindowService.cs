@@ -78,6 +78,12 @@ namespace WinReform.Domain.Windows
         }
 
         /// <inheritdoc/>
+        public void RelocateWindow(Window window, Rect location)
+        {
+            _winApiService.SetWindowPos(window.WindowHandle, location, SwpType.NoSize | SwpType.NoActive | SwpType.NoZOrder);
+        }
+
+        /// <inheritdoc/>
         public bool SetResizableBorder(Window window)
         {
             try
