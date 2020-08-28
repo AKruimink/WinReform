@@ -80,9 +80,7 @@ namespace WinReform.Domain.Windows
         /// <inheritdoc/>
         public void RelocateWindow(Window window, Rect location)
         {
-            var newPosition = new Rect { Left = location.Left, Top = location.Top, Right = window.Dimensions.Right, Bottom = window.Dimensions.Bottom };
-
-            _winApiService.SetWindowPos(window.WindowHandle, newPosition, SwpType.NoSize | SwpType.NoActive | SwpType.NoZOrder);
+            _winApiService.SetWindowPos(window.WindowHandle, location, SwpType.NoSize | SwpType.NoActive | SwpType.NoZOrder);
         }
 
         /// <inheritdoc/>
