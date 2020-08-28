@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using WinReform.Domain.WinApi;
 
 namespace WinReform.Domain.Displays
@@ -29,7 +28,7 @@ namespace WinReform.Domain.Displays
         {
             var displays = new List<Display>();
 
-            foreach(var monitor in _winApiService.GetAllMonitors())
+            foreach (var monitor in _winApiService.GetAllMonitors())
             {
                 var display = new Display
                 {

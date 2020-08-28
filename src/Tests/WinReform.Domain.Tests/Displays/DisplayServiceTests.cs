@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Moq;
 using WinReform.Domain.Displays;
 using WinReform.Domain.WinApi;
@@ -93,6 +92,6 @@ namespace WinReform.Domain.Tests.Displays
             Assert.Equal(2, result.Count);
         }
 
-        #endregion
+        #endregion GetDisplays Tests
     }
 }

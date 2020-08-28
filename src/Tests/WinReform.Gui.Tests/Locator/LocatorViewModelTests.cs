@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Moq;
 using WinReform.Domain.Displays;
 using WinReform.Domain.Infrastructure.Events;
@@ -166,7 +165,7 @@ namespace WinReform.Gui.Tests.Locator
             windowServiceMock.Verify(x => x.RelocateWindow(It.IsAny<Domain.Windows.Window>(), It.IsAny<Rect>()), Times.Never());
         }
 
-        #endregion
+        #endregion ApplyCustomLocation Tests
 
         #region ApplyPresetLocation Tests
 
@@ -192,7 +191,6 @@ namespace WinReform.Gui.Tests.Locator
                 SelectedDisplay = new Display { WorkArea = new Rect { Left = 0, Top = 0, Right = 500, Bottom = 500 } }
             };
             viewModel.SelectedWindows.Add(new Domain.Windows.Window());
-            
 
             // Act
             viewModel.ApplyPresetLocation(location);
@@ -248,6 +246,6 @@ namespace WinReform.Gui.Tests.Locator
             windowServiceMock.Verify(x => x.RelocateWindow(It.IsAny<Domain.Windows.Window>(), It.IsAny<Rect>()), Times.Never());
         }
 
-        #endregion
+        #endregion ApplyPresetLocation Tests
     }
 }

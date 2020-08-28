@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using WinReform.Domain.Displays;
 using WinReform.Domain.Infrastructure.Events;
 using WinReform.Domain.Infrastructure.Messenger;
@@ -112,7 +111,7 @@ namespace WinReform.Gui.Locator
         /// <param name="location"><see cref="Location"/> containing a preset location</param>
         public void ApplyPresetLocation(Location? location)
         {
-             if(location != null )
+            if (location != null)
             {
                 foreach (var window in SelectedWindows)
                 {
@@ -122,9 +121,11 @@ namespace WinReform.Gui.Locator
                         case HorizontalLocationType.Left:
                             newLocation.Left = SelectedDisplay.WorkArea.Left;
                             break;
+
                         case HorizontalLocationType.Center:
                             newLocation.Left = SelectedDisplay.WorkArea.Right - ((SelectedDisplay.WorkArea.Right - SelectedDisplay.WorkArea.Left) / 2) - (window.Dimensions.Right - window.Dimensions.Left) / 2;
                             break;
+
                         case HorizontalLocationType.Right:
                             newLocation.Left = SelectedDisplay.WorkArea.Right - (window.Dimensions.Right - window.Dimensions.Left);
                             break;
@@ -135,9 +136,11 @@ namespace WinReform.Gui.Locator
                         case VerticalLocationType.Top:
                             newLocation.Top = SelectedDisplay.WorkArea.Top;
                             break;
+
                         case VerticalLocationType.Center:
                             newLocation.Top = SelectedDisplay.WorkArea.Bottom - ((SelectedDisplay.WorkArea.Bottom - SelectedDisplay.WorkArea.Top) / 2) - (window.Dimensions.Bottom - window.Dimensions.Top) / 2;
                             break;
+
                         case VerticalLocationType.Bottom:
                             newLocation.Top = SelectedDisplay.WorkArea.Bottom - (window.Dimensions.Bottom - window.Dimensions.Top);
                             break;
@@ -154,7 +157,7 @@ namespace WinReform.Gui.Locator
         /// <param name="newLocation"><see cref="Rect"/> containing the new location</param>
         private void RelocateWindows(Rect newLocation)
         {
-            foreach(var window in SelectedWindows)
+            foreach (var window in SelectedWindows)
             {
                 _windowService.RelocateWindow(window, newLocation);
             }

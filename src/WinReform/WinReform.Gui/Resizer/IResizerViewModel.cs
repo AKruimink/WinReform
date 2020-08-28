@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using WinReform.Domain.WinApi;
 
 namespace WinReform.Gui.Resizer
 {

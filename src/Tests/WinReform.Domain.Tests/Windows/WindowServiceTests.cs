@@ -275,7 +275,7 @@ namespace WinReform.Domain.Tests.Windows
             Assert.Equal(resolutionMock, sendRect);
         }
 
-        #endregion
+        #endregion RelocateWindow Tests
 
         #region SetResizableBorder Tests
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using WinReform.Domain.Displays;
 
 namespace WinReform.Gui.Locator
@@ -10,7 +8,6 @@ namespace WinReform.Gui.Locator
     /// </summary>
     public interface ILocatorViewModel
     {
-
         /// <summary>
         /// Gets or Sets the new horizontal location to be applied to all selected windows
         /// NOTE: if left empty the original horizontal location of the window(s) will be used

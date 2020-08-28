@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using WinReform.Domain.Displays;
 
 namespace WinReform.Gui.Locator
@@ -12,7 +10,6 @@ namespace WinReform.Gui.Locator
     {
         ///<inheritdoc/>
         public string NewHorizontalLocation { get; set; }
-
 
         ///<inheritdoc/>
         public string NewVerticalLocation { get; set; }

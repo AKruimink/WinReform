@@ -1,14 +1,14 @@
 ﻿<UserControl x:Class="WinReform.Gui.Locator.LocatorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:viewModel="clr-namespace:WinReform.Gui.Infrastructure.Common.ViewModel"
              xmlns:validation="clr-namespace:WinReform.Gui.Infrastructure.Validation"
              xmlns:local="clr-namespace:WinReform.Gui.Locator"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:LocatorDesignModel, IsDesignTimeCreatable=True}"
              viewModel:ViewModelLocator.WireViewModel="{x:Type local:LocatorViewModel}">
 
@@ -96,8 +96,7 @@
                   ToolTip="Display to move the window to (Order is identical to screen order in windows)"
                   IsEditable="False"
                   Style="{DynamicResource MahApps.Styles.ComboBox.Virtualized}"
-                  Margin="5 10 5 5"/>
-
+                  Margin="5 10 5 5" />
 
         <mah:DropDownButton Grid.Column="1"
                             Grid.Row="1"
@@ -109,7 +108,7 @@
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Key}"/>
+                            <TextBlock Text="{Binding Path=Key}" />
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
