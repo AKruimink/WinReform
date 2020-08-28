@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using WinReform.Domain.Infrastructure.Events;
+using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 
 namespace WinReform.Domain.Settings

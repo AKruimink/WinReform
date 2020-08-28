@@ -1,6 +1,6 @@
 ﻿using System;
 using Moq;
-using WinReform.Domain.Infrastructure.Events;
+using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
 using WinReform.Gui.Window;

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using WinReform.Domain.Infrastructure.Events;
+using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Windows;
 using WinReform.Gui.Infrastructure.Common.Command;
