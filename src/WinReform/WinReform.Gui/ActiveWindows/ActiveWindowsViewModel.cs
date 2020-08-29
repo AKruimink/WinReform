@@ -19,7 +19,7 @@ namespace WinReform.Gui.ActiveWindows
     /// <summary>
     /// Defines a class that provides active windows running on the system and management of said windows
     /// </summary>
-    public class ActiveWindowsViewModel : ViewModelBase, IActiveWindowsViewModel
+    public class ActiveWindowsViewModel : ViewModelBase, IActiveWindowsViewModel, IDisposable
     {
         /// <summary>
         /// State that defines if the Active Windows list should automaticly refresh every 1000 miliseconds
@@ -128,7 +128,7 @@ namespace WinReform.Gui.ActiveWindows
         /// <summary>
         /// Disposes of all event handlers
         /// </summary>
-        ~ActiveWindowsViewModel()
+        public void Dispose()
         {
             _autoRefreshTimer.Stop();
             _autoRefreshTimer.Tick -= OnAutoRefreshEvent;
