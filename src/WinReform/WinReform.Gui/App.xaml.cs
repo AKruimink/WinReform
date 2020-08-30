@@ -29,8 +29,7 @@ namespace WinReform.Gui
             _container = builder.Build();
 
             // Setup the viewmodel locator
-            using var scope = _container.BeginLifetimeScope();
-            ViewModelLocator.SetViewModelFactory(scope.Resolve<Func<Type, ViewModelBase>>());
+            ViewModelLocator.SetViewModelFactory(_container.Resolve<Func<Type, ViewModelBase>>());
 
             // Setup the main window
             var window = new MainWindow();
