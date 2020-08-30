@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.ComponentModel;
 using WinReform.Domain.Infrastructure.Model;
 
 namespace WinReform.Gui.Infrastructure.Common.ViewModel

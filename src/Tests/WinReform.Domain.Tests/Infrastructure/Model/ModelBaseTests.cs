@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WinReform.Domain.Infrastructure.Model;
+﻿using WinReform.Domain.Infrastructure.Model;
 using WinReform.Tests.Fixtures;
 using Xunit;
 

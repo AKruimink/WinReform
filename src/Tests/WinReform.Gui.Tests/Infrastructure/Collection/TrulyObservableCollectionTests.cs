@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using WinReform.Gui.Infrastructure.Collection;
 using WinReform.Tests.Fixtures;
 using Xunit;
@@ -67,6 +65,6 @@ namespace WinReform.Gui.Tests.Infrastructure.Collection
             Assert.False(itemPropertyChangedFired);
         }
 
-        #endregion
+        #endregion TrulyObservableCollectionCollectionChanged Tests
     }
 }

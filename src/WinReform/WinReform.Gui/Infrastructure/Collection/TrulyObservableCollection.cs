@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Text;
 
 namespace WinReform.Gui.Infrastructure.Collection
 {
@@ -49,7 +48,7 @@ namespace WinReform.Gui.Infrastructure.Collection
             {
                 foreach (var item in e.NewItems)
                 {
-                    if(item is INotifyPropertyChanged inpc)
+                    if (item is INotifyPropertyChanged inpc)
                     {
                         inpc.PropertyChanged += ItemPropertyChanged;
                     }
@@ -106,6 +105,4 @@ namespace WinReform.Gui.Infrastructure.Collection
             PropertyName = propertyName;
         }
     }
-
-
 }

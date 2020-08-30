@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Infrastructure.Messenger.Strategies;
