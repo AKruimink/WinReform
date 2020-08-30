@@ -1,8 +1,8 @@
 ---
 name: Bug Report
-about: Create a report to help us improve
+about: Create a report to help us improve the application
 title: ''
-labels: ''
+labels: 'Bug'
 assignees: ''
 
 ---
@@ -24,9 +24,9 @@ assignees: ''
 <!--  If applicable, add screenshots to help explain your problem. -->
 
 ### _**Desktop (please complete the following information):**_
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+ - OS: [e.g. Windows]
+ - OS Version: [e.g 18363.1016]
+ - Version [e.g. 1.0.0]
 
 ### _**Additional context**_
 <!--  Add any other context about the problem here. -->
