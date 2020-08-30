@@ -1,27 +1,55 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using WinReform.Domain.Infrastructure.Model;
 
 namespace WinReform.Tests.Fixtures
 {
     /// <summary>
     /// Defines a class that represents a model fixture that provides a fake model properties for testing puprose
     /// </summary>
-    public class ModelFixture : IEquatable<ModelFixture>, IComparable<ModelFixture>
+    public class ModelFixture : ModelBase, IEquatable<ModelFixture>, IComparable<ModelFixture>
     {
         /// <summary>
         /// Gets or Sets the identifier of the model
         /// </summary>
-        public int Id { get; set; }
+        public int Id
+        {
+            get => _id;
+            set => SetProperty(ref _id, value);
+        }
+
+        private int _id;
 
         /// <summary>
         /// Gets or Sets a test text
         /// </summary>
-        public string Text { get; set; }
+        public string Text
+        {
+            get => _text;
+            set => SetProperty(ref _text, value);
+        }
+
+        private string _text = string.Empty;
 
         /// <summary>
         /// Gets or Sets a test number
         /// </summary>
-        public int Number { get; set; }
+        public int Number
+        {
+            get => _number;
+            set => SetProperty(ref _number, value);
+        }
+
+        private int _number;
+
+        /// <summary>
+        /// Raises the RaisePropertyChanged of the <see cref="ModelFixture"/>
+        /// </summary>
+        /// <param name="propertyName">Name of the property that changed</param>
+        public void InvokePropertyChanged(string propertyName)
+        {
+            RaisePropertyChanged(propertyName);
+        }
 
         /// <summary>
         /// Compares a given <see cref="ModelFixture"/> to the current <see cref="ModelFixture"/>
