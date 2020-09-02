@@ -21,14 +21,14 @@ namespace WinReform.Domain.Infrastructure.Model
         /// <see cref="Dictionary{TKey, TValue}"/> that contains all properties that depend on other properties to have their <see cref="RaisePropertyChanged(string?)"/> invoked
         /// NOTE: Use <see cref="DependsOnPropertyAttribute"/> to have the value set
         /// </summary>
-        private readonly Dictionary<string, List<string>> _propertyDependencies;
+        protected Dictionary<string, List<string>> PropertyDependencies { get; }
 
         /// <summary>
         /// Create a new instance of <see cref="ModelBase"/>
         /// </summary>
         public ModelBase()
         {
-            _propertyDependencies = new Dictionary<string, List<string>>();
+            PropertyDependencies = new Dictionary<string, List<string>>();
 
             foreach (var property in GetType().GetProperties())
             {
@@ -36,11 +36,11 @@ namespace WinReform.Domain.Infrastructure.Model
 
                 if (attribute != null)
                 {
-                    if (!_propertyDependencies.ContainsKey(attribute.DependencyProperty))
+                    if (!PropertyDependencies.ContainsKey(attribute.DependencyProperty))
                     {
-                        _propertyDependencies.Add(attribute.DependencyProperty, new List<string>());
+                        PropertyDependencies.Add(attribute.DependencyProperty, new List<string>());
                     }
-                    _propertyDependencies[attribute.DependencyProperty].Add(property.Name);
+                    PropertyDependencies[attribute.DependencyProperty].Add(property.Name);
                 }
             }
         }
@@ -73,9 +73,9 @@ namespace WinReform.Domain.Infrastructure.Model
             storage = value;
             RaisePropertyChanged(propertyName);
 
-            if (propertyName != null && _propertyDependencies.ContainsKey(propertyName))
+            if (propertyName != null && PropertyDependencies.ContainsKey(propertyName))
             {
-                foreach (var dependency in _propertyDependencies[propertyName])
+                foreach (var dependency in PropertyDependencies[propertyName])
                 {
                     RaisePropertyChanged(dependency);
                 }
@@ -105,9 +105,9 @@ namespace WinReform.Domain.Infrastructure.Model
             onChanged?.Invoke();
             RaisePropertyChanged(propertyName);
 
-            if (propertyName != null && _propertyDependencies.ContainsKey(propertyName))
+            if (propertyName != null && PropertyDependencies.ContainsKey(propertyName))
             {
-                foreach (var dependency in _propertyDependencies[propertyName])
+                foreach (var dependency in PropertyDependencies[propertyName])
                 {
                     RaisePropertyChanged(dependency);
                 }
