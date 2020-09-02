@@ -27,7 +27,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Model
             Assert.DoesNotContain("Number", propertyDepedencies);
         }
 
-        #endregion
+        #endregion Constructor Tests
 
         #region SetProperty Tests
 
