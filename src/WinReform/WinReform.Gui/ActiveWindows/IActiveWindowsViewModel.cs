@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using WinReform.Gui.Infrastructure.Collection;
 
 namespace WinReform.Gui.ActiveWindows
 {
@@ -12,7 +11,7 @@ namespace WinReform.Gui.ActiveWindows
         /// <summary>
         /// Gets or Sets all active windows currently open on the system
         /// </summary>
-        TrulyObservableCollection<Domain.Windows.Window> ActiveWindows { get; set; }
+        ObservableCollection<Domain.Windows.Window> ActiveWindows { get; set; }
 
         /// <summary>
         /// Gets or Sets all the selected active windows currently open on the system
