@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using WinReform.Domain.Infrastructure.Attributes;
 
 namespace WinReform.Domain.Infrastructure.Model
 {
@@ -16,6 +18,34 @@ namespace WinReform.Domain.Infrastructure.Model
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
+        /// <see cref="Dictionary{TKey, TValue}"/> that contains all properties that depend on other properties to have their <see cref="RaisePropertyChanged(string?)"/> invoked
+        /// NOTE: Use <see cref="DependsOnPropertyAttribute"/> to have the value set
+        /// </summary>
+        private readonly Dictionary<string, List<string>> _propertyDependencies;
+
+        /// <summary>
+        /// Create a new instance of <see cref="ModelBase"/>
+        /// </summary>
+        public ModelBase()
+        {
+            _propertyDependencies = new Dictionary<string, List<string>>();
+
+            foreach (var property in GetType().GetProperties())
+            {
+                var attribute = property.GetCustomAttribute<DependsOnPropertyAttribute>();
+
+                if (attribute != null)
+                {
+                    if (!_propertyDependencies.ContainsKey(attribute.DependencyProperty))
+                    {
+                        _propertyDependencies.Add(attribute.DependencyProperty, new List<string>());
+                    }
+                    _propertyDependencies[attribute.DependencyProperty].Add(property.Name);
+                }
+            }
+        }
+
+        /// <summary>
         /// Raises the property changed event
         /// </summary>
         /// <param name="args"><see cref="PropertyChangedEventArgs"/></param>
@@ -25,7 +55,7 @@ namespace WinReform.Domain.Infrastructure.Model
         }
 
         /// <summary>
-        /// Sets a property and notifies it's listeners
+        /// Sets a property and notifies it's listeners and it's dependencies
         /// NOTE: only sets and notifies if the value doesnt match the desired value
         /// </summary>
         /// <typeparam name="T">Type of the property</typeparam>
@@ -43,11 +73,19 @@ namespace WinReform.Domain.Infrastructure.Model
             storage = value;
             RaisePropertyChanged(propertyName);
 
+            if (propertyName != null && _propertyDependencies.ContainsKey(propertyName))
+            {
+                foreach (var dependency in _propertyDependencies[propertyName])
+                {
+                    RaisePropertyChanged(dependency);
+                }
+            }
+
             return true;
         }
 
         /// <summary>
-        /// Sets a property and notifies it's listeners
+        /// Sets a property and notifies it's listeners and it's dependencies
         /// NOTE: only sets and notifies if the value doesnt match the desired value
         /// </summary>
         /// <typeparam name="T">Type of the property</typeparam>
@@ -66,6 +104,14 @@ namespace WinReform.Domain.Infrastructure.Model
             storage = value;
             onChanged?.Invoke();
             RaisePropertyChanged(propertyName);
+
+            if (propertyName != null && _propertyDependencies.ContainsKey(propertyName))
+            {
+                foreach (var dependency in _propertyDependencies[propertyName])
+                {
+                    RaisePropertyChanged(dependency);
+                }
+            }
 
             return true;
         }
