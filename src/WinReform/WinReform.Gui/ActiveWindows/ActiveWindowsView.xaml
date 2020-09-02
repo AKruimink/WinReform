@@ -68,7 +68,7 @@
                       SelectionMode="Extended"
                       HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Visible"
-                      Style="{DynamicResource MahApps.Styles.DataGrid.Azure}"
+                      Style="{DynamicResource MahApps.Styles.DataGrid}"
                       ItemsSource="{Binding FilteredActiveWindows}"
                       CanUserAddRows="False"
                       IsReadOnly="True"
