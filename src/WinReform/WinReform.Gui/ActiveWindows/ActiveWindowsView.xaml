@@ -71,6 +71,7 @@
                       Style="{DynamicResource MahApps.Styles.DataGrid.Azure}"
                       ItemsSource="{Binding FilteredActiveWindows}"
                       CanUserAddRows="False"
+                      IsReadOnly="True"
                       mah:MultiSelectorHelper.SelectedItems="{Binding SelectedActiveWindows}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Application"
