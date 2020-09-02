@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using WinReform.Domain.Infrastructure.Attributes;
 using WinReform.Domain.Infrastructure.Model;
 using WinReform.Domain.WinApi;
 
@@ -70,6 +71,7 @@ namespace WinReform.Domain.Windows
         /// <summary>
         /// Gets the resolution of the application
         /// </summary>
+        [DependsOnProperty(nameof(Dimensions))]
         public string Resolution => $"{Dimensions.Right - Dimensions.Left} x {Dimensions.Bottom - Dimensions.Top}";
 
         /// <summary>

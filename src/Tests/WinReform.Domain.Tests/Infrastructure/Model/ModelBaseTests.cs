@@ -9,6 +9,26 @@ namespace WinReform.Domain.Tests.Infrastructure.Model
     /// </summary>
     public class ModelBaseTests : ModelBase
     {
+        #region Constructor Tests
+
+        [Fact]
+        public void Constructor_PropertyDependency_ShouldAddPropertyDependencies()
+        {
+            // Prepare
+            var modelFixture = new ModelFixture
+            {
+                Number = 10,
+                Text = "test text"
+            };
+
+            // Assert
+            var propertyDepedencies = modelFixture.GetPropertyDependencies("Text");
+            Assert.Contains("TextDependency", propertyDepedencies);
+            Assert.DoesNotContain("Number", propertyDepedencies);
+        }
+
+        #endregion Constructor Tests
+
         #region SetProperty Tests
 
         [Fact]
@@ -69,6 +89,28 @@ namespace WinReform.Domain.Tests.Infrastructure.Model
 
             // Act
             modelFixture.Number = value;
+
+            // Assert
+            Assert.True(invoked);
+        }
+
+        [Fact]
+        public void SetProperty_PropertyDependency_ShouldRaisePropertyChanged()
+        {
+            // Prepare
+            var modelFixture = new ModelFixture();
+            var invoked = false;
+            modelFixture.PropertyChanged += (o, e) =>
+            {
+                // Act
+                if (e.PropertyName.Equals(nameof(modelFixture.TextDependency)))
+                {
+                    invoked = true;
+                }
+            };
+
+            // Act
+            modelFixture.Text = "New Text";
 
             // Assert
             Assert.True(invoked);

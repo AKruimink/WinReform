@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using WinReform.Domain.Infrastructure.Attributes;
 using WinReform.Domain.Infrastructure.Model;
 
 namespace WinReform.Tests.Fixtures
@@ -21,17 +24,6 @@ namespace WinReform.Tests.Fixtures
         private int _id;
 
         /// <summary>
-        /// Gets or Sets a test text
-        /// </summary>
-        public string Text
-        {
-            get => _text;
-            set => SetProperty(ref _text, value);
-        }
-
-        private string _text = string.Empty;
-
-        /// <summary>
         /// Gets or Sets a test number
         /// </summary>
         public int Number
@@ -43,6 +35,23 @@ namespace WinReform.Tests.Fixtures
         private int _number;
 
         /// <summary>
+        /// Gets or Sets a test text
+        /// </summary>
+        public string Text
+        {
+            get => _text;
+            set => SetProperty(ref _text, value);
+        }
+
+        private string _text = string.Empty;
+
+        /// <summary>
+        /// Gets a string that depens on the <see cref="INotifyPropertyChanged"/> of <see cref="Text"/>
+        /// </summary>
+        [DependsOnProperty(nameof(Text))]
+        public string TextDependency => $"This string depends on {nameof(Text)}";
+
+        /// <summary>
         /// Raises the RaisePropertyChanged of the <see cref="ModelFixture"/>
         /// </summary>
         /// <param name="propertyName">Name of the property that changed</param>
@@ -50,6 +59,12 @@ namespace WinReform.Tests.Fixtures
         {
             RaisePropertyChanged(propertyName);
         }
+
+        /// <summary>
+        /// Gets all dependencies properties of a given property name
+        /// </summary>
+        /// <returns>Returns <see cref="List{string}"/> containing all property names that rely on the given property names <see cref="INotifyPropertyChanged"/></returns>
+        public List<string> GetPropertyDependencies(string propertyName) => PropertyDependencies[propertyName];
 
         /// <summary>
         /// Compares a given <see cref="ModelFixture"/> to the current <see cref="ModelFixture"/>

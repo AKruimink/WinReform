@@ -3,13 +3,14 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
 using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
 using WinReform.Domain.Windows;
-using WinReform.Gui.Infrastructure.Collection;
 using WinReform.Gui.Infrastructure.Common.Command;
 using WinReform.Gui.Infrastructure.Common.ViewModel;
 using WinReform.Gui.Infrastructure.Extensions;
@@ -27,13 +28,13 @@ namespace WinReform.Gui.ActiveWindows
         private bool _autoRefreshActiveWindows;
 
         ///<inheritdoc/>
-        public TrulyObservableCollection<Domain.Windows.Window> ActiveWindows
+        public ObservableCollection<Domain.Windows.Window> ActiveWindows
         {
             get => _activeWindows;
             set => SetProperty(ref _activeWindows, value);
         }
 
-        private TrulyObservableCollection<Domain.Windows.Window> _activeWindows = new TrulyObservableCollection<Domain.Windows.Window>();
+        private ObservableCollection<Domain.Windows.Window> _activeWindows = new ObservableCollection<Domain.Windows.Window>();
 
         ///<inheritdoc/>
         public ObservableCollection<Domain.Windows.Window> SelectedActiveWindows
@@ -122,7 +123,6 @@ namespace WinReform.Gui.ActiveWindows
             ApplicationSettingsChanged(applicationSettings);
             SelectedActiveWindows.CollectionChanged += SelectedActiveWindowsChanged;
             ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
-            ActiveWindows.CollectionItemChanged += ActiveWindowsItemChanged;
         }
 
         /// <summary>
@@ -132,7 +132,6 @@ namespace WinReform.Gui.ActiveWindows
         {
             _autoRefreshTimer.Stop();
             _autoRefreshTimer.Tick -= OnAutoRefreshEvent;
-            ActiveWindows.CollectionItemChanged -= ActiveWindowsItemChanged;
         }
 
         /// <summary>
@@ -140,11 +139,15 @@ namespace WinReform.Gui.ActiveWindows
         /// </summary>
         public void RefreshActiveWindows()
         {
-            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
+            Task.Run(() =>
+            {
+                var result = _windowService.GetActiveWindows().ToList();
+                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => ActiveWindows.UpdateCollection(result)));
+            });
         }
 
         /// <summary>
-        /// Occures when the Refresh timer is finished and updates the <see cref="ActiveWindows"/> with the latest items
+        /// Occures when <see cref="_autoRefreshTimer"/> is finished and updates the <see cref="ActiveWindows"/> with the latest items
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -179,16 +182,6 @@ namespace WinReform.Gui.ActiveWindows
         private void SelectedActiveWindowsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             _eventAggregator.GetEvent<ActiveWindowsSelectionChangedEvent>().Publish(SelectedActiveWindows.ToList());
-        }
-
-        /// <summary>
-        /// Invoked when <see cref="ActiveWindows"/> has an item that changed and triggers a refresh of the UI
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ActiveWindowsItemChanged(object? sender, CollectionItemChangedEventArgs<Domain.Windows.Window> e)
-        {
-            FilteredActiveWindows.Refresh();
         }
     }
 }
