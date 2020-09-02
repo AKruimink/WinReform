@@ -140,7 +140,7 @@ namespace WinReform.Gui.ActiveWindows
         /// </summary>
         public void RefreshActiveWindows()
         {
-            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
+            Task.Run(RefreshWindows);
         }
 
         /// <summary>
@@ -158,6 +158,12 @@ namespace WinReform.Gui.ActiveWindows
             }
 
             _autoRefreshTimer.Start();
+        }
+
+        private void RefreshWindows()
+        {
+            var result = _windowService.GetActiveWindows().ToList();
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => ActiveWindows.UpdateCollection(result)));
         }
 
         /// <summary>
