@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using MahApps.Metro.Controls;
 using WinReform.Gui.Window;
@@ -15,11 +14,11 @@ namespace WinReform.Gui
         /// <summary>
         /// Gets or Sets the scale value used to scale transform elements based on current application resolution
         /// </summary>
-        public static readonly DependencyProperty ScaleValueProperty = 
+        public static readonly DependencyProperty ScaleValueProperty =
             DependencyProperty.Register(
-                "ScaleValue", 
-                typeof(double), 
-                typeof(MainWindow), 
+                "ScaleValue",
+                typeof(double),
+                typeof(MainWindow),
                 new UIPropertyMetadata(1.0, new PropertyChangedCallback(OnScaleValueChanged), new CoerceValueCallback(OnCoerceScaleValue)));
 
         /// <summary>
@@ -48,14 +47,14 @@ namespace WinReform.Gui
 
             newValue = Math.Min(MaximumScaleValue, (double)value);
             newValue = Math.Max(MinimumScaleValue, newValue);
-            
+
             return newValue;
         }
 
         /// <summary>
         /// Gets the maximum scale value allowed
         /// </summary>
-        public static  double MaximumScaleValue { get; } = 1.0d;
+        public static double MaximumScaleValue { get; } = 1.0d;
 
         /// <summary>
         /// Gets the minimum scale value allowed
