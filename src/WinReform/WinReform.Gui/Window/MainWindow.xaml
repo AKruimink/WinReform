@@ -2,7 +2,6 @@
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                 xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:converters="clr-namespace:WinReform.Gui.Infrastructure.Converters"
@@ -27,9 +26,9 @@
                  WindowStartupLocation="CenterScreen"
                  Closing="MetroWindow_Closing"
                  Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={converters:RatioConverter}, ConverterParameter='0.20'}"
-                 MinWidth="300"
+                 MinWidth="315"
                  Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={converters:RatioConverter}, ConverterParameter='0.35'}"
-                 MinHeight="350"
+                 MinHeight="315"
                  SizeChanged="WinReformSizeChanged">
 
     <!-- Resources used in the view -->
