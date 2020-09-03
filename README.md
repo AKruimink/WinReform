@@ -65,6 +65,12 @@ This application wouldn't exist without the help of several amazing open source 
 WinReform is provided as-is under the Apache License Version 2.0. For more information see [LICENSE](./LICENSE.md).
 
 ## ShowRoom
+![image](./docs/Settings.gif)
+
+![image](./docs/Resizer.gif)
+
+![image](./docs/Locator.gif)
+
 <div align="center">
     <img alt="Settings" src="./docs/Settings.gif" style="display:block">
     <img alt="Resizer" src="./docs/Resizer.gif" style="display:block">
