@@ -80,6 +80,7 @@ namespace WinReform.Gui.Settings
 
             // Setup view
             UseDarkTheme = _settings.CurrentSetting.UseDarkTheme;
+            DisplayActiveWindowLocation = _settings.CurrentSetting.DisplayActiveWindowLocation;
             MinimizeOnClose = _settings.CurrentSetting.MinimizeOnClose;
             AutoRefreshActiveWindows = _settings.CurrentSetting.AutoRefreshActiveWindows;
         }
