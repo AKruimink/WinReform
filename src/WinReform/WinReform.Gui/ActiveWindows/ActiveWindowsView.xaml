@@ -96,7 +96,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="PID"
-                                        Width="2*"
+                                        Width="4*"
                                         Visibility="{Binding DataContext.DisplayLocation, Converter={converters:InvertedBooleanToVisibilityConverter}, Source={x:Reference dataContextElement}, Mode=TwoWay}"
                                         ElementStyle="{StaticResource DataGridTextColumnTrim}"
                                         Binding="{Binding Id}">
