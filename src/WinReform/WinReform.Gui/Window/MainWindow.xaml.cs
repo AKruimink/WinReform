@@ -83,7 +83,7 @@ namespace WinReform.Gui
         /// </summary>
         private double CalculateScale()
         {
-            return Math.Min(ActualWidth / 500d, ActualHeight / 400d);
+            return Math.Min(ActualWidth / 390, ActualHeight / 390d);
         }
 
         /// <summary>
