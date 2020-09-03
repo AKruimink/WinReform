@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using MahApps.Metro.Controls;
 using WinReform.Gui.Window;
@@ -78,6 +80,14 @@ namespace WinReform.Gui
         }
 
         /// <summary>
+        /// Calculates a new scale value based on the actual width and height of the application
+        /// </summary>
+        private double CalculateScale()
+        {
+            return Math.Min(ActualWidth / 500d, ActualHeight / 400d);
+        }
+
+        /// <summary>
         /// Triggers when the application is closed and handles closing or minimizing of the application
         /// TODO: Fix the Window Minimize on close to only work with the Close button, all other ways of closing the app should just close as expected
         /// WinForms has a CloseReason which seems to be non existing for WPF
@@ -96,6 +106,16 @@ namespace WinReform.Gui
             }
 
             Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// Fires each time the <see cref="MainWindow"/> changes size and updates the scale accordingly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WinReformSizeChanged(object sender, EventArgs e)
+        {
+            ScaleValue = (double)OnCoerceScaleValue(WinReformWindow, CalculateScale());
         }
     }
 }
