@@ -67,6 +67,8 @@ WinReform is provided as-is under the Apache License Version 2.0. For more infor
 ## ShowRoom
 <div align="center">
     <img alt="Settings" src="./docs/Settings.gif">
+    <br>
     <img alt="Resizer" src="./docs/Resizer.gif">
+    <br>
     <img alt="Locator" src="./docs/Locator.gif">
 </div>
