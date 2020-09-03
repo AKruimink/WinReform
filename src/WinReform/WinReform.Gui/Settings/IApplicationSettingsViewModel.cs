@@ -11,6 +11,11 @@
         bool UseDarkTheme { get; set; }
 
         /// <summary>
+        /// Gets or Sets the state that defines if the Active Windows should display window location instead of PID
+        /// </summary>
+        bool DisplayActiveWindowLocation { get; set; }
+
+        /// <summary>
         /// Gets or Sets the state that defines if the window should be minized when closed
         /// </summary>
         bool MinimizeOnClose { get; set; }

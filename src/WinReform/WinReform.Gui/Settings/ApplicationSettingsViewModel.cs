@@ -24,6 +24,20 @@ namespace WinReform.Gui.Settings
         private bool _useDarkTheme = true;
 
         ///<inheritdoc/>
+        public bool DisplayActiveWindowLocation
+        {
+            get => _displayActiveWindowLocation;
+            set
+            {
+                SetProperty(ref _displayActiveWindowLocation, value);
+                _settings.CurrentSetting.DisplayActiveWindowLocation = value;
+                SaveSettings();
+            }
+        }
+
+        private bool _displayActiveWindowLocation = false;
+
+        ///<inheritdoc/>
         public bool MinimizeOnClose
         {
             get => _minimizeOnClose;

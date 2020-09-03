@@ -12,6 +12,12 @@
         public bool UseDarkTheme { get; set; } = false;
 
         /// <summary>
+        /// Gets or Sets an indicator that defines if the PID of Active Windows should be replaced with the window location
+        /// <remarks>Defaults to <see langword="false"/></remarks>
+        /// </summary>
+        public bool DisplayActiveWindowLocation { get; set; } = false;
+
+        /// <summary>
         /// Gets or Sets an idicator that defines if the window should be minimized when closed
         /// <remarks>Defaults to <see langword="false"/></remarks>
         /// </summary>
