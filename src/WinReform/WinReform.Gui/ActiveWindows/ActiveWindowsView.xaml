@@ -24,6 +24,7 @@
     </UserControl.Resources>
 
     <Grid>
+        <FrameworkElement x:Name="dataContextElement" Visibility="Collapsed"/>
         <!-- Content -->
         <Grid>
             <Grid.RowDefinitions>
@@ -96,6 +97,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="PID"
                                         Width="2*"
+                                        Visibility="{Binding DataContext.DisplayLocation, Converter={converters:InvertedBooleanToVisibilityConverter}, Source={x:Reference dataContextElement}, Mode=TwoWay}"
                                         ElementStyle="{StaticResource DataGridTextColumnTrim}"
                                         Binding="{Binding Id}">
                         <DataGridTextColumn.CellStyle>
@@ -106,6 +108,7 @@
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Location"
                                         Width="4*"
+                                    Visibility="{Binding DataContext.DisplayLocation, Converter={converters:BooleanToVisibilityConverter}, Source={x:Reference dataContextElement}, Mode=TwoWay}"
                                         ElementStyle="{StaticResource DataGridTextColumnTrim}"
                                         Binding="{Binding Location}">
                         <DataGridTextColumn.CellStyle>

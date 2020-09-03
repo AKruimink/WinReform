@@ -9,6 +9,11 @@ namespace WinReform.Gui.ActiveWindows
     public interface IActiveWindowsViewModel
     {
         /// <summary>
+        /// Gets or Sets an indicates that defines if the location column should be shown
+        /// </summary>
+        bool DisplayLocation { get; set; }
+
+        /// <summary>
         /// Gets or Sets all active windows currently open on the system
         /// </summary>
         ObservableCollection<Domain.Windows.Window> ActiveWindows { get; set; }

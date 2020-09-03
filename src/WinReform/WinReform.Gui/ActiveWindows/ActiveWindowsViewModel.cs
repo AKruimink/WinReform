@@ -28,6 +28,15 @@ namespace WinReform.Gui.ActiveWindows
         private bool _autoRefreshActiveWindows;
 
         ///<inheritdoc/>
+        public bool DisplayLocation
+        {
+            get => _displayLocation;
+            set => SetProperty(ref _displayLocation, value);
+        }
+
+        private bool _displayLocation;
+
+        ///<inheritdoc/>
         public ObservableCollection<Domain.Windows.Window> ActiveWindows
         {
             get => _activeWindows;
@@ -170,6 +179,7 @@ namespace WinReform.Gui.ActiveWindows
         {
             if (settings.CurrentSetting != null)
             {
+                DisplayLocation = settings.CurrentSetting.DisplayActiveWindowLocation;
                 _autoRefreshActiveWindows = settings.CurrentSetting.AutoRefreshActiveWindows;
             }
         }
