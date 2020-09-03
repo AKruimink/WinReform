@@ -70,9 +70,3 @@ WinReform is provided as-is under the Apache License Version 2.0. For more infor
 ![image](./docs/Resizer.gif)
 
 ![image](./docs/Locator.gif)
-
-<div align="center">
-    <img alt="Settings" src="./docs/Settings.gif" style="display:block">
-    <img alt="Resizer" src="./docs/Resizer.gif" style="display:block">
-    <img alt="Locator" src="./docs/Locator.gif" style="display:block">
-</div>
