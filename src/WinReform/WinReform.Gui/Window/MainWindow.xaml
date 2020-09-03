@@ -46,6 +46,11 @@
     <!-- Left title items -->
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
+            <mah:WindowCommands.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding ElementName=WinReformWindow, Path=ScaleValue}"
+                                ScaleY="{Binding ElementName=WinReformWindow, Path=ScaleValue}" />
+            </mah:WindowCommands.LayoutTransform>
+
             <StackPanel Orientation="Horizontal">
                 <ToggleButton Height="24"
                               Width="24"
@@ -80,6 +85,11 @@
     <!-- Right title items -->
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
+            <mah:WindowCommands.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding ElementName=WinReformWindow, Path=ScaleValue}"
+                                ScaleY="{Binding ElementName=WinReformWindow, Path=ScaleValue}" />
+            </mah:WindowCommands.LayoutTransform>
+            
             <Button Command="{Binding ShowVersionsOnGithubCommand}"
                     ToolTip="Versions on Github">
                 <TextBlock Text="{Binding Version}"
@@ -101,8 +111,8 @@
                    IsPaneOpen="{Binding MenuIsOpen, Mode=TwoWay}"
                    PaneBackground="{DynamicResource MahApps.Brushes.Flyout.Background}">
         <mah:SplitView.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding ElementName=WinReformWindow, Path=ScaleValue}" 
-                            ScaleY="{Binding ElementName=WinReformWindow, Path=ScaleValue}"/>
+            <ScaleTransform ScaleX="{Binding ElementName=WinReformWindow, Path=ScaleValue}"
+                            ScaleY="{Binding ElementName=WinReformWindow, Path=ScaleValue}" />
         </mah:SplitView.LayoutTransform>
         <mah:SplitView.Pane>
             <Grid>
