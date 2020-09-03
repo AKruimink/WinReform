@@ -14,6 +14,9 @@ namespace WinReform.Gui.ActiveWindows
     public class ActiveWindowsDesignModel : IActiveWindowsViewModel
     {
         ///<inheritdoc/>
+        public bool DisplayLocation { get; set; }
+
+        ///<inheritdoc/>
         public ObservableCollection<Domain.Windows.Window> ActiveWindows { get; set; } = new ObservableCollection<Domain.Windows.Window>();
 
         ///<inheritdoc/>
@@ -30,6 +33,8 @@ namespace WinReform.Gui.ActiveWindows
         /// </summary>
         public ActiveWindowsDesignModel()
         {
+            DisplayLocation = false;
+
             var windows = new List<Domain.Windows.Window>
             {
                 new Domain.Windows.Window

@@ -9,6 +9,9 @@
         public bool UseDarkTheme { get; set; }
 
         ///<inheritdoc/>
+        public bool DisplayActiveWindowLocation { get; set; }
+
+        ///<inheritdoc/>
         public bool MinimizeOnClose { get; set; }
 
         ///<inheritdoc/>
@@ -20,8 +23,9 @@
         public ApplicationSettingsDesignModel()
         {
             UseDarkTheme = true;
-            MinimizeOnClose = false;
-            AutoRefreshActiveWindows = true;
+            DisplayActiveWindowLocation = false;
+            MinimizeOnClose = true;
+            AutoRefreshActiveWindows = false;
         }
     }
 }

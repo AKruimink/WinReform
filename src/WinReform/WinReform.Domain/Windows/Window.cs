@@ -69,6 +69,12 @@ namespace WinReform.Domain.Windows
         private Rect _dimensions;
 
         /// <summary>
+        /// Gets the location of the application within the virtual space
+        /// </summary>
+        [DependsOnProperty(nameof(Dimensions))]
+        public string Location => $"{Dimensions.Left} x {Dimensions.Top}";
+
+        /// <summary>
         /// Gets the resolution of the application
         /// </summary>
         [DependsOnProperty(nameof(Dimensions))]

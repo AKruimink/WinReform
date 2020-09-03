@@ -22,7 +22,11 @@ namespace WinReform.Domain.Settings
         /// </summary>
         public SettingStore()
         {
+            _filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\{Assembly.GetEntryAssembly()?.GetName().Name}";
+
+#if DEBUG
             _filePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+#endif
         }
 
         ///<inheritdoc/>
