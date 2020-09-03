@@ -16,7 +16,7 @@
 
         ///<inheritdoc/>
         public bool AutoRefreshActiveWindows { get; set; }
-        
+
         /// <summary>
         /// Create a new instance of the <see cref="ApplicationSettingsDesignModel"/>
         /// </summary>

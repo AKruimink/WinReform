@@ -12,20 +12,20 @@
     <!-- Content -->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        
+
         <!-- Looks & Feel-->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="32"/>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
@@ -47,7 +47,7 @@
                   Margin="5"
                   ToolTip="If enabled the application will use a dark theme instead of the default light theme"
                   IsChecked="{Binding UseDarkTheme}" />
-            
+
             <TextBlock Grid.Row="2"
                    Grid.Column="0"
                    VerticalAlignment="Center"
@@ -59,19 +59,18 @@
                   Margin="5"
                   ToolTip="If enabled the PID column in Active Windows will be repalced with the Location information"
                   IsChecked="{Binding DisplayActiveWindowLocation}" />
-
         </Grid>
 
         <!-- Behaviour-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="32"/>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"

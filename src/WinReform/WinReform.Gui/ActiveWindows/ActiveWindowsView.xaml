@@ -24,7 +24,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <FrameworkElement x:Name="dataContextElement" Visibility="Collapsed"/>
+        <FrameworkElement x:Name="dataContextElement" Visibility="Collapsed" />
         <!-- Content -->
         <Grid>
             <Grid.RowDefinitions>
@@ -102,7 +102,7 @@
                                         Binding="{Binding Id}">
                         <DataGridTextColumn.CellStyle>
                             <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}" TargetType="DataGridCell">
-                                <Setter Property="ToolTip" Value="The unique identifier assigned to the window"/>
+                                <Setter Property="ToolTip" Value="The unique identifier assigned to the window" />
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
@@ -113,7 +113,7 @@
                                         Binding="{Binding Location}">
                         <DataGridTextColumn.CellStyle>
                             <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}" TargetType="DataGridCell">
-                                <Setter Property="ToolTip" Value="The current window location inside the virtual space"/>
+                                <Setter Property="ToolTip" Value="The current window location inside the virtual space" />
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
@@ -123,7 +123,7 @@
                                         Binding="{Binding Resolution}">
                         <DataGridTextColumn.CellStyle>
                             <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}" TargetType="DataGridCell">
-                                <Setter Property="ToolTip" Value="The current window resolution"/>
+                                <Setter Property="ToolTip" Value="The current window resolution" />
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
