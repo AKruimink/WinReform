@@ -75,7 +75,7 @@
                       mah:MultiSelectorHelper.SelectedItems="{Binding SelectedActiveWindows}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Application"
-                                            Width="7*"
+                                            Width="8*"
                                             SortMemberPath="Description">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -97,11 +97,33 @@
                     <DataGridTextColumn Header="PID"
                                         Width="2*"
                                         ElementStyle="{StaticResource DataGridTextColumnTrim}"
-                                        Binding="{Binding Id}" />
-                    <DataGridTextColumn Header="Resolution"
-                                        Width="3*"
+                                        Binding="{Binding Id}">
+                        <DataGridTextColumn.CellStyle>
+                            <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}" TargetType="DataGridCell">
+                                <Setter Property="ToolTip" Value="The unique identifier assigned to the window"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Location"
+                                        Width="4*"
                                         ElementStyle="{StaticResource DataGridTextColumnTrim}"
-                                        Binding="{Binding Resolution}" />
+                                        Binding="{Binding Location}">
+                        <DataGridTextColumn.CellStyle>
+                            <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}" TargetType="DataGridCell">
+                                <Setter Property="ToolTip" Value="The current window location inside the virtual space"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Resolution"
+                                        Width="4*"
+                                        ElementStyle="{StaticResource DataGridTextColumnTrim}"
+                                        Binding="{Binding Resolution}">
+                        <DataGridTextColumn.CellStyle>
+                            <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}" TargetType="DataGridCell">
+                                <Setter Property="ToolTip" Value="The current window resolution"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
