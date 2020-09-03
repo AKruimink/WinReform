@@ -25,9 +25,9 @@
                  UseLayoutRounding="True"
                  WindowStartupLocation="CenterScreen"
                  Closing="MetroWindow_Closing"
-                 Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={converters:RatioConverter}, ConverterParameter='0.20'}"
+                 Width="390"
                  MinWidth="315"
-                 Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={converters:RatioConverter}, ConverterParameter='0.35'}"
+                 Height="390"
                  MinHeight="315"
                  SizeChanged="WinReformSizeChanged">
 
