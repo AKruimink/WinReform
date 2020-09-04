@@ -1,7 +1,7 @@
 <!-- Markdown doesnt like aligning stuff -->
 <div align="center">
     <a href="https://github.com/AKruimink/WinReform">
-        <img alt="WinReform" height="200" width="200" src="https://raw.githubusercontent.com/AKruimink/WinReform/develop/docs/logo.png">
+        <img alt="WinReform" height="200" width="200" src="./docs/logo.png">
     </a>
     <h1>WinReform</h1>
     <p>
@@ -65,4 +65,8 @@ This application wouldn't exist without the help of several amazing open source 
 WinReform is provided as-is under the Apache License Version 2.0. For more information see [LICENSE](./LICENSE.md).
 
 ## ShowRoom
-Pictures to be added after release 1.0.0
+![image](./docs/Settings.gif)
+
+![image](./docs/Resizer.gif)
+
+![image](./docs/Locator.gif)
