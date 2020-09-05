@@ -72,7 +72,6 @@ namespace WinReform.Domain.Displays
         /// Gets the hashCode of the <see cref="Display"/>
         /// </summary>
         /// <returns>Returns <see cref="int"/> containing a unique hashcode that represents the instance of the current <see cref="Display"/></returns>
-        public override int GetHashCode()
-            => (Id, DisplayHandle, Primary, WorkArea).GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
     }
 }
