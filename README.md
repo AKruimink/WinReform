@@ -72,6 +72,9 @@ This application wouldn't exist without the help of several amazing open source 
 **Why does my window resolution not match the monitor?**
 > Some windows might contain invisible border, drop shadows etc that are counted towards the resolution (full width and height of a window), this can cause resolutions that don't match a monitors exact resolution.
 
+**Does WinReform support multiple monitors?**
+> The answer is yes.
+
 ## License
 WinReform is provided as-is under the Apache License Version 2.0. For more information see [LICENSE](./LICENSE.md).
 
