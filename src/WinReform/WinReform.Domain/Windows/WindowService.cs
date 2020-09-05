@@ -49,13 +49,19 @@ namespace WinReform.Domain.Windows
                         continue; // Process doesn't own a window
                     }
 
+                    var dimensions = _winApiService.GetWindowRect(process.MainWindowHandle);
+                    if(dimensions.IsEmpty)
+                    {
+                        continue; // Has a 0 by 0 window, and not meant to display
+                    }
+
                     windows.Add(new Window()
                     {
                         Id = process.Id,
                         WindowHandle = process.MainWindowHandle,
                         Description = process.MainModule?.FileVersionInfo.FileDescription ?? string.Empty,
                         Icon = Icon.ExtractAssociatedIcon(process.MainModule?.FileName).ToBitmap(),
-                        Dimensions = _winApiService.GetWindowRect(process.MainWindowHandle)
+                        Dimensions = dimensions
                     });
                 }
                 catch (Win32Exception)
