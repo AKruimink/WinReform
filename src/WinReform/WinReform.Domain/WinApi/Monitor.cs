@@ -60,8 +60,7 @@ namespace WinReform.Domain.WinApi
         /// Gets the hashCode of the the current <see cref="Monitor"/>
         /// </summary>
         /// <returns>Returns <see cref="int"/> containing a unique hashcode that represents the instance of the current <see cref="Monitor"/></returns>
-        public override int GetHashCode()
-            => (Size, MonitorSize, WorkArea, Flags, MonitorHandle).GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
 
         /// <summary>
         /// Compare two instances of <see cref="Monitor"/> for equality

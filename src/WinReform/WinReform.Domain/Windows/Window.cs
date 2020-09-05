@@ -10,7 +10,7 @@ namespace WinReform.Domain.Windows
     /// <summary>
     /// Defines a class that acts as model for active windows running on the system
     /// </summary>
-    public class Window : ModelBase, IEquatable<Window>, IComparable<Window>
+    public class Window : ModelBase, IComparable<Window>, IEquatable<Window>
     {
         /// <summary>
         /// Gets or Sets the id of the window used as identification
@@ -81,17 +81,6 @@ namespace WinReform.Domain.Windows
         public string Resolution => $"{Dimensions.Right - Dimensions.Left} x {Dimensions.Bottom - Dimensions.Top}";
 
         /// <summary>
-        /// Comapares the current <see cref="Window"/> to a given <see cref="Window"/>
-        /// </summary>
-        /// <param name="other"><see cref="Window"/> to compare to the current instance</param>
-        /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="Window"/>, otherwise returns <see langword="false"/></returns>
-        public bool Equals([AllowNull] Window other)
-            => other?.Id == Id
-            && other?.WindowHandle == WindowHandle
-            && other?.Description == Description
-            && other?.Dimensions == Dimensions;
-
-        /// <summary>
         /// Compare if the current <see cref="Window"/> represents the same item as a given <see cref="Window"/>
         /// </summary>
         /// <param name="other"><see cref="Window"/> to compare against</param>
@@ -106,6 +95,17 @@ namespace WinReform.Domain.Windows
         }
 
         /// <summary>
+        /// Comapares the current <see cref="Window"/> to a given <see cref="Window"/>
+        /// </summary>
+        /// <param name="other"><see cref="Window"/> to compare to the current instance</param>
+        /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="Window"/>, otherwise returns <see langword="false"/></returns>
+        public bool Equals([AllowNull] Window other)
+            => other?.Id == Id
+            && other?.WindowHandle == WindowHandle
+            && other?.Description == Description
+            && other?.Dimensions == Dimensions;
+
+        /// <summary>
         /// Comapares the current <see cref="Window"/> to a given <see cref="object"/>
         /// </summary>
         /// <param name="obj"><see cref="object"/> to compare to the current instance</param>
@@ -118,7 +118,6 @@ namespace WinReform.Domain.Windows
         /// Gets the hashCode of the <see cref="Window"/>
         /// </summary>
         /// <returns>Returns <see cref="int"/> containing a unique hashcode that represents the instance of the current <see cref="Window"/></returns>
-        public override int GetHashCode()
-            => (Id, WindowHandle, Description, Dimensions).GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

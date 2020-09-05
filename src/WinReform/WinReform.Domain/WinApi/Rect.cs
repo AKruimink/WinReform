@@ -103,8 +103,7 @@ namespace WinReform.Domain.WinApi
         /// Gets the hashCode of the the current <see cref="Rect"/>
         /// </summary>
         /// <returns>Returns <see cref="int"/> containing a unique hashcode that represents the instance of the current <see cref="Rect"/></returns>
-        public override int GetHashCode()
-            => (Left, Top, Right, Bottom).GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
 
         /// <summary>
         /// Get the string representation of the current <see cref="Rect"/>
