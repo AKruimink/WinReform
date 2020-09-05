@@ -70,39 +70,5 @@ namespace WinReform.Domain.Tests.WinApi
         }
 
         #endregion Equals Tests
-
-        #region GetHashCode Tests
-
-        [Fact]
-        public void GetHashCode_EqualInstances_ShouldReturnEqualHashCode()
-        {
-            // Prepare
-            var rect1 = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 };
-            var rect2 = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 };
-
-            // Act
-            var hashCode1 = rect1.GetHashCode();
-            var hashCode2 = rect2.GetHashCode();
-
-            // Assert
-            Assert.Equal(hashCode1, hashCode2);
-        }
-
-        [Fact]
-        public void GetHashCode_UnEqualInstances_ShouldReturnUniqueHashCode()
-        {
-            // Prepare
-            var rect1 = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 };
-            var rect2 = new Rect { Left = 4, Top = 3, Right = 2, Bottom = 1 };
-
-            // Act
-            var hashCode1 = rect1.GetHashCode();
-            var hashCode2 = rect2.GetHashCode();
-
-            // Assert
-            Assert.NotEqual(hashCode1, hashCode2);
-        }
-
-        #endregion GetHashCode Tests
     }
 }

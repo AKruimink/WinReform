@@ -82,64 +82,6 @@ namespace WinReform.Domain.Tests.Displays
 
         #endregion Equals Tests
 
-        #region GetHashCode Tests
-
-        [Fact]
-        public void GetHashCode_EqualInstances_ShouldReturnEqualHashCode()
-        {
-            // Prepare
-            var display1 = new Display
-            {
-                Id = 1,
-                DisplayHandle = (IntPtr)1,
-                Primary = true,
-                WorkArea = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 }
-            };
-            var display2 = new Display
-            {
-                Id = 1,
-                DisplayHandle = (IntPtr)1,
-                Primary = true,
-                WorkArea = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 }
-            };
-
-            // Act
-            var hashCode1 = display1.GetHashCode();
-            var hashCode2 = display2.GetHashCode();
-
-            // Assert
-            Assert.Equal(hashCode1, hashCode2);
-        }
-
-        [Fact]
-        public void GetHashCode_UnEqualInstances_ShouldReturnUniqueHashCode()
-        {
-            // Prepare
-            var display1 = new Display
-            {
-                Id = 1,
-                DisplayHandle = (IntPtr)1,
-                Primary = true,
-                WorkArea = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 }
-            };
-            var display2 = new Display
-            {
-                Id = 2,
-                DisplayHandle = (IntPtr)2,
-                Primary = false,
-                WorkArea = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 }
-            };
-
-            // Act
-            var hashCode1 = display1.GetHashCode();
-            var hashCode2 = display2.GetHashCode();
-
-            // Assert
-            Assert.NotEqual(hashCode1, hashCode2);
-        }
-
-        #endregion GetHashCode Tests
-
         #region CompareTo Tests
 
         [Fact]

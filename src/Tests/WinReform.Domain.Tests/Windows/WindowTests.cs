@@ -52,40 +52,6 @@ namespace WinReform.Domain.Tests.Windows
 
         #endregion Equals Tests
 
-        #region GetHashCode Tests
-
-        [Fact]
-        public void GetHashCode_EqualInstances_ShouldReturnEqualHashCode()
-        {
-            // Prepare
-            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Rect() };
-            var window2 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window", Dimensions = new Rect() };
-
-            // Act
-            var hashCode1 = window1.GetHashCode();
-            var hashCode2 = window2.GetHashCode();
-
-            // Assert
-            Assert.Equal(hashCode1, hashCode2);
-        }
-
-        [Fact]
-        public void GetHashCode_UnEqualInstances_ShouldReturnUniqueHashCode()
-        {
-            // Prepare
-            var window1 = new Window { Id = 1, WindowHandle = (IntPtr)1, Description = "Window1", Dimensions = new Rect() };
-            var window2 = new Window { Id = 2, WindowHandle = (IntPtr)2, Description = "Window2", Dimensions = new Rect() };
-
-            // Act
-            var hashCode1 = window1.GetHashCode();
-            var hashCode2 = window2.GetHashCode();
-
-            // Assert
-            Assert.NotEqual(hashCode1, hashCode2);
-        }
-
-        #endregion GetHashCode Tests
-
         #region CompareTo Tests
 
         [Fact]
