@@ -62,14 +62,14 @@ This application wouldn't exist without the help of several amazing open source 
  - [DotNet](https://github.com/dotnet/core) which provided the possibility to create this application to begin with.
 
 ## FAQ
-** Is there a way to see the current window location? **
+**Is there a way to see the current window location?**
 The settings allows you to change the PID column for a location column that shows the current location within the [virtual screen](https://docs.microsoft.com/en-us/windows/win32/gdi/the-virtual-screen).
 
-** Why do some windows show a negative location? **
+**Why do some windows show a negative location?**
 The coordinate position of a window is based on it's current location within the [virtual screen](https://docs.microsoft.com/en-us/windows/win32/gdi/the-virtual-screen). The zero point (0 x and y coordinate ) of the virtual space is based on the top left corner of the primary monitor.
 windows located behind or above the zero point are assigned negative values.
 
-** Why does my window resolution not match the monitor? **
+**Why does my window resolution not match the monitor?**
 Some windows might contain invisible border, drop shadows etc that are counted towards the resolution (full width and height of a window), this can cause resolutions that don't match a monitors exact resolution.
 
 ## License
