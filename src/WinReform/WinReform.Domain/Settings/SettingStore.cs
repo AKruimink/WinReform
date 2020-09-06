@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Text.Json;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -32,7 +33,7 @@ namespace WinReform.Domain.Settings
         ///<inheritdoc/>
         public TSetting Load<TSetting>() where TSetting : new()
         {
-            var file = Path.Combine(_filePath, $"{typeof(TSetting).Name}.xml");
+            var file = Path.Combine(_filePath, $"{typeof(TSetting).Name}.json");
             var fileInfo = new FileInfo(file);
 
             // Create default settings if non exist
@@ -41,25 +42,28 @@ namespace WinReform.Domain.Settings
                 Save(new TSetting());
             }
 
-            var serializer = new XmlSerializer(typeof(TSetting));
+            var settingString = File.ReadAllText(file);
+            var serializerOptions = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
 
-            using var reader = new StreamReader(file);
-            return (TSetting)serializer.Deserialize(reader);
+            return JsonSerializer.Deserialize<TSetting>(settingString, serializerOptions);
         }
 
         ///<inheritdoc/>
         public void Save<TSetting>(TSetting settings)
         {
-            var file = Path.Combine(_filePath, $"{typeof(TSetting).Name}.xml");
-            var settingsFile = new XmlDocument();
-            var serializer = new XmlSerializer(typeof(TSetting));
+            var file = Path.Combine(_filePath, $"{typeof(TSetting).Name}.json");
+            var fileInfo = new FileInfo(file);
+            fileInfo.Directory.Create();
 
-            using var stream = new MemoryStream();
-            serializer.Serialize(stream, settings);
-            stream.Position = 0;
-            settingsFile.Load(stream);
-            settingsFile.Save(file);
-            stream.Close();
+            var serializerOptions = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+            var json = JsonSerializer.Serialize(settings, serializerOptions);
+            File.WriteAllText(file, json);
         }
     }
 }
