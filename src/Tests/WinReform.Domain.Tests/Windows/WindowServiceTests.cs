@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Moq;
 using WinReform.Domain.Process;
 using WinReform.Domain.WinApi;
@@ -166,6 +167,7 @@ namespace WinReform.Domain.Tests.Windows
             var winApiServiceMock = new Mock<IWinApiService>();
             var processServiceMock = new Mock<IProcessService>();
 
+            winApiServiceMock.Setup(x => x.GetWindowRect(It.IsAny<IntPtr>())).Returns(new Rect(10, 20, 30, 40));
             processServiceMock.Setup(x => x.GetActiveProcesses()).Returns(_windowProcessList);
 
             var windowService = new WindowService(winApiServiceMock.Object, processServiceMock.Object);
