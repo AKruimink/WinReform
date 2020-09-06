@@ -180,6 +180,25 @@ namespace WinReform.Domain.Tests.Windows
             Assert.NotNull(result.FirstOrDefault()?.WindowHandle);
         }
 
+        [Fact]
+        public void GetActiveWindows_ProcessesWithWindowsButNoDimensions_ShouldReturnEmptyList()
+        {
+            // Prepare
+            var winApiServiceMock = new Mock<IWinApiService>();
+            var processServiceMock = new Mock<IProcessService>();
+
+            winApiServiceMock.Setup(x => x.GetWindowRect(It.IsAny<IntPtr>())).Returns(new Rect(0, 0, 0, 0));
+            processServiceMock.Setup(x => x.GetActiveProcesses()).Returns(_windowProcessList);
+
+            var windowService = new WindowService(winApiServiceMock.Object, processServiceMock.Object);
+
+            // Act
+            var result = windowService.GetActiveWindows();
+
+            // Assert
+            Assert.Equal(new List<Window>(), result);
+        }
+
         #endregion GetActiveWindows Tests
 
         #region ResizeWindow Tests
