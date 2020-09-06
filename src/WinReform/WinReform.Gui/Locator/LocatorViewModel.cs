@@ -5,10 +5,10 @@ using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.WinApi;
 using WinReform.Domain.Windows;
-using WinReform.Gui.Infrastructure.Common.Command;
-using WinReform.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Infrastructure.Common.Command;
+using WinReform.Infrastructure.Common.ViewModel;
 
-namespace WinReform.Gui.Locator
+namespace WinReform.Locator
 {
     /// <summary>
     /// Defines a class that provides data and functionality for the relocation of windows

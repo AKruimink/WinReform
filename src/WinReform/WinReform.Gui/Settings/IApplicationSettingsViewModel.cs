@@ -1,4 +1,4 @@
-﻿namespace WinReform.Gui.Settings
+﻿namespace WinReform.Settings
 {
     /// <summary>
     /// Represents a class that provides general application settings data

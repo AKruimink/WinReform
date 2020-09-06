@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using WinReform.Gui.Infrastructure.Extensions;
+using WinReform.Infrastructure.Extensions;
 using WinReform.Tests.Fixtures;
 using Xunit;
 
-namespace WinReform.Gui.Tests.Infrastructure.Extensions
+namespace WinReform.Tests.Infrastructure.Extensions
 {
     /// <summary>
     /// Tests for the <see cref="ObservableCollectionExtensions"/>

@@ -6,10 +6,10 @@ using ControlzEx.Theming;
 using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
-using WinReform.Gui.Infrastructure.Common.Command;
-using WinReform.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Infrastructure.Common.Command;
+using WinReform.Infrastructure.Common.ViewModel;
 
-namespace WinReform.Gui.Window
+namespace WinReform.Window
 {
     /// <summary>
     /// Defines a class that provides and handles application information

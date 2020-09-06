@@ -1,4 +1,4 @@
-﻿namespace WinReform.Gui.Settings
+﻿namespace WinReform.Settings
 {
     /// <summary>
     /// Defines a class that provides design time general application settings data

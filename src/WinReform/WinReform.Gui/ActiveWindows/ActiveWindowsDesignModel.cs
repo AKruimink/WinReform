@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using WinReform.Domain.WinApi;
-using WinReform.Gui.Infrastructure.Extensions;
+using WinReform.Infrastructure.Extensions;
 
-namespace WinReform.Gui.ActiveWindows
+namespace WinReform.ActiveWindows
 {
     /// <summary>
     /// Defines a class that provides active windows running on the system and management of said windows during design time

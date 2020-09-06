@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using WinReform.Domain.Infrastructure.Model;
 
-namespace WinReform.Gui.Infrastructure.Common.ViewModel
+namespace WinReform.Infrastructure.Common.ViewModel
 {
     /// <summary>
     /// Defines a class that acts as a base for viewmodel and provides a <see cref="INotifyPropertyChanged"/> implementation

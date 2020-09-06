@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows.Input;
 
-namespace WinReform.Gui.Infrastructure.Common.Command
+namespace WinReform.Infrastructure.Common.Command
 {
     /// <summary>
     /// An <see cref="ICommand"/> whose delegate doesnt take any parameters

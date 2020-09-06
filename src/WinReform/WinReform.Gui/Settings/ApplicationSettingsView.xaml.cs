@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WinReform.Gui.Settings
+namespace WinReform.Settings
 {
     /// <summary>
     /// Interaction logic for GeneralSettingsView.xaml

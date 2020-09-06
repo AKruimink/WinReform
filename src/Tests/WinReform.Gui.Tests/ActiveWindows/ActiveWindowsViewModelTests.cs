@@ -4,10 +4,10 @@ using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
 using WinReform.Domain.Windows;
-using WinReform.Gui.ActiveWindows;
+using WinReform.ActiveWindows;
 using Xunit;
 
-namespace WinReform.Gui.Tests.ActiveWindows
+namespace WinReform.Tests.ActiveWindows
 {
     /// <summary>
     /// Tests for the <see cref="ActiveWindowsViewModel"/>

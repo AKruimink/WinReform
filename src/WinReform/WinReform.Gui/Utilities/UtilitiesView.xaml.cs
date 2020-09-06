@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WinReform.Gui.Utilities
+namespace WinReform.Utilities
 {
     /// <summary>
     /// Interaction logic for UtilitiesView.xaml

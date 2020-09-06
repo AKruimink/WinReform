@@ -1,4 +1,4 @@
-﻿namespace WinReform.Gui.Window
+﻿namespace WinReform.Window
 {
     /// <summary>
     /// Defines a class that provides design time application information

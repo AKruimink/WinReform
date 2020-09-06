@@ -3,10 +3,10 @@ using Moq;
 using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Windows;
-using WinReform.Gui.Utilities;
+using WinReform.Utilities;
 using Xunit;
 
-namespace WinReform.Gui.Tests.Utilities
+namespace WinReform.Tests.Utilities
 {
     /// <summary>
     /// Defines a class that provides tests for <see cref="UtilitiesViewModel"/>

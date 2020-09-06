@@ -4,10 +4,10 @@ using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.WinApi;
 using WinReform.Domain.Windows;
-using WinReform.Gui.Resizer;
+using WinReform.Resizer;
 using Xunit;
 
-namespace WinReform.Gui.Tests.Resizer
+namespace WinReform.Tests.Resizer
 {
     /// <summary>
     /// Defines a class that provides tests for <see cref="ResizerViewModel"/>

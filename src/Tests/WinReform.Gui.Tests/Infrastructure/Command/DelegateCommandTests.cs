@@ -1,10 +1,10 @@
 ﻿using System;
 using Moq;
-using WinReform.Gui.Infrastructure.Common.Command;
+using WinReform.Infrastructure.Common.Command;
 using WinReform.Tests.Fixtures;
 using Xunit;
 
-namespace WinReform.Gui.Tests.Infrastructure.Common.Command
+namespace WinReform.Tests.Infrastructure.Common.Command
 {
     /// <summary>
     /// Tests for the <see cref="DelegateCommand"/>

@@ -1,4 +1,4 @@
-﻿namespace WinReform.Gui.Window
+﻿namespace WinReform.Window
 {
     /// <summary>
     /// Represents a class that provides general application information

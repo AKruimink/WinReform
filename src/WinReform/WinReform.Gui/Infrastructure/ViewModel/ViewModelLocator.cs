@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 
-namespace WinReform.Gui.Infrastructure.Common.ViewModel
+namespace WinReform.Infrastructure.Common.ViewModel
 {
     public static class ViewModelLocator
     {

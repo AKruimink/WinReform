@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Windows;
 using MahApps.Metro.Controls;
-using WinReform.Gui.Window;
+using WinReform.Window;
 
-namespace WinReform.Gui
+namespace WinReform
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

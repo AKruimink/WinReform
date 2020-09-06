@@ -3,10 +3,10 @@ using Moq;
 using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
-using WinReform.Gui.Window;
+using WinReform.Window;
 using Xunit;
 
-namespace WinReform.Gui.Tests.Window
+namespace WinReform.Tests.Window
 {
     /// <summary>
     /// Tests for the <see cref="WindowViewModel"/>

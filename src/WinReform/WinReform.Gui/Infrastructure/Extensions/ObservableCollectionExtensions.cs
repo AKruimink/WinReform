@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 
-namespace WinReform.Gui.Infrastructure.Extensions
+namespace WinReform.Infrastructure.Extensions
 {
     /// <summary>
     /// Defines a class that contains all the extensions for <see cref="ObservableCollection{T}"/>

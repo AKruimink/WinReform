@@ -11,11 +11,11 @@ using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
 using WinReform.Domain.Windows;
-using WinReform.Gui.Infrastructure.Common.Command;
-using WinReform.Gui.Infrastructure.Common.ViewModel;
-using WinReform.Gui.Infrastructure.Extensions;
+using WinReform.Infrastructure.Common.Command;
+using WinReform.Infrastructure.Common.ViewModel;
+using WinReform.Infrastructure.Extensions;
 
-namespace WinReform.Gui.ActiveWindows
+namespace WinReform.ActiveWindows
 {
     /// <summary>
     /// Defines a class that provides active windows running on the system and management of said windows

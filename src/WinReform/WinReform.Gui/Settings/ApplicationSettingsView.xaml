@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="WinReform.Gui.Settings.ApplicationSettingsView"
+﻿<UserControl x:Class="WinReform.Settings.ApplicationSettingsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:viewModel="clr-namespace:WinReform.Gui.Infrastructure.Common.ViewModel"
-             xmlns:local="clr-namespace:WinReform.Gui.Settings"
+             xmlns:viewModel="clr-namespace:WinReform.Infrastructure.Common.ViewModel"
+             xmlns:local="clr-namespace:WinReform.Settings"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:ApplicationSettingsDesignModel, IsDesignTimeCreatable=True}"
              viewModel:ViewModelLocator.WireViewModel="{x:Type local:ApplicationSettingsViewModel}">

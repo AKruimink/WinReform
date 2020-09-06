@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WinReform.Domain.Displays;
 
-namespace WinReform.Gui.Locator
+namespace WinReform.Locator
 {
     /// <summary>
     /// Defines a class that provides data and functionality for the relocation of windows during design time

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WinReform.Gui.Resizer
+namespace WinReform.Resizer
 {
     /// <summary>
     /// Defines a class that provides data and functionality for resizing of windows during design time

@@ -8,9 +8,9 @@ using WinReform.Domain.Process;
 using WinReform.Domain.Settings;
 using WinReform.Domain.WinApi;
 using WinReform.Domain.Windows;
-using WinReform.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Infrastructure.Common.ViewModel;
 
-namespace WinReform.Gui
+namespace WinReform
 {
     /// <summary>
     /// Defines a class that registers all <see cref="Gui"/> dependencies

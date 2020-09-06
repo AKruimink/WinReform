@@ -12,30 +12,30 @@ namespace WinReform.Tests.Process.Fixture
         /// <summary>
         /// <see cref="Timer"/> that triggers an automatic close of the application
         /// </summary>
-        private static Timer _autoCloseTimer;
+        private static Timer s_autoCloseTimer;
 
         /// <summary>
         /// Entry point of the application
         /// </summary>
         /// <param name="args">Arguments passed on startup</param>
-        private static void Main(string[] args)
+        private static void Main()
         {
-            _autoCloseTimer = new Timer(20000); // 20 seconds
-            _autoCloseTimer.Elapsed += OnAutoCloseTimer;
-            _autoCloseTimer.Start();
+            s_autoCloseTimer = new Timer(20000); // 20 seconds
+            s_autoCloseTimer.Elapsed += OnAutoCloseTimer;
+            s_autoCloseTimer.Start();
 
             Console.ReadKey();
         }
 
         /// <summary>
-        /// Raised when the <see cref="_autoCloseTimer"/> elapsed and automaticly closes the application
+        /// Raised when the <see cref="s_autoCloseTimer"/> elapsed and automaticly closes the application
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private static void OnAutoCloseTimer(object sender, ElapsedEventArgs e)
         {
-            _autoCloseTimer.Close();
-            _autoCloseTimer.Dispose();
+            s_autoCloseTimer.Close();
+            s_autoCloseTimer.Dispose();
             Environment.Exit(0);
         }
     }

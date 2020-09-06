@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WinReform.Gui.Locator
+namespace WinReform.Locator
 {
     /// <summary>
     /// Defines a class that represents a preset location on a display

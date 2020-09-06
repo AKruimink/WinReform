@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WinReform.Gui.Infrastructure.Extensions
+namespace WinReform.Infrastructure.Extensions
 {
     /// <summary>
     /// Defines a class that contains all the extensions for <see cref="string"/>

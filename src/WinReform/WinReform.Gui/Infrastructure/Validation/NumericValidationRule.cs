@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Controls;
 
-namespace WinReform.Gui.Infrastructure.Validation
+namespace WinReform.Infrastructure.Validation
 {
     /// <summary>
     /// Defines a class that validates if a given object is of a specific numeric value type

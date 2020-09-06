@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Windows.Input;
 
-namespace WinReform.Gui.Infrastructure.Common.Command
+namespace WinReform.Infrastructure.Common.Command
 {
     /// <summary>
     /// Defines a base command

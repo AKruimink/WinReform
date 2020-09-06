@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WinReform.Gui.Locator
+namespace WinReform.Locator
 {
     /// <summary>
     /// Interaction logic for LocatorView.xaml

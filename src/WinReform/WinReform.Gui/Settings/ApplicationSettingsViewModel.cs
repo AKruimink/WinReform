@@ -1,8 +1,8 @@
 ﻿using System;
 using WinReform.Domain.Settings;
-using WinReform.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Infrastructure.Common.ViewModel;
 
-namespace WinReform.Gui.Settings
+namespace WinReform.Settings
 {
     /// <summary>
     /// Defines a class that provides general application settings data

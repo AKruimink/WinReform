@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 using Autofac;
-using WinReform.Gui.Infrastructure.Common.ViewModel;
+using WinReform.Infrastructure.Common.ViewModel;
 
-namespace WinReform.Gui
+namespace WinReform
 {
     /// <summary>
     /// Interaction logic for App.xaml

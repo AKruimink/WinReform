@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WinReform.Gui.ActiveWindows
+namespace WinReform.ActiveWindows
 {
     /// <summary>
     /// Interaction logic for ActiveWindowsView.xaml

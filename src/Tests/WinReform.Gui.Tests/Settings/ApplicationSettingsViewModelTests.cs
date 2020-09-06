@@ -1,10 +1,10 @@
 ﻿using System;
 using Moq;
 using WinReform.Domain.Settings;
-using WinReform.Gui.Settings;
+using WinReform.Settings;
 using Xunit;
 
-namespace WinReform.Gui.Tests.Settings
+namespace WinReform.Tests.Settings
 {
     /// <summary>
     /// Tests for the <see cref="ApplicationSettingsViewModel"/>

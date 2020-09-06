@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Gui", "WinReform\WinReform.Gui\WinReform.Gui.csproj", "{5106CAC9-A541-43BD-B29F-7D021E3E6B29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform", "WinReform\WinReform.Gui\WinReform.csproj", "{5106CAC9-A541-43BD-B29F-7D021E3E6B29}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinReform.Gui.Tests", "Tests\WinReform.Gui.Tests\WinReform.Gui.Tests.csproj", "{7797442B-03C9-4C8E-8E68-2AB52F1440F6}"
 EndProject

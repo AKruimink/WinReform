@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WinReform.Gui.Resizer
+namespace WinReform.Resizer
 {
     /// <summary>
     /// Interaction logic for ResizerView.xaml

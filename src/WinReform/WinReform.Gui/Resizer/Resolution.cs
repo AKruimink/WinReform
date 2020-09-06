@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WinReform.Domain.WinApi;
 
-namespace WinReform.Gui.Resizer
+namespace WinReform.Resizer
 {
     /// <summary>
     /// Defines a class that represents a preset resolution for a window

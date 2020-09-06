@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace WinReform.Gui.Infrastructure.Converters
+namespace WinReform.Infrastructure.Converters
 {
     /// <summary>
     /// Defines a class that converts <see cref="bool"/> to <see cref="Visibility"/>
