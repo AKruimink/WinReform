@@ -15,7 +15,7 @@ namespace WinReform.Domain.Tests.WinApi
         public void Equals_EqualMonitors_ShouldReturnTrue()
         {
             // Prepare
-            var monitor1 = new Monitor
+            var monitor1 = new Domain.WinApi.Monitor
             {
                 Size = 1,
                 MonitorSize = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 },
@@ -23,7 +23,7 @@ namespace WinReform.Domain.Tests.WinApi
                 Flags = 1,
                 MonitorHandle = (IntPtr)1
             };
-            var monitor2 = new Monitor
+            var monitor2 = new Domain.WinApi.Monitor
             {
                 Size = 1,
                 MonitorSize = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 },
@@ -40,7 +40,7 @@ namespace WinReform.Domain.Tests.WinApi
         public void Equals_UnEqualMonitors_ShouldReturnFalse()
         {
             // Prepare
-            var monitor1 = new Monitor
+            var monitor1 = new Domain.WinApi.Monitor
             {
                 Size = 1,
                 MonitorSize = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 },
@@ -48,7 +48,7 @@ namespace WinReform.Domain.Tests.WinApi
                 Flags = 1,
                 MonitorHandle = (IntPtr)1
             };
-            var monitor2 = new Monitor
+            var monitor2 = new Domain.WinApi.Monitor
             {
                 Size = 2,
                 MonitorSize = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 },
@@ -65,7 +65,7 @@ namespace WinReform.Domain.Tests.WinApi
         public void Equals_InvalidType_ShouldReturnFalse()
         {
             // Prepare
-            var monitor = new Monitor
+            var monitor = new Domain.WinApi.Monitor
             {
                 Size = 1,
                 MonitorSize = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 },

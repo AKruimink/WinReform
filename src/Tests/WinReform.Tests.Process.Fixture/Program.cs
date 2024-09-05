@@ -12,7 +12,7 @@ namespace WinReform.Tests.Process.Fixture
         /// <summary>
         /// <see cref="Timer"/> that triggers an automatic close of the application
         /// </summary>
-        private static Timer s_autoCloseTimer;
+        private static System.Timers.Timer s_autoCloseTimer;
 
         /// <summary>
         /// Entry point of the application
@@ -20,7 +20,7 @@ namespace WinReform.Tests.Process.Fixture
         /// <param name="args">Arguments passed on startup</param>
         private static void Main()
         {
-            s_autoCloseTimer = new Timer(20000); // 20 seconds
+            s_autoCloseTimer = new System.Timers.Timer(20000); // 20 seconds
             s_autoCloseTimer.Elapsed += OnAutoCloseTimer;
             s_autoCloseTimer.Start();
 

@@ -46,7 +46,7 @@ namespace WinReform.Domain.Tests.Displays
         {
             // Prepare
             var winApiServiceMock = new Mock<IWinApiService>();
-            winApiServiceMock.Setup(x => x.GetAllMonitors()).Returns(new List<Monitor>());
+            winApiServiceMock.Setup(x => x.GetAllMonitors()).Returns(new List<Domain.WinApi.Monitor>());
             var displayService = new DisplayService(winApiServiceMock.Object);
 
             // Act
@@ -60,9 +60,9 @@ namespace WinReform.Domain.Tests.Displays
         public void GetDisplays_ExistingDisplays_ShoulReturnListWithDisplays()
         {
             // Prepare
-            var monitorList = new List<Monitor>
+            var monitorList = new List<Domain.WinApi.Monitor>
             {
-                new Monitor
+                new Domain.WinApi.Monitor
                 {
                     Size = 1,
                     MonitorSize = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 },
@@ -70,7 +70,7 @@ namespace WinReform.Domain.Tests.Displays
                     Flags = 1,
                     MonitorHandle = (IntPtr)1
                 },
-                new Monitor
+                new Domain.WinApi.Monitor
                 {
                     Size = 2,
                     MonitorSize = new Rect { Left = 1, Top = 2, Right = 3, Bottom = 4 },

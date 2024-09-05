@@ -13,7 +13,7 @@ namespace WinReform.Tests.WindowProcess.Fixture
         /// <summary>
         /// <see cref="Timer"/> that triggers an automatic close of the application
         /// </summary>
-        private Timer _autoCloseTimer;
+        private System.Timers.Timer _autoCloseTimer;
 
         /// <summary>
         /// Sets up the project
@@ -23,7 +23,7 @@ namespace WinReform.Tests.WindowProcess.Fixture
         {
             base.OnStartup(e);
 
-            _autoCloseTimer = new Timer(20000); // 20 seconds
+            _autoCloseTimer = new System.Timers.Timer(20000); // 20 seconds
             _autoCloseTimer.Elapsed += OnAutoCloseTimer;
             _autoCloseTimer.Start();
 
