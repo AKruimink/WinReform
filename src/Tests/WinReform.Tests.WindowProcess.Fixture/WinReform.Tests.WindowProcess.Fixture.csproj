@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
+    <NoWarn>$(NoWarn);NETSDK1137</NoWarn>
   </PropertyGroup>
 
 </Project>

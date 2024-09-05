@@ -57,7 +57,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Model
             modelFixture.PropertyChanged += (o, e) =>
             {
                 // Act
-                if (e.PropertyName.Equals(nameof(modelFixture.Number)))
+                if (e.PropertyName != null && e.PropertyName.Equals(nameof(modelFixture.Number)))
                 {
                     invoked = true;
                 }
@@ -81,7 +81,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Model
             modelFixture.PropertyChanged += (o, e) =>
             {
                 // Act
-                if (e.PropertyName.Equals(nameof(modelFixture.Number)))
+                if (e.PropertyName != null && e.PropertyName.Equals(nameof(modelFixture.Number)))
                 {
                     invoked = true;
                 }
@@ -103,7 +103,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Model
             modelFixture.PropertyChanged += (o, e) =>
             {
                 // Act
-                if (e.PropertyName.Equals(nameof(modelFixture.TextDependency)))
+                if (e.PropertyName != null && e.PropertyName.Equals(nameof(modelFixture.TextDependency)))
                 {
                     invoked = true;
                 }
@@ -129,7 +129,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Model
             modelFixture.PropertyChanged += (o, e) =>
             {
                 // Act
-                if (e.PropertyName.Equals(nameof(modelFixture.Number)))
+                if (e.PropertyName != null && e.PropertyName.Equals(nameof(modelFixture.Number)))
                 {
                     invoked = true;
                 }

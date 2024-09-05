@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
@@ -135,9 +132,18 @@ namespace WinReform.ActiveWindows
         }
 
         /// <summary>
-        /// Disposes of all event handlers
+        /// Disposes of the view model
         /// </summary>
         public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Disposes of all event handlers
+        /// </summary>
+        protected virtual void Dispose(bool disposing)
         {
             _autoRefreshTimer.Stop();
             _autoRefreshTimer.Tick -= OnAutoRefreshEvent;
@@ -189,7 +195,7 @@ namespace WinReform.ActiveWindows
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectedActiveWindowsChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void SelectedActiveWindowsChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             _eventAggregator.GetEvent<ActiveWindowsSelectionChangedEvent>().Publish(SelectedActiveWindows.ToList());
         }
