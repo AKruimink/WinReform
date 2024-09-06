@@ -59,13 +59,13 @@ namespace WinReform.Infrastructure.Common.Command
         }
 
         ///<inheritdoc/>
-        protected override void Execute(object parameter)
+        protected override void Execute(object? parameter)
         {
             Execute();
         }
 
         ///<inheritdoc/>
-        protected override bool CanExecute(object parameter)
+        protected override bool CanExecute(object? parameter)
         {
             return CanExecute();
         }
@@ -106,12 +106,9 @@ namespace WinReform.Infrastructure.Common.Command
             }
 
             var typeInfo = typeof(T).GetTypeInfo();
-            if (typeInfo.IsValueType)
+            if (typeInfo.IsValueType && (!typeInfo.IsGenericType || !typeof(Nullable<>).GetTypeInfo().IsAssignableFrom(typeInfo.GetGenericTypeDefinition().GetTypeInfo())))
             {
-                if (!typeInfo.IsGenericType || !typeof(Nullable<>).GetTypeInfo().IsAssignableFrom(typeInfo.GetGenericTypeDefinition().GetTypeInfo()))
-                {
-                    throw new InvalidCastException("Parameter type isnt a valid generic type");
-                }
+                throw new InvalidCastException("Parameter type isnt a valid generic type");
             }
 
             _executeMethod = executeMethod;
@@ -138,15 +135,37 @@ namespace WinReform.Infrastructure.Common.Command
         }
 
         ///<inheritdoc/>
-        protected override void Execute(object parameter)
+        protected override void Execute(object? parameter)
         {
-            Execute((T)parameter);
+            if (parameter is T typedParameter)
+            {
+                Execute(typedParameter);
+            }
+            else if (parameter == null && default(T) is null)
+            {
+                Execute(default!);
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid parameter type. Expected {typeof(T)}, got {parameter?.GetType().Name ?? "null"}.");
+            }
         }
 
         ///<inheritdoc/>
-        protected override bool CanExecute(object parameter)
+        protected override bool CanExecute(object? parameter)
         {
-            return CanExecute((T)parameter);
+            if (parameter is T typedParameter)
+            {
+                return CanExecute(typedParameter);
+            }
+            else if (parameter is null && default(T) is null)
+            {
+                return CanExecute(default!);
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
