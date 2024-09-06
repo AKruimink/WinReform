@@ -106,7 +106,7 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
             // Prepare
             var eventBase = new EventFixture();
             var eventSubscriptionMock = new Mock<IEventSubscription>();
-            eventSubscriptionMock.Setup(x => x.GetExecutionStrategy()).Returns(null);
+            eventSubscriptionMock.Setup(x => x.GetExecutionStrategy()).Returns<Delegate?>(null!);
             eventSubscriptionMock.SetupAllProperties();
             var token = eventBase.Subscribe(eventSubscriptionMock.Object);
 

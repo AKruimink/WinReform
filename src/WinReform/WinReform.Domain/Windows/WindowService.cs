@@ -50,9 +50,19 @@ namespace WinReform.Domain.Windows
                     }
 
                     var dimensions = _winApiService.GetWindowRect(process.MainWindowHandle);
-                    if(dimensions.IsEmpty)
+                    if (dimensions.IsEmpty)
                     {
                         continue; // Has a 0 by 0 window, and not meant to display
+                    }
+
+                    Bitmap? iconBitmap = default;
+                    if (process.MainModule?.FileName != null && File.Exists(process.MainModule.FileName))
+                    {
+                        var icon = Icon.ExtractAssociatedIcon(process.MainModule.FileName);
+                        if (icon != null)
+                        {
+                            iconBitmap = icon.ToBitmap();
+                        }
                     }
 
                     windows.Add(new Window()
@@ -60,13 +70,13 @@ namespace WinReform.Domain.Windows
                         Id = process.Id,
                         WindowHandle = process.MainWindowHandle,
                         Description = process.MainModule?.FileVersionInfo.FileDescription ?? string.Empty,
-                        Icon = Icon.ExtractAssociatedIcon(process.MainModule?.FileName).ToBitmap(),
+                        Icon = iconBitmap,
                         Dimensions = dimensions
                     });
                 }
                 catch (Win32Exception)
                 {
-                    continue;
+                    // Do nothing
                 }
             }
 

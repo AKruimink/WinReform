@@ -38,14 +38,18 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void SubscribeNonGeneric_DefaultThread_ShouldPublishOnSubscriberThread()
         {
             // Prepare
-            static void ActionReference() { }
+            static void ActionReference()
+            {
+                // Method intentionally left empty.
+            }
+
             var pubsubEvent = new PubSubEventFixture();
 
             // Act
-            var token = pubsubEvent.Subscribe(ActionReference);
+            _ = pubsubEvent.Subscribe(ActionReference);
 
             // Assert
-            Assert.Equal(1, pubsubEvent.CurrentSubscriptions.Count);
+            Assert.Single(pubsubEvent.CurrentSubscriptions);
             Assert.Equal(typeof(EventSubscription), pubsubEvent.CurrentSubscriptions.ElementAt(0).GetType());
         }
 
@@ -53,14 +57,18 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void SubscribeGeneric_DefaultThread_ShouldPublishOnSubscriberThread()
         {
             // Prepare
-            static void ActionReference(string arg) { }
+            static void ActionReference(string arg)
+            {
+                // Method intentionally left empty.
+            }
+
             var pubsubEvent = new PubSubEventFixture<string>();
 
             // Act
-            var token = pubsubEvent.Subscribe(ActionReference);
+            _ = pubsubEvent.Subscribe(ActionReference);
 
             // Assert
-            Assert.Equal(1, pubsubEvent.CurrentSubscriptions.Count);
+            Assert.Single(pubsubEvent.CurrentSubscriptions);
             Assert.Equal(typeof(EventSubscription<string>), pubsubEvent.CurrentSubscriptions.ElementAt(0).GetType());
         }
 
@@ -68,7 +76,11 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void Subscribe_DefaultFilter_ShouldReturnTrue()
         {
             // Prepare
-            static void ActionReference(string arg) { }
+            static void ActionReference(string arg)
+            {
+                // Method intentionally left empty.
+            }
+
             var pubSubEvent = new PubSubEventFixture<string>();
 
             // Act
@@ -89,9 +101,13 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void UnsubscribeNonGeneric_UnsubscribeByAction_ShouldUnsubscribe()
         {
             // Prepare
-            static void ActionReference() { }
+            static void ActionReference()
+            {
+                // Method intentionally left empty.
+            }
+
             var pubSubEvent = new PubSubEventFixture();
-            var token = pubSubEvent.Subscribe(ActionReference);
+            _ = pubSubEvent.Subscribe(ActionReference);
 
             // Assert
             Assert.True(pubSubEvent.Contains(ActionReference));
@@ -107,9 +123,13 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void UnsubscribeGeneric_UnsubscribeByAction_ShouldUnsubscribe()
         {
             // Prepare
-            static void ActionReference(string arg) { }
+            static void ActionReference(string arg)
+            {
+                // Method intentionally left empty.
+            }
+
             var pubSubEvent = new PubSubEventFixture<string>();
-            var token = pubSubEvent.Subscribe(ActionReference);
+            _ = pubSubEvent.Subscribe(ActionReference);
 
             // Assert
             Assert.True(pubSubEvent.Contains(ActionReference));
@@ -123,25 +143,19 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
 
         #endregion Unsubscribe Tests
 
-        #region Publish Tests
-
-        [Fact]
-        public void PublishGeneric_NullArgument_ShouldThrowNullArgumentException()
-        {
-            // Prepare
-        }
-
-        #endregion Publish Tests
-
         #region Contains Tests
 
         [Fact]
         public void ContainsNonGeneric_SearchByAction_ShouldFindSubscriber()
         {
             // Prepare
-            static void ActionReference() { }
+            static void ActionReference()
+            {
+                // Method intentionally left empty.
+            }
+
             var pubSubEvent = new PubSubEventFixture();
-            var token = pubSubEvent.Subscribe(ActionReference);
+            _ = pubSubEvent.Subscribe(ActionReference);
 
             // Assert
             Assert.True(pubSubEvent.Contains(ActionReference));
@@ -151,9 +165,13 @@ namespace WinReform.Domain.Tests.Infrastructure.Messenger
         public void ContainsGeneric_SearchByAction_ShouldFindSubscriber()
         {
             // Prepare
-            static void ActionReference(string arg) { }
+            static void ActionReference(string arg)
+            {
+                // Method intentionally left empty.
+            }
+
             var pubSubEvent = new PubSubEventFixture<string>();
-            var token = pubSubEvent.Subscribe(ActionReference);
+            _ = pubSubEvent.Subscribe(ActionReference);
 
             // Assert
             Assert.True(pubSubEvent.Contains(ActionReference));

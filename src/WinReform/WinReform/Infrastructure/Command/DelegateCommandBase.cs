@@ -22,7 +22,7 @@ namespace WinReform.Infrastructure.Common.Command
         /// <summary>
         /// A base command that provides base functionallity to a command
         /// </summary>
-        public DelegateCommandBase()
+        protected DelegateCommandBase()
         {
             _synchronizationContext = SynchronizationContext.Current;
         }
@@ -31,7 +31,7 @@ namespace WinReform.Infrastructure.Common.Command
         /// Executes the command
         /// </summary>
         /// <param name="parameter">Command parameter</param>
-        void ICommand.Execute(object parameter)
+        void ICommand.Execute(object? parameter)
         {
             Execute(parameter);
         }
@@ -41,7 +41,7 @@ namespace WinReform.Infrastructure.Common.Command
         /// </summary>
         /// <param name="parameter">Data used to determine if the command can be executed</param>
         /// <returns>Returns <see langword="true"/> if the command can execute, otherwise <see langword="false"/></returns>
-        bool ICommand.CanExecute(object parameter)
+        bool ICommand.CanExecute(object? parameter)
         {
             return CanExecute(parameter);
         }
@@ -59,13 +59,13 @@ namespace WinReform.Infrastructure.Common.Command
         /// </summary>
         /// <param name="parameter">Data used to determine if the command can be executed</param>
         /// <returns>Returns <see langword="true"/> if the command can execute, otherwise <see langword="false"/></returns>
-        protected abstract bool CanExecute(object parameter);
+        protected abstract bool CanExecute(object? parameter);
 
         /// <summary>
         /// Executes the command
         /// </summary>
         /// <param name="parameter">Command parameter</param>
-        protected abstract void Execute(object parameter);
+        protected abstract void Execute(object? parameter);
 
         /// <summary>
         /// Raises the <see cref="ICommand.CanExecuteChanged"/> allowing every command to requery <see cref="ICommand.CanExecute"/>

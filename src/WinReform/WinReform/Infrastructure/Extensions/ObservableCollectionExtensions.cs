@@ -31,25 +31,29 @@ namespace WinReform.Infrastructure.Extensions
             {
                 if (collection.Count > i)
                 {
-                    var itemIndex = collection.IndexOf(collection.Where(i => Comparer<T>.Default.Compare(i, item) == 0).FirstOrDefault());
+                    var existingItem = collection.FirstOrDefault(existing => Comparer<T>.Default.Compare(existing, item) == 0);
 
-                    if (itemIndex < 0)
+                    if (existingItem == null! || existingItem.Equals(default(T)))
                     {
-                        // Item doesn't exist
+                        // Item doesn't exist in the collection, so insert it
                         collection.Insert(i, item);
-                    }
-                    else if (itemIndex > i || itemIndex < i)
-                    {
-                        // Item exists, but has moved up or down
-                        collection.Move(itemIndex, i);
                     }
                     else
                     {
-                        if ((!collection[i]?.Equals(item)) ?? false)
+                        // Get the index of the existing item, ensuring it's not null
+                        var itemIndex = collection.IndexOf(existingItem);
+
+                        if (itemIndex != i)
                         {
-                            // Item has changed, replace it
-                            if (item != null)
+                            // Item exists but is in the wrong place, so move it
+                            collection.Move(itemIndex, i);
+                        }
+                        else
+                        {
+                            // Check if the item has changed (considering nullability)
+                            if (collection[i] is not null && item is not null && !collection[i]!.Equals(item))
                             {
+                                // If the item has changed, copy properties
                                 foreach (var sourceProperty in item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
                                 {
                                     var targetProperty = collection[i]?.GetType().GetProperty(sourceProperty.Name);
@@ -65,14 +69,14 @@ namespace WinReform.Infrastructure.Extensions
                 }
                 else
                 {
-                    // Item doesn't exist
+                    // Item doesn't exist in the collection, so add it
                     collection.Add(item);
                 }
 
                 i++;
             }
 
-            // Remove all old items
+            // Remove any items left in the original collection that aren't in the new collection
             while (collection.Count > newCollection.Count)
             {
                 collection.RemoveAt(i);

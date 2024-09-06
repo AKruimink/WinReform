@@ -48,7 +48,7 @@ namespace WinReform.Domain.Settings
                 WriteIndented = true
             };
 
-            return JsonSerializer.Deserialize<TSetting>(settingString, serializerOptions);
+            return JsonSerializer.Deserialize<TSetting>(settingString, serializerOptions) ?? new TSetting();
         }
 
         ///<inheritdoc/>
@@ -56,12 +56,17 @@ namespace WinReform.Domain.Settings
         {
             var file = Path.Combine(_filePath, $"{typeof(TSetting).Name}.json");
             var fileInfo = new FileInfo(file);
-            fileInfo.Directory.Create();
+
+            if (fileInfo.Directory != null && !fileInfo.Directory.Exists)
+            {
+                fileInfo.Directory.Create();
+            }
 
             var serializerOptions = new JsonSerializerOptions
             {
                 WriteIndented = true
             };
+
             var json = JsonSerializer.Serialize(settings, serializerOptions);
             File.WriteAllText(file, json);
         }

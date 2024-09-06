@@ -16,15 +16,15 @@
     </a>
     <br>
     <!-- CD/CI Badges-->
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Abuild-project">
-        <img src="https://img.shields.io/github/workflow/status/AKruimink/WinReform/build-project/master?label=master&style=flat-square">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=branch%3Amaster">
+        <img src="https://img.shields.io/github/actions/workflow/status/AKruimink/WinReform/build-project.yml?branch=master&label=master&style=flat-square">
     </a>
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Abuild-project">
-        <img src="https://img.shields.io/github/workflow/status/AKruimink/WinReform/build-project/develop?label=develop&style=flat-square">
+    <a href="https://github.com/AKruimink/WinReform/actions?query=branch%3Adevelop">
+        <img src="https://img.shields.io/github/actions/workflow/status/AKruimink/WinReform/build-project.yml?branch=develop&label=develop&style=flat-square">
     </a>
-    <a href="https://github.com/AKruimink/WinReform/actions?query=workflow%3Atest-project">
-        <img src="https://img.shields.io/github/workflow/status/AKruimink/WinReform/test-project/develop?label=tests&style=flat-square">
-    </a>
+    <a href="https://github.com/AKruimink/WinReform/actions?query=branch%3Adevelop">
+        <img src="https://img.shields.io/github/actions/workflow/status/AKruimink/WinReform/test-project.yml?branch=develop&label=tests&style=flat-square">
+    </a>    
     <br>
     <!--Issues and Pull Request Badges -->
     <a href="https://github.com/AKruimink/WinReform/issues">
@@ -74,6 +74,9 @@ This application wouldn't exist without the help of several amazing open source 
 
 **Does WinReform support multiple monitors?**
 > The answer is yes.
+
+**Why do some of my applications not show up?**
+> By default, the application runs in non-privileged mode, which allows it to interact only with non-privileged windows. If you're trying to access a privileged window, you'll need to restart WinReform as an administrator.
 
 ## License
 WinReform is provided as-is under the Apache License Version 2.0. For more information see [LICENSE](./LICENSE.md).
