@@ -75,6 +75,9 @@ This application wouldn't exist without the help of several amazing open source 
 **Does WinReform support multiple monitors?**
 > The answer is yes.
 
+**Why do some of my applications not show up?**
+> By default, the application runs in non-privileged mode, which allows it to interact only with non-privileged windows. If you're trying to access a privileged window, you'll need to restart WinReform as an administrator.
+
 ## License
 WinReform is provided as-is under the Apache License Version 2.0. For more information see [LICENSE](./LICENSE.md).
 
