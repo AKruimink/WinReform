@@ -10,6 +10,7 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <AssemblyName>WinReform</AssemblyName>
     <NoWarn>$(NoWarn);NETSDK1137</NoWarn>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
