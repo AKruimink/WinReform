@@ -157,7 +157,7 @@ namespace WinReform.ActiveWindows
             Task.Run(() =>
             {
                 var result = _windowService.GetActiveWindows().ToList();
-                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => ActiveWindows.UpdateCollection(result)));
+                Application.Current?.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => ActiveWindows.UpdateCollection(result)));
             });
         }
 
