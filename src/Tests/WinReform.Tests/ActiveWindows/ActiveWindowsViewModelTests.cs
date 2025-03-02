@@ -99,7 +99,7 @@ namespace WinReform.Tests.ActiveWindows
             viewmodel.RefreshActiveWindows();
 
             // Assert
-            windowServiceMock.Verify(x => x.GetActiveWindows(), Times.AtLeastOnce());
+            windowServiceMock.Verify(x => x.GetActiveWindows(It.IsAny<bool>()), Times.AtLeastOnce());
         }
 
         #endregion RefreshActiveWindows tests

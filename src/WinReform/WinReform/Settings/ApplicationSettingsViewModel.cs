@@ -65,6 +65,20 @@ namespace WinReform.Settings
 
         private bool _autoRefreshActiveWindows;
 
+        ///<inheritdoc/>
+        public bool ShowZeroSizeWindows
+        {
+            get => _showZeroSizeWindows;
+            set
+            {
+                SetProperty(ref _showZeroSizeWindows, value);
+                _settings.CurrentSetting.ShowZeroSizeWindows = value;
+                SaveSettings();
+            }
+        }
+
+        private bool _showZeroSizeWindows;
+
         /// <summary>
         /// <see cref="ISetting{TSetting}"/> containing the <see cref="ApplicationSettings"/>
         /// </summary>
@@ -83,6 +97,7 @@ namespace WinReform.Settings
             DisplayActiveWindowLocation = _settings.CurrentSetting.DisplayActiveWindowLocation;
             MinimizeOnClose = _settings.CurrentSetting.MinimizeOnClose;
             AutoRefreshActiveWindows = _settings.CurrentSetting.AutoRefreshActiveWindows;
+            ShowZeroSizeWindows = _settings.CurrentSetting.ShowZeroSizeWindows;
         }
 
         /// <summary>

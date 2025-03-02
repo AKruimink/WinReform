@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using WinReform.Domain.Process;
 using WinReform.Domain.WinApi;
 using WinReform.Domain.WinApi.Types;
@@ -36,7 +34,7 @@ namespace WinReform.Domain.Windows
         }
 
         /// <inheritdoc/>
-        public IEnumerable<Window> GetActiveWindows()
+        public IEnumerable<Window> GetActiveWindows(bool showZeroSizeWindows = false)
         {
             var windows = new List<Window>();
 
@@ -44,24 +42,29 @@ namespace WinReform.Domain.Windows
             {
                 try
                 {
-                    if (process.MainWindowHandle == IntPtr.Zero)
+                    // Ensure the process has a valid window
+                    if (process.MainWindowHandle == IntPtr.Zero || process.HasExited)
                     {
-                        continue; // Process doesn't own a window
+                        continue; // Skip processes that do not have a window
                     }
 
                     var dimensions = _winApiService.GetWindowRect(process.MainWindowHandle);
-                    if (dimensions.IsEmpty)
+                    var isZeroSize = dimensions.IsEmpty;
+                    if (isZeroSize && !showZeroSizeWindows)
                     {
-                        continue; // Has a 0 by 0 window, and not meant to display
+                        continue; // Skip windows with 0x0 size
                     }
 
-                    Bitmap? iconBitmap = default;
-                    if (process.MainModule?.FileName != null && File.Exists(process.MainModule.FileName))
+                    var description = string.Empty;
+                    Bitmap? iconBitmap = null;
+                    if (CanAccessProcess(process))
                     {
-                        var icon = Icon.ExtractAssociatedIcon(process.MainModule.FileName);
-                        if (icon != null)
+                        description = process.MainModule?.FileVersionInfo?.FileDescription ?? string.Empty;
+
+                        if (File.Exists(process.MainModule?.FileName))
                         {
-                            iconBitmap = icon.ToBitmap();
+                            var icon = Icon.ExtractAssociatedIcon(process.MainModule.FileName);
+                            iconBitmap = icon?.ToBitmap();
                         }
                     }
 
@@ -69,18 +72,47 @@ namespace WinReform.Domain.Windows
                     {
                         Id = process.Id,
                         WindowHandle = process.MainWindowHandle,
-                        Description = process.MainModule?.FileVersionInfo.FileDescription ?? string.Empty,
+                        Description = description,
                         Icon = iconBitmap,
                         Dimensions = dimensions
                     });
                 }
-                catch (Win32Exception)
+                catch (Exception ex)
                 {
-                    // Do nothing
+                    Debug.WriteLine($"Error processing process {process.ProcessName}: {ex.Message}");
                 }
             }
 
             return windows.OrderBy(w => w.Description).ToList();
+        }
+
+        /// <summary>
+        /// Determines whether the specified process is accessible by checking if its <see cref="Process.MainModule"/> can be read.
+        /// </summary>
+        /// <param name="process">The <see cref="Process"/> to check for accessibility.</param>
+        /// <returns>
+        /// <see langword="true"/> if the process is accessible and its modules can be read; otherwise, <see langword="false"/>.
+        /// </returns>
+        /// <remarks>
+        /// Some system or protected processes restrict access to their module information,
+        /// which can cause exceptions. This method prevents unnecessary exceptions
+        /// by safely checking access permissions before retrieving process details.
+        /// </remarks>
+        private static bool CanAccessProcess(System.Diagnostics.Process process)
+        {
+            try
+            {
+                _ = process.MainModule;
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                return false; // Process is protected or restricted
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return false; // Process access is denied
+            }
         }
 
         /// <inheritdoc/>
