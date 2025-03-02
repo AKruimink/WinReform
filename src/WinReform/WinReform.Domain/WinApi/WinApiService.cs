@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace WinReform.Domain.WinApi
 {
@@ -173,6 +174,34 @@ namespace WinReform.Domain.WinApi
             EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero, Callback, IntPtr.Zero);
 
             return monitors;
+        }
+
+        /// <summary>
+        /// Retrieves the title bar text of a specified window.
+        /// </summary>
+        /// <param name="hWnd">Handle to the window.</param>
+        /// <param name="lpString">Buffer to receive the title text.</param>
+        /// <param name="nMaxCount">Maximum number of characters to copy, including null terminator.</param>
+        /// <returns>Length of the copied string (excluding null terminator), or 0 if the window has no title.</returns>
+        /// <see href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtext"/>
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+        /// <inheritdoc/>
+        public string GetWindowTitle(IntPtr windowHandle)
+        {
+            const int nChars = 256;
+            var buffer = new StringBuilder(256);
+
+            if (windowHandle != IntPtr.Zero)
+            {
+                if (GetWindowText(windowHandle, buffer, nChars) > 0)
+                {
+                    return buffer.ToString();
+                }
+            }
+
+            return string.Empty;
         }
     }
 }

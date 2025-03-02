@@ -56,7 +56,11 @@ namespace WinReform.Domain.Windows
                     }
 
                     var description = string.Empty;
+                    var windowTitle = _winApiService.GetWindowTitle(process.MainWindowHandle);
+                    var processName = process.ProcessName;
+                    var processId = process.Id;
                     Bitmap? iconBitmap = null;
+
                     if (CanAccessProcess(process))
                     {
                         description = process.MainModule?.FileVersionInfo?.FileDescription ?? string.Empty;
@@ -68,11 +72,19 @@ namespace WinReform.Domain.Windows
                         }
                     }
 
+                    // Fallbacks: If description is empty, use process name or window title
+                    if (string.IsNullOrWhiteSpace(description))
+                    {
+                        description = !string.IsNullOrWhiteSpace(windowTitle) ? windowTitle : processName;
+                    }
+
                     windows.Add(new Window()
                     {
-                        Id = process.Id,
+                        Id = processId,
                         WindowHandle = process.MainWindowHandle,
                         Description = description,
+                        WindowTitle = windowTitle,
+                        ProcessName = processName,
                         Icon = iconBitmap,
                         Dimensions = dimensions
                     });

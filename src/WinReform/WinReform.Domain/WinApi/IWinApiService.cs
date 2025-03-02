@@ -51,5 +51,12 @@ namespace WinReform.Domain.WinApi
         /// </summary>
         /// <returns>Returns <see cref="List{Monitor}"/> of all the monitors available</returns>
         List<Monitor> GetAllMonitors();
+
+        /// <summary>
+        /// Retrieves the window title for the specified process.
+        /// </summary>
+        /// <param name="windowHandle">handle of the window to get the title for.</param>
+        /// <returns>The window title if available, otherwise an empty string.</returns>
+        string GetWindowTitle(IntPtr windowHandle);
     }
 }
