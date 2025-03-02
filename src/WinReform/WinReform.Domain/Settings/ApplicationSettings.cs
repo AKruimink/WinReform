@@ -9,7 +9,7 @@
         /// Gets or Sets an idicator that defines if dark theme should be used
         /// <remarks>Defaults to <see langword="false"/></remarks>
         /// </summary>
-        public bool UseDarkTheme { get; set; } = false;
+        public bool UseDarkTheme { get; set; } = true;
 
         /// <summary>
         /// Gets or Sets an indicator that defines if the PID of Active Windows should be replaced with the window location
