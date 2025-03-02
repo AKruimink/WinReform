@@ -28,5 +28,11 @@
         /// <remarks>Defaults to <see langword="true"/></remarks>
         /// </summary>
         public bool AutoRefreshActiveWindows { get; set; } = true;
+
+        /// <summary>
+        /// Gets or Sets an indicator that defines if processes with 0x0 windows should be displayed.
+        /// <remarks>Defaults to <see langword="false"/></remarks>
+        /// </summary>
+        public bool ShowZeroSizeWindows { get; set; } = false;
     }
 }

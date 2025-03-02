@@ -24,5 +24,10 @@
         /// Gets or Sets the state that defines if the Active Windows should automaticly be refreshed
         /// </summary>
         bool AutoRefreshActiveWindows { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the state that defines if processes with 0x0 size windows should be displayed
+        /// </summary>
+        bool ShowZeroSizeWindows { get; set; }
     }
 }

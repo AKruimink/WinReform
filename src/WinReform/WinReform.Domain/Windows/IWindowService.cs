@@ -9,10 +9,11 @@ namespace WinReform.Domain.Windows
     public interface IWindowService
     {
         /// <summary>
-        /// Gets the ative windows running on the system
+        /// Gets the active windows running on the system, with optional filtering for processes without windows and zero-size windows.
         /// </summary>
-        /// <returns>Returns <see cref="IEnumerable{Window}"/> containing all active windows on the system</returns>
-        IEnumerable<Window> GetActiveWindows();
+        /// <param name="showZeroSizeWindows">If <see langword="true"/>, includes windows with a size of 0x0. Defaults to <see langword="false"/>.</param>
+        /// <returns>Returns an <see cref="IEnumerable{Window}"/> containing all active windows on the system, based on the applied filters.</returns>
+        IEnumerable<Window> GetActiveWindows(bool showZeroSizeWindows = false);
 
         /// <summary>
         /// Resize a window

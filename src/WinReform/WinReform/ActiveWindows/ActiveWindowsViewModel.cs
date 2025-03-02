@@ -24,6 +24,11 @@ namespace WinReform.ActiveWindows
         /// </summary>
         private bool _autoRefreshActiveWindows;
 
+        /// <summary>
+        /// State that defines if processes with 0x0 size windows should be displayed in the Active Windows list
+        /// </summary>
+        private bool _showZeroSizeWindows;
+
         ///<inheritdoc/>
         public bool DisplayLocation
         {
@@ -128,7 +133,7 @@ namespace WinReform.ActiveWindows
             // Setup view
             ApplicationSettingsChanged(applicationSettings);
             SelectedActiveWindows.CollectionChanged += SelectedActiveWindowsChanged;
-            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows().ToList());
+            ActiveWindows.UpdateCollection(_windowService.GetActiveWindows(_showZeroSizeWindows).ToList());
         }
 
         /// <summary>
@@ -156,7 +161,7 @@ namespace WinReform.ActiveWindows
         {
             Task.Run(() =>
             {
-                var result = _windowService.GetActiveWindows().ToList();
+                var result = _windowService.GetActiveWindows(_showZeroSizeWindows).ToList();
                 Application.Current?.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => ActiveWindows.UpdateCollection(result)));
             });
         }
@@ -187,6 +192,7 @@ namespace WinReform.ActiveWindows
             {
                 DisplayLocation = settings.CurrentSetting.DisplayActiveWindowLocation;
                 _autoRefreshActiveWindows = settings.CurrentSetting.AutoRefreshActiveWindows;
+                _showZeroSizeWindows = settings.CurrentSetting.ShowZeroSizeWindows;
             }
         }
 

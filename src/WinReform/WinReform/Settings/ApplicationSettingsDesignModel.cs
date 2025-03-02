@@ -17,6 +17,9 @@
         ///<inheritdoc/>
         public bool AutoRefreshActiveWindows { get; set; }
 
+        ///<inheritdoc/>
+        public bool ShowZeroSizeWindows { get; set; }
+
         /// <summary>
         /// Create a new instance of the <see cref="ApplicationSettingsDesignModel"/>
         /// </summary>
@@ -26,6 +29,7 @@
             DisplayActiveWindowLocation = false;
             MinimizeOnClose = true;
             AutoRefreshActiveWindows = false;
+            ShowZeroSizeWindows = false;
         }
     }
 }
