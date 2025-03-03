@@ -94,6 +94,11 @@
         OutOfMemory = 0x8007000E,
 
         /// <summary>
+        /// The specified window handle is invalid
+        /// </summary>
+        InvalidWindowHandle = 0x80070578,
+
+        /// <summary>
         /// One or more arguments are invalid
         /// </summary>
         InvalidArguments = 0x80070057,

@@ -29,5 +29,10 @@
         /// Gets or Sets the state that defines if processes with 0x0 size windows should be displayed
         /// </summary>
         bool ShowZeroSizeWindows { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the state that defines if an overlay should be rendered on top of each selected window
+        /// </summary>
+        bool HighlightSelectedWindows { get; set; }
     }
 }

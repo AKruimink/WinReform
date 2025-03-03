@@ -47,6 +47,29 @@ namespace WinReform.Domain.Windows
         private string _description = string.Empty;
 
         /// <summary>
+        /// Gets or sets the title of the window as displayed on the title bar.
+        /// </summary>
+        public string WindowTitle
+        {
+            get => _windowTitle;
+            set => SetProperty(ref _windowTitle, value);
+        }
+
+        private string _windowTitle = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the name of the process that owns the window.
+        /// </summary>
+        public string ProcessName
+        {
+            get => _processName;
+            set => SetProperty(ref _processName, value);
+        }
+
+        private string _processName = string.Empty;
+
+
+        /// <summary>
         /// Gets or Sets the icon of the application that owns the window
         /// </summary>
         public Bitmap? Icon
@@ -91,18 +114,21 @@ namespace WinReform.Domain.Windows
             {
                 return 0;
             }
+
             return -1;
         }
 
         /// <summary>
-        /// Comapares the current <see cref="Window"/> to a given <see cref="Window"/>
+        /// Compares the current <see cref="Window"/> with another <see cref="Window"/>.
         /// </summary>
-        /// <param name="other"><see cref="Window"/> to compare to the current instance</param>
-        /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="Window"/>, otherwise returns <see langword="false"/></returns>
+        /// <param name="other">The <see cref="Window"/> instance to compare to the current instance.</param>
+        /// <returns>Returns <see langword="true"/> if the current instance is equal to the given <see cref="Window"/>; otherwise, returns <see langword="false"/>.</returns>
         public bool Equals([AllowNull] Window other)
             => other?.Id == Id
             && other?.WindowHandle == WindowHandle
             && other?.Description == Description
+            && other?.WindowTitle == WindowTitle
+            && other?.ProcessName == ProcessName
             && other?.Dimensions == Dimensions;
 
         /// <summary>
@@ -110,9 +136,7 @@ namespace WinReform.Domain.Windows
         /// </summary>
         /// <param name="obj"><see cref="object"/> to compare to the current instance</param>
         /// <returns>Returns <see langword="true"/> if the current istance is equal to the given <see cref="object"/>, otherwise returns <see langword="false"/></returns>
-        public override bool Equals(object? obj)
-            => obj is Window window
-            && Equals(window);
+        public override bool Equals(object? obj) => obj is Window window && Equals(window);
 
         /// <summary>
         /// Gets the hashCode of the <see cref="Window"/>

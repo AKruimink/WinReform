@@ -20,6 +20,9 @@
         ///<inheritdoc/>
         public bool ShowZeroSizeWindows { get; set; }
 
+        ///<inheritdoc/>
+        public bool HighlightSelectedWindows { get; set; }
+
         /// <summary>
         /// Create a new instance of the <see cref="ApplicationSettingsDesignModel"/>
         /// </summary>
@@ -30,6 +33,7 @@
             MinimizeOnClose = true;
             AutoRefreshActiveWindows = false;
             ShowZeroSizeWindows = false;
+            HighlightSelectedWindows = true;
         }
     }
 }

@@ -27,6 +27,7 @@
                 <RowDefinition Height="32" />
                 <RowDefinition Height="32" />
                 <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
@@ -61,17 +62,29 @@
                   ToolTip="If enabled the PID column in Active Windows will be repalced with the Location information"
                   IsChecked="{Binding DisplayActiveWindowLocation}" />
 
-            <TextBlock Grid.Row="4"
+            <TextBlock Grid.Row="3"
                    Grid.Column="0"
                    VerticalAlignment="Center"
                    Margin="8"
                    Text="Show 0x0 Size Windows" />
-            <CheckBox Grid.Row="4"
+            <CheckBox Grid.Row="3"
                   Grid.Column="1"
                   VerticalAlignment="Center"
                   Margin="5"
                   ToolTip="If enabled, windows with a size of 0x0 will be displayed in the Active Windows list"
                   IsChecked="{Binding ShowZeroSizeWindows}" />
+
+            <TextBlock Grid.Row="4"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="8"
+                   Text="Highlight Selected Windows" />
+            <CheckBox Grid.Row="4"
+                  Grid.Column="1"
+                  VerticalAlignment="Center"
+                  Margin="5"
+                  ToolTip="If enabled, a red border will be rendered on top of each selected window"
+                  IsChecked="{Binding HighlightSelectedWindows}" />
         </Grid>
 
         <!-- Behaviour-->

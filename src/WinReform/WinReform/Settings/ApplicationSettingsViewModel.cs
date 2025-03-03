@@ -79,6 +79,20 @@ namespace WinReform.Settings
 
         private bool _showZeroSizeWindows;
 
+        ///<inheritdoc/>
+        public bool HighlightSelectedWindows
+        {
+            get => _highlightSelectedWindows;
+            set
+            {
+                SetProperty(ref _highlightSelectedWindows, value);
+                _settings.CurrentSetting.HighlightSelectedWindows = value;
+                SaveSettings();
+            }
+        }
+
+        private bool _highlightSelectedWindows;
+
         /// <summary>
         /// <see cref="ISetting{TSetting}"/> containing the <see cref="ApplicationSettings"/>
         /// </summary>
@@ -98,6 +112,7 @@ namespace WinReform.Settings
             MinimizeOnClose = _settings.CurrentSetting.MinimizeOnClose;
             AutoRefreshActiveWindows = _settings.CurrentSetting.AutoRefreshActiveWindows;
             ShowZeroSizeWindows = _settings.CurrentSetting.ShowZeroSizeWindows;
+            HighlightSelectedWindows = _settings.CurrentSetting.HighlightSelectedWindows;
         }
 
         /// <summary>

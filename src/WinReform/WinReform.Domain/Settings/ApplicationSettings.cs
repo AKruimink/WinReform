@@ -34,5 +34,11 @@
         /// <remarks>Defaults to <see langword="false"/></remarks>
         /// </summary>
         public bool ShowZeroSizeWindows { get; set; } = false;
+
+        /// <summary>
+        /// Gets or Sets an indicator that defines if a overlay should be rendered on topof selected windows
+        /// <remarks>Defaults to <see langword="false"/></remarks>
+        /// </summary>
+        public bool HighlightSelectedWindows { get; set; } = false;
     }
 }
