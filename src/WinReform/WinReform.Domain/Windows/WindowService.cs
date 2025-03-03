@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using WinReform.Domain.Process;
 using WinReform.Domain.WinApi;
 using WinReform.Domain.WinApi.Types;
@@ -12,6 +13,12 @@ namespace WinReform.Domain.Windows
     /// </summary>
     public class WindowService : IWindowService
     {
+        /// <summary>
+        /// Stores a mapping between window handles and their corresponding event hook handles.
+        /// This ensures that each tracked window has a registered movement event hook,
+        /// </summary>
+        private readonly Dictionary<IntPtr, IntPtr> _windowHooks = [];
+
         /// <summary>
         /// <see cref="IWinApiService"/> used to manage existing windows
         /// </summary>
@@ -128,6 +135,24 @@ namespace WinReform.Domain.Windows
         }
 
         /// <inheritdoc/>
+        public Window UpdateWindow(Window window)
+        {
+            ArgumentNullException.ThrowIfNull(window);
+
+            var updatedRect = _winApiService.GetVisibleWindowRect(window.WindowHandle);
+            return new Window
+            {
+                Id = window.Id,
+                WindowHandle = window.WindowHandle,
+                Description = window.Description,
+                WindowTitle = window.WindowTitle,
+                ProcessName = window.ProcessName,
+                Icon = window.Icon,
+                Dimensions = updatedRect
+            };
+        }
+
+        /// <inheritdoc/>
         public void ResizeWindow(Window window, Rect resolution)
         {
             var newWidth = resolution.Right == 0 ? window.Dimensions.Right : resolution.Right;
@@ -165,6 +190,50 @@ namespace WinReform.Domain.Windows
         public void RedrawWindow(Window window)
         {
             _winApiService.RedrawMenuBar(window.WindowHandle);
+        }
+
+        /// <inheritdoc/>
+        public void HookWindowMoveEvent(Window targetWindow, Action callback)
+        {
+            ArgumentNullException.ThrowIfNull(targetWindow);
+
+            if (_windowHooks.ContainsKey(targetWindow.WindowHandle))
+            {
+                return; // Prevent duplicate hooks
+            }
+
+            var hook = _winApiService.RegisterWindowMoveHook(targetWindow.WindowHandle, callback);
+            _windowHooks[targetWindow.WindowHandle] = hook;
+        }
+
+        /// <inheritdoc/>
+        public void UnhookWindowMoveEvent(Window targetWindow)
+        {
+            ArgumentNullException.ThrowIfNull(targetWindow);
+
+            if (_windowHooks.TryGetValue(targetWindow.WindowHandle, out var hookHandle))
+            {
+                _winApiService.UnregisterWindowMoveHook(hookHandle);
+                _windowHooks.Remove(targetWindow.WindowHandle);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void EnableClickThrough(Window window)
+        {
+            ArgumentNullException.ThrowIfNull(window);
+
+            var extendedStyle = _winApiService.GetWindowLongPtr(window.WindowHandle, GwlType.ExStyle).ToInt32();
+            _winApiService.SetWindowLongPtr(window.WindowHandle, GwlType.ExStyle, new IntPtr(extendedStyle | (int)ExWsStyleType.Transparent | (int)ExWsStyleType.Layered));
+        }
+
+        /// <inheritdoc/>
+        public void UpdateOverlayPosition(Window overlayWindow, Rect transformedRect)
+        {
+            ArgumentNullException.ThrowIfNull(overlayWindow);
+
+            // Use pre-transformed coordinates to update overlay position
+            _winApiService.SetWindowPos(overlayWindow.WindowHandle, transformedRect, SwpType.NoActive | SwpType.NoZOrder);
         }
     }
 }

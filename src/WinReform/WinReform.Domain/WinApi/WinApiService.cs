@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using WinReform.Domain.WinApi.Types;
 
 namespace WinReform.Domain.WinApi
 {
@@ -202,6 +203,110 @@ namespace WinReform.Domain.WinApi
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Hooks into Windows events to track window position changes.
+        /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwineventhook">SetWinEventHook</a>
+        /// </summary>
+        /// <param name="eventMin">The lowest event value to track.</param>
+        /// <param name="eventMax">The highest event value to track.</param>
+        /// <param name="hmodWinEventProc">Handle to the DLL containing the event hook function (null for inline).</param>
+        /// <param name="lpfnWinEventProc">The callback function to be called when an event is triggered.</param>
+        /// <param name="idProcess">The process ID to track (0 for all processes).</param>
+        /// <param name="idThread">The thread ID to track (0 for all threads).</param>
+        /// <param name="dwFlags">Flags to control event hook behavior.</param>
+        /// <returns>A handle to the event hook.</returns>
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc, WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
+
+        /// <summary>
+        /// Removes a previously registered event hook.
+        /// <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unhookwinevent">UnhookWinEvent</a>
+        /// </summary>
+        /// <param name="hWinEventHook">Handle to the event hook to be removed.</param>
+        /// <returns><see langword="true"/> if the hook was successfully removed, otherwise <see langword="false"/>.</returns>
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool UnhookWinEvent(IntPtr hWinEventHook);
+
+        /// <summary>
+        /// Stores active window event hooks to prevent garbage collection.
+        /// This ensures that callbacks remain valid for the lifetime of the hook.
+        /// </summary>
+        private static readonly Dictionary<IntPtr, WinEventDelegate> _eventHooks = new();
+
+        /// <summary>
+        /// Delegate for handling Windows event hook callbacks.
+        /// This is used to receive notifications when specific window events occur,
+        /// such as window position changes.
+        /// </summary>
+        /// <param name="hWinEventHook">Handle to the event hook.</param>
+        /// <param name="eventType">The type of event that was triggered.</param>
+        /// <param name="hwnd">The handle to the window associated with the event.</param>
+        /// <param name="idObject">The object identifier for the event.</param>
+        /// <param name="idChild">The child identifier of the event target.</param>
+        /// <param name="dwEventThread">The thread ID where the event was generated.</param>
+        /// <param name="dwmsEventTime">The timestamp of the event, in milliseconds.</param>
+        private delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
+
+        /// <inheritdoc/>
+        public IntPtr RegisterWindowMoveHook(IntPtr windowHandle, Action callback)
+        {
+            var winEventCallback = new WinEventDelegate((hWinEventHook, eventType, hwnd, idObject, idChild, dwEventThread, dwmsEventTime) =>
+            {
+                if (hwnd == windowHandle)
+                {
+                    callback();
+                }
+            });
+
+            var hookHandle = SetWinEventHook(0x800B, 0x800B, IntPtr.Zero, winEventCallback, 0, 0, 0);
+            if (hookHandle != IntPtr.Zero)
+            {
+                _eventHooks[hookHandle] = winEventCallback;
+            }
+
+            return hookHandle;
+        }
+
+        /// <inheritdoc/>
+        public void UnregisterWindowMoveHook(IntPtr hookHandle)
+        {
+            if (hookHandle != IntPtr.Zero)
+            {
+                UnhookWinEvent(hookHandle);
+                _eventHooks.Remove(hookHandle);
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the extended frame bounds of a window, excluding non-client areas.
+        /// <a href="https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/nf-dwmapi-dwmgetwindowattribute">DwmGetWindowAttribute</a>
+        /// </summary>
+        /// <param name="hwnd">Handle to the window.</param>
+        /// <param name="dwAttribute">The attribute to retrieve (e.g., DWMWA_EXTENDED_FRAME_BOUNDS).</param>
+        /// <param name="pvAttribute">Receives the attribute value.</param>
+        /// <param name="cbAttribute">Size of the output buffer.</param>
+        /// <returns>0 if successful, otherwise a Win32 error code.</returns>
+        [DllImport("dwmapi.dll", EntryPoint = "DwmGetWindowAttribute", PreserveSig = true)]
+        private static extern int DwmGetWindowAttribute(IntPtr hwnd, int dwAttribute, out Rect pvAttribute, int cbAttribute);
+
+        /// <inheritdoc/>
+        public Rect GetVisibleWindowRect(IntPtr hwnd)
+        {
+            if (hwnd == IntPtr.Zero)
+            {
+                throw new ArgumentException("Invalid window handle.", nameof(hwnd));
+            }
+
+            var result = DwmGetWindowAttribute(hwnd, (int)DwmWindowAttributeType.ExtendedFrameBounds, out var rect, Marshal.SizeOf(typeof(Rect)));
+            if (result != 0)
+            {
+                throw new InvalidOperationException($"DwmGetWindowAttribute failed with error code {result}");
+            }
+
+            return rect;
         }
     }
 }

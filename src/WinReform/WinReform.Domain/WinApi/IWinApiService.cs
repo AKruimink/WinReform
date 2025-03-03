@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WinReform.Domain.WinApi
+﻿namespace WinReform.Domain.WinApi
 {
     /// <summary>
     /// Represents a class that acts as a service that allows for the execution of unmanaged code
@@ -20,6 +17,13 @@ namespace WinReform.Domain.WinApi
         /// <param name="hwnd"><see cref="IntPtr"/> containing the handle of the window to get the <see cref="Rect"/> of</param>
         /// <returns>Returns <see cref="Rect"/> containing the dimensions of the given window</returns>
         Rect GetWindowRect(IntPtr hwnd);
+
+        /// <summary>
+        /// Gets the real visible bounds of a window (excluding invisible borders).
+        /// </summary>
+        /// <param name="hwnd">Handle to the window.</param>
+        /// <returns>A <see cref="Rect"/> containing the window's actual visible dimensions.</returns>
+        Rect GetVisibleWindowRect(IntPtr hwnd);
 
         /// <summary>
         /// Sets a new position for a given window
@@ -53,10 +57,24 @@ namespace WinReform.Domain.WinApi
         List<Monitor> GetAllMonitors();
 
         /// <summary>
-        /// Retrieves the window title for the specified process.
+        /// Retrieves the title of the specified window.
         /// </summary>
-        /// <param name="windowHandle">handle of the window to get the title for.</param>
-        /// <returns>The window title if available, otherwise an empty string.</returns>
+        /// <param name="windowHandle">The handle of the window whose title is to be retrieved.</param>
+        /// <returns>The window title if available; otherwise, an empty string.</returns>
         string GetWindowTitle(IntPtr windowHandle);
+
+        /// <summary>
+        /// Registers a hook to monitor when a specific window moves.
+        /// </summary>
+        /// <param name="windowHandle">The handle of the window to track.</param>
+        /// <param name="callback">The action to invoke when the window moves.</param>
+        /// <returns>An <see cref="IntPtr"/> representing the event hook handle.</returns>
+        IntPtr RegisterWindowMoveHook(IntPtr windowHandle, Action callback);
+
+        /// <summary>
+        /// Unregisters a previously registered window move event hook, stopping movement tracking.
+        /// </summary>
+        /// <param name="hookHandle">The handle of the event hook to be removed.</param>
+        void UnregisterWindowMoveHook(IntPtr hookHandle);
     }
 }

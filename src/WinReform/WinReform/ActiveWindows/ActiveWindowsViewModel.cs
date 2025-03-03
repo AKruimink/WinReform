@@ -7,10 +7,12 @@ using System.Windows.Threading;
 using WinReform.Domain.Infrastructure.Messanger;
 using WinReform.Domain.Infrastructure.Messenger;
 using WinReform.Domain.Settings;
+using WinReform.Domain.WinApi;
 using WinReform.Domain.Windows;
 using WinReform.Infrastructure.Common.Command;
 using WinReform.Infrastructure.Common.ViewModel;
 using WinReform.Infrastructure.Extensions;
+using WinReform.Overlay;
 
 namespace WinReform.ActiveWindows
 {
@@ -28,6 +30,16 @@ namespace WinReform.ActiveWindows
         /// State that defines if processes with 0x0 size windows should be displayed in the Active Windows list
         /// </summary>
         private bool _showZeroSizeWindows;
+
+        /// <summary>
+        /// Indicates whether or not to display a overlays on top of selected windows
+        /// </summary>
+        private bool _highlightSelectedWindows;
+
+        /// <summary>
+        /// Stores active overlay windows mapped to their corresponding window handles
+        /// </summary>
+        private readonly Dictionary<IntPtr, OverlayWindow> _overlayWindows = [];
 
         ///<inheritdoc/>
         public bool DisplayLocation
@@ -152,6 +164,13 @@ namespace WinReform.ActiveWindows
         {
             _autoRefreshTimer.Stop();
             _autoRefreshTimer.Tick -= OnAutoRefreshEvent;
+
+            // Remove all window overlays
+            foreach (var overlay in _overlayWindows.Values)
+            {
+                overlay.Close();
+            }
+            _overlayWindows.Clear();
         }
 
         /// <summary>
@@ -193,6 +212,7 @@ namespace WinReform.ActiveWindows
                 DisplayLocation = settings.CurrentSetting.DisplayActiveWindowLocation;
                 _autoRefreshActiveWindows = settings.CurrentSetting.AutoRefreshActiveWindows;
                 _showZeroSizeWindows = settings.CurrentSetting.ShowZeroSizeWindows;
+                _highlightSelectedWindows = settings.CurrentSetting.HighlightSelectedWindows;
             }
         }
 
@@ -203,7 +223,54 @@ namespace WinReform.ActiveWindows
         /// <param name="e"></param>
         private void SelectedActiveWindowsChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
+            // Remove highlight from deselected windows
+            foreach (var removedItem in e.OldItems?.Cast<Domain.Windows.Window>() ?? [])
+            {
+                RemoveHighlight(removedItem);
+            }
+
+            if (_highlightSelectedWindows)
+            {
+                // Add highlight to newly selected windows
+                foreach (var addedItem in e.NewItems?.Cast<Domain.Windows.Window>() ?? [])
+                {
+                    HighlightWindow(addedItem);
+                }
+            }
+
+            // Publish the selection change event
             _eventAggregator.GetEvent<ActiveWindowsSelectionChangedEvent>().Publish(SelectedActiveWindows.ToList());
+        }
+
+        /// <summary>
+        /// Creates and displays an overlay window for the specified window if it is not already highlighted.
+        /// This ensures each window can have only one overlay at a time.
+        /// </summary>
+        /// <param name="window">The <see cref="Domain.Windows.Window"/> to highlight.</param>
+        private void HighlightWindow(Domain.Windows.Window window)
+        {
+            if (_overlayWindows.ContainsKey(window.WindowHandle))
+            {
+                return;
+            }
+
+            var overlay = new OverlayWindow(window, _windowService);
+            _overlayWindows[window.WindowHandle] = overlay;
+            overlay.Show();
+        }
+
+        /// <summary>
+        /// Removes the overlay window associated with the specified window.
+        /// Ensures the overlay is properly closed and removed from tracking.
+        /// </summary>
+        /// <param name="window">The <see cref="Domain.Windows.Window"/> whose highlight should be removed.</param>
+        private void RemoveHighlight(Domain.Windows.Window window)
+        {
+            if (_overlayWindows.TryGetValue(window.WindowHandle, out var overlay))
+            {
+                overlay.Close();
+                _overlayWindows.Remove(window.WindowHandle);
+            }
         }
     }
 }
